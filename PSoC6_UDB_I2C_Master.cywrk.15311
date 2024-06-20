@@ -13,9 +13,10 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
 <v>PSoC6_UDB_I2C_Master</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\TopDesign</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr\Pins</v>
@@ -50,6 +51,7 @@
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\ARM MDK Generic</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\ARM MDK Generic\cy8c6xx7_cm4_dual.scat</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Header Files</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Header Files\ADPD1080.h</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Header Files\FreeRTOSConfig.h</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM GCC Generic</v>
@@ -58,6 +60,8 @@
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM IAR Generic\startup_psoc6_01_cm4.s</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM MDK Generic</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM MDK Generic\startup_psoc6_01_cm4.s</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ADPD1080.c</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ADPD1080.h</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\main_cm4.c</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\system_psoc6_cm4.c</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\Shared Files</v>
@@ -69,8 +73,53 @@
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\Generated_Source\PSoC6</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>PSoC6_UDB_I2C_Master</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr\Pins</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr\Analog</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr\DMA</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr\Clocks</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr\Interrupts</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr\System</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CY8CPROTO-063-BLE_Master.cydwr\Directives</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\ARM GCC Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\ARM GCC Generic\cy8c6xx7_cm0plus.ld</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\ARM IAR Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\ARM IAR Generic\cy8c6xx7_cm0plus.icf</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\ARM MDK Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\ARM MDK Generic\cy8c6xx7_cm0plus.scat</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Header Files</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Source Files</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Source Files\ARM GCC Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Source Files\ARM GCC Generic\startup_psoc6_01_cm0plus.S</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Source Files\ARM IAR Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Source Files\ARM IAR Generic\startup_psoc6_01_cm0plus.s</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Source Files\ARM MDK Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Source Files\ARM MDK Generic\startup_psoc6_01_cm0plus.s</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Source Files\main_cm0p.c</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM0p (Core 0)\Source Files\system_psoc6_cm0plus.c</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\ARM GCC Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\ARM GCC Generic\cy8c6xx7_cm4_dual.ld</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\ARM IAR Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\ARM IAR Generic\cy8c6xx7_cm4_dual.icf</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\ARM MDK Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\ARM MDK Generic\cy8c6xx7_cm4_dual.scat</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Header Files</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Header Files\ADPD1080.h</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Header Files\FreeRTOSConfig.h</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM GCC Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM GCC Generic\startup_psoc6_01_cm4.S</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM IAR Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM IAR Generic\startup_psoc6_01_cm4.s</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM MDK Generic</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ARM MDK Generic\startup_psoc6_01_cm4.s</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ADPD1080.c</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\ADPD1080.h</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\main_cm4.c</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CM4 (Core 1)\Source Files\system_psoc6_cm4.c</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\Shared Files</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master">
@@ -212,6 +261,7 @@
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files</v>
+<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\ADPD1080.lst</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\croutine.lst</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_ble_clk.lst</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_device.lst</v>
@@ -315,26 +365,6 @@
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM0p\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm0plus.lst</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM0p\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
 <v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM0p\ARM_GCC_541\Debug\CY8CPROTO-063-BLE_Master.elf</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM0p\ARM_GCC_541\Debug\CY8CPROTO-063-BLE_Master.hex</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM0p\ARM_GCC_541\Debug\CY8CPROTO-063-BLE_Master.map</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\croutine.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_ble_clk.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_device.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_efuse.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_flash.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_gpio.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_ipc_drv.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_ipc_pipe.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_ipc_sema.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_lvd.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_profile.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_prot.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_scb_common.lst</v>
-<v>PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_scb_ezi2c.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -382,16 +412,42 @@
 </dataGuid>
 <dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
 <CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
-<indicators />
+<indicators>
+<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="333" DocumentName=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" />
+</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
+<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="244" DocumentName=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" />
+</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
+<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="268" DocumentName=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" />
+</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
+<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="271" DocumentName=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" />
+</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
+<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="312" DocumentName=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" />
+</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
+<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="316" DocumentName=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" />
+</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
+<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="323" DocumentName=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" />
+</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
+<CyGuid_67999771-01c6-4f62-90b3-2054bb36a318 type_name="CyDesigner.Framework.CyBookmark" version="1">
+<CyGuid_a1027fc4-3497-43a6-85d7-b91ffa0029b7 type_name="CyDesigner.Framework.CySerializableMarginIndicator" version="1" LineNumber="326" DocumentName=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" />
+</CyGuid_67999771-01c6-4f62-90b3-2054bb36a318>
+</indicators>
 </CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
 </dataGuid>
 </userData>
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\CY8CPROTO-063-BLE_Master.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\CY8CPROTO-063-BLE_Master.cydsn\stdio_user.h" />
+<name v=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.h" />
 <name v=".\CY8CPROTO-063-BLE_Master.cydsn\main_cm4.c" />
+<name v=".\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" />
+<name v=".\CY8CPROTO-063-BLE_Master.cydsn\TopDesign\TopDesign.cysch" />
 <name v=".\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cydwr" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
@@ -400,7 +456,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="828, 762" SelectedTabbedMdiWindow="4671d72f-6d3c-4dbf-b9af-215f2b0e3959"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="0e45bd31-6df8-490b-98c2-3fde9e6e54cd" /><DocumentWindow Key="C:\Users\15311\Desktop\PSoC_project\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\TopDesign\TopDesign.cysch" Guid="99dafe9a-f3be-4ab5-a98f-7e1478543e56" /><DocumentWindow Key="C:\Users\15311\Desktop\PSoC_project\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\stdio_user.h" Guid="4e6c2378-128d-45fa-8298-2b8417d7113b" /><DocumentWindow Key="C:\Users\15311\Desktop\PSoC_project\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\main_cm4.c" Guid="4671d72f-6d3c-4dbf-b9af-215f2b0e3959" /><DocumentWindow Key="C:\Users\15311\Desktop\PSoC_project\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cydwr" Guid="fae951bb-98cc-4010-9279-4a8bd538428a" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="547, 652" SelectedTabbedMdiWindow="c6d0ca62-1290-40ce-8fc1-60e55be78957"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="0e45bd31-6df8-490b-98c2-3fde9e6e54cd" /><DocumentWindow Key="C:\Users\15311\Desktop\PSoC_project\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.h" Guid="1356822d-22b9-4321-ab02-833ec83fb286" /><DocumentWindow Key="C:\Users\15311\Desktop\PSoC_project\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\main_cm4.c" Guid="c6d0ca62-1290-40ce-8fc1-60e55be78957" /><DocumentWindow Key="C:\Users\15311\Desktop\PSoC_project\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\ADPD1080.c" Guid="86a05f7f-7c5d-4f3e-af6b-e83ee9681540" /><DocumentWindow Key="C:\Users\15311\Desktop\PSoC_project\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\TopDesign\TopDesign.cysch" Guid="2b47ff3f-552e-4403-b0ce-4a6ca8a9ed29" /><DocumentWindow Key="C:\Users\15311\Desktop\PSoC_project\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cydwr" Guid="5afc18b2-4244-4e28-88fe-e1860091609f" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

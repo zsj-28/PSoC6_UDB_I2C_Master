@@ -1,120 +1,71 @@
-/* ========================================
- *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
- * ========================================*/
 #include "project.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "queue.h"
+#include "ADPD1080.h"
 #include <stdio.h>
 
-#define TASK_I2C_PRIORITY (configMAX_PRIORITIES - 1)
-#define I2C_QUEUE_LENGTH  (5)
-#define I2C_ITEM_SIZE     (sizeof(I2C_Message_t))
+// Task configuration
+#define ADPD1080_TASK_STACK_SIZE 1024
+#define ADPD1080_TASK_PRIORITY   2
+#define READ_INTERVAL_MS         500
 
-QueueHandle_t i2cQueue;
+// Function prototypes
+void ADPD1080_Task(void *pvParameters);
 
-typedef struct {
-    uint8_t address;
-    uint8_t reg;
-    uint8_t data;
-} I2C_Message_t;
+int main(void)
+{
+    __enable_irq();  // Enable global interrupts
 
-TaskHandle_t i2cWriteTaskHandle;
-TaskHandle_t i2cReadTaskHandle;
-
-void Write_I2C(void *pvParameters);
-void Read_I2C(void *pvParameters);
-
-int main()
-{   
-    I2C_Start();
+    // Initialize UART for serial communication
     UART_Start();
-    setvbuf(stdin, NULL, _IONBF, 0);
-    xTaskCreate(Write_I2C, "I2C Write", configMINIMAL_STACK_SIZE, NULL, TASK_I2C_PRIORITY, &i2cWriteTaskHandle);
-    xTaskCreate(Read_I2C, "I2C Read", configMINIMAL_STACK_SIZE, NULL, TASK_I2C_PRIORITY, &i2cReadTaskHandle);
-
-    i2cQueue = xQueueCreate(I2C_QUEUE_LENGTH, I2C_ITEM_SIZE);
-    if (i2cQueue == NULL)
-    {
-        CY_ASSERT(0);
-    }
-
-    vTaskStartScheduler();
     
-    CY_ASSERT(0);
+    // Initialize I2C for sensor communication
+    I2C_Start();
 
-    for(;;)
-    {
-    }    
-}
+    // Create the ADPD1080 task
+    xTaskCreate(ADPD1080_Task, "ADPD1080 Task", ADPD1080_TASK_STACK_SIZE, NULL, ADPD1080_TASK_PRIORITY, NULL);
 
-void Write_I2C(void *pvParameters)
-{
-    I2C_Message_t i2cMessage;
-    uint8_t randomAddress = 0x27; // I2C address of Arduino
-    uint8_t randomReg = 0x01;     // Arbitrary register, not used in this context
+    // Start the FreeRTOS scheduler
+    vTaskStartScheduler();
 
-    for (;;)
-    {
-        // Generate random data
-        i2cMessage.address = randomAddress;
-        i2cMessage.reg = randomReg;
-        i2cMessage.data = 0x2; // Random data
-
-        // Perform I2C write operation
-        uint8_t writeData[2] = {i2cMessage.reg, i2cMessage.data};
-        I2C_MasterWriteBuf(i2cMessage.address, writeData, 2, I2C_MODE_COMPLETE_XFER);
-
-        // Wait for the transfer to complete
-        while (I2C_MasterStatus() & I2C_MSTAT_XFER_INP);
-        // Add a delay to observe on logic analyzer
-        vTaskDelay(pdMS_TO_TICKS(100)); // 100ms delay for clear signal observation
+    for (;;) {
+        // This point should never be reached
     }
 }
 
-void Read_I2C(void *pvParameters)
+// Task to handle ADPD1080 sensor data
+void ADPD1080_Task(void *pvParameters)
 {
-    uint8_t slaveAddress = 0x27; // Use the same address as your Arduino
-    uint8_t readData[1];         // Buffer to store read data
+    (void) pvParameters;
 
-    for (;;)
-    {
-        // Send read request to slave
-        I2C_MasterReadBuf(slaveAddress, readData, 1, I2C_MODE_COMPLETE_XFER);
+    char buffer[128];
+    volatile uint16_t au16DataSlotA[4] = {0, 0, 0, 0};
+    volatile uint16_t au16DataSlotB[4] = {0, 0, 0, 0};
 
-        // Wait for the transfer to complete
-        while (I2C_MasterStatus() & I2C_MSTAT_XFER_INP);
+    // Initialize and configure the ADPD1080 sensor
+    printf("Initializing ADPD1080 sensor...\n");
 
-        // Print the read data or process it
-        printf("Received data: 0x%02X\n", readData[0]);
+    if (!ADPD1080_Init()) {
+        printf("ADPD1080 initialization failed!\n");
+        vTaskSuspend(NULL); // Suspend task on failure
+    }
 
-        // Add a delay to avoid constant polling
-        vTaskDelay(pdMS_TO_TICKS(200)); // 500ms delay for next read
+    printf("ADPD1080 initialization successful.\n");
+    turbidity_init();
+    //turbidity_ChannelOffsetCalibration();
+    
+    for (;;) {
+        // Read data from the sensor
+        ADPD1080_ReadData(au16DataSlotA, au16DataSlotB, 4);
+
+        // Format and print the data via UART
+        snprintf(buffer, sizeof(buffer), "Slot A: %d, %d, %d, %d | Slot B: %d, %d, %d, %d\n",
+                 au16DataSlotA[0], au16DataSlotA[1], au16DataSlotA[2], au16DataSlotA[3],
+                 au16DataSlotB[0], au16DataSlotB[1], au16DataSlotB[2], au16DataSlotB[3]);
+
+        printf(buffer);
+
+        // Delay task for the specified interval
+        vTaskDelay(pdMS_TO_TICKS(READ_INTERVAL_MS));
     }
 }
-
-void vApplicationIdleHook(void)
-{
-    Cy_SysPm_Sleep(CY_SYSPM_WAIT_FOR_INTERRUPT);
-}
-
-void vApplicationStackOverflowHook(TaskHandle_t *pxTask, signed char *pcTaskName)
-{
-    (void)pxTask;
-    CY_ASSERT(0);
-}
-
-void vApplicationMallocFailedHook(void)
-{
-    CY_ASSERT(0);
-}
-
-
-/* [] END OF FILE */
