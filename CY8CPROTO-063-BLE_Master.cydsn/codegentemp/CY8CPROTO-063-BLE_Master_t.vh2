@@ -1,5 +1,5 @@
--- Project:   C:\Users\user\Documents\c_code\Smart_Connected _Device\adpd1080\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj
--- Generated: 06/22/2024 09:49:07
+-- Project:   C:\Users\user\Documents\c_code\Smart_Connected _Device\ADC\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj
+-- Generated: 06/22/2024 23:28:01
 -- PSoC Creator  4.4
 
 ENTITY \CY8CPROTO-063-BLE_Master\ IS
@@ -22,6 +22,14 @@ ENTITY \CY8CPROTO-063-BLE_Master\ IS
 END \CY8CPROTO-063-BLE_Master\;
 
 ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
+    SIGNAL ADC_CH0(0)__PA : bit;
+    SIGNAL ADC_CH1(0)__PA : bit;
+    SIGNAL ADC_CH2(0)__PA : bit;
+    SIGNAL ADC_CH3(0)__PA : bit;
+    SIGNAL ADC_CH4(0)__PA : bit;
+    SIGNAL ADC_CH5(0)__PA : bit;
+    SIGNAL ADC_CH6(0)__PA : bit;
+    SIGNAL ADC_CH7(0)__PA : bit;
     SIGNAL CPUSS_swj_swclk_tclk : bit;
     SIGNAL CPUSS_swj_swdio_tms : bit;
     SIGNAL CY_CPUSS_SWJ_SWCLK_TCLK(0)__PA : bit;
@@ -50,26 +58,49 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     SIGNAL Net_5 : bit;
     SIGNAL Net_55 : bit;
     SIGNAL Net_56 : bit;
+    SIGNAL Net_74 : bit;
+    SIGNAL Net_75 : bit;
+    SIGNAL Net_76_0 : bit;
+    SIGNAL Net_76_1 : bit;
+    SIGNAL Net_76_2 : bit;
+    SIGNAL Net_76_3 : bit;
+    SIGNAL Net_77 : bit;
+    SIGNAL Net_78_0 : bit;
+    SIGNAL Net_78_1 : bit;
+    SIGNAL Net_78_10 : bit;
+    SIGNAL Net_78_11 : bit;
+    SIGNAL Net_78_2 : bit;
+    SIGNAL Net_78_3 : bit;
+    SIGNAL Net_78_4 : bit;
+    SIGNAL Net_78_5 : bit;
+    SIGNAL Net_78_6 : bit;
+    SIGNAL Net_78_7 : bit;
+    SIGNAL Net_78_8 : bit;
+    SIGNAL Net_78_9 : bit;
+    SIGNAL Net_79 : bit;
     SIGNAL RST(0)__PA : bit;
     SIGNAL SCL(0)__PA : bit;
     SIGNAL SDA(0)__PA : bit;
+    SIGNAL \ADC:Net_423\ : bit;
+    SIGNAL \ADC:Net_428_ff49\ : bit;
+    ATTRIBUTE global_signal OF \ADC:Net_428_ff49\ : SIGNAL IS true;
     SIGNAL \I2C:Net_1109_0\ : bit;
     SIGNAL \I2C:Net_1109_1\ : bit;
     SIGNAL \I2C:Net_643_3\ : bit;
-    ATTRIBUTE placement_force OF \I2C:Net_643_3\ : SIGNAL IS "U(1,2,A)0";
+    ATTRIBUTE placement_force OF \I2C:Net_643_3\ : SIGNAL IS "U(1,1,A)0";
     SIGNAL \I2C:Net_697\ : bit;
     SIGNAL \I2C:bI2C_UDB:bus_busy_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:bus_busy_reg\ : SIGNAL IS "U(0,1,B)1";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:bus_busy_reg\ : SIGNAL IS "U(1,0,A)2";
     SIGNAL \I2C:bI2C_UDB:clk_eq_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:clk_eq_reg\ : SIGNAL IS "U(1,2,A)1";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:clk_eq_reg\ : SIGNAL IS "U(1,2,A)3";
     SIGNAL \I2C:bI2C_UDB:clkgen_cl1\ : bit;
     SIGNAL \I2C:bI2C_UDB:clkgen_tc1_reg\ : bit;
     ATTRIBUTE placement_force OF \I2C:bI2C_UDB:clkgen_tc1_reg\ : SIGNAL IS "U(1,0,B)0";
     SIGNAL \I2C:bI2C_UDB:clkgen_tc2_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:clkgen_tc2_reg\ : SIGNAL IS "U(1,1,B)2";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:clkgen_tc2_reg\ : SIGNAL IS "U(1,1,A)1";
     SIGNAL \I2C:bI2C_UDB:clkgen_tc\ : bit;
     SIGNAL \I2C:bI2C_UDB:cnt_reset\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:cnt_reset\ : SIGNAL IS "U(0,0,B)1";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:cnt_reset\ : SIGNAL IS "U(1,1,B)0";
     ATTRIBUTE soft OF \I2C:bI2C_UDB:cnt_reset\ : SIGNAL IS 1;
     SIGNAL \I2C:bI2C_UDB:control_0\ : bit;
     SIGNAL \I2C:bI2C_UDB:control_1\ : bit;
@@ -80,62 +111,62 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     SIGNAL \I2C:bI2C_UDB:control_6\ : bit;
     SIGNAL \I2C:bI2C_UDB:control_7\ : bit;
     SIGNAL \I2C:bI2C_UDB:cs_addr_clkgen_0\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:cs_addr_clkgen_0\ : SIGNAL IS "U(1,1,B)1";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:cs_addr_clkgen_0\ : SIGNAL IS "U(1,0,B)3";
     SIGNAL \I2C:bI2C_UDB:cs_addr_clkgen_1\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:cs_addr_clkgen_1\ : SIGNAL IS "U(1,2,B)0";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:cs_addr_clkgen_1\ : SIGNAL IS "U(1,0,B)2";
     SIGNAL \I2C:bI2C_UDB:cs_addr_shifter_0\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:cs_addr_shifter_0\ : SIGNAL IS "U(1,0,B)3";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:cs_addr_shifter_0\ : SIGNAL IS "U(1,3,B)3";
     SIGNAL \I2C:bI2C_UDB:cs_addr_shifter_1\ : bit;
     ATTRIBUTE placement_force OF \I2C:bI2C_UDB:cs_addr_shifter_1\ : SIGNAL IS "U(0,3,B)1";
     ATTRIBUTE soft OF \I2C:bI2C_UDB:cs_addr_shifter_1\ : SIGNAL IS 1;
     SIGNAL \I2C:bI2C_UDB:lost_arb_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:lost_arb_reg\ : SIGNAL IS "U(0,0,A)0";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:lost_arb_reg\ : SIGNAL IS "U(0,1,B)1";
     SIGNAL \I2C:bI2C_UDB:m_reset\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_reset\ : SIGNAL IS "U(0,1,A)3";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_reset\ : SIGNAL IS "U(0,1,B)3";
     SIGNAL \I2C:bI2C_UDB:m_state_0\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_0\ : SIGNAL IS "U(1,1,B)0";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_0\ : SIGNAL IS "U(1,3,B)0";
     SIGNAL \I2C:bI2C_UDB:m_state_0_split\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_0_split\ : SIGNAL IS "U(0,2,A)3";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_0_split\ : SIGNAL IS "U(0,2,A)0";
     SIGNAL \I2C:bI2C_UDB:m_state_1\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_1\ : SIGNAL IS "U(1,0,A)0";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_1\ : SIGNAL IS "U(0,0,B)0";
     SIGNAL \I2C:bI2C_UDB:m_state_2\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_2\ : SIGNAL IS "U(1,2,B)2";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_2\ : SIGNAL IS "U(1,3,A)3";
     SIGNAL \I2C:bI2C_UDB:m_state_2_split\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_2_split\ : SIGNAL IS "U(1,3,A)0";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_2_split\ : SIGNAL IS "U(0,2,B)0";
     SIGNAL \I2C:bI2C_UDB:m_state_3\ : bit;
     ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_3\ : SIGNAL IS "U(0,3,B)0";
     SIGNAL \I2C:bI2C_UDB:m_state_4\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_4\ : SIGNAL IS "U(1,1,A)1";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_4\ : SIGNAL IS "U(1,2,B)1";
     SIGNAL \I2C:bI2C_UDB:m_state_4_split\ : bit;
     ATTRIBUTE placement_force OF \I2C:bI2C_UDB:m_state_4_split\ : SIGNAL IS "U(0,3,A)0";
     SIGNAL \I2C:bI2C_UDB:scl_in_last2_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:scl_in_last2_reg\ : SIGNAL IS "U(0,1,A)1";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:scl_in_last2_reg\ : SIGNAL IS "U(1,1,B)2";
     SIGNAL \I2C:bI2C_UDB:scl_in_last_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:scl_in_last_reg\ : SIGNAL IS "U(0,0,B)3";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:scl_in_last_reg\ : SIGNAL IS "U(1,3,A)0";
     SIGNAL \I2C:bI2C_UDB:scl_in_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:scl_in_reg\ : SIGNAL IS "U(1,3,B)1";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:scl_in_reg\ : SIGNAL IS "U(1,2,A)0";
     SIGNAL \I2C:bI2C_UDB:sda_in_last2_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:sda_in_last2_reg\ : SIGNAL IS "U(0,1,B)3";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:sda_in_last2_reg\ : SIGNAL IS "U(1,0,A)1";
     SIGNAL \I2C:bI2C_UDB:sda_in_last_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:sda_in_last_reg\ : SIGNAL IS "U(0,2,B)3";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:sda_in_last_reg\ : SIGNAL IS "U(1,1,A)2";
     SIGNAL \I2C:bI2C_UDB:sda_in_reg\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:sda_in_reg\ : SIGNAL IS "U(1,2,B)1";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:sda_in_reg\ : SIGNAL IS "U(1,2,A)2";
     SIGNAL \I2C:bI2C_UDB:shift_data_out\ : bit;
     SIGNAL \I2C:bI2C_UDB:status_0\ : bit;
     ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_0\ : SIGNAL IS "U(0,0,A)1";
     SIGNAL \I2C:bI2C_UDB:status_1\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_1\ : SIGNAL IS "U(0,0,B)0";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_1\ : SIGNAL IS "U(1,1,B)1";
     SIGNAL \I2C:bI2C_UDB:status_2\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_2\ : SIGNAL IS "U(1,0,B)2";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_2\ : SIGNAL IS "U(1,0,B)1";
     SIGNAL \I2C:bI2C_UDB:status_3\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_3\ : SIGNAL IS "U(0,0,A)3";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_3\ : SIGNAL IS "U(0,0,A)0";
     SIGNAL \I2C:bI2C_UDB:status_4\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_4\ : SIGNAL IS "U(0,3,B)2";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_4\ : SIGNAL IS "U(0,3,A)1";
     SIGNAL \I2C:bI2C_UDB:status_5\ : bit;
-    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_5\ : SIGNAL IS "U(0,1,B)0";
+    ATTRIBUTE placement_force OF \I2C:bI2C_UDB:status_5\ : SIGNAL IS "U(1,0,A)3";
     SIGNAL \I2C:bI2C_UDB:tx_reg_empty\ : bit;
     SIGNAL \I2C:sda_x_wire\ : bit;
-    ATTRIBUTE placement_force OF \I2C:sda_x_wire\ : SIGNAL IS "U(1,1,A)0";
+    ATTRIBUTE placement_force OF \I2C:sda_x_wire\ : SIGNAL IS "U(1,2,B)0";
     SIGNAL \UART:Net_1172\ : bit;
     SIGNAL \UART:Net_161\ : bit;
     SIGNAL \UART:Net_847_ff0\ : bit;
@@ -174,79 +205,97 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE Location OF \UART:tx(0)\ : LABEL IS "P5[1]";
     ATTRIBUTE lib_model OF \UART:rx(0)\ : LABEL IS "iocell7";
     ATTRIBUTE Location OF \UART:rx(0)\ : LABEL IS "P5[0]";
+    ATTRIBUTE lib_model OF ADC_CH0(0) : LABEL IS "iocell8";
+    ATTRIBUTE Location OF ADC_CH0(0) : LABEL IS "P10[3]";
+    ATTRIBUTE lib_model OF ADC_CH1(0) : LABEL IS "iocell9";
+    ATTRIBUTE Location OF ADC_CH1(0) : LABEL IS "P10[4]";
+    ATTRIBUTE lib_model OF ADC_CH2(0) : LABEL IS "iocell10";
+    ATTRIBUTE Location OF ADC_CH2(0) : LABEL IS "P10[5]";
+    ATTRIBUTE lib_model OF ADC_CH3(0) : LABEL IS "iocell11";
+    ATTRIBUTE Location OF ADC_CH3(0) : LABEL IS "P10[6]";
+    ATTRIBUTE lib_model OF ADC_CH4(0) : LABEL IS "iocell12";
+    ATTRIBUTE Location OF ADC_CH4(0) : LABEL IS "P9[0]";
+    ATTRIBUTE lib_model OF ADC_CH5(0) : LABEL IS "iocell13";
+    ATTRIBUTE Location OF ADC_CH5(0) : LABEL IS "P9[1]";
+    ATTRIBUTE lib_model OF ADC_CH6(0) : LABEL IS "iocell14";
+    ATTRIBUTE Location OF ADC_CH6(0) : LABEL IS "P9[2]";
+    ATTRIBUTE lib_model OF ADC_CH7(0) : LABEL IS "iocell15";
+    ATTRIBUTE Location OF ADC_CH7(0) : LABEL IS "P9[3]";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_5\ : LABEL IS "macrocell2";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:status_5\ : LABEL IS "U(0,1)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:status_5\ : LABEL IS "U(1,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_4\ : LABEL IS "macrocell3";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:status_4\ : LABEL IS "U(0,3)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:cnt_reset\ : LABEL IS "macrocell4";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:cnt_reset\ : LABEL IS "U(0,0)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:cnt_reset\ : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:cs_addr_clkgen_1\ : LABEL IS "macrocell5";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:cs_addr_clkgen_1\ : LABEL IS "U(1,2)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:cs_addr_clkgen_1\ : LABEL IS "U(1,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:cs_addr_clkgen_0\ : LABEL IS "macrocell6";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:cs_addr_clkgen_0\ : LABEL IS "U(1,1)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:cs_addr_clkgen_0\ : LABEL IS "U(1,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:cs_addr_shifter_1\ : LABEL IS "macrocell7";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:cs_addr_shifter_1\ : LABEL IS "U(0,3)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:cs_addr_shifter_0\ : LABEL IS "macrocell8";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:cs_addr_shifter_0\ : LABEL IS "U(1,0)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:cs_addr_shifter_0\ : LABEL IS "U(1,3)";
     ATTRIBUTE Location OF \I2C:I2C_IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(122)]";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:SyncCtl:CtrlReg\ : LABEL IS "controlcell1";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:SyncCtl:CtrlReg\ : LABEL IS "U(0,1)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_state_0_split\ : LABEL IS "macrocell9";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_0_split\ : LABEL IS "U(0,2)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:StsReg\ : LABEL IS "statusicell1";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:StsReg\ : LABEL IS "U(0,3)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:StsReg\ : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:Shifter:u0\ : LABEL IS "datapathcell1";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:Shifter:u0\ : LABEL IS "U(0,2)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:Shifter:u0\ : LABEL IS "U(1,2)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:Master:ClkGen:u0\ : LABEL IS "datapathcell2";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:Master:ClkGen:u0\ : LABEL IS "U(1,2)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:Master:ClkGen:u0\ : LABEL IS "U(1,0)";
     ATTRIBUTE Location OF \UART:SCB_IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(46)]";
     ATTRIBUTE Location OF \UART:SCB\ : LABEL IS "F(SCB,5)";
+    ATTRIBUTE Location OF \ADC:IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(138)]";
+    ATTRIBUTE Location OF \ADC:SAR\ : LABEL IS "F(SARADC,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:sda_in_reg\ : LABEL IS "macrocell10";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:sda_in_reg\ : LABEL IS "U(1,2)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_state_4\ : LABEL IS "macrocell11";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_4\ : LABEL IS "U(1,1)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_4\ : LABEL IS "U(1,2)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_state_3\ : LABEL IS "macrocell12";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_3\ : LABEL IS "U(0,3)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_state_2\ : LABEL IS "macrocell13";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_2\ : LABEL IS "U(1,2)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_2\ : LABEL IS "U(1,3)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_state_1\ : LABEL IS "macrocell14";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_1\ : LABEL IS "U(1,0)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_1\ : LABEL IS "U(0,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_state_0\ : LABEL IS "macrocell15";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_0\ : LABEL IS "U(1,1)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_0\ : LABEL IS "U(1,3)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_3\ : LABEL IS "macrocell16";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:status_3\ : LABEL IS "U(0,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_2\ : LABEL IS "macrocell17";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:status_2\ : LABEL IS "U(1,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_1\ : LABEL IS "macrocell18";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:status_1\ : LABEL IS "U(0,0)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:status_1\ : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_0\ : LABEL IS "macrocell19";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:status_0\ : LABEL IS "U(0,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:scl_in_reg\ : LABEL IS "macrocell20";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:scl_in_reg\ : LABEL IS "U(1,3)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:scl_in_reg\ : LABEL IS "U(1,2)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:scl_in_last_reg\ : LABEL IS "macrocell21";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:scl_in_last_reg\ : LABEL IS "U(0,0)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:scl_in_last_reg\ : LABEL IS "U(1,3)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:scl_in_last2_reg\ : LABEL IS "macrocell22";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:scl_in_last2_reg\ : LABEL IS "U(0,1)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:scl_in_last2_reg\ : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:sda_in_last_reg\ : LABEL IS "macrocell23";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:sda_in_last_reg\ : LABEL IS "U(0,2)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:sda_in_last_reg\ : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:sda_in_last2_reg\ : LABEL IS "macrocell24";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:sda_in_last2_reg\ : LABEL IS "U(0,1)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:sda_in_last2_reg\ : LABEL IS "U(1,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:clkgen_tc1_reg\ : LABEL IS "macrocell25";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:clkgen_tc1_reg\ : LABEL IS "U(1,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:lost_arb_reg\ : LABEL IS "macrocell26";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:lost_arb_reg\ : LABEL IS "U(0,0)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:lost_arb_reg\ : LABEL IS "U(0,1)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_state_2_split\ : LABEL IS "macrocell27";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_2_split\ : LABEL IS "U(1,3)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:m_state_2_split\ : LABEL IS "U(0,2)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:clkgen_tc2_reg\ : LABEL IS "macrocell28";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:clkgen_tc2_reg\ : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:bus_busy_reg\ : LABEL IS "macrocell29";
-    ATTRIBUTE Location OF \I2C:bI2C_UDB:bus_busy_reg\ : LABEL IS "U(0,1)";
+    ATTRIBUTE Location OF \I2C:bI2C_UDB:bus_busy_reg\ : LABEL IS "U(1,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:clk_eq_reg\ : LABEL IS "macrocell30";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:clk_eq_reg\ : LABEL IS "U(1,2)";
     ATTRIBUTE lib_model OF \I2C:Net_643_3\ : LABEL IS "macrocell31";
-    ATTRIBUTE Location OF \I2C:Net_643_3\ : LABEL IS "U(1,2)";
+    ATTRIBUTE Location OF \I2C:Net_643_3\ : LABEL IS "U(1,1)";
     ATTRIBUTE lib_model OF \I2C:sda_x_wire\ : LABEL IS "macrocell32";
-    ATTRIBUTE Location OF \I2C:sda_x_wire\ : LABEL IS "U(1,1)";
+    ATTRIBUTE Location OF \I2C:sda_x_wire\ : LABEL IS "U(1,2)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_reset\ : LABEL IS "macrocell33";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:m_reset\ : LABEL IS "U(0,1)";
     COMPONENT CLK_GEN
@@ -734,6 +783,40 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
             q : OUT std_ulogic;
             q_fixed : OUT std_ulogic);
     END COMPONENT;
+    COMPONENT SARADC
+        PORT (
+            dsi_sar_sample_done : OUT std_ulogic;
+            dsi_sar_chan_id_valid : OUT std_ulogic;
+            dsi_sar_data_valid : OUT std_ulogic;
+            tr_sar_out : OUT std_ulogic;
+            dsi_sar_data_0 : OUT std_ulogic;
+            dsi_sar_data_1 : OUT std_ulogic;
+            dsi_sar_data_2 : OUT std_ulogic;
+            dsi_sar_data_3 : OUT std_ulogic;
+            dsi_sar_data_4 : OUT std_ulogic;
+            dsi_sar_data_5 : OUT std_ulogic;
+            dsi_sar_data_6 : OUT std_ulogic;
+            dsi_sar_data_7 : OUT std_ulogic;
+            dsi_sar_data_8 : OUT std_ulogic;
+            dsi_sar_data_9 : OUT std_ulogic;
+            dsi_sar_data_10 : OUT std_ulogic;
+            dsi_sar_data_11 : OUT std_ulogic;
+            dsi_sar_chan_id_0 : OUT std_ulogic;
+            dsi_sar_chan_id_1 : OUT std_ulogic;
+            dsi_sar_chan_id_2 : OUT std_ulogic;
+            dsi_sar_chan_id_3 : OUT std_ulogic;
+            dsi_sar_cfg_st_sel_0 : IN std_ulogic;
+            dsi_sar_cfg_st_sel_1 : IN std_ulogic;
+            dsi_sar_cfg_average : IN std_ulogic;
+            dsi_sar_cfg_differential : IN std_ulogic;
+            dsi_sar_sw_negvref : IN std_ulogic;
+            dsi_sar_data_hilo_sel : IN std_ulogic;
+            tr_sar_in : IN std_ulogic;
+            clock : IN std_ulogic;
+            interrupt : OUT std_ulogic);
+    END COMPONENT;
+    COMPONENT SARMUX
+    END COMPONENT;
     COMPONENT SCB
         PORT (
             clock : IN std_ulogic;
@@ -831,6 +914,7 @@ BEGIN
             lfclk => ClockBlock_LFClk,
             udb_div_0 => dclk_to_genclk,
             ff_div_0 => open,
+            ff_div_49 => \ADC:Net_428_ff49\,
             ff_div_5 => \UART:Net_847_ff0\,
             periclk_App => periclk_App);
 
@@ -1225,6 +1309,430 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
+    ADC_CH0:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "0113321b-4a37-46f6-8407-2f8646c68756",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    ADC_CH0(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "ADC_CH0",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => ADC_CH0(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    ADC_CH1:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "73d5de89-5942-48fc-a034-79fc43f28aae",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    ADC_CH1(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "ADC_CH1",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => ADC_CH1(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    ADC_CH2:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "9e8cc873-349c-454d-b76b-45ae1e5ab2ca",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    ADC_CH2(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "ADC_CH2",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => ADC_CH2(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    ADC_CH3:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "21b4e067-c0e9-4c7b-8c83-ad858e6566e8",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    ADC_CH3(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "ADC_CH3",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => ADC_CH3(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    ADC_CH4:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "ba4d4955-0115-4df6-9fb0-e81346f58fe2",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    ADC_CH4(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "ADC_CH4",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => ADC_CH4(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    ADC_CH5:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "f33aa665-cd07-4e22-a86e-569bbb5b0261",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    ADC_CH5(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "ADC_CH5",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => ADC_CH5(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    ADC_CH6:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "63a9ae5c-e009-4798-8986-8b31d40bd178",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    ADC_CH6(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "ADC_CH6",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => ADC_CH6(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    ADC_CH7:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "1421286a-9264-443b-8c40-855a116a89f1",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    ADC_CH7(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "ADC_CH7",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => ADC_CH7(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
     \I2C:bI2C_UDB:status_5\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * main_1 * main_2 * main_3 * !main_4)",
@@ -1493,6 +2001,57 @@ BEGIN
             tr_tx_req => Net_56,
             tr_rx_req => Net_55,
             tr_i2c_scl_filtered => \UART:Net_161\);
+
+    \ADC:SARMUX\:SARMUX
+        GENERIC MAP(
+            cmn_neg_width => 1,
+            cy_registers => "",
+            input_mode => "00000000",
+            muxin_width => 8);
+
+    \ADC:IRQ\:interrupt
+        GENERIC MAP(
+            cy_registers => "",
+            deepsleep_required => 0,
+            int_type => "10")
+        PORT MAP(
+            interrupt => \ADC:Net_423\,
+            clock => ClockBlock_PeriClk);
+
+    \ADC:SAR\:SARADC
+        GENERIC MAP(
+            cy_registers => "",
+            edge_trigger => 0)
+        PORT MAP(
+            dsi_sar_sample_done => Net_75,
+            dsi_sar_chan_id_valid => Net_77,
+            dsi_sar_data_valid => Net_79,
+            tr_sar_out => Net_74,
+            dsi_sar_data_11 => Net_78_11,
+            dsi_sar_data_10 => Net_78_10,
+            dsi_sar_data_9 => Net_78_9,
+            dsi_sar_data_8 => Net_78_8,
+            dsi_sar_data_7 => Net_78_7,
+            dsi_sar_data_6 => Net_78_6,
+            dsi_sar_data_5 => Net_78_5,
+            dsi_sar_data_4 => Net_78_4,
+            dsi_sar_data_3 => Net_78_3,
+            dsi_sar_data_2 => Net_78_2,
+            dsi_sar_data_1 => Net_78_1,
+            dsi_sar_data_0 => Net_78_0,
+            dsi_sar_chan_id_3 => Net_76_3,
+            dsi_sar_chan_id_2 => Net_76_2,
+            dsi_sar_chan_id_1 => Net_76_1,
+            dsi_sar_chan_id_0 => Net_76_0,
+            dsi_sar_cfg_st_sel_1 => open,
+            dsi_sar_cfg_st_sel_0 => open,
+            dsi_sar_cfg_average => open,
+            dsi_sar_cfg_differential => open,
+            dsi_sar_sw_negvref => open,
+            dsi_sar_data_hilo_sel => open,
+            tr_sar_in => open,
+            clock => \ADC:Net_428_ff49\,
+            interrupt => \ADC:Net_423\);
 
     \I2C:bI2C_UDB:sda_in_reg\:macrocell
         GENERIC MAP(

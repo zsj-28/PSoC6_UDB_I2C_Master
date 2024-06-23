@@ -6,11 +6,14 @@
 
 // Task configuration
 #define ADPD1080_TASK_STACK_SIZE 1024
+#define ADC_TASK_STACK_SIZE 1024
 #define ADPD1080_TASK_PRIORITY   2
+#define ADC_Task_PRIORITY   3
 #define READ_INTERVAL_MS         500
-
+#define ADC_READ_INTERVAL_MS 1000
 // Function prototypes
 void ADPD1080_Task(void *pvParameters);
+void ADC_TASK(void *pvParameters);
 
 int main(void)
 {
@@ -22,9 +25,11 @@ int main(void)
     // Initialize I2C for sensor communication
     I2C_Start();
 
+    // Start ADC module 
+    ADC_Start();
     // Create the ADPD1080 task
     xTaskCreate(ADPD1080_Task, "ADPD1080 Task", ADPD1080_TASK_STACK_SIZE, NULL, ADPD1080_TASK_PRIORITY, NULL);
-
+    xTaskCreate(ADC_TASK, "ADC Task", ADC_TASK_STACK_SIZE, NULL, ADC_Task_PRIORITY, NULL);
     // Start the FreeRTOS scheduler
     vTaskStartScheduler();
 
@@ -73,5 +78,33 @@ void ADPD1080_Task(void *pvParameters)
 
         // Delay task for the specified interval
         vTaskDelay(pdMS_TO_TICKS(READ_INTERVAL_MS));
+    }
+}
+
+void ADC_TASK(void *pvParameter){
+    int16_t adc_val0, adc_val1, adc_val2, adc_val3, adc_val4, adc_val5, adc_val6, adc_val7;
+    ADC_StartConvert();
+    printf("Start ADC Convertion\n");
+    for(;;){
+        //wait for conversion
+        while(!ADC_IsEndConversion(CY_SAR_WAIT_FOR_RESULT));
+        adc_val0 = Cy_SAR_GetResult16(SAR, 0);
+        adc_val1 = Cy_SAR_GetResult16(SAR, 1);
+        adc_val2 = Cy_SAR_GetResult16(SAR, 2);
+        adc_val3 = Cy_SAR_GetResult16(SAR, 3);
+        adc_val4 = Cy_SAR_GetResult16(SAR, 4);
+        adc_val5 = Cy_SAR_GetResult16(SAR, 5);
+        adc_val6 = Cy_SAR_GetResult16(SAR, 6);
+        adc_val7 = Cy_SAR_GetResult16(SAR, 7);
+        printf("ADC CH0:%d \n\r", adc_val0);
+        printf("ADC CH1:%d \n\r", adc_val1);
+        printf("ADC CH2:%d \n\r", adc_val2);
+        printf("ADC CH3:%d \n\r", adc_val3);
+        printf("ADC CH4:%d \n\r", adc_val4);
+        printf("ADC CH5:%d \n\r", adc_val5);
+        printf("ADC CH6:%d \n\r", adc_val6);
+        printf("ADC CH7:%d \n\r", adc_val7);
+        
+        vTaskDelay(pdMS_TO_TICKS(ADC_READ_INTERVAL_MS));
     }
 }

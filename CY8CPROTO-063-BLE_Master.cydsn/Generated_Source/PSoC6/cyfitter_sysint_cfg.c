@@ -32,5 +32,11 @@
         .intrPriority = I2C_I2C_IRQ__INTC_CORTEXM4_PRIORITY
     };
 
+    /* ADC_IRQ */
+    const cy_stc_sysint_t ADC_IRQ_cfg = {
+        .intrSrc = (IRQn_Type)ADC_IRQ__INTC_NUMBER,
+        .intrPriority = ADC_IRQ__INTC_CORTEXM4_PRIORITY
+    };
+
 #endif /* ((__CORTEX_M == 4) && (CY_CORE_ID == 0)) */
 
