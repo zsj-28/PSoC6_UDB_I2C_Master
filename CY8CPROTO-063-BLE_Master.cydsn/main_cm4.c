@@ -45,13 +45,15 @@ void ADPD1080_Task(void *pvParameters)
     // Initialize and configure the ADPD1080 sensor
     printf("Initializing ADPD1080 sensor...\n");
 
-    if (!ADPD1080_Init()) {
-        printf("ADPD1080 initialization failed!\n");
-        vTaskSuspend(NULL); // Suspend task on failure
-    }
+    //if (!ADPD1080_Init()) {
+    //    printf("ADPD1080 initialization failed!\n");
+    //    vTaskSuspend(NULL); // Suspend task on failure
+    //}
 
     printf("ADPD1080 initialization successful.\n");
+    
     turbidity_init();
+    //while(1){}
     //turbidity_ChannelOffsetCalibration();
     
     for (;;) {

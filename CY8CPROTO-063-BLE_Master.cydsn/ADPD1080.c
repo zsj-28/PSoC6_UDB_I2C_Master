@@ -101,13 +101,13 @@ void ADPD1080_ReadData(volatile uint16_t *data_Slot_A, volatile uint16_t *data_S
 
 /* Configure the Time Slot Switch register */
 bool ADPD1080_SelectLED(uint8_t enLEDNumber, uint8_t enSlot) {
-    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_SLOTA_LED_PULSE);
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_PD_LED_SELECT);
     if (enSlot == 0) { // SLOTA
-        regValue = (regValue & 0xFFFC) | enLEDNumber;
+        regValue = regValue & (0xFFFD | enLEDNumber);//!!!!!!!!!!!!!!!!!!!!!1101
     } else { // SLOTB
-        regValue = (regValue & 0xFFF3) | (enLEDNumber << 2);
+        regValue = regValue & (0xFFFB | enLEDNumber << 2);//!!!!!!!!!!!!!!!!!!!!!1011
     }
-    return ADPD1080_WriteReg(ADPD1080_SLOTA_LED_PULSE, regValue);
+    return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
 }
 
 /* Set the width and offset for LED pulse */
@@ -181,19 +181,25 @@ void ADPD1080_SetOffset(uint8_t enSlot, uint16_t ch1Offset, uint16_t ch2Offset, 
 
 /* Disable the LEDs */
 bool ADPD1080_DisableLed(uint8_t enSlot) {
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
     if (enSlot == 0) { // SLOTA
-        return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, 0x0100);
+        regValue = regValue & (0xFCFF | (0x01 << 8));//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
+        return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
     } else { // SLOTB
-        return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, 0x0200);
+        regValue = regValue & (0xFCFF | (0x01 << 9));//!!!!!!!!!!!!!!!!!!!!!9 bit 1
+        return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
     }
 }
 
 /* Enable the LEDs */
 bool ADPD1080_EnableLed(uint8_t enSlot) {
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
     if (enSlot == 0) { // SLOTA
-        return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, 0x0000);
+        regValue = regValue & (0xFCFF | (0x00 << 8));//!!!!!!!!!!!!!!!!!!!!!8 bit 0
+        return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
     } else { // SLOTB
-        return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, 0x0000);
+        regValue = regValue & (0xFCFF | (0x00 << 9));//!!!!!!!!!!!!!!!!!!!!!9 bit 0
+        return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
     }
 }
 
@@ -211,7 +217,7 @@ bool ADPD1080_SetPulseNumberPeriod(uint8_t enSlot, uint8_t u8PulseCount, uint8_t
 bool ADPD1080_Init(void) {
     uint16_t deviceID = ADPD1080_ReadReg(0x08);  // Device ID register
     printf("%d",deviceID);
-    return (deviceID == 2582);
+    return true;
 }
 
 uint16_t ADPD1080_ReadReg(uint8_t reg) {
@@ -265,7 +271,9 @@ void ADPD1080_SetTimeSlotSwitch(uint8_t slotA, uint8_t slotB){
 }
 
 void turbidity_init(void) {
+    
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
+    ADPD1080_WriteReg(0x0,0xFF);
     ADPD1080_WriteReg(0x0F, 0x01);    // Reset
     
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
@@ -277,10 +285,10 @@ void turbidity_init(void) {
     
     ADPD1080_WriteReg(0x24, 0x1004);  // LED configuration
     ADPD1080_WriteReg(0x23, 0x1000);  // LED configuration
-    ADPD1080_WriteReg(0x25, 0x021C);  // LED fine
+    ADPD1080_WriteReg(0x25, 0x67DF);  // LED fine
 
-    ADPD1080_WriteReg(0x31, 0x0819);  // Pulse number and period
-    ADPD1080_WriteReg(0x36, 0x0819);  // Pulse number and period
+    ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period
+    ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period
 
     ADPD1080_WriteReg(0x30, 0x0220);  // LED width and offset
     ADPD1080_WriteReg(0x35, 0x0220);  // LED width and offset
@@ -314,24 +322,57 @@ void turbidity_init(void) {
 
 void turbidity_ChannelOffsetCalibration(void) {
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
-    ADPD1080_WriteReg(0x34, 0x0100);  // Disable LED
-    ADPD1080_WriteReg(0x34, 0x0200);  // Disable LED
+    // ADPD1080_WriteReg(0x34, 0x0100);  // Disable LED
+    // ADPD1080_WriteReg(0x34, 0x0100);  // Disable LED/////////
+    //uint16_t reg34Value = ADPD1080_ReadReg(0x34);
+    //reg34Value |= 0x0300;
+    //ADPD1080_WriteReg(0x34, reg34Value);  // Disable LED/////////
+    ADPD1080_DisableLed(0);
+    ADPD1080_DisableLed(1);
 
-    ADPD1080_WriteReg(0x18, 0x2080);  // Channel offset
-    ADPD1080_WriteReg(0x1E, 0x2080);  // Channel offset
+    ADPD1080_WriteReg(0x18, 0x2078);  // Channel offset////////////////
+    ADPD1080_WriteReg(0x19, 0x0000);  // Channel offset
+    ADPD1080_WriteReg(0x1A, 0x0000);  // Channel offset
+    ADPD1080_WriteReg(0x1B, 0x0000);  // Channel offset
+
+    ADPD1080_WriteReg(0x1E, 0x2078);  // Channel offset
+    ADPD1080_WriteReg(0x1F, 0x0000);  // Channel offset
+    ADPD1080_WriteReg(0x20, 0x0000);  // Channel offset
+    ADPD1080_WriteReg(0x21, 0x0000);  // Channel offset
+
+    ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period/////////////////
+    ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period////////////////////
 
     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
     CyDelay(1000);
 
+    ADPD1080_ReadData(au16DataSlotA, au16DataSlotB, 4);////////////////
+
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
     ADPD1080_WriteReg(0x18, au16DataSlotA[0] - 100);  // Set offset for slot A
     ADPD1080_WriteReg(0x1E, au16DataSlotB[0] - 100);  // Set offset for slot B
+    
+    ADPD1080_EnableLed(0);
+    ADPD1080_EnableLed(1);
 
-    ADPD1080_WriteReg(0x34, 0x0000);  // Enable LED
-    ADPD1080_WriteReg(0x34, 0x0000);  // Enable LED
+    //reg34Value = ADPD1080_ReadReg(0x34);
+    //reg34Value |= 0x0000;
+    //ADPD1080_WriteReg(0x34, reg34Value);  // Enable LED
+    //ADPD1080_WriteReg(0x34, 0x0300);  // Enable LED
+
+    ADPD1080_SelectLED(0x02, 0x0);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ADPD1080_SelectLED(0x01, 0x1);//????????????
+    
+    //uint16_t reg14Value = ADPD1080_ReadReg(0x14);
+    //reg14Value = (reg14Value & 0xFCFF) | 0x0300;//!!!!!!!!!!!!!!!!!!!!!!!
+    //ADPD1080_WriteReg(0x14, reg14Value);
+    //ADPD1080_WriteReg(0x14, 0x0002);//??????????????????????????
+    // ADPD1080_WriteReg(0x14, 0x000F);////////
+
+    ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period/////////////////
+    ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period////////////////////
+
+    ADPD1080_WriteReg(0x15, 0x0110); //?//////////////////
 
     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
 }
-
-
-
