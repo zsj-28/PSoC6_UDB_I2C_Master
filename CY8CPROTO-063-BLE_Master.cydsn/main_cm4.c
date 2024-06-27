@@ -46,33 +46,29 @@ void ADPD1080_Task(void *pvParameters)
     char buffer[128];
     volatile uint16_t au16DataSlotA[4] = {0, 0, 0, 0};
     volatile uint16_t au16DataSlotB[4] = {0, 0, 0, 0};
-    bool initialize_retry = 1;
-    // Initialize and configure the ADPD1080 sensor
-    while(initialize_retry){
-        printf("Initializing ADPD1080 sensor...\n");
 
-        if (!ADPD1080_Init()) {
-            printf("ADPD1080 initialization failed!\n");
-            initialize_retry = 1;
-            //vTaskSuspend(NULL); // Suspend task on failure
-            vTaskDelay(pdMS_TO_TICKS(1000)); //retry every 1 second 
-        }
-        else{
-            initialize_retry = 0;
-            printf("ADPD1080 initialization successful.\n");
-            turbidity_init();
-            //turbidity_ChannelOffsetCalibration();
-        }
-        
-    }
+    // Initialize and configure the ADPD1080 sensor
+    printf("Initializing ADPD1080 sensor...\n");
+
+    //if (!ADPD1080_Init()) {
+    //    printf("ADPD1080 initialization failed!\n");
+    //    vTaskSuspend(NULL); // Suspend task on failure
+    //}
+
+    printf("ADPD1080 initialization successful.\n");
+    
+    turbidity_init();
+    //while(1){}
+    turbidity_ChannelOffsetCalibration();
+    
     for (;;) {
         // Read data from the sensor
         ADPD1080_ReadData(au16DataSlotA, au16DataSlotB, 4);
 
         // Format and print the data via UART
-        snprintf(buffer, sizeof(buffer), "Slot A: %d, %d, %d, %d | Slot B: %d, %d, %d, %d\n",
-                 au16DataSlotA[0], au16DataSlotA[1], au16DataSlotA[2], au16DataSlotA[3],
-                 au16DataSlotB[0], au16DataSlotB[1], au16DataSlotB[2], au16DataSlotB[3]);
+        snprintf(buffer, sizeof(buffer), "Slot A: %d | Slot B: %d\n",
+                 au16DataSlotA[0],
+                 au16DataSlotB[0]);
 
         printf(buffer);
 
@@ -82,6 +78,7 @@ void ADPD1080_Task(void *pvParameters)
 }
 
 void ADC_TASK(void *pvParameter){
+    (void) pvParameter;
     int16_t adc_val0, adc_val1, adc_val2, adc_val3, adc_val4, adc_val5, adc_val6, adc_val7;
     ADC_StartConvert();
     printf("Start ADC Convertion\n");
@@ -89,22 +86,24 @@ void ADC_TASK(void *pvParameter){
         //wait for conversion
         while(!ADC_IsEndConversion(CY_SAR_WAIT_FOR_RESULT));
         adc_val0 = Cy_SAR_GetResult16(SAR, 0);
+        float32_t result0 = Cy_SAR_CountsTo_Volts(SAR,0,adc_val0);
         adc_val1 = Cy_SAR_GetResult16(SAR, 1);
+        float32_t result1 = Cy_SAR_CountsTo_Volts(SAR,1,adc_val1);
         adc_val2 = Cy_SAR_GetResult16(SAR, 2);
+        float32_t result2 = Cy_SAR_CountsTo_Volts(SAR,2,adc_val2);
         adc_val3 = Cy_SAR_GetResult16(SAR, 3);
+        float32_t result3 = Cy_SAR_CountsTo_Volts(SAR,3,adc_val3);
         adc_val4 = Cy_SAR_GetResult16(SAR, 4);
+        float32_t result4 = Cy_SAR_CountsTo_Volts(SAR,4,adc_val4);
         adc_val5 = Cy_SAR_GetResult16(SAR, 5);
+        float32_t result5 = Cy_SAR_CountsTo_Volts(SAR,5,adc_val5);
         adc_val6 = Cy_SAR_GetResult16(SAR, 6);
+        float32_t result6 = Cy_SAR_CountsTo_Volts(SAR,6,adc_val6);
         adc_val7 = Cy_SAR_GetResult16(SAR, 7);
-        printf("ADC CH0:%d \n\r", adc_val0);
-        printf("ADC CH1:%d \n\r", adc_val1);
-        printf("ADC CH2:%d \n\r", adc_val2);
-        printf("ADC CH3:%d \n\r", adc_val3);
-        printf("ADC CH4:%d \n\r", adc_val4);
-        printf("ADC CH5:%d \n\r", adc_val5);
-        printf("ADC CH6:%d \n\r", adc_val6);
-        printf("ADC CH7:%d \n\r", adc_val7);
+        float32_t result7 = Cy_SAR_CountsTo_Volts(SAR,7,adc_val7);
+    
+        printf("0 to 7 is %f, %f, %f, %f, %f, %f, %f\r\n", result0, result1, result2, result3, result4, result5, result6, result7);
         
-        vTaskDelay(pdMS_TO_TICKS(ADC_READ_INTERVAL_MS));
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
