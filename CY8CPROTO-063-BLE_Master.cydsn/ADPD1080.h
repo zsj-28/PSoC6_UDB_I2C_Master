@@ -1,6 +1,9 @@
+/* ADPD1080.h */
+
 #ifndef _ADPD1080_H
 #define _ADPD1080_H
 
+/* Include Files */
 #include "project.h"  // Include PSoC project header for PSoC-specific functions
 #include <stdint.h>
 #include <stdbool.h>
@@ -88,6 +91,10 @@
 
 /* Sensitivity */
 #define ADPD1080_SENSITIVITY 1.64f
+    
+/* Define volatile data slots */
+extern volatile uint16_t au16DataSlotA[4];
+extern volatile uint16_t au16DataSlotB[4];
 
 /* Enumeration and structure definitions */
 typedef enum {
@@ -111,7 +118,7 @@ typedef enum {
 typedef enum {
   LEDX1 = 0x02,
   LEDX2 = 0x01,
-  LEDX3
+  LEDX3 = 0x00,
 } ADPD1080_LED;
 
 typedef enum {
@@ -144,30 +151,33 @@ struct ADPD1080_ChannelOffset {
   uint16_t CH4Offset;
 };
 
-/* Function prototypes */
+/* Sensor function prototypes */
 bool ADPD1080_Init(void);
 bool ADPD1080_WriteReg(uint8_t u8Address, uint16_t u16Value);
 uint16_t ADPD1080_ReadReg(uint8_t u8Address);
-void ADPD1080_SetTimeSlotSwitch(uint8_t slotA, uint8_t slotB);
-void ADPD1080_Set32KCLK(int set);
+bool ADPD1080_SetOperationMode(ADPD1080_OperationMode enMode);
+bool ADPD1080_SetTimeSlotSwitch(ADPD1080_TimeSlotPD u8SlotASelect, ADPD1080_TimeSlotPD u8SlotBSelect);
+bool ADPD1080_Set32KCLK(bool enableSampleClk);
 void ADPD1080_SetFIFO(void);
 bool ADPD1080_SelectLED(ADPD1080_LED enLEDNumber, ADPD1080_TimeSlot enSlot);
 bool ADPD1080_DeselectLEDs(void);
-void ADPD1080_ReadDataRegs(volatile uint16_t *data_Slot_A, volatile uint16_t *data_Slot_B, uint8_t count);
+void ADPD1080_ReadDataRegs(volatile uint16_t *dataSlotA, volatile uint16_t *dataSlotB, uint8_t count);
 bool ADPD1080_SetLEDWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t u8Width, uint8_t u8Offset);
 bool ADPD1080_SetAFEWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t u8Width, uint8_t u8Offset, uint8_t u8FineOffset);
-bool ADPD1080_SetTIAGain(uint8_t enSlot, uint16_t enTIAGain);
+bool ADPD1080_SetTIAGain(uint8_t enSlot, ADPD1080_TIAGain enTIAGain);
 bool ADPD1080_SetSamplingFrequency(uint16_t u16Frequency);
 bool ADPD1080_SetAverageFactor(ADPD1080_AverageN enAverage);
 bool ADPD1080_SetADCClock(ADPD1080_ADCClockSpeed enADCClock);
 bool ADPD1080_SetDigitalClock(void);
 bool ADPD1080_Reset(void);
-void ADPD1080_SetOffset(uint8_t enSlot, uint16_t ch1Offset, uint16_t ch2Offset, uint16_t ch3Offset, uint16_t ch4Offset);
+void ADPD1080_SetOffset(ADPD1080_TimeSlot enSlot, struct ADPD1080_ChannelOffset);
 bool ADPD1080_DisableLed(ADPD1080_TimeSlot enSlot);
 bool ADPD1080_EnableLed(ADPD1080_TimeSlot enSlot);
 bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t u8PulseCount, uint8_t u8PulsePeriod);
-void turbidity_init(void);
-void ADPD1080_ReadData(volatile uint16_t *data_Slot_A, volatile uint16_t *data_Slot_B, uint8_t count);
-void ADPD1080_SetOperationMode(uint8_t mode);
+
+/* Helper function prototypes */
+void turbidity_Init(void);
+void turbidity_ReadDataInterrupt(void);
 void turbidity_ChannelOffsetCalibration(void);
+
 #endif /* _ADPD1080_H */
