@@ -73,15 +73,15 @@ uint16_t ADPD1080_ReadReg(uint8_t regAddr) {
 bool ADPD1080_SetOperationMode(ADPD1080_OperationMode enMode) {
     uint16_t regValue = ADPD1080_ReadReg(0x10);
     bool success = false;
-    if(enMode == 0){
+    if (enMode == 0) {
         regValue = (regValue & 0xFFFC);//!!!!!!!!!!!!!!!!!!!!!1101
         success = ADPD1080_WriteReg(0x10, regValue);
     }
-    else if(enMode == 1) {
+    else if (enMode == 1) {
         regValue = (regValue & 0xFFFC) | 0x01;//!!!!!!!!!!!!!!!!!!!!!1101
         success = ADPD1080_WriteReg(0x10, regValue);
     }
-    else if(enMode == 2) {
+    else if (enMode == 2) {
         regValue = (regValue & 0xFFFC) | 0x02;//!!!!!!!!!!!!!!!!!!!!!1101
         success = ADPD1080_WriteReg(0x10, regValue);
     }
@@ -205,7 +205,8 @@ bool ADPD1080_SetLEDWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t
     uint16_t regValue = offset + ((width & 0x1F) << 8);
     if (enSlot == SLOTA) {
         return ADPD1080_WriteReg(ADPD1080_SLOTA_LED_PULSE, regValue);
-    } else { // enSlot == SLOTB
+    } 
+    else { // SLOTB
         return ADPD1080_WriteReg(ADPD1080_SLOTB_LED_PULSE, regValue);
     }
 }
@@ -220,77 +221,130 @@ bool ADPD1080_SetLEDWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t
  * 
  * @return true if successful - false if failure 
  */
-bool ADPD1080_SetAFEWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t offset, uint8_t fineOffset){
-  uint16_t regValue = 0;
+bool ADPD1080_SetAFEWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t offset, uint8_t fineOffset) {
+    uint16_t regValue = 0;
 
-  if (enSlot == SLOTA) {
-    regValue = (uint16_t)(fineOffset & 0x1F) + 
-        (uint16_t)((offset & 0x3F) << 5) +
-        (uint16_t)((width & 0x1F) << 11);
-    return ADPD1080_WriteReg(ADPD1080_SLOTA_AFE_WINDOW, regValue);        
-  } else { // enSlot == SLOTB
-    regValue = (uint16_t)(fineOffset & 0x1F) +
-        (uint16_t)((offset & 0x3F) << 5) +
-        (uint16_t)((width & 0x1F) << 11);
-    return ADPD1080_WriteReg(ADPD1080_SLOTB_AFE_WINDOW, regValue);        
-  }
+    if (enSlot == SLOTA) {
+        regValue = (uint16_t)(fineOffset & 0x1F) + 
+            (uint16_t)((offset & 0x3F) << 5) +
+            (uint16_t)((width & 0x1F) << 11);
+        return ADPD1080_WriteReg(ADPD1080_SLOTA_AFE_WINDOW, regValue);        
+    } 
+    else { // SLOTB
+        regValue = (uint16_t)(fineOffset & 0x1F) +
+            (uint16_t)((offset & 0x3F) << 5) +
+            (uint16_t)((width & 0x1F) << 11);
+        return ADPD1080_WriteReg(ADPD1080_SLOTB_AFE_WINDOW, regValue);        
+    }
 }
 
-/* Set the transimpedance amplifier gain */
-bool ADPD1080_SetTIAGain(uint8_t enSlot, uint16_t enTIAGain) {
-    if (enSlot == 0) { // SLOTA
+/**
+ * @brief Set the transimpendance amplifier gain.
+ * 
+ * @param enSlot - time slot (SlotA or SlotB)
+ * @param enTIAGain - TIA gain value
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_SetTIAGain(uint8_t enSlot, ADPD1080_TIAGain enTIAGain) {
+    if (enSlot == SLOTA) {
         return ADPD1080_WriteReg(ADPD1080_SLOTA_TIA_CFG, enTIAGain);
-    } else { // SLOTB
+    } 
+    else { // SLOTB
         return ADPD1080_WriteReg(ADPD1080_SLOTB_TIA_CFG, enTIAGain);
     }
 }
 
-/* Set the sampling frequency */
-bool ADPD1080_SetSamplingFrequency(uint16_t u16Frequency) {
-    uint16_t u16FValue = 32000 / u16Frequency / 4;
+/**
+ * @brief Set the sampling frequency value.
+ * 
+ * @param u16Frequency - sampling frequency value
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_SetSamplingFrequency(uint16_t frequency) {
+    uint16_t regValue = 32000 / frequency / 4;
 
-    return ADPD1080_WriteReg(ADPD1080_FSAMPLE, u16FValue);
+    return ADPD1080_WriteReg(ADPD1080_FSAMPLE, regValue);
 }
 
-/* Set the average factor */
-bool ADPD1080_SetAverageFactor(uint8_t enAverage) {
+/**
+ * @brief Set the value of the average factor N.
+ * 
+ * @param enAverage - average factor value
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_SetAverageFactor(ADPD1080_AverageN enAverage) {
     uint16_t regValue = (enAverage << 4) | (enAverage << 8);
 
     return ADPD1080_WriteReg(ADPD1080_NUM_AVG, regValue);
 }
 
-/* Enable the digital clock */
+/**
+ * @brief Set the ADC clock speed.
+ * 
+ * @param enADCClock - ADC clock speed value
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_SetADCClock(ADPD1080_ADCClockSpeed enADCClock){
+  return ADPD1080_WriteReg(ADPD1080_ADC_CLOCK, enADCClock);
+}
+
+/**
+ * @brief Enable the digital clock.
+ * 
+ * @return true if successful - false if failure 
+ */
 bool ADPD1080_SetDigitalClock(void) {
-    uint16_t origin = ADPD1080_ReadReg(0x4B);
+    uint16_t origin = ADPD1080_ReadReg(ADPD1080_DATA_ACCESS_CTL);
     uint16_t new = origin | 0x1;
-    ADPD1080_WriteReg(0x5F, new);
+    return ADPD1080_WriteReg(ADPD1080_DATA_ACCESS_CTL, new);
 }
 
-/* Software reset of the ADPD1080 */
+/**
+ * @brief Software reset of the ADPD1080
+ * 
+ * @return true if successful - false if failure 
+ */
 bool ADPD1080_Reset(void) {
-    return ADPD1080_WriteReg(ADPD1080_SW_RESET, 1);
+    return ADPD1080_WriteReg(ADPD1080_SW_RESET, 1); // write 0x0001; see datasheet p.68
 }
 
-/* Set channel offset */
-void ADPD1080_SetOffset(uint8_t enSlot, uint16_t ch1Offset, uint16_t ch2Offset, uint16_t ch3Offset, uint16_t ch4Offset) {
-    if (enSlot == 0) { // SLOTA
-        ADPD1080_WriteReg(ADPD1080_SLOTA_CH1_OFFSET, ch1Offset);
-        ADPD1080_WriteReg(ADPD1080_SLOTA_CH2_OFFSET, ch2Offset);
-        ADPD1080_WriteReg(ADPD1080_SLOTA_CH3_OFFSET, ch3Offset);
-        ADPD1080_WriteReg(ADPD1080_SLOTA_CH4_OFFSET, ch4Offset);
+/**
+ * @brief Set channel offset.
+ * 
+ * @param enSlot - time slot (SlotA or SlotB)
+ * @param stOffset - offset value
+ * 
+ * @return true if successful - false if failure
+ */
+void ADPD1080_SetOffset(ADPD1080_TimeSlot enSlot, struct ADPD1080_ChannelOffset stOffset) {
+    if (enSlot == SLOTA) {
+        ADPD1080_WriteReg(ADPD1080_SLOTA_CH1_OFFSET, stOffset.CH1Offset);
+        ADPD1080_WriteReg(ADPD1080_SLOTA_CH2_OFFSET, stOffset.CH2Offset);
+        ADPD1080_WriteReg(ADPD1080_SLOTA_CH3_OFFSET, stOffset.CH3Offset);
+        ADPD1080_WriteReg(ADPD1080_SLOTA_CH4_OFFSET, stOffset.CH4Offset);
     } else { // SLOTB
-        ADPD1080_WriteReg(ADPD1080_SLOTB_CH1_OFFSET, ch1Offset);
-        ADPD1080_WriteReg(ADPD1080_SLOTB_CH2_OFFSET, ch2Offset);
-        ADPD1080_WriteReg(ADPD1080_SLOTB_CH3_OFFSET, ch3Offset);
-        ADPD1080_WriteReg(ADPD1080_SLOTB_CH4_OFFSET, ch4Offset);
+        ADPD1080_WriteReg(ADPD1080_SLOTB_CH1_OFFSET, stOffset.CH1Offset);
+        ADPD1080_WriteReg(ADPD1080_SLOTB_CH2_OFFSET, stOffset.CH2Offset);
+        ADPD1080_WriteReg(ADPD1080_SLOTB_CH3_OFFSET, stOffset.CH3Offset);
+        ADPD1080_WriteReg(ADPD1080_SLOTB_CH4_OFFSET, stOffset.CH4Offset);
     }
 }
 
-/* Disable the LEDs */
-bool ADPD1080_DisableLed(uint8_t enSlot) {
+/**
+ * @brief Disables the LEDs
+ *  
+ * @param enSlot - time slot (SlotA or SlotB)
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_DisableLed(ADPD1080_TimeSlot enSlot) {
     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
     (void) enSlot;
-    //if (enSlot == 0) { // SLOTA
+    //if (enSlot == SLOTA) {
         //regValue = regValue & (0xFCFF | (0x01 << 8));//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
     //} else { // SLOTB
@@ -301,11 +355,17 @@ bool ADPD1080_DisableLed(uint8_t enSlot) {
     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
 }
 
-/* Enable the LEDs */
-bool ADPD1080_EnableLed(uint8_t enSlot) {
+/**
+ * @brief Enable the LEDs
+ *  
+ * @param enSlot - time slot (SlotA or SlotB)
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_EnableLed(ADPD1080_TimeSlot enSlot) {
     (void) enSlot;
     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
-    //if (enSlot == 0) { // SLOTA
+    //if (enSlot == SLOTA) {
         //regValue = regValue & (0xFCFF | (0x00 << 8));//!!!!!!!!!!!!!!!!!!!!!8 bit 0
         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
     //} else { // SLOTB
@@ -316,19 +376,27 @@ bool ADPD1080_EnableLed(uint8_t enSlot) {
     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
 }
 
-/* Set the pulse number and period */
-bool ADPD1080_SetPulseNumberPeriod(uint8_t enSlot, uint8_t u8PulseCount, uint8_t u8PulsePeriod) {
-    uint16_t u16Value = ((uint16_t)u8PulseCount << 8) | u8PulsePeriod;
+/**
+ * @brief Set the pulse number and period
+ *  
+ * @param enSlot - time slot (SlotA or SlotB)
+ * @param u8PulseCount - number of pulses in selected time slot
+ * @param u8PulsePeriod - period of the pulse
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t pulseCount, uint8_t pulsePeriod) {
+    uint16_t regValue = ((uint16_t)pulseCount << 8) | pulsePeriod;
 
-    if (enSlot == 0) { // SLOTA
-        return ADPD1080_WriteReg(ADPD1080_SLOTA_NUMPULSES, u16Value);
+    if (enSlot == SLOTA) {
+        return ADPD1080_WriteReg(ADPD1080_SLOTA_NUMPULSES, regValue);
     } else { // SLOTB
-        return ADPD1080_WriteReg(ADPD1080_SLOTB_NUMPULSES, u16Value);
+        return ADPD1080_WriteReg(ADPD1080_SLOTB_NUMPULSES, regValue);
     }
 }
 
 /* Controller Function Definitions */
-void turbidity_init(void) {
+void turbidity_Init(void) {
     
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
     ADPD1080_WriteReg(0x0,0xFF);
