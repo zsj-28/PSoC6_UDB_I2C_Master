@@ -4,7 +4,6 @@
 #define _ADPD1080_H
 
 /* Include Files */
-#include "project.h"  // Include PSoC project header for PSoC-specific functions
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -175,7 +174,7 @@ bool ADPD1080_DisableLed(ADPD1080_TimeSlot enSlot);
 bool ADPD1080_EnableLed(ADPD1080_TimeSlot enSlot);
 bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t u8PulseCount, uint8_t u8PulsePeriod);
 
-/* Helper function prototypes */
+/* Controller function prototypes */
 void turbidity_Init(void);
 void turbidity_ReadDataInterrupt(void);
 void turbidity_ChannelOffsetCalibration(void);

@@ -14,6 +14,7 @@
 #define ADC_Task_PRIORITY   3
 #define READ_INTERVAL_MS         500
 #define ADC_READ_INTERVAL_MS 1000
+
 // Function prototypes
 void ADPD1080_Task(void *pvParameters);
 void ADC_TASK(void *pvParameters);
@@ -60,13 +61,13 @@ void ADPD1080_Task(void *pvParameters)
 
     printf("ADPD1080 initialization successful.\n");
     
-    turbidity_init();
+    turbidity_Init();
     //while(1){}
     turbidity_ChannelOffsetCalibration();
     
     for (;;) {
         // Read data from the sensor
-        ADPD1080_ReadData(au16DataSlotA, au16DataSlotB, 4);
+        turbidity_ReadDataInterrupt();
 
         // Format and print the data via UART
         snprintf(buffer, sizeof(buffer), "Slot A: %d | Slot B: %d\n",
@@ -105,7 +106,8 @@ void ADC_TASK(void *pvParameter){
         adc_val7 = Cy_SAR_GetResult16(SAR, 7);
         float32_t result7 = Cy_SAR_CountsTo_Volts(SAR,7,adc_val7);
     
-        printf("0 to 7 is %f, %f, %f, %f, %f, %f, %f\r\n", result0, result1, result2, result3, result4, result5, result6, result7);
+        printf("0 to 7 is %f, %f, %f, %f, %f, %f, %f, %f\r\n", result0, result1, 
+            result2, result3, result4, result5, result6, result7);
         
         vTaskDelay(pdMS_TO_TICKS(100));
     }

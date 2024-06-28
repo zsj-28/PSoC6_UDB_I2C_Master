@@ -1,11 +1,8 @@
 /* ADPD1080.c */
 
 /* Include Files */
-#include "project.h" // Include PSoC project header
+#include "project.h"  // Include PSoC project header for PSoC-specific functions
 #include "ADPD1080.h"
-//#include <stdlib.h>
-#include <stdint.h>
-#include <stdbool.h>
 #include <stdio.h>
 
 /* Initialize data slot arrays */
@@ -134,7 +131,7 @@ bool ADPD1080_Set32KCLK(bool enableSampleClk){
  * @remarks INT_MASK settings are a bit weird ... (see ADPD_1Sensor.ino code)
  */
 void ADPD1080_SetFIFO(void) {
-    // TODO
+    // TODO: check this function, very different from original code
     ADPD1080_WriteReg(ADPD1080_SLOT_EN, 0x1021);
     ADPD1080_WriteReg(ADPD1080_FIFO_THRESH, 0x1F00);
     ADPD1080_WriteReg(ADPD1080_INT_MASK, 0xC0FF);
@@ -154,6 +151,37 @@ bool ADPD1080_SelectLED(ADPD1080_LED enLEDNumber, ADPD1080_TimeSlot enSlot) {
     //}
     regValue = (regValue & 0xFFF0) | 0x0009;//!!!!!!!!!!!!!!!!!!!!!1101
     return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
+}
+
+/**
+ * @brief Unselect the LEDs for each time slot.
+ * 
+ * @param 
+ *  
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_DeselectLEDs(void){
+    return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, 0xFFF0);
+}
+
+/**
+ * @brief Reads the data register for each time slot
+ * 
+ * @param *dataSlotA - 
+ * 
+ * @param *dataSlotB - 
+ * 
+ * @param count - 
+ *  
+ * @return none
+ * 
+ * @remarks timer_sleep has been commented but it may be required ...
+ */
+void ADPD1080_ReadDataRegs(volatile uint16_t *dataSlotA, volatile uint16_t *dataSlotB, uint8_t count) {
+    for (uint8_t i = 0; i < count; i++) {
+        dataSlotA[i] = ADPD1080_ReadReg(0x64 + i);
+        dataSlotB[i] = ADPD1080_ReadReg(0x68 + i);
+    }
 }
 
 /* Set the width and offset for LED pulse */
@@ -257,13 +285,6 @@ bool ADPD1080_SetPulseNumberPeriod(uint8_t enSlot, uint8_t u8PulseCount, uint8_t
     }
 }
 
-void ADPD1080_ReadData(volatile uint16_t *data_Slot_A, volatile uint16_t *data_Slot_B, uint8_t count) {
-    for (uint8_t i = 0; i < count; i++) {
-        data_Slot_A[i] = ADPD1080_ReadReg(0x64 + i);
-        data_Slot_B[i] = ADPD1080_ReadReg(0x68 + i);
-    }
-}
-
 void turbidity_init(void) {
     
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
@@ -314,6 +335,24 @@ void turbidity_init(void) {
     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
 }
 
+/* 
+The interrupt handler must perform the following:
+a. Read Register 0x00 and observe Bit 5 or Bit 6 to confirm
+which interrupt occurred. This step is not required if
+only one interrupt is in use.
+b. Read the data registers before the next sample can be
+written. The system must have interrupt latency and service time short enough to respond before 
+the next data update, based on the output data rate.
+c. Write a 1 to Bit 5 or Bit 6 in Register 0x00 to clear the interrupt.
+*/
+void turbidity_ReadDataInterrupt(void) {
+    ADPD1080_ReadReg(0x00);
+    ADPD1080_ReadDataRegs(au16DataSlotA, au16DataSlotB, 4);
+  
+    // Clear interrupt
+    ADPD1080_WriteReg(0x00, 0xFF);      
+}
+
 void turbidity_ChannelOffsetCalibration(void) {
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
     // ADPD1080_WriteReg(0x34, 0x0100);  // Disable LED
@@ -340,7 +379,7 @@ void turbidity_ChannelOffsetCalibration(void) {
     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
     CyDelay(1000);
 
-    ADPD1080_ReadData(au16DataSlotA, au16DataSlotB, 4);////////////////
+    ADPD1080_ReadDataRegs(au16DataSlotA, au16DataSlotB, 4);////////////////
 
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
     //ADPD1080_WriteReg(0x18, au16DataSlotA[0] - 100);  // Set offset for slot A
