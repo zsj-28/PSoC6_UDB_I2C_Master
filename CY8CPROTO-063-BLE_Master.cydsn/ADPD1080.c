@@ -71,21 +71,10 @@ uint16_t ADPD1080_ReadReg(uint8_t regAddr) {
  * @return true if successful - false if failure
  */
 bool ADPD1080_SetOperationMode(ADPD1080_OperationMode enMode) {
-    uint16_t regValue = ADPD1080_ReadReg(0x10);
-    bool success = false;
-    if (enMode == STANDBY) {
-        regValue = (regValue & 0xFFFC);//!!!!!!!!!!!!!!!!!!!!!1101
-        success = ADPD1080_WriteReg(0x10, regValue);
-    }
-    else if (enMode == PROGRAM) {
-        regValue = (regValue & 0xFFFC) | 0x01;//!!!!!!!!!!!!!!!!!!!!!1101
-        success = ADPD1080_WriteReg(0x10, regValue);
-    }
-    else if (enMode == NORMAL_OPERATION) {
-        regValue = (regValue & 0xFFFC) | 0x02;//!!!!!!!!!!!!!!!!!!!!!1101
-        success = ADPD1080_WriteReg(0x10, regValue);
-    }
-    return success;
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_MODE);
+    regValue &= ~(0x3 << 0);
+    regValue |= (enMode << 0);
+    return ADPD1080_WriteReg(ADPD1080_MODE, regValue);
 }
 /**
  * @brief Configure the Time Slot Switch register.
@@ -97,14 +86,14 @@ bool ADPD1080_SetOperationMode(ADPD1080_OperationMode enMode) {
  * @return true if successful - false if failure 
  */
 bool ADPD1080_SetTimeSlotSwitch(ADPD1080_TimeSlotPD u8SlotASel, ADPD1080_TimeSlotPD u8SlotBSel){
-    uint16_t select_value = ADPD1080_ReadReg(0x14);
-    select_value &= ~(0x0F << 4);        // Clear bits 4-7
-    select_value |= (u8SlotASel << 4); // Set the new value for bits 4-7
-    select_value &= ~(0x0F << 8);        // Clear bits 8-11
-    select_value |= (u8SlotBSel << 8); // Set the new value for bits 8-11
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_PD_LED_SELECT);
+    regValue &= ~(0x0F << 4);        // Clear bits 4-7
+    regValue |= (u8SlotASel << 4); // Set the new value for bits 4-7
+    regValue &= ~(0x0F << 8);        // Clear bits 8-11
+    regValue |= (u8SlotBSel << 8); // Set the new value for bits 8-11
     
     // Write the updated value back to the ADPD1080_PD_LED_SELECT register
-    return ADPD1080_WriteReg(0x14, select_value);
+    return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
 }
 
 /**
@@ -115,10 +104,10 @@ bool ADPD1080_SetTimeSlotSwitch(ADPD1080_TimeSlotPD u8SlotASel, ADPD1080_TimeSlo
  * @return true if successful - false if failure 
  */
 bool ADPD1080_Set32KCLK(bool enableSampleClk){
-    uint16_t origin = ADPD1080_ReadReg(ADPD1080_SAMPLE_CLK);
-    uint16_t mask = (enableSampleClk << 7);
-    uint16_t new = origin | mask;
-    return ADPD1080_WriteReg(ADPD1080_SAMPLE_CLK, new);
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_SAMPLE_CLK);
+    regValue &= ~(0x01 << 7);
+    regValue |= (enableSampleClk << 7);
+    return ADPD1080_WriteReg(ADPD1080_SAMPLE_CLK, regValue);
 }
 
 /**
@@ -151,15 +140,14 @@ void ADPD1080_SetFIFO(void) {
  * @return true if successful - false if failure 
  */
 bool ADPD1080_SelectLED(ADPD1080_LED enLEDNumber, ADPD1080_TimeSlot enSlot) {
-    (void) enLEDNumber;
-    (void) enSlot;
     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_PD_LED_SELECT);
-    //if (enSlot == 0) { // SLOTA
-        //regValue = regValue & (0xFFFD | enLEDNumber);//!!!!!!!!!!!!!!!!!!!!!1101
-    //} else { // SLOTB
-        //regValue = regValue & (0xFFFB | enLEDNumber << 2);//!!!!!!!!!!!!!!!!!!!!!1011
-    //}
-    regValue = (regValue & 0xFFF0) | 0x0009;//!!!!!!!!!!!!!!!!!!!!!1101
+    if (enSlot == SLOTA) {
+        regValue &= ~(0x03 << 0);
+        regValue |= (enLEDNumber << 0);
+    } else { // SLOTB
+        regValue &= ~(0x03 << 2);
+        regValue |= (enLEDNumber << 2);
+    }
     return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
 }
 
@@ -402,7 +390,7 @@ void turbidity_Init(void) {
     
     ADPD1080_SetOperationMode(PROGRAM);  // Set to program mode
     ADPD1080_Reset();
-    ADPD1080_SetOperationMode(PROGRAM);  // Set to program mode
+    ADPD1080_SetOperationMode(PROGRAM);  // Set to program mode ^update above
     register_settings();
     
     ADPD1080_Set32KCLK(true);            // Enable 32K clock
@@ -410,7 +398,7 @@ void turbidity_Init(void) {
     
     /* Select LEDs for each time slot */
     ADPD1080_SelectLED(LEDX1, SLOTA);
-    ADPD1080_SelectLED(LEDX2, SLOTB); // TODO: update this and above function calls
+    ADPD1080_SelectLED(LEDX2, SLOTB);
     
     /* Set led coarse value 100% and 10% */
     ADPD1080_WriteReg(ADPD1080_ILED1_COARSE, 0x1031);  // LED configuration
@@ -541,7 +529,7 @@ void turbidity_ChannelOffsetCalibration(void) {
 /* Helper function for turbidity_Init() */
 void register_settings(void) {
 
-    ADPD1080_WriteReg(0x00,0x0000);
+    ADPD1080_WriteReg(0x00,0x0000); // TODO: 0x8000 didn't seem to help
     ADPD1080_WriteReg(0x01,0xC0FF);
     ADPD1080_WriteReg(0x02,0x0005);
     ADPD1080_WriteReg(0x03,0x0000);

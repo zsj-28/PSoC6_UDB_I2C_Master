@@ -98,8 +98,8 @@ extern volatile uint16_t au16DataSlotB[4];
 /* Enumeration and structure definitions */
 typedef enum {
   STANDBY = 0,
-  PROGRAM,
-  NORMAL_OPERATION
+  PROGRAM = 1,
+  NORMAL_OPERATION = 2
 } ADPD1080_OperationMode;
 
 typedef enum {
@@ -117,7 +117,7 @@ typedef enum {
 typedef enum {
   LEDX1 = 0x02,
   LEDX2 = 0x01,
-  LEDX3 = 0x00,
+  LEDX3 = 0x03,
 } ADPD1080_LED;
 
 typedef enum {
