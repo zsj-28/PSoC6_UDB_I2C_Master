@@ -52,21 +52,23 @@ void ADPD1080_Task(void *pvParameters)
     volatile uint16_t au16DataSlotB[4] = {0, 0, 0, 0};
 
     // Initialize and configure the ADPD1080 sensor
-    printf("Initializing ADPD1080 sensor...\n");
+    printf("Initializing ADPD1080 sensor...\r\n");
 
-    //if (!ADPD1080_Init()) {
-    //    printf("ADPD1080 initialization failed!\n");
-    //    vTaskSuspend(NULL); // Suspend task on failure
-    //}
+    if (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
+        printf("ADPD1080 initialization failed!\r\n");
+        vTaskSuspend(NULL); // Suspend task on failure
+    }
 
-    printf("ADPD1080 initialization successful.\n");
+    printf("ADPD1080 initialization successful.\r\n");
     
     turbidity_Init();
     //while(1){}
-    turbidity_ChannelOffsetCalibration();
+    //turbidity_ChannelOffsetCalibration();
     
     for (;;) {
         // Read data from the sensor
+        uint16_t regValue = ADPD1080_ReadReg(0x10);
+        printf("operation mode: %d\r\n", regValue);
         turbidity_ReadDataInterrupt();
 
         // Format and print the data via UART
@@ -74,7 +76,7 @@ void ADPD1080_Task(void *pvParameters)
                  au16DataSlotA[0],
                  au16DataSlotB[0]);
 
-        printf(buffer);
+        printf("%s\r\n", buffer);
 
         // Delay task for the specified interval
         vTaskDelay(pdMS_TO_TICKS(READ_INTERVAL_MS));

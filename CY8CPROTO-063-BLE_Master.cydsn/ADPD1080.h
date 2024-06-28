@@ -178,5 +178,6 @@ bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t u8PulseCoun
 void turbidity_Init(void);
 void turbidity_ReadDataInterrupt(void);
 void turbidity_ChannelOffsetCalibration(void);
+void register_settings(void);
 
 #endif /* _ADPD1080_H */
