@@ -9,7 +9,7 @@
 volatile uint16_t au16DataSlotA[4] = {0,0,0,0};
 volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
 
-/* Function definitions */
+/* Sensor Function Definitions */
 /**
  *    @brief  Sets up the hardware and initializes I2C
  *    @param  i2cAddr
@@ -139,7 +139,15 @@ void ADPD1080_SetFIFO(void) {
     ADPD1080_WriteReg(ADPD1080_GPIO_DRV, 0x05);
 }
 
-/* Configure the Time Slot Switch register */
+/**
+ * @brief Select the LED to be used for a time slot
+ * 
+ * @param enLEDNumber - specifies the LED to be used.
+ * 
+ * @param enSlot - time slot to be used (SlotA or SlotB)
+ *  
+ * @return true if successful - false if failure 
+ */
 bool ADPD1080_SelectLED(ADPD1080_LED enLEDNumber, ADPD1080_TimeSlot enSlot) {
     (void) enLEDNumber;
     (void) enSlot;
@@ -184,14 +192,48 @@ void ADPD1080_ReadDataRegs(volatile uint16_t *dataSlotA, volatile uint16_t *data
     }
 }
 
-/* Set the width and offset for LED pulse */
-bool ADPD1080_SetLEDWidthOffset(uint8_t enSlot, uint8_t u8Width, uint8_t u8Offset) {
-    uint16_t regValue = u8Offset + ((u8Width & 0x1F) << 8);
-    if (enSlot == 0) { // SLOTA
+/**
+ * @brief Set the width and offset for led pulse.
+ * 
+ * @param enSlot - time slot (SlotA or SlotB)
+ * @param u8Width - the width of the led pulse (1us step)
+ * @param u8Offset - the offset of the led pulse (1us step)
+ * 
+ * @return true if successfull - false if failure 
+ */
+bool ADPD1080_SetLEDWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t offset) {
+    uint16_t regValue = offset + ((width & 0x1F) << 8);
+    if (enSlot == SLOTA) {
         return ADPD1080_WriteReg(ADPD1080_SLOTA_LED_PULSE, regValue);
-    } else { // SLOTB
+    } else { // enSlot == SLOTB
         return ADPD1080_WriteReg(ADPD1080_SLOTB_LED_PULSE, regValue);
     }
+}
+
+/**
+ * @brief Set the width and offset for AFE integration.
+ * 
+ * @param enSlot - time slot (SlotA or SlotB)
+ * @param u8Width - the width of the AFE integration window (1us step)
+ * @param u8Offset - the offset of the AFE integration window (1us step)
+ * @param u8FineOffset - the fine offset of the AFE integration window (31.25 ns step)
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_SetAFEWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t offset, uint8_t fineOffset){
+  uint16_t regValue = 0;
+
+  if (enSlot == SLOTA) {
+    regValue = (uint16_t)(fineOffset & 0x1F) + 
+        (uint16_t)((offset & 0x3F) << 5) +
+        (uint16_t)((width & 0x1F) << 11);
+    return ADPD1080_WriteReg(ADPD1080_SLOTA_AFE_WINDOW, regValue);        
+  } else { // enSlot == SLOTB
+    regValue = (uint16_t)(fineOffset & 0x1F) +
+        (uint16_t)((offset & 0x3F) << 5) +
+        (uint16_t)((width & 0x1F) << 11);
+    return ADPD1080_WriteReg(ADPD1080_SLOTB_AFE_WINDOW, regValue);        
+  }
 }
 
 /* Set the transimpedance amplifier gain */
@@ -285,6 +327,7 @@ bool ADPD1080_SetPulseNumberPeriod(uint8_t enSlot, uint8_t u8PulseCount, uint8_t
     }
 }
 
+/* Controller Function Definitions */
 void turbidity_init(void) {
     
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
