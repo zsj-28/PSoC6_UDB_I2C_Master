@@ -8,11 +8,142 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+/* Initialize data slot arrays */
 volatile uint16_t au16DataSlotA[4] = {0,0,0,0};
 volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
 
+/* Function definitions */
+/**
+ *    @brief  Sets up the hardware and initializes I2C
+ *    @param  i2cAddr
+ *            The I2C address to be used.
+ *    @param  sensorId
+ *            The unique ID to differentiate the sensors from others
+ *    @return True if initialization was successful, otherwise false.
+ */
+bool ADPD1080_Begin(uint8_t i2cAddr, int32_t sensorId) {
+    (void) i2cAddr;
+    (void) sensorId;
+    
+    uint16_t deviceID = ADPD1080_ReadReg(0x08);  // Device ID register
+    printf("%d",deviceID);
+    return true;
+}
+
+/**
+ * @brief Writes a register from the ADPD1080 using I2C bus.
+ * 
+ * @param regAddr - register address
+ * @param regValue - register data to write
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_WriteReg(uint8_t regAddr, uint16_t regValue) {
+    //uint8_t err;
+    I2C_MasterSendStart(ADPD1080_ADDRESS, I2C_WRITE_XFER_MODE);
+    I2C_MasterWriteByte(regAddr);
+    I2C_MasterWriteByte((regValue >> 8) & 0xFF);
+    I2C_MasterWriteByte(regValue & 0xFF);
+    I2C_MasterSendStop();
+    return true;
+}
+
+/**
+ * @brief Reads a register from the ADPD1080 using I2C bus.
+ * 
+ * @param regAddr - register address
+ * 
+ * @return uint16_t - register value
+ */
+uint16_t ADPD1080_ReadReg(uint8_t regAddr) {
+    uint8_t buffer[2] = {0};
+    I2C_MasterSendStart(ADPD1080_ADDRESS, I2C_WRITE_XFER_MODE);
+    I2C_MasterWriteByte(regAddr);
+    I2C_MasterSendRestart(ADPD1080_ADDRESS, I2C_READ_XFER_MODE);
+    buffer[0] = I2C_MasterReadByte(I2C_ACK_DATA);
+    buffer[1] = I2C_MasterReadByte(I2C_NAK_DATA);
+    I2C_MasterSendStop();
+    return (buffer[0] << 8) | buffer[1];
+}
+
+/**
+ * @brief Sets the operation mode of the ADPD1080
+ * 
+ * @param enMode = STANDBY, PROGRAM or NORMAL_OPERATION.
+ * 
+ * @return true if successful - false if failure
+ */
+bool ADPD1080_SetOperationMode(ADPD1080_OperationMode enMode) {
+    uint16_t regValue = ADPD1080_ReadReg(0x10);
+    bool success = false;
+    if(enMode == 0){
+        regValue = (regValue & 0xFFFC);//!!!!!!!!!!!!!!!!!!!!!1101
+        success = ADPD1080_WriteReg(0x10, regValue);
+    }
+    else if(enMode == 1) {
+        regValue = (regValue & 0xFFFC) | 0x01;//!!!!!!!!!!!!!!!!!!!!!1101
+        success = ADPD1080_WriteReg(0x10, regValue);
+    }
+    else if(enMode == 2) {
+        regValue = (regValue & 0xFFFC) | 0x02;//!!!!!!!!!!!!!!!!!!!!!1101
+        success = ADPD1080_WriteReg(0x10, regValue);
+    }
+    return success;
+}
+/**
+ * @brief Configure the Time Slot Switch register.
+ *
+ * @param u8SlotASel - SlotA input
+ * 
+ * @param u8SlotBSel - SlotB input
+ * 
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_SetTimeSlotSwitch(ADPD1080_TimeSlotPD u8SlotASel, ADPD1080_TimeSlotPD u8SlotBSel){
+    uint16_t select_value = ADPD1080_ReadReg(0x14);
+    select_value &= ~(0x0F << 4);        // Clear bits 4-7
+    select_value |= (u8SlotASel << 4); // Set the new value for bits 4-7
+    select_value &= ~(0x0F << 8);        // Clear bits 8-11
+    select_value |= (u8SlotBSel << 8); // Set the new value for bits 8-11
+    
+    // Write the updated value back to the ADPD1080_PD_LED_SELECT register
+    return ADPD1080_WriteReg(0x14, select_value);
+}
+
+/**
+ * @brief Enable the internal 32kHz internal clock from ADPD105 via I2C.
+ * 
+ * @param enableSampleClk - enables/disables 32kHz clock
+ *  
+ * @return true if successful - false if failure 
+ */
+bool ADPD1080_Set32KCLK(bool enableSampleClk){
+    uint16_t origin = ADPD1080_ReadReg(0x4B);
+    uint16_t mask = (enableSampleClk << 7);
+    uint16_t new = origin | mask;
+    return ADPD1080_WriteReg(0x4B, new);
+}
+
+/**
+ * @brief Setup FIFO for data reading
+ * 
+ * @param 
+ *  
+ * @return none
+ * 
+ * @remarks INT_MASK settings are a bit weird ... (see ADPD_1Sensor.ino code)
+ */
+void ADPD1080_SetFIFO(void) {
+    // TODO
+    ADPD1080_WriteReg(ADPD1080_SLOT_EN, 0x1021);
+    ADPD1080_WriteReg(ADPD1080_FIFO_THRESH, 0x1F00);
+    ADPD1080_WriteReg(ADPD1080_INT_MASK, 0xC0FF);
+    ADPD1080_WriteReg(ADPD1080_GPIO_CTRL, 0x101);
+    ADPD1080_WriteReg(ADPD1080_GPIO_DRV, 0x05);
+}
+
 /* Configure the Time Slot Switch register */
-bool ADPD1080_SelectLED(uint8_t enLEDNumber, uint8_t enSlot) {
+bool ADPD1080_SelectLED(ADPD1080_LED enLEDNumber, ADPD1080_TimeSlot enSlot) {
     (void) enLEDNumber;
     (void) enSlot;
     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_PD_LED_SELECT);
@@ -42,15 +173,6 @@ bool ADPD1080_SetTIAGain(uint8_t enSlot, uint16_t enTIAGain) {
     } else { // SLOTB
         return ADPD1080_WriteReg(ADPD1080_SLOTB_TIA_CFG, enTIAGain);
     }
-}
-
-/* Setup FIFO for data reading */
-void ADPD1080_SetFIFO(void) {
-    ADPD1080_WriteReg(ADPD1080_SLOT_EN, 0x1021);
-    ADPD1080_WriteReg(ADPD1080_FIFO_THRESH, 0x1F00);
-    ADPD1080_WriteReg(ADPD1080_INT_MASK, 0xC0FF);
-    ADPD1080_WriteReg(ADPD1080_GPIO_CTRL, 0x101);
-    ADPD1080_WriteReg(ADPD1080_GPIO_DRV, 0x05);
 }
 
 /* Set the sampling frequency */
@@ -135,72 +257,11 @@ bool ADPD1080_SetPulseNumberPeriod(uint8_t enSlot, uint8_t u8PulseCount, uint8_t
     }
 }
 
-bool ADPD1080_Init(void) {
-    uint16_t deviceID = ADPD1080_ReadReg(0x08);  // Device ID register
-    printf("%d",deviceID);
-    return true;
-}
-
-uint16_t ADPD1080_ReadReg(uint8_t reg) {
-    uint8_t buffer[2] = {0};
-    I2C_MasterSendStart(ADPD1080_I2C_ADDRESS, I2C_WRITE_XFER_MODE);
-    I2C_MasterWriteByte(reg);
-    I2C_MasterSendRestart(ADPD1080_I2C_ADDRESS, I2C_READ_XFER_MODE);
-    buffer[0] = I2C_MasterReadByte(I2C_ACK_DATA);
-    buffer[1] = I2C_MasterReadByte(I2C_NAK_DATA);
-    I2C_MasterSendStop();
-    return (buffer[0] << 8) | buffer[1];
-}
-
-bool ADPD1080_WriteReg(uint8_t reg, uint16_t value) {
-    I2C_MasterSendStart(ADPD1080_I2C_ADDRESS, I2C_WRITE_XFER_MODE);
-    I2C_MasterWriteByte(reg);
-    I2C_MasterWriteByte((value >> 8) & 0xFF);
-    I2C_MasterWriteByte(value & 0xFF);
-    I2C_MasterSendStop();
-    return true;
-}
-
 void ADPD1080_ReadData(volatile uint16_t *data_Slot_A, volatile uint16_t *data_Slot_B, uint8_t count) {
     for (uint8_t i = 0; i < count; i++) {
         data_Slot_A[i] = ADPD1080_ReadReg(0x64 + i);
         data_Slot_B[i] = ADPD1080_ReadReg(0x68 + i);
     }
-}
-
-void ADPD1080_SetOperationMode(uint8_t mode) {
-    uint16_t regValue = ADPD1080_ReadReg(0x10);
-    if(mode == 0){
-        regValue = (regValue & 0xFFFC);//!!!!!!!!!!!!!!!!!!!!!1101
-        ADPD1080_WriteReg(0x10, regValue);
-    }
-    else if(mode == 1){
-       regValue = (regValue & 0xFFFC) | 0x01;//!!!!!!!!!!!!!!!!!!!!!1101
-        ADPD1080_WriteReg(0x10, regValue);
-    }
-    else if(mode == 2){
-        regValue = (regValue & 0xFFFC) | 0x02;//!!!!!!!!!!!!!!!!!!!!!1101
-        ADPD1080_WriteReg(0x10, regValue);
-    }
-    
-}
-
-void ADPD1080_Set32KCLK(int set){
-    uint16_t origin = ADPD1080_ReadReg(0x4B);
-    uint16_t mask = (set << 7);
-    uint16_t new = origin | mask;
-    ADPD1080_WriteReg(0x4B, new);
-}
-
-void ADPD1080_SetTimeSlotSwitch(uint8_t slotA, uint8_t slotB){
-    uint16_t select_value = ADPD1080_ReadReg(0x14);
-    select_value &= ~(0x0F << 4);        // Clear bits 4-7
-    select_value |= (slotA << 4); // Set the new value for bits 4-7
-    select_value &= ~(0x0F << 8);        // Clear bits 8-11
-    select_value |= (slotB << 8); // Set the new value for bits 8-11
-    
-    // Write the updated value back to the ADPD1080_PD_LED_SELECT register
-    ADPD1080_WriteReg(0x14, select_value);
 }
 
 void turbidity_init(void) {

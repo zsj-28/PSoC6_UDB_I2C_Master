@@ -152,9 +152,9 @@ struct ADPD1080_ChannelOffset {
 };
 
 /* Sensor function prototypes */
-bool ADPD1080_Init(void);
-bool ADPD1080_WriteReg(uint8_t u8Address, uint16_t u16Value);
-uint16_t ADPD1080_ReadReg(uint8_t u8Address);
+bool ADPD1080_Begin(uint8_t i2cAddr, int32_t sensorId);
+bool ADPD1080_WriteReg(uint8_t regAddr, uint16_t regValue);
+uint16_t ADPD1080_ReadReg(uint8_t regAddr);
 bool ADPD1080_SetOperationMode(ADPD1080_OperationMode enMode);
 bool ADPD1080_SetTimeSlotSwitch(ADPD1080_TimeSlotPD u8SlotASelect, ADPD1080_TimeSlotPD u8SlotBSelect);
 bool ADPD1080_Set32KCLK(bool enableSampleClk);
