@@ -30,10 +30,10 @@ int main(void)
     I2C_Start();
 
     // Start ADC module 
-    //ADC_Start();
+    ADC_Start();
     // Create the ADPD1080 task
     xTaskCreate(ADPD1080_Task, "ADPD1080 Task", ADPD1080_TASK_STACK_SIZE, NULL, ADPD1080_TASK_PRIORITY, NULL);
-    //xTaskCreate(ADC_TASK, "ADC Task", ADC_TASK_STACK_SIZE, NULL, ADC_Task_PRIORITY, NULL);
+    xTaskCreate(ADC_TASK, "ADC Task", ADC_TASK_STACK_SIZE, NULL, ADC_Task_PRIORITY, NULL);
     // Start the FreeRTOS scheduler
     vTaskStartScheduler();
 

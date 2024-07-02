@@ -132,7 +132,7 @@ bool ADPD1080_Set32KCLK(bool enableSampleClk){
  *  
  * @return none
  * 
- * @remarks INT_MASK settings are a bit weird ... (see ADPD_1    ADPD1080_ino code)
+ * @remarks INT_MASK settings are a bit weird ... (see ADPD_1Sensor.ino code)
  */
 void ADPD1080_SetFIFO(void) {
     ADPD1080_SetOperationMode(PROGRAM);
