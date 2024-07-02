@@ -404,6 +404,8 @@ void turbidity_Init(void) {
     register_settings();
     
     ADPD1080_Set32KCLK(true);            // Enable 32K clock
+    uint16_t clkRegValue = ADPD1080_ReadReg(ADPD1080_SAMPLE_CLK);
+    printf("Clk Reg Value: 0x%x\r\n", clkRegValue);
     ADPD1080_SetTimeSlotSwitch(PD_1_4_CONNECTED, PD_1_4_CONNECTED); // Select photodiodes 1-4, datasheet p.21
     
     /* Select LEDs for each time slot */
@@ -526,6 +528,7 @@ void turbidity_ReadDataInterrupt(void) {
     //volatile uint16_t status = ADPD1080_ReadReg(ADPD1080_STATUS);
     //printf("Status: 0x%x\r\n", status);
     ADPD1080_ReadDataRegs(au16DataSlotA, au16DataSlotB, 4);
+    printf("A: 0x%x, B: 0x%x\r\n", au16DataSlotA[0], au16DataSlotB[0]);
   
     // Clear all interrupts
     //ADPD1080_WriteReg(ADPD1080_STATUS, 0xFF);      
