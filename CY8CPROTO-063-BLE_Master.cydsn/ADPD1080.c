@@ -525,13 +525,12 @@ the next data update, based on the output data rate.
 c. Write a 1 to Bit 5 or Bit 6 in Register 0x00 to clear the interrupt.
 */
 void turbidity_ReadDataInterrupt(void) {
-    //volatile uint16_t status = ADPD1080_ReadReg(ADPD1080_STATUS);
-    //printf("Status: 0x%x\r\n", status);
+    volatile uint16_t status = ADPD1080_ReadReg(ADPD1080_STATUS);
+    printf("Status: 0x%x\r\n", status);
     ADPD1080_ReadDataRegs(au16DataSlotA, au16DataSlotB, 4);
-    printf("A: 0x%x, B: 0x%x\r\n", au16DataSlotA[0], au16DataSlotB[0]);
   
     // Clear all interrupts
-    //ADPD1080_WriteReg(ADPD1080_STATUS, 0xFF);      
+    ADPD1080_WriteReg(ADPD1080_STATUS, 0xFF);      
 }
 
 void turbidity_ChannelOffsetCalibration(void) {

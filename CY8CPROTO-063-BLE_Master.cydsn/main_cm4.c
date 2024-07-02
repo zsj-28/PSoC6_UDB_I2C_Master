@@ -48,8 +48,6 @@ void ADPD1080_Task(void *pvParameters)
     (void) pvParameters;
 
     char buffer[1024];
-    volatile uint16_t au16DataSlotA[4] = {0, 0, 0, 0};
-    volatile uint16_t au16DataSlotB[4] = {0, 0, 0, 0};
 
     // Initialize and configure the ADPD1080 sensor
     printf("Initializing ADPD1080 sensor...\r\n");
@@ -67,14 +65,12 @@ void ADPD1080_Task(void *pvParameters)
     
     for (;;) {
         // Read data from the sensor
-        //uint16_t regValue = ADPD1080_ReadReg(ADPD1080_MODE);
-        //printf("operation mode: %d\r\n", regValue);
         turbidity_ReadDataInterrupt();
 
         // Format and print the data via UART
-        snprintf(buffer, sizeof(buffer), "Slot A: %d %d %d %d | Slot B: %d\n",
+        snprintf(buffer, sizeof(buffer), "Slot A: %d %d %d %d | Slot B: %d %d %d %d\n",
                  au16DataSlotA[0], au16DataSlotA[1], au16DataSlotA[2], au16DataSlotA[3],
-                 au16DataSlotB[0]);
+                 au16DataSlotB[0], au16DataSlotB[1], au16DataSlotB[2], au16DataSlotB[3]);
 
         printf("%s\r\n", buffer);
 
