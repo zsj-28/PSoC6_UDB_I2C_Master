@@ -22,9 +22,10 @@ bool ADPD1080_Begin(uint8_t i2cAddr, int32_t sensorId) {
     (void) i2cAddr;
     (void) sensorId;
     
-    uint16_t deviceID = ADPD1080_ReadReg(0x08);  // Device ID register
-    printf("%d",deviceID);
-    return true;
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_DEVID);  // Device ID register
+    uint8_t deviceID = (uint8_t) regValue;
+    printf("Device ID is 0x%x\r\n", deviceID);
+    return deviceID == ADPD1080_CHIP_ID;
 }
 
 /**
@@ -61,6 +62,15 @@ uint16_t ADPD1080_ReadReg(uint8_t regAddr) {
     buffer[1] = I2C_MasterReadByte(I2C_NAK_DATA);
     I2C_MasterSendStop();
     return (buffer[0] << 8) | buffer[1];
+    /*
+    uint8_t regByte[2];
+    uint8_t wrBuf[1] = {regAddr};
+    I2C_MasterWriteBuf(ADPD1080_ADDRESS, wrBuf, 1, I2C_MODE_NO_STOP);
+    I2C_MasterReadBuf(ADPD1080_ADDRESS, regByte, 2, I2C_MODE_REPEAT_START | I2C_MODE_NO_STOP);
+    I2C_MasterSendStop();
+    uint16_t regValue = ((uint16_t)regByte[0] << 8) | ((uint16_t)regByte[1]);
+    return regValue
+    */
 }
 
 /**
@@ -177,8 +187,8 @@ bool ADPD1080_DeselectLEDs(void){
  */
 void ADPD1080_ReadDataRegs(volatile uint16_t *dataSlotA, volatile uint16_t *dataSlotB, uint8_t count) {
     for (uint8_t i = 0; i < count; i++) {
-        dataSlotA[i] = ADPD1080_ReadReg(0x64 + i);
-        dataSlotB[i] = ADPD1080_ReadReg(0x68 + i);
+        dataSlotA[i] = ADPD1080_ReadReg(ADPD1080_SLOTA_PD1_16BIT + i);
+        dataSlotB[i] = ADPD1080_ReadReg(ADPD1080_SLOTB_PD1_16BIT + i);
     }
 }
 
@@ -189,7 +199,7 @@ void ADPD1080_ReadDataRegs(volatile uint16_t *dataSlotA, volatile uint16_t *data
  * @param u8Width - the width of the led pulse (1us step)
  * @param u8Offset - the offset of the led pulse (1us step)
  * 
- * @return true if successfull - false if failure 
+ * @return true if successful - false if failure 
  */
 bool ADPD1080_SetLEDWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t offset) {
     uint16_t regValue = offset + ((width & 0x1F) << 8);
@@ -390,7 +400,7 @@ void turbidity_Init(void) {
     
     ADPD1080_SetOperationMode(PROGRAM);  // Set to program mode
     ADPD1080_Reset();
-    ADPD1080_SetOperationMode(PROGRAM);  // Set to program mode ^update above
+    ADPD1080_SetOperationMode(PROGRAM);  // Set to program mode
     register_settings();
     
     ADPD1080_Set32KCLK(true);            // Enable 32K clock
@@ -439,6 +449,7 @@ void turbidity_Init(void) {
     // Set V_CATHODE to 1.3V, enable all channels
     ADPD1080_WriteReg(ADPD1080_AFE_PWR_CFG1, 0x7006);  // 1806,7006
     ADPD1080_SetAverageFactor(AVERAGE2);
+    
     struct ADPD1080_ChannelOffset stOffsetA  = {8201,0,0,0};      //set to be <1% of full scale ADC (65535)
     struct ADPD1080_ChannelOffset stOffsetB  = {8201,0,0,0};    
     ADPD1080_SetOffset(SLOTA, stOffsetA);
@@ -461,12 +472,12 @@ the next data update, based on the output data rate.
 c. Write a 1 to Bit 5 or Bit 6 in Register 0x00 to clear the interrupt.
 */
 void turbidity_ReadDataInterrupt(void) {
-    uint16_t status = ADPD1080_ReadReg(0x00);
-    printf("Status: %d\r\n", status);
+    //volatile uint16_t status = ADPD1080_ReadReg(ADPD1080_STATUS);
+    //printf("Status: 0x%x\r\n", status);
     ADPD1080_ReadDataRegs(au16DataSlotA, au16DataSlotB, 4);
   
-    // Clear interrupt
-    ADPD1080_WriteReg(0x00, 0xFF);      
+    // Clear all interrupts
+    //ADPD1080_WriteReg(ADPD1080_STATUS, 0xFF);      
 }
 
 void turbidity_ChannelOffsetCalibration(void) {

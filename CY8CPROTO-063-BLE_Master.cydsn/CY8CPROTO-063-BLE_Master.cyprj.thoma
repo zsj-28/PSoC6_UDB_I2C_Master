@@ -7267,9 +7267,11 @@
 <dataGuid v="504337dd-7d07-4bc7-9057-90e60cf6c469">
 <CyGuid_504337dd-7d07-4bc7-9057-90e60cf6c469 type_name="CyDesigner.Common.Debugger.CyBreakpointList" version="1">
 <debugger_breakpoint_list>
-<CyGuid_76464711-0ae1-4583-b869-f07a0403fc6e type_name="CyDesigner.Common.Debugger.CyFileLineBreakpoint" version="1" hitcount="0" condition="" enabled="False" hardware="True" temparary="False" filename=".\main_cm4.c" linenumber="58" />
-<CyGuid_76464711-0ae1-4583-b869-f07a0403fc6e type_name="CyDesigner.Common.Debugger.CyFileLineBreakpoint" version="1" hitcount="0" condition="" enabled="False" hardware="True" temparary="False" filename=".\main_cm4.c" linenumber="52" />
-<CyGuid_76464711-0ae1-4583-b869-f07a0403fc6e type_name="CyDesigner.Common.Debugger.CyFileLineBreakpoint" version="1" hitcount="0" condition="" enabled="False" hardware="True" temparary="False" filename=".\main_cm4.c" linenumber="62" />
+<CyGuid_da1648eb-f713-4789-813b-89e33e3769c0 type_name="CyDesigner.Common.Debugger.CyWatchpoint" version="1" hitcount="0" condition="" enabled="False" hardware="True" temparary="False" variable="au16DataSlotA" access="WRITE" />
+<CyGuid_da1648eb-f713-4789-813b-89e33e3769c0 type_name="CyDesigner.Common.Debugger.CyWatchpoint" version="1" hitcount="0" condition="" enabled="False" hardware="True" temparary="False" variable="au16DataSlotB" access="WRITE" />
+<CyGuid_da1648eb-f713-4789-813b-89e33e3769c0 type_name="CyDesigner.Common.Debugger.CyWatchpoint" version="1" hitcount="0" condition="" enabled="True" hardware="True" temparary="False" variable="au16DataSlotA" access="READ" />
+<CyGuid_da1648eb-f713-4789-813b-89e33e3769c0 type_name="CyDesigner.Common.Debugger.CyWatchpoint" version="1" hitcount="0" condition="" enabled="True" hardware="True" temparary="False" variable="au16DataSlotA" access="ACCESS" />
+<CyGuid_76464711-0ae1-4583-b869-f07a0403fc6e type_name="CyDesigner.Common.Debugger.CyFileLineBreakpoint" version="1" hitcount="0" condition="" enabled="True" hardware="True" temparary="False" filename=".\ADPD1080.c" linenumber="477" />
 </debugger_breakpoint_list>
 </CyGuid_504337dd-7d07-4bc7-9057-90e60cf6c469>
 </dataGuid>
@@ -7728,7 +7730,7 @@
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
 <name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0p" v="133640860686160439" />
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM4" v="133640885414931846" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM4" v="133644217788442692" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>
