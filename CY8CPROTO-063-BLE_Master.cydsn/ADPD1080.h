@@ -175,6 +175,7 @@ bool ADPD1080_EnableLed(ADPD1080_TimeSlot enSlot);
 bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t u8PulseCount, uint8_t u8PulsePeriod);
 
 /* Controller function prototypes */
+void turbidity_init(void); // Debug only
 void turbidity_Init(void);
 void turbidity_ReadDataInterrupt(void);
 void turbidity_ChannelOffsetCalibration(void);

@@ -461,6 +461,57 @@ void turbidity_Init(void) {
     ADPD1080_SetOperationMode(NORMAL_OPERATION);
 }
 
+void turbidity_init(void) {
+    
+    ADPD1080_SetOperationMode(0x01);  // Set to program mode
+    ADPD1080_WriteReg(0x0,0xFF);
+    ADPD1080_WriteReg(0x0F, 0x01);    // Reset
+    
+    ADPD1080_SetOperationMode(0x01);  // Set to program mode
+    ADPD1080_Set32KCLK(1);            // Enable 32K clock
+    ADPD1080_SetTimeSlotSwitch(0x5, 0x5);
+  /* Select LEDs for each time slot */
+    ADPD1080_SelectLED(0x02, 0x0);
+    //ADPD1080_SelectLED(0x01, 0x1);
+    
+    ADPD1080_WriteReg(0x24, 0x1004);  // LED configuration
+    ADPD1080_WriteReg(0x23, 0x1000);  // LED configuration
+    ADPD1080_WriteReg(0x25, 0x67DF);  // LED fine
+
+    ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period
+    ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period
+
+    ADPD1080_WriteReg(0x30, 0x0220);  // LED width and offset
+    ADPD1080_WriteReg(0x35, 0x0220);  // LED width and offset
+
+    ADPD1080_WriteReg(0x39, 0x1AE0);  // AFE width and offset
+    ADPD1080_WriteReg(0x3B, 0x1AE0);  // AFE width and offset
+
+    //ADPD1080_WriteReg(0x4E, 0x40);  // ADC clock
+    //ADPD1080_WriteReg(0x58, 0x01);    // Digital clock
+
+    ADPD1080_WriteReg(0x12, 0x5);     // Sampling frequency
+    
+    ADPD1080_WriteReg(0x42, 0x1C37);  // TIA gain
+    ADPD1080_WriteReg(0x44, 0x1C37);  // TIA gain
+
+    ADPD1080_WriteReg(0x4B, 0x2695);  // Sample clock
+    ADPD1080_WriteReg(0x4D, 0x0098);  // Adjust clock
+    ADPD1080_WriteReg(0x4F, 0x2090);  // External sync
+    ADPD1080_WriteReg(0x50, 0x0000);  // Calibration
+
+    ADPD1080_WriteReg(0x3C, 0x7006);  // AFE power configuration
+    // FIFO setup
+    ADPD1080_WriteReg(0x11, 0x3131); 
+    ADPD1080_WriteReg(0x06, 0x1F00);
+    ADPD1080_WriteReg(0x01, 0xC0FF);
+    ADPD1080_WriteReg(0x0B, 0x101);
+    ADPD1080_WriteReg(0x02, 0x05);
+    
+    ADPD1080_SetOperationMode(0x02);  // Set to normal operation
+}
+
+
 /* 
 The interrupt handler must perform the following:
 a. Read Register 0x00 and observe Bit 5 or Bit 6 to confirm

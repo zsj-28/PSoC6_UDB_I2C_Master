@@ -72,9 +72,9 @@ void ADPD1080_Task(void *pvParameters)
         turbidity_ReadDataInterrupt();
 
         // Format and print the data via UART
-        snprintf(buffer, sizeof(buffer), "Slot A: %d | Slot B: %d\n",
-                 au16DataSlotA[3],
-                 au16DataSlotB[2]);
+        snprintf(buffer, sizeof(buffer), "Slot A: %d %d %d %d | Slot B: %d\n",
+                 au16DataSlotA[0], au16DataSlotA[1], au16DataSlotA[2], au16DataSlotA[3],
+                 au16DataSlotB[0]);
 
         printf("%s\r\n", buffer);
 
