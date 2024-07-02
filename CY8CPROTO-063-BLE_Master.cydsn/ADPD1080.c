@@ -22,9 +22,10 @@ bool ADPD1080_Begin(uint8_t i2cAddr, int32_t sensorId) {
     (void) i2cAddr;
     (void) sensorId;
     
-    uint16_t deviceID = ADPD1080_ReadReg(0x08);  // Device ID register
-    printf("%d",deviceID);
-    return true;
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_DEVID);  // Device ID register
+    uint8_t deviceID = (uint8_t) regValue;
+    printf("Device ID is 0x%x\r\n", deviceID);
+    return deviceID == ADPD1080_CHIP_ID;
 }
 
 /**
@@ -36,13 +37,18 @@ bool ADPD1080_Begin(uint8_t i2cAddr, int32_t sensorId) {
  * @return true if successful - false if failure 
  */
 bool ADPD1080_WriteReg(uint8_t regAddr, uint16_t regValue) {
-    //uint8_t err;
+    //uint8_t err; // TODO: implement error checking
     I2C_MasterSendStart(ADPD1080_ADDRESS, I2C_WRITE_XFER_MODE);
     I2C_MasterWriteByte(regAddr);
     I2C_MasterWriteByte((regValue >> 8) & 0xFF);
     I2C_MasterWriteByte(regValue & 0xFF);
     I2C_MasterSendStop();
     return true;
+    /*
+    uint8_t wrData[3] = {regAddr, (uint8_t)(regValue >> 8), (uint8_t)regValue};
+    err = I2C_MasterWriteBuf(ADPD1080_ADDRESS, wrData, 3, I2C_MODE_COMPLETE_XFER);
+    return err == I2C_MSTR_NO_ERROR;
+    */
 }
 
 /**
@@ -61,6 +67,15 @@ uint16_t ADPD1080_ReadReg(uint8_t regAddr) {
     buffer[1] = I2C_MasterReadByte(I2C_NAK_DATA);
     I2C_MasterSendStop();
     return (buffer[0] << 8) | buffer[1];
+    /*
+    uint8_t regByte[2];
+    uint8_t wrBuf[1] = {regAddr};
+    I2C_MasterWriteBuf(ADPD1080_ADDRESS, wrBuf, 1, I2C_MODE_NO_STOP);
+    I2C_MasterReadBuf(ADPD1080_ADDRESS, regByte, 2, I2C_MODE_REPEAT_START | I2C_MODE_NO_STOP);
+    I2C_MasterSendStop();
+    uint16_t regValue = ((uint16_t)regByte[0] << 8) | ((uint16_t)regByte[1]);
+    return regValue
+    */
 }
 
 /**
@@ -71,21 +86,10 @@ uint16_t ADPD1080_ReadReg(uint8_t regAddr) {
  * @return true if successful - false if failure
  */
 bool ADPD1080_SetOperationMode(ADPD1080_OperationMode enMode) {
-    uint16_t regValue = ADPD1080_ReadReg(0x10);
-    bool success = false;
-    if (enMode == 0) {
-        regValue = (regValue & 0xFFFC);//!!!!!!!!!!!!!!!!!!!!!1101
-        success = ADPD1080_WriteReg(0x10, regValue);
-    }
-    else if (enMode == 1) {
-        regValue = (regValue & 0xFFFC) | 0x01;//!!!!!!!!!!!!!!!!!!!!!1101
-        success = ADPD1080_WriteReg(0x10, regValue);
-    }
-    else if (enMode == 2) {
-        regValue = (regValue & 0xFFFC) | 0x02;//!!!!!!!!!!!!!!!!!!!!!1101
-        success = ADPD1080_WriteReg(0x10, regValue);
-    }
-    return success;
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_MODE);
+    regValue &= ~(0x3 << 0);
+    regValue |= (enMode << 0);
+    return ADPD1080_WriteReg(ADPD1080_MODE, regValue);
 }
 /**
  * @brief Configure the Time Slot Switch register.
@@ -97,14 +101,14 @@ bool ADPD1080_SetOperationMode(ADPD1080_OperationMode enMode) {
  * @return true if successful - false if failure 
  */
 bool ADPD1080_SetTimeSlotSwitch(ADPD1080_TimeSlotPD u8SlotASel, ADPD1080_TimeSlotPD u8SlotBSel){
-    uint16_t select_value = ADPD1080_ReadReg(0x14);
-    select_value &= ~(0x0F << 4);        // Clear bits 4-7
-    select_value |= (u8SlotASel << 4); // Set the new value for bits 4-7
-    select_value &= ~(0x0F << 8);        // Clear bits 8-11
-    select_value |= (u8SlotBSel << 8); // Set the new value for bits 8-11
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_PD_LED_SELECT);
+    regValue &= ~(0x0F << 4);        // Clear bits 4-7
+    regValue |= (u8SlotASel << 4); // Set the new value for bits 4-7
+    regValue &= ~(0x0F << 8);        // Clear bits 8-11
+    regValue |= (u8SlotBSel << 8); // Set the new value for bits 8-11
     
     // Write the updated value back to the ADPD1080_PD_LED_SELECT register
-    return ADPD1080_WriteReg(0x14, select_value);
+    return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
 }
 
 /**
@@ -115,10 +119,10 @@ bool ADPD1080_SetTimeSlotSwitch(ADPD1080_TimeSlotPD u8SlotASel, ADPD1080_TimeSlo
  * @return true if successful - false if failure 
  */
 bool ADPD1080_Set32KCLK(bool enableSampleClk){
-    uint16_t origin = ADPD1080_ReadReg(0x4B);
-    uint16_t mask = (enableSampleClk << 7);
-    uint16_t new = origin | mask;
-    return ADPD1080_WriteReg(0x4B, new);
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_SAMPLE_CLK);
+    regValue &= ~(0x01 << 7);
+    regValue |= (enableSampleClk << 7); // true is 0x1, false is 0x0
+    return ADPD1080_WriteReg(ADPD1080_SAMPLE_CLK, regValue);
 }
 
 /**
@@ -128,15 +132,17 @@ bool ADPD1080_Set32KCLK(bool enableSampleClk){
  *  
  * @return none
  * 
- * @remarks INT_MASK settings are a bit weird ... (see ADPD_1Sensor.ino code)
+ * @remarks INT_MASK settings are a bit weird ... (see ADPD_1    ADPD1080_ino code)
  */
 void ADPD1080_SetFIFO(void) {
-    // TODO: check this function, very different from original code
-    ADPD1080_WriteReg(ADPD1080_SLOT_EN, 0x1021);
-    ADPD1080_WriteReg(ADPD1080_FIFO_THRESH, 0x1F00);
-    ADPD1080_WriteReg(ADPD1080_INT_MASK, 0xC0FF);
-    ADPD1080_WriteReg(ADPD1080_GPIO_CTRL, 0x101);
-    ADPD1080_WriteReg(ADPD1080_GPIO_DRV, 0x05);
+    ADPD1080_SetOperationMode(PROGRAM);
+    // Slot A enable and 32 bit extend sample data to FIFO
+    ADPD1080_WriteReg(ADPD1080_SLOT_EN, 0x3131); // Slot A and Slot B enabled
+    ADPD1080_WriteReg(ADPD1080_FIFO_THRESH, 0x1F00); // set FIFO threshold to 8 words data
+    ADPD1080_WriteReg(ADPD1080_INT_MASK, 0x1DF); // Sends an interrupt on the Time Slot A sample 
+    ADPD1080_WriteReg(ADPD1080_GPIO_CTRL, 0x101); // interrupt function provided on GPIO0, as defined in Register 0x01
+                                                  // GPIO1 set to 0
+    ADPD1080_WriteReg(ADPD1080_GPIO_DRV, 0x05); // GPIO0 pin enabled, always driven, active high.
 }
 
 /**
@@ -149,15 +155,14 @@ void ADPD1080_SetFIFO(void) {
  * @return true if successful - false if failure 
  */
 bool ADPD1080_SelectLED(ADPD1080_LED enLEDNumber, ADPD1080_TimeSlot enSlot) {
-    (void) enLEDNumber;
-    (void) enSlot;
     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_PD_LED_SELECT);
-    //if (enSlot == 0) { // SLOTA
-        //regValue = regValue & (0xFFFD | enLEDNumber);//!!!!!!!!!!!!!!!!!!!!!1101
-    //} else { // SLOTB
-        //regValue = regValue & (0xFFFB | enLEDNumber << 2);//!!!!!!!!!!!!!!!!!!!!!1011
-    //}
-    regValue = (regValue & 0xFFF0) | 0x0009;//!!!!!!!!!!!!!!!!!!!!!1101
+    if (enSlot == SLOTA) {
+        regValue &= ~(0x03 << 0);
+        regValue |= (enLEDNumber << 0);
+    } else { // SLOTB
+        regValue &= ~(0x03 << 2);
+        regValue |= (enLEDNumber << 2);
+    }
     return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
 }
 
@@ -187,8 +192,8 @@ bool ADPD1080_DeselectLEDs(void){
  */
 void ADPD1080_ReadDataRegs(volatile uint16_t *dataSlotA, volatile uint16_t *dataSlotB, uint8_t count) {
     for (uint8_t i = 0; i < count; i++) {
-        dataSlotA[i] = ADPD1080_ReadReg(0x64 + i);
-        dataSlotB[i] = ADPD1080_ReadReg(0x68 + i);
+        dataSlotA[i] = ADPD1080_ReadReg(ADPD1080_SLOTA_PD1_16BIT + i);
+        dataSlotB[i] = ADPD1080_ReadReg(ADPD1080_SLOTB_PD1_16BIT + i);
     }
 }
 
@@ -199,7 +204,7 @@ void ADPD1080_ReadDataRegs(volatile uint16_t *dataSlotA, volatile uint16_t *data
  * @param u8Width - the width of the led pulse (1us step)
  * @param u8Offset - the offset of the led pulse (1us step)
  * 
- * @return true if successfull - false if failure 
+ * @return true if successful - false if failure 
  */
 bool ADPD1080_SetLEDWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t offset) {
     uint16_t regValue = offset + ((width & 0x1F) << 8);
@@ -222,18 +227,14 @@ bool ADPD1080_SetLEDWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t
  * @return true if successful - false if failure 
  */
 bool ADPD1080_SetAFEWidthOffset(ADPD1080_TimeSlot enSlot, uint8_t width, uint8_t offset, uint8_t fineOffset) {
-    uint16_t regValue = 0;
-
-    if (enSlot == SLOTA) {
-        regValue = (uint16_t)(fineOffset & 0x1F) + 
+    uint16_t regValue = (uint16_t)(fineOffset & 0x1F) + 
             (uint16_t)((offset & 0x3F) << 5) +
             (uint16_t)((width & 0x1F) << 11);
+
+    if (enSlot == SLOTA) {
         return ADPD1080_WriteReg(ADPD1080_SLOTA_AFE_WINDOW, regValue);        
     } 
     else { // SLOTB
-        regValue = (uint16_t)(fineOffset & 0x1F) +
-            (uint16_t)((offset & 0x3F) << 5) +
-            (uint16_t)((width & 0x1F) << 11);
         return ADPD1080_WriteReg(ADPD1080_SLOTB_AFE_WINDOW, regValue);        
     }
 }
@@ -275,7 +276,7 @@ bool ADPD1080_SetSamplingFrequency(uint16_t frequency) {
  * 
  * @return true if successful - false if failure 
  */
-bool ADPD1080_SetAverageFactor(ADPD1080_AverageN enAverage) {
+bool ADPD1080_SetAverageFactor(ADPD1080_AverageN enAverage) { // TODO: define enAverage better
     uint16_t regValue = (enAverage << 4) | (enAverage << 8);
 
     return ADPD1080_WriteReg(ADPD1080_NUM_AVG, regValue);
@@ -298,9 +299,9 @@ bool ADPD1080_SetADCClock(ADPD1080_ADCClockSpeed enADCClock){
  * @return true if successful - false if failure 
  */
 bool ADPD1080_SetDigitalClock(void) {
-    uint16_t origin = ADPD1080_ReadReg(ADPD1080_DATA_ACCESS_CTL);
-    uint16_t new = origin | 0x1;
-    return ADPD1080_WriteReg(ADPD1080_DATA_ACCESS_CTL, new);
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_DATA_ACCESS_CTL);
+    regValue |= 0x1;
+    return ADPD1080_WriteReg(ADPD1080_DATA_ACCESS_CTL, regValue);
 }
 
 /**
@@ -343,15 +344,14 @@ void ADPD1080_SetOffset(ADPD1080_TimeSlot enSlot, struct ADPD1080_ChannelOffset 
  */
 bool ADPD1080_DisableLed(ADPD1080_TimeSlot enSlot) {
     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
-    (void) enSlot;
-    //if (enSlot == SLOTA) {
-        //regValue = regValue & (0xFCFF | (0x01 << 8));//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
-        //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
-    //} else { // SLOTB
-        //regValue = regValue & (0xFCFF | (0x01 << 9));//!!!!!!!!!!!!!!!!!!!!!9 bit 1
-        //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
-    //}
-    regValue = (regValue & 0xFCFF) | (0x0300);//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
+    if (enSlot == SLOTA) {
+        regValue &= ~(0x1 << 8);
+        regValue |= (0x1 << 8);
+    } 
+    else { // SLOTB
+        regValue &= ~(0x1 << 9);
+        regValue |= (0x1 << 9);
+    }
     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
 }
 
@@ -363,16 +363,15 @@ bool ADPD1080_DisableLed(ADPD1080_TimeSlot enSlot) {
  * @return true if successful - false if failure 
  */
 bool ADPD1080_EnableLed(ADPD1080_TimeSlot enSlot) {
-    (void) enSlot;
     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
-    //if (enSlot == SLOTA) {
-        //regValue = regValue & (0xFCFF | (0x00 << 8));//!!!!!!!!!!!!!!!!!!!!!8 bit 0
-        //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
-    //} else { // SLOTB
-        //regValue = regValue & (0xFCFF | (0x00 << 9));//!!!!!!!!!!!!!!!!!!!!!9 bit 0
-        //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
-    //}
-    regValue = (regValue & 0xFCFF);//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
+    if (enSlot == SLOTA) {
+        regValue &= ~(0x1 << 8);
+        regValue |= (0x0 << 8);
+    } 
+    else { // SLOTB
+        regValue &= ~(0x1 << 9);
+        regValue |= (0x0 << 9);
+    }
     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
 }
 
@@ -397,6 +396,70 @@ bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t pulseCount,
 
 /* Controller Function Definitions */
 void turbidity_Init(void) {
+    ADPD1080_SetOperationMode(PROGRAM);  // Set to program mode
+    ADPD1080_Reset();
+    ADPD1080_SetOperationMode(PROGRAM);  // Set to program mode
+    register_settings();
+    
+    ADPD1080_Set32KCLK(true);            // Enable 32K clock
+    ADPD1080_SetTimeSlotSwitch(PD_1_4_CONNECTED, PD_1_4_CONNECTED); // Select photodiodes 1-4, datasheet p.21
+    
+    /* Select LEDs for each time slot */
+    ADPD1080_SelectLED(LEDX1, SLOTA);
+    ADPD1080_SelectLED(LEDX2, SLOTB);
+    
+    /* Set led coarse value 100% and 10% */
+    ADPD1080_WriteReg(ADPD1080_ILED1_COARSE, 0x1031);  // LED configuration
+    ADPD1080_WriteReg(ADPD1080_ILED2_COARSE, 0x1034);  // LED configuration
+    ADPD1080_WriteReg(ADPD1080_ILED_FINE, 0x67DF);  // LED fine
+
+    /* Set LED pulse count */
+    ADPD1080_SetPulseNumberPeriod(SLOTA, 127, 0x19);    // One pulse, 19 µs period   0x0113  275
+    ADPD1080_SetPulseNumberPeriod(SLOTB, 127, 0x19);    // One pulse, 19 µs period
+
+    /* Set LED pulse width and offset */
+    ADPD1080_SetLEDWidthOffset(SLOTA, 3, 25);           // 3 µs pulse width, 23 µs LED Offset  
+    ADPD1080_SetLEDWidthOffset(SLOTB, 3, 25);           // 3 µs pulse width, 23 µs LED Offset
+
+    /* Set AFE width and offset */
+    ADPD1080_SetAFEWidthOffset(SLOTA, 4, 16, 4);        // (slot, AFE width, offset, fine offset) - AFE width is usually LED pulse width + 1µs
+    ADPD1080_SetAFEWidthOffset(SLOTB, 4, 16, 4);        // 3 µs AFE width, 13 µs offset
+
+    /* Set ADC clock speed */
+    ADPD1080_SetADCClock(ADC_CLOCK_100MHz);
+    
+    /* Enable digital clock */
+    ADPD1080_SetDigitalClock();
+
+    /* Set sampling frequency */
+    ADPD1080_SetSamplingFrequency(400); // For 400 Hz sampling frequency set to 1600. Currently 100 Hz
+    
+    /* Set TIA gain */
+    ADPD1080_SetTIAGain(SLOTA, TIA_25);
+    ADPD1080_SetTIAGain(SLOTB, TIA_25);
+
+    /* Set sample clock */
+    ADPD1080_WriteReg(ADPD1080_SAMPLE_CLK, 0x2695);  // 0080,2695
+    ADPD1080_WriteReg(ADPD1080_CLK32M_ADJUST, 0x0098);  // 0x005e,0098
+    ADPD1080_WriteReg(ADPD1080_EXT_SYNC_SEL, 0x2090);  // 20d0,2090
+    ADPD1080_WriteReg(ADPD1080_CLK32M_CAL_EN, 0x0000);  // 0040,0000
+
+    // Set V_CATHODE to 1.3V, enable all channels
+    ADPD1080_WriteReg(ADPD1080_AFE_PWR_CFG1, 0x7006);  // 1806,7006
+    ADPD1080_SetAverageFactor(AVERAGE2);
+    
+    struct ADPD1080_ChannelOffset stOffsetA  = {8201,0,0,0};      //set to be <1% of full scale ADC (65535)
+    struct ADPD1080_ChannelOffset stOffsetB  = {8201,0,0,0};    
+    ADPD1080_SetOffset(SLOTA, stOffsetA);
+    ADPD1080_SetOffset(SLOTB, stOffsetB);
+    
+    /* Set FIFO and start measurement */
+    ADPD1080_SetFIFO();
+    
+    ADPD1080_SetOperationMode(NORMAL_OPERATION);
+}
+
+void turbidity_init(void) {
     
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
     ADPD1080_WriteReg(0x0,0xFF);
@@ -446,6 +509,7 @@ void turbidity_Init(void) {
     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
 }
 
+
 /* 
 The interrupt handler must perform the following:
 a. Read Register 0x00 and observe Bit 5 or Bit 6 to confirm
@@ -457,11 +521,11 @@ the next data update, based on the output data rate.
 c. Write a 1 to Bit 5 or Bit 6 in Register 0x00 to clear the interrupt.
 */
 void turbidity_ReadDataInterrupt(void) {
-    ADPD1080_ReadReg(0x00);
+    ADPD1080_ReadReg(ADPD1080_STATUS);
     ADPD1080_ReadDataRegs(au16DataSlotA, au16DataSlotB, 4);
   
-    // Clear interrupt
-    ADPD1080_WriteReg(0x00, 0xFF);      
+    // Clear all interrupts
+    ADPD1080_WriteReg(ADPD1080_STATUS, 0xFF);      
 }
 
 void turbidity_ChannelOffsetCalibration(void) {
@@ -519,4 +583,133 @@ void turbidity_ChannelOffsetCalibration(void) {
     ADPD1080_WriteReg(0x15, 0x0110); //?//////////////////
 
     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
+}
+
+/* Helper function for turbidity_Init() */
+void register_settings(void) {
+
+    ADPD1080_WriteReg(0x00,0x0000); 
+    ADPD1080_WriteReg(0x01,0xC0FF);
+    ADPD1080_WriteReg(0x02,0x0005);
+    ADPD1080_WriteReg(0x03,0x0000);
+    ADPD1080_WriteReg(0x04,0x0000);
+    ADPD1080_WriteReg(0x05,0x0000);
+    ADPD1080_WriteReg(0x06,0x1F00);
+    ADPD1080_WriteReg(0x07,0x0060);
+    ADPD1080_WriteReg(0x08,0x0A16);
+    ADPD1080_WriteReg(0x09,0x00C8);
+    ADPD1080_WriteReg(0x0A,0x0000);
+    ADPD1080_WriteReg(0x0B,0x0000);
+    ADPD1080_WriteReg(0x0C,0x0000);
+    ADPD1080_WriteReg(0x0D,0x0000);
+    ADPD1080_WriteReg(0x0E,0x0000);
+    ADPD1080_WriteReg(0x0F,0x0000);
+    ADPD1080_WriteReg(0x10,0x0000);
+    ADPD1080_WriteReg(0x11,0x3131);
+    ADPD1080_WriteReg(0x12,0x0050);
+    ADPD1080_WriteReg(0x13,0x0320);
+    ADPD1080_WriteReg(0x14,0x0336);
+    ADPD1080_WriteReg(0x15,0x0110);
+    ADPD1080_WriteReg(0x16,0x3000);
+    ADPD1080_WriteReg(0x17,0x0000);
+    ADPD1080_WriteReg(0x18,0x0000);
+    ADPD1080_WriteReg(0x19,0x0000);
+    ADPD1080_WriteReg(0x1A,0x0000);
+    ADPD1080_WriteReg(0x1B,0x0000);
+    ADPD1080_WriteReg(0x1C,0x0000);
+    ADPD1080_WriteReg(0x1D,0x0000);
+    ADPD1080_WriteReg(0x1E,0x0000);
+    ADPD1080_WriteReg(0x1F,0x0000);
+    ADPD1080_WriteReg(0x20,0x0000);
+    ADPD1080_WriteReg(0x21,0x0000);
+    ADPD1080_WriteReg(0x26,0x0000);
+    ADPD1080_WriteReg(0x27,0x0700);
+    ADPD1080_WriteReg(0x28,0x0000);
+    ADPD1080_WriteReg(0x29,0x4000);
+    ADPD1080_WriteReg(0x2A,0x0000);
+    ADPD1080_WriteReg(0x2B,0x0000);
+    ADPD1080_WriteReg(0x2C,0x0000);
+    ADPD1080_WriteReg(0x2D,0x0000);
+    ADPD1080_WriteReg(0x2E,0x0000);
+    ADPD1080_WriteReg(0x2F,0x0000);
+    ADPD1080_WriteReg(0x30,0x0219);
+    ADPD1080_WriteReg(0x31,0x7F1E);
+    ADPD1080_WriteReg(0x32,0x0320);
+    ADPD1080_WriteReg(0x33,0x0818);
+    ADPD1080_WriteReg(0x34,0x0000);
+    ADPD1080_WriteReg(0x35,0x0219);
+    ADPD1080_WriteReg(0x36,0x7F1E);
+    ADPD1080_WriteReg(0x37,0x0000);
+    ADPD1080_WriteReg(0x38,0x0000);
+    ADPD1080_WriteReg(0x39,0x1A04);
+    ADPD1080_WriteReg(0x3A,0x22FC);
+    ADPD1080_WriteReg(0x3B,0x1A04);
+    ADPD1080_WriteReg(0x3C,0x7006);
+    ADPD1080_WriteReg(0x3D,0x0000);
+    ADPD1080_WriteReg(0x3E,0x0320);
+    ADPD1080_WriteReg(0x3F,0x0320);
+    ADPD1080_WriteReg(0x40,0x1010);
+    ADPD1080_WriteReg(0x41,0x004C);
+    ADPD1080_WriteReg(0x42,0x1C37);
+    ADPD1080_WriteReg(0x43,0xADA5);
+    ADPD1080_WriteReg(0x44,0x1C37);
+    ADPD1080_WriteReg(0x45,0xADA5);
+    ADPD1080_WriteReg(0x46,0x0000);
+    ADPD1080_WriteReg(0x47,0x0080);
+    ADPD1080_WriteReg(0x48,0x0000);
+    ADPD1080_WriteReg(0x49,0x0000);
+    ADPD1080_WriteReg(0x4A,0x0000);
+    ADPD1080_WriteReg(0x4B,0x2695);
+    ADPD1080_WriteReg(0x4C,0x0004);
+    ADPD1080_WriteReg(0x4D,0x0098);
+    ADPD1080_WriteReg(0x4E,0x7040);
+    ADPD1080_WriteReg(0x4F,0x2090);
+    ADPD1080_WriteReg(0x50,0x0000);
+    ADPD1080_WriteReg(0x51,0x0000);
+    ADPD1080_WriteReg(0x52,0x0040);
+    ADPD1080_WriteReg(0x53,0xE400);
+    ADPD1080_WriteReg(0x54,0x0AA0);
+    ADPD1080_WriteReg(0x55,0x0000);
+    ADPD1080_WriteReg(0x56,0x0000);
+    ADPD1080_WriteReg(0x57,0x0000);
+    ADPD1080_WriteReg(0x58,0x0000);
+    ADPD1080_WriteReg(0x59,0x0808);
+    ADPD1080_WriteReg(0x5A,0x0010);
+    ADPD1080_WriteReg(0x5B,0x0000);
+    ADPD1080_WriteReg(0x5C,0x0000);
+    ADPD1080_WriteReg(0x5D,0x0000);
+    ADPD1080_WriteReg(0x5E,0x0808);
+    ADPD1080_WriteReg(0x5F,0x0000);
+    ADPD1080_WriteReg(0x60,0x0000);
+    ADPD1080_WriteReg(0x61,0x0000);
+    ADPD1080_WriteReg(0x62,0x0000);
+    ADPD1080_WriteReg(0x63,0x0000);
+    ADPD1080_WriteReg(0x64,0x0000);
+    ADPD1080_WriteReg(0x65,0x0000);
+    ADPD1080_WriteReg(0x66,0x0000);
+    ADPD1080_WriteReg(0x67,0x0000);
+    ADPD1080_WriteReg(0x68,0x0000);
+    ADPD1080_WriteReg(0x69,0x0000);
+    ADPD1080_WriteReg(0x6A,0x0000);
+    ADPD1080_WriteReg(0x6B,0x0000);
+    ADPD1080_WriteReg(0x6C,0x0000);
+    ADPD1080_WriteReg(0x6D,0x0000);
+    ADPD1080_WriteReg(0x6E,0x0000);
+    ADPD1080_WriteReg(0x6F,0x0000);
+    ADPD1080_WriteReg(0x70,0x0000);
+    ADPD1080_WriteReg(0x71,0x0000);
+    ADPD1080_WriteReg(0x72,0x0000);
+    ADPD1080_WriteReg(0x73,0x0000);
+    ADPD1080_WriteReg(0x74,0x0000);
+    ADPD1080_WriteReg(0x75,0x0000);
+    ADPD1080_WriteReg(0x76,0x0000);
+    ADPD1080_WriteReg(0x77,0x0000);
+    ADPD1080_WriteReg(0x78,0x0000);
+    ADPD1080_WriteReg(0x79,0x0000);
+    ADPD1080_WriteReg(0x7A,0x0000);
+    ADPD1080_WriteReg(0x7B,0x0000);
+    ADPD1080_WriteReg(0x7C,0x0000);
+    ADPD1080_WriteReg(0x7D,0x0000);
+    ADPD1080_WriteReg(0x7E,0x0000);
+    ADPD1080_WriteReg(0x7F,0x0000);
 }

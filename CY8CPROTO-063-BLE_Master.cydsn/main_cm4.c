@@ -12,7 +12,7 @@
 #define ADC_TASK_STACK_SIZE 1024
 #define ADPD1080_TASK_PRIORITY   2
 #define ADC_Task_PRIORITY   3
-#define READ_INTERVAL_MS         500
+#define READ_INTERVAL_MS         15
 #define ADC_READ_INTERVAL_MS 1000
 
 // Function prototypes
@@ -30,10 +30,10 @@ int main(void)
     I2C_Start();
 
     // Start ADC module 
-    ADC_Start();
+    //ADC_Start();
     // Create the ADPD1080 task
     xTaskCreate(ADPD1080_Task, "ADPD1080 Task", ADPD1080_TASK_STACK_SIZE, NULL, ADPD1080_TASK_PRIORITY, NULL);
-    xTaskCreate(ADC_TASK, "ADC Task", ADC_TASK_STACK_SIZE, NULL, ADC_Task_PRIORITY, NULL);
+    //xTaskCreate(ADC_TASK, "ADC Task", ADC_TASK_STACK_SIZE, NULL, ADC_Task_PRIORITY, NULL);
     // Start the FreeRTOS scheduler
     vTaskStartScheduler();
 
@@ -47,34 +47,32 @@ void ADPD1080_Task(void *pvParameters)
 {
     (void) pvParameters;
 
-    char buffer[128];
-    volatile uint16_t au16DataSlotA[4] = {0, 0, 0, 0};
-    volatile uint16_t au16DataSlotB[4] = {0, 0, 0, 0};
+    char buffer[1024];
 
     // Initialize and configure the ADPD1080 sensor
-    printf("Initializing ADPD1080 sensor...\n");
+    printf("Initializing ADPD1080 sensor...\r\n");
 
-    //if (!ADPD1080_Init()) {
-    //    printf("ADPD1080 initialization failed!\n");
-    //    vTaskSuspend(NULL); // Suspend task on failure
-    //}
+    if (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
+        printf("ADPD1080 initialization failed!\r\n");
+        vTaskSuspend(NULL); // Suspend task on failure
+    }
 
-    printf("ADPD1080 initialization successful.\n");
+    printf("ADPD1080 initialization successful.\r\n");
     
     turbidity_Init();
     //while(1){}
-    turbidity_ChannelOffsetCalibration();
+    //turbidity_ChannelOffsetCalibration();
     
     for (;;) {
         // Read data from the sensor
         turbidity_ReadDataInterrupt();
 
         // Format and print the data via UART
-        snprintf(buffer, sizeof(buffer), "Slot A: %d | Slot B: %d\n",
-                 au16DataSlotA[0],
-                 au16DataSlotB[0]);
+        snprintf(buffer, sizeof(buffer), "Slot A: %d %d %d %d | Slot B: %d %d %d %d\n",
+                 au16DataSlotA[0], au16DataSlotA[1], au16DataSlotA[2], au16DataSlotA[3],
+                 au16DataSlotB[0], au16DataSlotB[1], au16DataSlotB[2], au16DataSlotB[3]);
 
-        printf(buffer);
+        printf("%s\r\n", buffer);
 
         // Delay task for the specified interval
         vTaskDelay(pdMS_TO_TICKS(READ_INTERVAL_MS));
