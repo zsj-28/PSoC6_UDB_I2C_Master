@@ -1,5 +1,6 @@
 /***************************** Include Files **********************************/
 #include "project.h" // Include PSoC project header
+#include "ADPD1080.h"
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>

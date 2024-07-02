@@ -42,7 +42,7 @@
 
 #include "syslib/cy_syslib.h"
 
-#warning This is a template. Modify it according to your project and remove this line. 
+//#warning This is a template. Modify it according to your project and remove this line. 
 
 #define configUSE_PREEMPTION                    1
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION 0

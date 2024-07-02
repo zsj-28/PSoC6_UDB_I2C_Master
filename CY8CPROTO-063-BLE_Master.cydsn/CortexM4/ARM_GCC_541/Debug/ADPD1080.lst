@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 1
 
 
    1              		.syntax unified
@@ -31,249 +31,250 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
   28              		.file 1 "ADPD1080.c"
    1:ADPD1080.c    **** /***************************** Include Files **********************************/
    2:ADPD1080.c    **** #include "project.h" // Include PSoC project header
-   3:ADPD1080.c    **** #include <stdlib.h>
-   4:ADPD1080.c    **** #include <stdint.h>
-   5:ADPD1080.c    **** #include <stdbool.h>
-   6:ADPD1080.c    **** #include <stdio.h>
-   7:ADPD1080.c    **** 
-   8:ADPD1080.c    **** #define ADPD1080_I2C_ADDRESS        0x64
-   9:ADPD1080.c    **** #define ADPD1080_SENSITIVITY 1.64f
-  10:ADPD1080.c    **** /* Registers for ADPD1080 */
-  11:ADPD1080.c    **** #define ADPD1080_STATUS             0x00
-  12:ADPD1080.c    **** #define ADPD1080_INT_MASK           0x01
-  13:ADPD1080.c    **** #define ADPD1080_GPIO_DRV           0x02
-  14:ADPD1080.c    **** #define ADPD1080_FIFO_THRESH        0x06
-  15:ADPD1080.c    **** #define ADPD1080_DEVID              0x08
-  16:ADPD1080.c    **** #define ADPD1080_CHIP_ID            0x16  // Default Device ID value (LSB of DEVID register)
-  17:ADPD1080.c    **** #define ADPD1080_I2CS_ID            0x09
-  18:ADPD1080.c    **** #define ADPD1080_CLK_RATIO          0x0A
-  19:ADPD1080.c    **** #define ADPD1080_GPIO_CTRL          0x0B
-  20:ADPD1080.c    **** #define ADPD1080_SLAVE_ADDRESS_KEY  0x0D
-  21:ADPD1080.c    **** #define ADPD1080_SW_RESET           0x0F
-  22:ADPD1080.c    **** #define ADPD1080_MODE               0x10
-  23:ADPD1080.c    **** #define ADPD1080_SLOT_EN            0x11
-  24:ADPD1080.c    **** #define ADPD1080_FSAMPLE            0x12
-  25:ADPD1080.c    **** #define ADPD1080_PD_LED_SELECT      0x14
-  26:ADPD1080.c    **** #define ADPD1080_NUM_AVG            0x15
-  27:ADPD1080.c    **** #define ADPD1080_SLOTA_CH1_OFFSET   0x18
-  28:ADPD1080.c    **** #define ADPD1080_SLOTA_CH2_OFFSET   0x19
-  29:ADPD1080.c    **** #define ADPD1080_SLOTA_CH3_OFFSET   0x1A
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 2
+   3:ADPD1080.c    **** #include "ADPD1080.h"
+   4:ADPD1080.c    **** #include <stdlib.h>
+   5:ADPD1080.c    **** #include <stdint.h>
+   6:ADPD1080.c    **** #include <stdbool.h>
+   7:ADPD1080.c    **** #include <stdio.h>
+   8:ADPD1080.c    **** 
+   9:ADPD1080.c    **** #define ADPD1080_I2C_ADDRESS        0x64
+  10:ADPD1080.c    **** #define ADPD1080_SENSITIVITY 1.64f
+  11:ADPD1080.c    **** /* Registers for ADPD1080 */
+  12:ADPD1080.c    **** #define ADPD1080_STATUS             0x00
+  13:ADPD1080.c    **** #define ADPD1080_INT_MASK           0x01
+  14:ADPD1080.c    **** #define ADPD1080_GPIO_DRV           0x02
+  15:ADPD1080.c    **** #define ADPD1080_FIFO_THRESH        0x06
+  16:ADPD1080.c    **** #define ADPD1080_DEVID              0x08
+  17:ADPD1080.c    **** #define ADPD1080_CHIP_ID            0x16  // Default Device ID value (LSB of DEVID register)
+  18:ADPD1080.c    **** #define ADPD1080_I2CS_ID            0x09
+  19:ADPD1080.c    **** #define ADPD1080_CLK_RATIO          0x0A
+  20:ADPD1080.c    **** #define ADPD1080_GPIO_CTRL          0x0B
+  21:ADPD1080.c    **** #define ADPD1080_SLAVE_ADDRESS_KEY  0x0D
+  22:ADPD1080.c    **** #define ADPD1080_SW_RESET           0x0F
+  23:ADPD1080.c    **** #define ADPD1080_MODE               0x10
+  24:ADPD1080.c    **** #define ADPD1080_SLOT_EN            0x11
+  25:ADPD1080.c    **** #define ADPD1080_FSAMPLE            0x12
+  26:ADPD1080.c    **** #define ADPD1080_PD_LED_SELECT      0x14
+  27:ADPD1080.c    **** #define ADPD1080_NUM_AVG            0x15
+  28:ADPD1080.c    **** #define ADPD1080_SLOTA_CH1_OFFSET   0x18
+  29:ADPD1080.c    **** #define ADPD1080_SLOTA_CH2_OFFSET   0x19
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 2
 
 
-  30:ADPD1080.c    **** #define ADPD1080_SLOTA_CH4_OFFSET   0x1B
-  31:ADPD1080.c    **** #define ADPD1080_SLOTB_CH1_OFFSET   0x1E
-  32:ADPD1080.c    **** #define ADPD1080_SLOTB_CH2_OFFSET   0x1F
-  33:ADPD1080.c    **** #define ADPD1080_SLOTB_CH3_OFFSET   0x20
-  34:ADPD1080.c    **** #define ADPD1080_SLOTB_CH4_OFFSET   0x21
-  35:ADPD1080.c    **** #define ADPD1080_ILED3_COARSE       0x22
-  36:ADPD1080.c    **** #define ADPD1080_ILED1_COARSE       0x23
-  37:ADPD1080.c    **** #define ADPD1080_ILED2_COARSE       0x24
-  38:ADPD1080.c    **** #define ADPD1080_ILED_FINE          0x25
-  39:ADPD1080.c    **** #define ADPD1080_SLOTA_LED_PULSE    0x30
-  40:ADPD1080.c    **** #define ADPD1080_SLOTA_NUMPULSES    0x31
-  41:ADPD1080.c    **** #define ADPD1080_LED_DISABLE        0x34
-  42:ADPD1080.c    **** #define ADPD1080_SLOTB_LED_PULSE    0x35
-  43:ADPD1080.c    **** #define ADPD1080_SLOTB_NUMPULSES    0x36
-  44:ADPD1080.c    **** #define ADPD1080_ALT_PWR_DN         0x37
-  45:ADPD1080.c    **** #define ADPD1080_EXT_SYNC_STARTUP   0x38
-  46:ADPD1080.c    **** #define ADPD1080_SLOTA_AFE_WINDOW   0x39
-  47:ADPD1080.c    **** #define ADPD1080_SLOTB_AFE_WINDOW   0x3B
-  48:ADPD1080.c    **** #define ADPD1080_AFE_PWR_CFG1       0x3C
-  49:ADPD1080.c    **** #define ADPD1080_SLOTA_TIA_CFG      0x42
-  50:ADPD1080.c    **** #define ADPD1080_SLOTA_AFE_CFG      0x43
-  51:ADPD1080.c    **** #define ADPD1080_SLOTB_TIA_CFG      0x44
-  52:ADPD1080.c    **** #define ADPD1080_SLOTB_AFE_CFG      0x45
-  53:ADPD1080.c    **** #define ADPD1080_SAMPLE_CLK         0x4B
-  54:ADPD1080.c    **** #define ADPD1080_CLK32M_ADJUST      0x4D
-  55:ADPD1080.c    **** #define ADPD1080_ADC_CLOCK          0x4E
-  56:ADPD1080.c    **** #define ADPD1080_EXT_SYNC_SEL       0x4F
-  57:ADPD1080.c    **** #define ADPD1080_CLK32M_CAL_EN      0x50
-  58:ADPD1080.c    **** #define ADPD1080_AFE_PWR_CFG2       0x54
-  59:ADPD1080.c    **** #define ADPD1080_TIA_INDEP_GAIN     0x55
-  60:ADPD1080.c    **** #define ADPD1080_DIGITAL_INT_EN     0x58
-  61:ADPD1080.c    **** #define ADPD1080_DIG_INT_CFG        0x5A
-  62:ADPD1080.c    **** #define ADPD1080_DATA_ACCESS_CTL    0x5F
-  63:ADPD1080.c    **** #define ADPD1080_FIFO_ACCESS        0x60
-  64:ADPD1080.c    **** #define ADPD1080_SLOTA_PD1_16BIT    0x64
-  65:ADPD1080.c    **** #define ADPD1080_SLOTA_PD2_16BIT    0x65
-  66:ADPD1080.c    **** #define ADPD1080_SLOTA_PD3_16BIT    0x66
-  67:ADPD1080.c    **** #define ADPD1080_SLOTA_PD4_16BIT    0x67
-  68:ADPD1080.c    **** #define ADPD1080_SLOTB_PD1_16BIT    0x68
-  69:ADPD1080.c    **** #define ADPD1080_SLOTB_PD2_16BIT    0x69
-  70:ADPD1080.c    **** #define ADPD1080_SLOTB_PD3_16BIT    0x6A
-  71:ADPD1080.c    **** #define ADPD1080_SLOTB_PD4_16BIT    0x6B
-  72:ADPD1080.c    **** #define ADPD1080_A_PD1_LOW          0x70
-  73:ADPD1080.c    **** #define ADPD1080_A_PD2_LOW          0x71
-  74:ADPD1080.c    **** #define ADPD1080_A_PD3_LOW          0x72
-  75:ADPD1080.c    **** #define ADPD1080_A_PD4_LOW          0x73
-  76:ADPD1080.c    **** #define ADPD1080_A_PD1_HIGH         0x74
-  77:ADPD1080.c    **** #define ADPD1080_A_PD2_HIGH         0x75
-  78:ADPD1080.c    **** #define ADPD1080_A_PD3_HIGH         0x76
-  79:ADPD1080.c    **** #define ADPD1080_A_PD4_HIGH         0x77
-  80:ADPD1080.c    **** #define ADPD1080_B_PD1_LOW          0x78
-  81:ADPD1080.c    **** #define ADPD1080_B_PD2_LOW          0x79
-  82:ADPD1080.c    **** #define ADPD1080_B_PD3_LOW          0x7A
-  83:ADPD1080.c    **** #define ADPD1080_B_PD4_LOW          0x7B
-  84:ADPD1080.c    **** #define ADPD1080_B_PD1_HIGH         0x7C
-  85:ADPD1080.c    **** #define ADPD1080_B_PD2_HIGH         0x7D
-  86:ADPD1080.c    **** #define ADPD1080_B_PD3_HIGH         0x7E
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 3
+  30:ADPD1080.c    **** #define ADPD1080_SLOTA_CH3_OFFSET   0x1A
+  31:ADPD1080.c    **** #define ADPD1080_SLOTA_CH4_OFFSET   0x1B
+  32:ADPD1080.c    **** #define ADPD1080_SLOTB_CH1_OFFSET   0x1E
+  33:ADPD1080.c    **** #define ADPD1080_SLOTB_CH2_OFFSET   0x1F
+  34:ADPD1080.c    **** #define ADPD1080_SLOTB_CH3_OFFSET   0x20
+  35:ADPD1080.c    **** #define ADPD1080_SLOTB_CH4_OFFSET   0x21
+  36:ADPD1080.c    **** #define ADPD1080_ILED3_COARSE       0x22
+  37:ADPD1080.c    **** #define ADPD1080_ILED1_COARSE       0x23
+  38:ADPD1080.c    **** #define ADPD1080_ILED2_COARSE       0x24
+  39:ADPD1080.c    **** #define ADPD1080_ILED_FINE          0x25
+  40:ADPD1080.c    **** #define ADPD1080_SLOTA_LED_PULSE    0x30
+  41:ADPD1080.c    **** #define ADPD1080_SLOTA_NUMPULSES    0x31
+  42:ADPD1080.c    **** #define ADPD1080_LED_DISABLE        0x34
+  43:ADPD1080.c    **** #define ADPD1080_SLOTB_LED_PULSE    0x35
+  44:ADPD1080.c    **** #define ADPD1080_SLOTB_NUMPULSES    0x36
+  45:ADPD1080.c    **** #define ADPD1080_ALT_PWR_DN         0x37
+  46:ADPD1080.c    **** #define ADPD1080_EXT_SYNC_STARTUP   0x38
+  47:ADPD1080.c    **** #define ADPD1080_SLOTA_AFE_WINDOW   0x39
+  48:ADPD1080.c    **** #define ADPD1080_SLOTB_AFE_WINDOW   0x3B
+  49:ADPD1080.c    **** #define ADPD1080_AFE_PWR_CFG1       0x3C
+  50:ADPD1080.c    **** #define ADPD1080_SLOTA_TIA_CFG      0x42
+  51:ADPD1080.c    **** #define ADPD1080_SLOTA_AFE_CFG      0x43
+  52:ADPD1080.c    **** #define ADPD1080_SLOTB_TIA_CFG      0x44
+  53:ADPD1080.c    **** #define ADPD1080_SLOTB_AFE_CFG      0x45
+  54:ADPD1080.c    **** #define ADPD1080_SAMPLE_CLK         0x4B
+  55:ADPD1080.c    **** #define ADPD1080_CLK32M_ADJUST      0x4D
+  56:ADPD1080.c    **** #define ADPD1080_ADC_CLOCK          0x4E
+  57:ADPD1080.c    **** #define ADPD1080_EXT_SYNC_SEL       0x4F
+  58:ADPD1080.c    **** #define ADPD1080_CLK32M_CAL_EN      0x50
+  59:ADPD1080.c    **** #define ADPD1080_AFE_PWR_CFG2       0x54
+  60:ADPD1080.c    **** #define ADPD1080_TIA_INDEP_GAIN     0x55
+  61:ADPD1080.c    **** #define ADPD1080_DIGITAL_INT_EN     0x58
+  62:ADPD1080.c    **** #define ADPD1080_DIG_INT_CFG        0x5A
+  63:ADPD1080.c    **** #define ADPD1080_DATA_ACCESS_CTL    0x5F
+  64:ADPD1080.c    **** #define ADPD1080_FIFO_ACCESS        0x60
+  65:ADPD1080.c    **** #define ADPD1080_SLOTA_PD1_16BIT    0x64
+  66:ADPD1080.c    **** #define ADPD1080_SLOTA_PD2_16BIT    0x65
+  67:ADPD1080.c    **** #define ADPD1080_SLOTA_PD3_16BIT    0x66
+  68:ADPD1080.c    **** #define ADPD1080_SLOTA_PD4_16BIT    0x67
+  69:ADPD1080.c    **** #define ADPD1080_SLOTB_PD1_16BIT    0x68
+  70:ADPD1080.c    **** #define ADPD1080_SLOTB_PD2_16BIT    0x69
+  71:ADPD1080.c    **** #define ADPD1080_SLOTB_PD3_16BIT    0x6A
+  72:ADPD1080.c    **** #define ADPD1080_SLOTB_PD4_16BIT    0x6B
+  73:ADPD1080.c    **** #define ADPD1080_A_PD1_LOW          0x70
+  74:ADPD1080.c    **** #define ADPD1080_A_PD2_LOW          0x71
+  75:ADPD1080.c    **** #define ADPD1080_A_PD3_LOW          0x72
+  76:ADPD1080.c    **** #define ADPD1080_A_PD4_LOW          0x73
+  77:ADPD1080.c    **** #define ADPD1080_A_PD1_HIGH         0x74
+  78:ADPD1080.c    **** #define ADPD1080_A_PD2_HIGH         0x75
+  79:ADPD1080.c    **** #define ADPD1080_A_PD3_HIGH         0x76
+  80:ADPD1080.c    **** #define ADPD1080_A_PD4_HIGH         0x77
+  81:ADPD1080.c    **** #define ADPD1080_B_PD1_LOW          0x78
+  82:ADPD1080.c    **** #define ADPD1080_B_PD2_LOW          0x79
+  83:ADPD1080.c    **** #define ADPD1080_B_PD3_LOW          0x7A
+  84:ADPD1080.c    **** #define ADPD1080_B_PD4_LOW          0x7B
+  85:ADPD1080.c    **** #define ADPD1080_B_PD1_HIGH         0x7C
+  86:ADPD1080.c    **** #define ADPD1080_B_PD2_HIGH         0x7D
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 3
 
 
-  87:ADPD1080.c    **** 
-  88:ADPD1080.c    **** /* Define volatile data slots */
-  89:ADPD1080.c    **** volatile uint16_t au16DataSlotA[4] = {0,0,0,0};
-  90:ADPD1080.c    **** volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
-  91:ADPD1080.c    **** 
-  92:ADPD1080.c    **** /* Function prototypes */
-  93:ADPD1080.c    **** bool ADPD1080_WriteReg(uint8_t reg, uint16_t value);
-  94:ADPD1080.c    **** uint16_t ADPD1080_ReadReg(uint8_t reg);
-  95:ADPD1080.c    **** bool ADPD1080_Init(void);
-  96:ADPD1080.c    **** void ADPD1080_SetFIFO(void);
-  97:ADPD1080.c    **** bool ADPD1080_SelectLED(uint8_t enLEDNumber, uint8_t enSlot);
-  98:ADPD1080.c    **** bool ADPD1080_SetLEDWidthOffset(uint8_t enSlot, uint8_t u8Width, uint8_t u8Offset);
-  99:ADPD1080.c    **** bool ADPD1080_SetTIAGain(uint8_t enSlot, uint16_t enTIAGain);
- 100:ADPD1080.c    **** void ADPD1080_ReadData(volatile uint16_t *data_Slot_A, volatile uint16_t *data_Slot_B, uint8_t coun
- 101:ADPD1080.c    **** 
- 102:ADPD1080.c    **** /* Configure the Time Slot Switch register */
- 103:ADPD1080.c    **** bool ADPD1080_SelectLED(uint8_t enLEDNumber, uint8_t enSlot) {
- 104:ADPD1080.c    ****     (void) enLEDNumber;
- 105:ADPD1080.c    ****     (void) enSlot;
- 106:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_PD_LED_SELECT);
- 107:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
- 108:ADPD1080.c    ****         //regValue = regValue & (0xFFFD | enLEDNumber);//!!!!!!!!!!!!!!!!!!!!!1101
- 109:ADPD1080.c    ****     //} else { // SLOTB
- 110:ADPD1080.c    ****         //regValue = regValue & (0xFFFB | enLEDNumber << 2);//!!!!!!!!!!!!!!!!!!!!!1011
- 111:ADPD1080.c    ****     //}
- 112:ADPD1080.c    ****     regValue = (regValue & 0xFFF0) | 0x0009;//!!!!!!!!!!!!!!!!!!!!!1101
- 113:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
- 114:ADPD1080.c    **** }
- 115:ADPD1080.c    **** 
- 116:ADPD1080.c    **** /* Set the width and offset for LED pulse */
- 117:ADPD1080.c    **** bool ADPD1080_SetLEDWidthOffset(uint8_t enSlot, uint8_t u8Width, uint8_t u8Offset) {
- 118:ADPD1080.c    ****     uint16_t regValue = u8Offset + ((u8Width & 0x1F) << 8);
- 119:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
- 120:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_LED_PULSE, regValue);
- 121:ADPD1080.c    ****     } else { // SLOTB
- 122:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTB_LED_PULSE, regValue);
- 123:ADPD1080.c    ****     }
- 124:ADPD1080.c    **** }
- 125:ADPD1080.c    **** 
- 126:ADPD1080.c    **** /* Set the transimpedance amplifier gain */
- 127:ADPD1080.c    **** bool ADPD1080_SetTIAGain(uint8_t enSlot, uint16_t enTIAGain) {
- 128:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
- 129:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_TIA_CFG, enTIAGain);
- 130:ADPD1080.c    ****     } else { // SLOTB
- 131:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTB_TIA_CFG, enTIAGain);
- 132:ADPD1080.c    ****     }
- 133:ADPD1080.c    **** }
- 134:ADPD1080.c    **** 
- 135:ADPD1080.c    **** /* Setup FIFO for data reading */
- 136:ADPD1080.c    **** void ADPD1080_SetFIFO(void) {
- 137:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_SLOT_EN, 0x1021);
- 138:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_FIFO_THRESH, 0x1F00);
- 139:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_INT_MASK, 0xC0FF);
- 140:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_GPIO_CTRL, 0x101);
- 141:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_GPIO_DRV, 0x05);
- 142:ADPD1080.c    **** }
- 143:ADPD1080.c    **** 
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 4
+  87:ADPD1080.c    **** #define ADPD1080_B_PD3_HIGH         0x7E
+  88:ADPD1080.c    **** 
+  89:ADPD1080.c    **** /* Define volatile data slots */
+  90:ADPD1080.c    **** volatile uint16_t au16DataSlotA[4] = {0,0,0,0};
+  91:ADPD1080.c    **** volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
+  92:ADPD1080.c    **** 
+  93:ADPD1080.c    **** /* Function prototypes */
+  94:ADPD1080.c    **** bool ADPD1080_WriteReg(uint8_t reg, uint16_t value);
+  95:ADPD1080.c    **** uint16_t ADPD1080_ReadReg(uint8_t reg);
+  96:ADPD1080.c    **** bool ADPD1080_Init(void);
+  97:ADPD1080.c    **** void ADPD1080_SetFIFO(void);
+  98:ADPD1080.c    **** bool ADPD1080_SelectLED(uint8_t enLEDNumber, uint8_t enSlot);
+  99:ADPD1080.c    **** bool ADPD1080_SetLEDWidthOffset(uint8_t enSlot, uint8_t u8Width, uint8_t u8Offset);
+ 100:ADPD1080.c    **** bool ADPD1080_SetTIAGain(uint8_t enSlot, uint16_t enTIAGain);
+ 101:ADPD1080.c    **** void ADPD1080_ReadData(volatile uint16_t *data_Slot_A, volatile uint16_t *data_Slot_B, uint8_t coun
+ 102:ADPD1080.c    **** 
+ 103:ADPD1080.c    **** /* Configure the Time Slot Switch register */
+ 104:ADPD1080.c    **** bool ADPD1080_SelectLED(uint8_t enLEDNumber, uint8_t enSlot) {
+ 105:ADPD1080.c    ****     (void) enLEDNumber;
+ 106:ADPD1080.c    ****     (void) enSlot;
+ 107:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_PD_LED_SELECT);
+ 108:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
+ 109:ADPD1080.c    ****         //regValue = regValue & (0xFFFD | enLEDNumber);//!!!!!!!!!!!!!!!!!!!!!1101
+ 110:ADPD1080.c    ****     //} else { // SLOTB
+ 111:ADPD1080.c    ****         //regValue = regValue & (0xFFFB | enLEDNumber << 2);//!!!!!!!!!!!!!!!!!!!!!1011
+ 112:ADPD1080.c    ****     //}
+ 113:ADPD1080.c    ****     regValue = (regValue & 0xFFF0) | 0x0009;//!!!!!!!!!!!!!!!!!!!!!1101
+ 114:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
+ 115:ADPD1080.c    **** }
+ 116:ADPD1080.c    **** 
+ 117:ADPD1080.c    **** /* Set the width and offset for LED pulse */
+ 118:ADPD1080.c    **** bool ADPD1080_SetLEDWidthOffset(uint8_t enSlot, uint8_t u8Width, uint8_t u8Offset) {
+ 119:ADPD1080.c    ****     uint16_t regValue = u8Offset + ((u8Width & 0x1F) << 8);
+ 120:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
+ 121:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_LED_PULSE, regValue);
+ 122:ADPD1080.c    ****     } else { // SLOTB
+ 123:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTB_LED_PULSE, regValue);
+ 124:ADPD1080.c    ****     }
+ 125:ADPD1080.c    **** }
+ 126:ADPD1080.c    **** 
+ 127:ADPD1080.c    **** /* Set the transimpedance amplifier gain */
+ 128:ADPD1080.c    **** bool ADPD1080_SetTIAGain(uint8_t enSlot, uint16_t enTIAGain) {
+ 129:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
+ 130:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_TIA_CFG, enTIAGain);
+ 131:ADPD1080.c    ****     } else { // SLOTB
+ 132:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTB_TIA_CFG, enTIAGain);
+ 133:ADPD1080.c    ****     }
+ 134:ADPD1080.c    **** }
+ 135:ADPD1080.c    **** 
+ 136:ADPD1080.c    **** /* Setup FIFO for data reading */
+ 137:ADPD1080.c    **** void ADPD1080_SetFIFO(void) {
+ 138:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_SLOT_EN, 0x1021);
+ 139:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_FIFO_THRESH, 0x1F00);
+ 140:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_INT_MASK, 0xC0FF);
+ 141:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_GPIO_CTRL, 0x101);
+ 142:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_GPIO_DRV, 0x05);
+ 143:ADPD1080.c    **** }
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 4
 
 
- 144:ADPD1080.c    **** /* Set the sampling frequency */
- 145:ADPD1080.c    **** bool ADPD1080_SetSamplingFrequency(uint16_t u16Frequency) {
- 146:ADPD1080.c    ****     uint16_t u16FValue = 32000 / u16Frequency / 4;
- 147:ADPD1080.c    **** 
- 148:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_FSAMPLE, u16FValue);
- 149:ADPD1080.c    **** }
- 150:ADPD1080.c    **** 
- 151:ADPD1080.c    **** /* Set the average factor */
- 152:ADPD1080.c    **** bool ADPD1080_SetAverageFactor(uint8_t enAverage) {
- 153:ADPD1080.c    ****     uint16_t regValue = (enAverage << 4) | (enAverage << 8);
- 154:ADPD1080.c    **** 
- 155:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_NUM_AVG, regValue);
- 156:ADPD1080.c    **** }
- 157:ADPD1080.c    **** 
- 158:ADPD1080.c    **** /* Enable the digital clock */
- 159:ADPD1080.c    **** bool ADPD1080_SetDigitalClock(void) {
- 160:ADPD1080.c    ****     uint16_t origin = ADPD1080_ReadReg(0x4B);
- 161:ADPD1080.c    ****     uint16_t new = origin | 0x1;
- 162:ADPD1080.c    ****     ADPD1080_WriteReg(0x5F, new);
- 163:ADPD1080.c    **** }
- 164:ADPD1080.c    **** 
- 165:ADPD1080.c    **** /* Software reset of the ADPD1080 */
- 166:ADPD1080.c    **** bool ADPD1080_Reset(void) {
- 167:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_SW_RESET, 1);
- 168:ADPD1080.c    **** }
- 169:ADPD1080.c    **** 
- 170:ADPD1080.c    **** /* Set channel offset */
- 171:ADPD1080.c    **** void ADPD1080_SetOffset(uint8_t enSlot, uint16_t ch1Offset, uint16_t ch2Offset, uint16_t ch3Offset,
- 172:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
- 173:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH1_OFFSET, ch1Offset);
- 174:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH2_OFFSET, ch2Offset);
- 175:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH3_OFFSET, ch3Offset);
- 176:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH4_OFFSET, ch4Offset);
- 177:ADPD1080.c    ****     } else { // SLOTB
- 178:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH1_OFFSET, ch1Offset);
- 179:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH2_OFFSET, ch2Offset);
- 180:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH3_OFFSET, ch3Offset);
- 181:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH4_OFFSET, ch4Offset);
- 182:ADPD1080.c    ****     }
- 183:ADPD1080.c    **** }
- 184:ADPD1080.c    **** 
- 185:ADPD1080.c    **** /* Disable the LEDs */
- 186:ADPD1080.c    **** bool ADPD1080_DisableLed(uint8_t enSlot) {
- 187:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
- 188:ADPD1080.c    ****     (void) enSlot;
- 189:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
- 190:ADPD1080.c    ****         //regValue = regValue & (0xFCFF | (0x01 << 8));//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
- 191:ADPD1080.c    ****         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
- 192:ADPD1080.c    ****     //} else { // SLOTB
- 193:ADPD1080.c    ****         //regValue = regValue & (0xFCFF | (0x01 << 9));//!!!!!!!!!!!!!!!!!!!!!9 bit 1
- 194:ADPD1080.c    ****         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
- 195:ADPD1080.c    ****     //}
- 196:ADPD1080.c    ****     regValue = (regValue & 0xFCFF) | (0x0300);//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
- 197:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
- 198:ADPD1080.c    **** }
- 199:ADPD1080.c    **** 
- 200:ADPD1080.c    **** /* Enable the LEDs */
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 5
+ 144:ADPD1080.c    **** 
+ 145:ADPD1080.c    **** /* Set the sampling frequency */
+ 146:ADPD1080.c    **** bool ADPD1080_SetSamplingFrequency(uint16_t u16Frequency) {
+ 147:ADPD1080.c    ****     uint16_t u16FValue = 32000 / u16Frequency / 4;
+ 148:ADPD1080.c    **** 
+ 149:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_FSAMPLE, u16FValue);
+ 150:ADPD1080.c    **** }
+ 151:ADPD1080.c    **** 
+ 152:ADPD1080.c    **** /* Set the average factor */
+ 153:ADPD1080.c    **** bool ADPD1080_SetAverageFactor(uint8_t enAverage) {
+ 154:ADPD1080.c    ****     uint16_t regValue = (enAverage << 4) | (enAverage << 8);
+ 155:ADPD1080.c    **** 
+ 156:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_NUM_AVG, regValue);
+ 157:ADPD1080.c    **** }
+ 158:ADPD1080.c    **** 
+ 159:ADPD1080.c    **** /* Enable the digital clock */
+ 160:ADPD1080.c    **** bool ADPD1080_SetDigitalClock(void) {
+ 161:ADPD1080.c    ****     uint16_t origin = ADPD1080_ReadReg(0x4B);
+ 162:ADPD1080.c    ****     uint16_t new = origin | 0x1;
+ 163:ADPD1080.c    ****     ADPD1080_WriteReg(0x5F, new);
+ 164:ADPD1080.c    **** }
+ 165:ADPD1080.c    **** 
+ 166:ADPD1080.c    **** /* Software reset of the ADPD1080 */
+ 167:ADPD1080.c    **** bool ADPD1080_Reset(void) {
+ 168:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_SW_RESET, 1);
+ 169:ADPD1080.c    **** }
+ 170:ADPD1080.c    **** 
+ 171:ADPD1080.c    **** /* Set channel offset */
+ 172:ADPD1080.c    **** void ADPD1080_SetOffset(uint8_t enSlot, uint16_t ch1Offset, uint16_t ch2Offset, uint16_t ch3Offset,
+ 173:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
+ 174:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH1_OFFSET, ch1Offset);
+ 175:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH2_OFFSET, ch2Offset);
+ 176:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH3_OFFSET, ch3Offset);
+ 177:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH4_OFFSET, ch4Offset);
+ 178:ADPD1080.c    ****     } else { // SLOTB
+ 179:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH1_OFFSET, ch1Offset);
+ 180:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH2_OFFSET, ch2Offset);
+ 181:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH3_OFFSET, ch3Offset);
+ 182:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH4_OFFSET, ch4Offset);
+ 183:ADPD1080.c    ****     }
+ 184:ADPD1080.c    **** }
+ 185:ADPD1080.c    **** 
+ 186:ADPD1080.c    **** /* Disable the LEDs */
+ 187:ADPD1080.c    **** bool ADPD1080_DisableLed(uint8_t enSlot) {
+ 188:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
+ 189:ADPD1080.c    ****     (void) enSlot;
+ 190:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
+ 191:ADPD1080.c    ****         //regValue = regValue & (0xFCFF | (0x01 << 8));//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
+ 192:ADPD1080.c    ****         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
+ 193:ADPD1080.c    ****     //} else { // SLOTB
+ 194:ADPD1080.c    ****         //regValue = regValue & (0xFCFF | (0x01 << 9));//!!!!!!!!!!!!!!!!!!!!!9 bit 1
+ 195:ADPD1080.c    ****         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
+ 196:ADPD1080.c    ****     //}
+ 197:ADPD1080.c    ****     regValue = (regValue & 0xFCFF) | (0x0300);//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
+ 198:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
+ 199:ADPD1080.c    **** }
+ 200:ADPD1080.c    **** 
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 5
 
 
- 201:ADPD1080.c    **** bool ADPD1080_EnableLed(uint8_t enSlot) {
- 202:ADPD1080.c    ****     (void) enSlot;
- 203:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
- 204:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
- 205:ADPD1080.c    ****         //regValue = regValue & (0xFCFF | (0x00 << 8));//!!!!!!!!!!!!!!!!!!!!!8 bit 0
- 206:ADPD1080.c    ****         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
- 207:ADPD1080.c    ****     //} else { // SLOTB
- 208:ADPD1080.c    ****         //regValue = regValue & (0xFCFF | (0x00 << 9));//!!!!!!!!!!!!!!!!!!!!!9 bit 0
- 209:ADPD1080.c    ****         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
- 210:ADPD1080.c    ****     //}
- 211:ADPD1080.c    ****     regValue = (regValue & 0xFCFF);//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
- 212:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
- 213:ADPD1080.c    **** }
- 214:ADPD1080.c    **** 
- 215:ADPD1080.c    **** /* Set the pulse number and period */
- 216:ADPD1080.c    **** bool ADPD1080_SetPulseNumberPeriod(uint8_t enSlot, uint8_t u8PulseCount, uint8_t u8PulsePeriod) {
- 217:ADPD1080.c    ****     uint16_t u16Value = ((uint16_t)u8PulseCount << 8) | u8PulsePeriod;
- 218:ADPD1080.c    **** 
- 219:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
- 220:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_NUMPULSES, u16Value);
- 221:ADPD1080.c    ****     } else { // SLOTB
- 222:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTB_NUMPULSES, u16Value);
- 223:ADPD1080.c    ****     }
- 224:ADPD1080.c    **** }
- 225:ADPD1080.c    **** 
- 226:ADPD1080.c    **** bool ADPD1080_Init(void) {
- 227:ADPD1080.c    ****     uint16_t deviceID = ADPD1080_ReadReg(0x08);  // Device ID register
- 228:ADPD1080.c    ****     printf("%d",deviceID);
- 229:ADPD1080.c    ****     return true;
- 230:ADPD1080.c    **** }
- 231:ADPD1080.c    **** 
- 232:ADPD1080.c    **** uint16_t ADPD1080_ReadReg(uint8_t reg) {
-  29              		.loc 1 232 0
+ 201:ADPD1080.c    **** /* Enable the LEDs */
+ 202:ADPD1080.c    **** bool ADPD1080_EnableLed(uint8_t enSlot) {
+ 203:ADPD1080.c    ****     (void) enSlot;
+ 204:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
+ 205:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
+ 206:ADPD1080.c    ****         //regValue = regValue & (0xFCFF | (0x00 << 8));//!!!!!!!!!!!!!!!!!!!!!8 bit 0
+ 207:ADPD1080.c    ****         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
+ 208:ADPD1080.c    ****     //} else { // SLOTB
+ 209:ADPD1080.c    ****         //regValue = regValue & (0xFCFF | (0x00 << 9));//!!!!!!!!!!!!!!!!!!!!!9 bit 0
+ 210:ADPD1080.c    ****         //return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
+ 211:ADPD1080.c    ****     //}
+ 212:ADPD1080.c    ****     regValue = (regValue & 0xFCFF);//!!!!!!!!!!!!!!!!!!!!! 8 bit 1
+ 213:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
+ 214:ADPD1080.c    **** }
+ 215:ADPD1080.c    **** 
+ 216:ADPD1080.c    **** /* Set the pulse number and period */
+ 217:ADPD1080.c    **** bool ADPD1080_SetPulseNumberPeriod(uint8_t enSlot, uint8_t u8PulseCount, uint8_t u8PulsePeriod) {
+ 218:ADPD1080.c    ****     uint16_t u16Value = ((uint16_t)u8PulseCount << 8) | u8PulsePeriod;
+ 219:ADPD1080.c    **** 
+ 220:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
+ 221:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_NUMPULSES, u16Value);
+ 222:ADPD1080.c    ****     } else { // SLOTB
+ 223:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTB_NUMPULSES, u16Value);
+ 224:ADPD1080.c    ****     }
+ 225:ADPD1080.c    **** }
+ 226:ADPD1080.c    **** 
+ 227:ADPD1080.c    **** bool ADPD1080_Init(void) {
+ 228:ADPD1080.c    ****     uint16_t deviceID = ADPD1080_ReadReg(0x08);  // Device ID register
+ 229:ADPD1080.c    ****     printf("%d",deviceID);
+ 230:ADPD1080.c    ****     return true;
+ 231:ADPD1080.c    **** }
+ 232:ADPD1080.c    **** 
+ 233:ADPD1080.c    **** uint16_t ADPD1080_ReadReg(uint8_t reg) {
+  29              		.loc 1 233 0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -285,49 +286,49 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
   38              		.cfi_offset 5, -8
   39              		.cfi_offset 14, -4
   40 0002 0446     		mov	r4, r0
- 233:ADPD1080.c    ****     uint8_t buffer[2] = {0};
- 234:ADPD1080.c    ****     I2C_MasterSendStart(ADPD1080_I2C_ADDRESS, I2C_WRITE_XFER_MODE);
-  41              		.loc 1 234 0
+ 234:ADPD1080.c    ****     uint8_t buffer[2] = {0};
+ 235:ADPD1080.c    ****     I2C_MasterSendStart(ADPD1080_I2C_ADDRESS, I2C_WRITE_XFER_MODE);
+  41              		.loc 1 235 0
   42 0004 0021     		movs	r1, #0
   43 0006 6420     		movs	r0, #100
   44              	.LVL1:
   45 0008 FFF7FEFF 		bl	I2C_MasterSendStart
   46              	.LVL2:
- 235:ADPD1080.c    ****     I2C_MasterWriteByte(reg);
-  47              		.loc 1 235 0
+ 236:ADPD1080.c    ****     I2C_MasterWriteByte(reg);
+  47              		.loc 1 236 0
   48 000c 2046     		mov	r0, r4
   49 000e FFF7FEFF 		bl	I2C_MasterWriteByte
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 6
+
+
   50              	.LVL3:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 6
-
-
- 236:ADPD1080.c    ****     I2C_MasterSendRestart(ADPD1080_I2C_ADDRESS, I2C_READ_XFER_MODE);
-  51              		.loc 1 236 0
+ 237:ADPD1080.c    ****     I2C_MasterSendRestart(ADPD1080_I2C_ADDRESS, I2C_READ_XFER_MODE);
+  51              		.loc 1 237 0
   52 0012 0121     		movs	r1, #1
   53 0014 6420     		movs	r0, #100
   54 0016 FFF7FEFF 		bl	I2C_MasterSendRestart
   55              	.LVL4:
- 237:ADPD1080.c    ****     buffer[0] = I2C_MasterReadByte(I2C_ACK_DATA);
-  56              		.loc 1 237 0
+ 238:ADPD1080.c    ****     buffer[0] = I2C_MasterReadByte(I2C_ACK_DATA);
+  56              		.loc 1 238 0
   57 001a 0120     		movs	r0, #1
   58 001c FFF7FEFF 		bl	I2C_MasterReadByte
   59              	.LVL5:
   60 0020 0546     		mov	r5, r0
- 238:ADPD1080.c    ****     buffer[1] = I2C_MasterReadByte(I2C_NAK_DATA);
-  61              		.loc 1 238 0
+ 239:ADPD1080.c    ****     buffer[1] = I2C_MasterReadByte(I2C_NAK_DATA);
+  61              		.loc 1 239 0
   62 0022 0020     		movs	r0, #0
   63 0024 FFF7FEFF 		bl	I2C_MasterReadByte
   64              	.LVL6:
   65 0028 0446     		mov	r4, r0
- 239:ADPD1080.c    ****     I2C_MasterSendStop();
-  66              		.loc 1 239 0
+ 240:ADPD1080.c    ****     I2C_MasterSendStop();
+  66              		.loc 1 240 0
   67 002a FFF7FEFF 		bl	I2C_MasterSendStop
   68              	.LVL7:
- 240:ADPD1080.c    ****     return (buffer[0] << 8) | buffer[1];
-  69              		.loc 1 240 0
+ 241:ADPD1080.c    ****     return (buffer[0] << 8) | buffer[1];
+  69              		.loc 1 241 0
   70 002e 44EA0520 		orr	r0, r4, r5, lsl #8
- 241:ADPD1080.c    **** }
-  71              		.loc 1 241 0
+ 242:ADPD1080.c    **** }
+  71              		.loc 1 242 0
   72 0032 80B2     		uxth	r0, r0
   73 0034 38BD     		pop	{r3, r4, r5, pc}
   74              		.cfi_endproc
@@ -341,8 +342,8 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
   82              		.type	ADPD1080_Init, %function
   83              	ADPD1080_Init:
   84              	.LFB547:
- 226:ADPD1080.c    ****     uint16_t deviceID = ADPD1080_ReadReg(0x08);  // Device ID register
-  85              		.loc 1 226 0
+ 227:ADPD1080.c    ****     uint16_t deviceID = ADPD1080_ReadReg(0x08);  // Device ID register
+  85              		.loc 1 227 0
   86              		.cfi_startproc
   87              		@ args = 0, pretend = 0, frame = 0
   88              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -350,23 +351,23 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
   90              		.cfi_def_cfa_offset 8
   91              		.cfi_offset 3, -8
   92              		.cfi_offset 14, -4
- 227:ADPD1080.c    ****     printf("%d",deviceID);
-  93              		.loc 1 227 0
+ 228:ADPD1080.c    ****     printf("%d",deviceID);
+  93              		.loc 1 228 0
   94 0002 0820     		movs	r0, #8
   95 0004 FFF7FEFF 		bl	ADPD1080_ReadReg
   96              	.LVL8:
- 228:ADPD1080.c    ****     return true;
-  97              		.loc 1 228 0
+ 229:ADPD1080.c    ****     return true;
+  97              		.loc 1 229 0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 7
+
+
   98 0008 0146     		mov	r1, r0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 7
-
-
   99 000a 0248     		ldr	r0, .L5
  100              	.LVL9:
  101 000c FFF7FEFF 		bl	printf
  102              	.LVL10:
- 230:ADPD1080.c    **** 
- 103              		.loc 1 230 0
+ 231:ADPD1080.c    **** 
+ 103              		.loc 1 231 0
  104 0010 0120     		movs	r0, #1
  105 0012 08BD     		pop	{r3, pc}
  106              	.L6:
@@ -384,9 +385,9 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  118              		.type	ADPD1080_WriteReg, %function
  119              	ADPD1080_WriteReg:
  120              	.LFB549:
- 242:ADPD1080.c    **** 
- 243:ADPD1080.c    **** bool ADPD1080_WriteReg(uint8_t reg, uint16_t value) {
- 121              		.loc 1 243 0
+ 243:ADPD1080.c    **** 
+ 244:ADPD1080.c    **** bool ADPD1080_WriteReg(uint8_t reg, uint16_t value) {
+ 121              		.loc 1 244 0
  122              		.cfi_startproc
  123              		@ args = 0, pretend = 0, frame = 0
  124              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -399,39 +400,39 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  131              		.cfi_offset 14, -4
  132 0002 0546     		mov	r5, r0
  133 0004 0C46     		mov	r4, r1
- 244:ADPD1080.c    ****     I2C_MasterSendStart(ADPD1080_I2C_ADDRESS, I2C_WRITE_XFER_MODE);
- 134              		.loc 1 244 0
+ 245:ADPD1080.c    ****     I2C_MasterSendStart(ADPD1080_I2C_ADDRESS, I2C_WRITE_XFER_MODE);
+ 134              		.loc 1 245 0
  135 0006 0021     		movs	r1, #0
  136              	.LVL12:
  137 0008 6420     		movs	r0, #100
  138              	.LVL13:
  139 000a FFF7FEFF 		bl	I2C_MasterSendStart
  140              	.LVL14:
- 245:ADPD1080.c    ****     I2C_MasterWriteByte(reg);
- 141              		.loc 1 245 0
+ 246:ADPD1080.c    ****     I2C_MasterWriteByte(reg);
+ 141              		.loc 1 246 0
  142 000e 2846     		mov	r0, r5
  143 0010 FFF7FEFF 		bl	I2C_MasterWriteByte
  144              	.LVL15:
- 246:ADPD1080.c    ****     I2C_MasterWriteByte((value >> 8) & 0xFF);
- 145              		.loc 1 246 0
+ 247:ADPD1080.c    ****     I2C_MasterWriteByte((value >> 8) & 0xFF);
+ 145              		.loc 1 247 0
  146 0014 200A     		lsrs	r0, r4, #8
  147 0016 FFF7FEFF 		bl	I2C_MasterWriteByte
  148              	.LVL16:
- 247:ADPD1080.c    ****     I2C_MasterWriteByte(value & 0xFF);
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 8
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 8
 
 
- 149              		.loc 1 247 0
+ 248:ADPD1080.c    ****     I2C_MasterWriteByte(value & 0xFF);
+ 149              		.loc 1 248 0
  150 001a E0B2     		uxtb	r0, r4
  151 001c FFF7FEFF 		bl	I2C_MasterWriteByte
  152              	.LVL17:
- 248:ADPD1080.c    ****     I2C_MasterSendStop();
- 153              		.loc 1 248 0
+ 249:ADPD1080.c    ****     I2C_MasterSendStop();
+ 153              		.loc 1 249 0
  154 0020 FFF7FEFF 		bl	I2C_MasterSendStop
  155              	.LVL18:
- 249:ADPD1080.c    ****     return true;
- 250:ADPD1080.c    **** }
- 156              		.loc 1 250 0
+ 250:ADPD1080.c    ****     return true;
+ 251:ADPD1080.c    **** }
+ 156              		.loc 1 251 0
  157 0024 0120     		movs	r0, #1
  158 0026 38BD     		pop	{r3, r4, r5, pc}
  159              		.cfi_endproc
@@ -445,8 +446,8 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  167              		.type	ADPD1080_SelectLED, %function
  168              	ADPD1080_SelectLED:
  169              	.LFB535:
- 103:ADPD1080.c    ****     (void) enLEDNumber;
- 170              		.loc 1 103 0
+ 104:ADPD1080.c    ****     (void) enLEDNumber;
+ 170              		.loc 1 104 0
  171              		.cfi_startproc
  172              		@ args = 0, pretend = 0, frame = 0
  173              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -455,32 +456,32 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  176              		.cfi_def_cfa_offset 8
  177              		.cfi_offset 3, -8
  178              		.cfi_offset 14, -4
- 106:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
- 179              		.loc 1 106 0
+ 107:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
+ 179              		.loc 1 107 0
  180 0002 1420     		movs	r0, #20
  181              	.LVL20:
  182 0004 FFF7FEFF 		bl	ADPD1080_ReadReg
  183              	.LVL21:
- 112:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
- 184              		.loc 1 112 0
+ 113:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_PD_LED_SELECT, regValue);
+ 184              		.loc 1 113 0
  185 0008 20F00F00 		bic	r0, r0, #15
  186              	.LVL22:
  187 000c 40F00901 		orr	r1, r0, #9
  188 0010 09B2     		sxth	r1, r1
  189 0012 89B2     		uxth	r1, r1
  190              	.LVL23:
- 113:ADPD1080.c    **** }
- 191              		.loc 1 113 0
+ 114:ADPD1080.c    **** }
+ 191              		.loc 1 114 0
  192 0014 1420     		movs	r0, #20
  193 0016 FFF7FEFF 		bl	ADPD1080_WriteReg
  194              	.LVL24:
- 114:ADPD1080.c    **** 
- 195              		.loc 1 114 0
+ 115:ADPD1080.c    **** 
+ 195              		.loc 1 115 0
  196 001a 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 9
+
+
  197              		.cfi_endproc
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 9
-
-
  198              	.LFE535:
  199              		.size	ADPD1080_SelectLED, .-ADPD1080_SelectLED
  200              		.section	.text.ADPD1080_SetLEDWidthOffset,"ax",%progbits
@@ -491,8 +492,8 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  205              		.type	ADPD1080_SetLEDWidthOffset, %function
  206              	ADPD1080_SetLEDWidthOffset:
  207              	.LFB536:
- 117:ADPD1080.c    ****     uint16_t regValue = u8Offset + ((u8Width & 0x1F) << 8);
- 208              		.loc 1 117 0
+ 118:ADPD1080.c    ****     uint16_t regValue = u8Offset + ((u8Width & 0x1F) << 8);
+ 208              		.loc 1 118 0
  209              		.cfi_startproc
  210              		@ args = 0, pretend = 0, frame = 0
  211              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -501,18 +502,18 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  214              		.cfi_def_cfa_offset 8
  215              		.cfi_offset 3, -8
  216              		.cfi_offset 14, -4
- 118:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
- 217              		.loc 1 118 0
+ 119:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
+ 217              		.loc 1 119 0
  218 0002 0902     		lsls	r1, r1, #8
  219              	.LVL26:
  220 0004 01F4F851 		and	r1, r1, #7936
  221 0008 1144     		add	r1, r1, r2
  222              	.LVL27:
- 119:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_LED_PULSE, regValue);
- 223              		.loc 1 119 0
+ 120:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_LED_PULSE, regValue);
+ 223              		.loc 1 120 0
  224 000a 18B9     		cbnz	r0, .L12
- 120:ADPD1080.c    ****     } else { // SLOTB
- 225              		.loc 1 120 0
+ 121:ADPD1080.c    ****     } else { // SLOTB
+ 225              		.loc 1 121 0
  226 000c 3020     		movs	r0, #48
  227              	.LVL28:
  228 000e FFF7FEFF 		bl	ADPD1080_WriteReg
@@ -520,14 +521,14 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  230 0012 08BD     		pop	{r3, pc}
  231              	.LVL30:
  232              	.L12:
- 122:ADPD1080.c    ****     }
- 233              		.loc 1 122 0
+ 123:ADPD1080.c    ****     }
+ 233              		.loc 1 123 0
  234 0014 3520     		movs	r0, #53
  235              	.LVL31:
  236 0016 FFF7FEFF 		bl	ADPD1080_WriteReg
  237              	.LVL32:
- 124:ADPD1080.c    **** 
- 238              		.loc 1 124 0
+ 125:ADPD1080.c    **** 
+ 238              		.loc 1 125 0
  239 001a 08BD     		pop	{r3, pc}
  240              		.cfi_endproc
  241              	.LFE536:
@@ -537,14 +538,14 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  245              		.global	ADPD1080_SetTIAGain
  246              		.thumb
  247              		.thumb_func
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 10
+
+
  248              		.type	ADPD1080_SetTIAGain, %function
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 10
-
-
  249              	ADPD1080_SetTIAGain:
  250              	.LFB537:
- 127:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
- 251              		.loc 1 127 0
+ 128:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
+ 251              		.loc 1 128 0
  252              		.cfi_startproc
  253              		@ args = 0, pretend = 0, frame = 0
  254              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -553,11 +554,11 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  257              		.cfi_def_cfa_offset 8
  258              		.cfi_offset 3, -8
  259              		.cfi_offset 14, -4
- 128:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_TIA_CFG, enTIAGain);
- 260              		.loc 1 128 0
+ 129:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_TIA_CFG, enTIAGain);
+ 260              		.loc 1 129 0
  261 0002 18B9     		cbnz	r0, .L16
- 129:ADPD1080.c    ****     } else { // SLOTB
- 262              		.loc 1 129 0
+ 130:ADPD1080.c    ****     } else { // SLOTB
+ 262              		.loc 1 130 0
  263 0004 4220     		movs	r0, #66
  264              	.LVL34:
  265 0006 FFF7FEFF 		bl	ADPD1080_WriteReg
@@ -565,14 +566,14 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  267 000a 08BD     		pop	{r3, pc}
  268              	.LVL36:
  269              	.L16:
- 131:ADPD1080.c    ****     }
- 270              		.loc 1 131 0
+ 132:ADPD1080.c    ****     }
+ 270              		.loc 1 132 0
  271 000c 4420     		movs	r0, #68
  272              	.LVL37:
  273 000e FFF7FEFF 		bl	ADPD1080_WriteReg
  274              	.LVL38:
- 133:ADPD1080.c    **** 
- 275              		.loc 1 133 0
+ 134:ADPD1080.c    **** 
+ 275              		.loc 1 134 0
  276 0012 08BD     		pop	{r3, pc}
  277              		.cfi_endproc
  278              	.LFE537:
@@ -585,8 +586,8 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  285              		.type	ADPD1080_SetFIFO, %function
  286              	ADPD1080_SetFIFO:
  287              	.LFB538:
- 136:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_SLOT_EN, 0x1021);
- 288              		.loc 1 136 0
+ 137:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_SLOT_EN, 0x1021);
+ 288              		.loc 1 137 0
  289              		.cfi_startproc
  290              		@ args = 0, pretend = 0, frame = 0
  291              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -594,35 +595,35 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  293              		.cfi_def_cfa_offset 8
  294              		.cfi_offset 3, -8
  295              		.cfi_offset 14, -4
- 137:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_FIFO_THRESH, 0x1F00);
- 296              		.loc 1 137 0
+ 138:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_FIFO_THRESH, 0x1F00);
+ 296              		.loc 1 138 0
  297 0002 41F22101 		movw	r1, #4129
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 11
+
+
  298 0006 1120     		movs	r0, #17
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 11
-
-
  299 0008 FFF7FEFF 		bl	ADPD1080_WriteReg
  300              	.LVL39:
- 138:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_INT_MASK, 0xC0FF);
- 301              		.loc 1 138 0
+ 139:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_INT_MASK, 0xC0FF);
+ 301              		.loc 1 139 0
  302 000c 4FF4F851 		mov	r1, #7936
  303 0010 0620     		movs	r0, #6
  304 0012 FFF7FEFF 		bl	ADPD1080_WriteReg
  305              	.LVL40:
- 139:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_GPIO_CTRL, 0x101);
- 306              		.loc 1 139 0
+ 140:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_GPIO_CTRL, 0x101);
+ 306              		.loc 1 140 0
  307 0016 4CF2FF01 		movw	r1, #49407
  308 001a 0120     		movs	r0, #1
  309 001c FFF7FEFF 		bl	ADPD1080_WriteReg
  310              	.LVL41:
- 140:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_GPIO_DRV, 0x05);
- 311              		.loc 1 140 0
+ 141:ADPD1080.c    ****     ADPD1080_WriteReg(ADPD1080_GPIO_DRV, 0x05);
+ 311              		.loc 1 141 0
  312 0020 40F20111 		movw	r1, #257
  313 0024 0B20     		movs	r0, #11
  314 0026 FFF7FEFF 		bl	ADPD1080_WriteReg
  315              	.LVL42:
- 141:ADPD1080.c    **** }
- 316              		.loc 1 141 0
+ 142:ADPD1080.c    **** }
+ 316              		.loc 1 142 0
  317 002a 0521     		movs	r1, #5
  318 002c 0220     		movs	r0, #2
  319 002e FFF7FEFF 		bl	ADPD1080_WriteReg
@@ -639,8 +640,8 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  330              		.type	ADPD1080_SetSamplingFrequency, %function
  331              	ADPD1080_SetSamplingFrequency:
  332              	.LFB539:
- 145:ADPD1080.c    ****     uint16_t u16FValue = 32000 / u16Frequency / 4;
- 333              		.loc 1 145 0
+ 146:ADPD1080.c    ****     uint16_t u16FValue = 32000 / u16Frequency / 4;
+ 333              		.loc 1 146 0
  334              		.cfi_startproc
  335              		@ args = 0, pretend = 0, frame = 0
  336              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -650,19 +651,19 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  340              		.cfi_offset 3, -8
  341              		.cfi_offset 14, -4
  342              	.LVL45:
- 148:ADPD1080.c    **** }
- 343              		.loc 1 148 0
+ 149:ADPD1080.c    **** }
+ 343              		.loc 1 149 0
  344 0002 4FF4FA51 		mov	r1, #8000
  345 0006 91FBF0F1 		sdiv	r1, r1, r0
  346 000a 1220     		movs	r0, #18
  347              	.LVL46:
  348 000c FFF7FEFF 		bl	ADPD1080_WriteReg
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 12
+
+
  349              	.LVL47:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 12
-
-
- 149:ADPD1080.c    **** 
- 350              		.loc 1 149 0
+ 150:ADPD1080.c    **** 
+ 350              		.loc 1 150 0
  351 0010 08BD     		pop	{r3, pc}
  352              		.cfi_endproc
  353              	.LFE539:
@@ -675,8 +676,8 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  360              		.type	ADPD1080_SetAverageFactor, %function
  361              	ADPD1080_SetAverageFactor:
  362              	.LFB540:
- 152:ADPD1080.c    ****     uint16_t regValue = (enAverage << 4) | (enAverage << 8);
- 363              		.loc 1 152 0
+ 153:ADPD1080.c    ****     uint16_t regValue = (enAverage << 4) | (enAverage << 8);
+ 363              		.loc 1 153 0
  364              		.cfi_startproc
  365              		@ args = 0, pretend = 0, frame = 0
  366              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -685,20 +686,20 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  369              		.cfi_def_cfa_offset 8
  370              		.cfi_offset 3, -8
  371              		.cfi_offset 14, -4
- 153:ADPD1080.c    **** 
- 372              		.loc 1 153 0
+ 154:ADPD1080.c    **** 
+ 372              		.loc 1 154 0
  373 0002 0102     		lsls	r1, r0, #8
  374              	.LVL49:
- 155:ADPD1080.c    **** }
- 375              		.loc 1 155 0
+ 156:ADPD1080.c    **** }
+ 375              		.loc 1 156 0
  376 0004 41EA0011 		orr	r1, r1, r0, lsl #4
  377              	.LVL50:
  378 0008 1520     		movs	r0, #21
  379              	.LVL51:
  380 000a FFF7FEFF 		bl	ADPD1080_WriteReg
  381              	.LVL52:
- 156:ADPD1080.c    **** 
- 382              		.loc 1 156 0
+ 157:ADPD1080.c    **** 
+ 382              		.loc 1 157 0
  383 000e 08BD     		pop	{r3, pc}
  384              		.cfi_endproc
  385              	.LFE540:
@@ -711,36 +712,36 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  392              		.type	ADPD1080_SetDigitalClock, %function
  393              	ADPD1080_SetDigitalClock:
  394              	.LFB541:
- 159:ADPD1080.c    ****     uint16_t origin = ADPD1080_ReadReg(0x4B);
- 395              		.loc 1 159 0
+ 160:ADPD1080.c    ****     uint16_t origin = ADPD1080_ReadReg(0x4B);
+ 395              		.loc 1 160 0
  396              		.cfi_startproc
  397              		@ args = 0, pretend = 0, frame = 0
  398              		@ frame_needed = 0, uses_anonymous_args = 0
  399 0000 08B5     		push	{r3, lr}
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 13
+
+
  400              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 13
-
-
  401              		.cfi_offset 3, -8
  402              		.cfi_offset 14, -4
- 160:ADPD1080.c    ****     uint16_t new = origin | 0x1;
- 403              		.loc 1 160 0
+ 161:ADPD1080.c    ****     uint16_t new = origin | 0x1;
+ 403              		.loc 1 161 0
  404 0002 4B20     		movs	r0, #75
  405 0004 FFF7FEFF 		bl	ADPD1080_ReadReg
  406              	.LVL53:
- 161:ADPD1080.c    ****     ADPD1080_WriteReg(0x5F, new);
- 407              		.loc 1 161 0
+ 162:ADPD1080.c    ****     ADPD1080_WriteReg(0x5F, new);
+ 407              		.loc 1 162 0
  408 0008 40F00101 		orr	r1, r0, #1
  409              	.LVL54:
- 162:ADPD1080.c    **** }
- 410              		.loc 1 162 0
+ 163:ADPD1080.c    **** }
+ 410              		.loc 1 163 0
  411 000c 89B2     		uxth	r1, r1
  412 000e 5F20     		movs	r0, #95
  413              	.LVL55:
  414 0010 FFF7FEFF 		bl	ADPD1080_WriteReg
  415              	.LVL56:
- 163:ADPD1080.c    **** 
- 416              		.loc 1 163 0
+ 164:ADPD1080.c    **** 
+ 416              		.loc 1 164 0
  417 0014 08BD     		pop	{r3, pc}
  418              		.cfi_endproc
  419              	.LFE541:
@@ -753,8 +754,8 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  426              		.type	ADPD1080_Reset, %function
  427              	ADPD1080_Reset:
  428              	.LFB542:
- 166:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_SW_RESET, 1);
- 429              		.loc 1 166 0
+ 167:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_SW_RESET, 1);
+ 429              		.loc 1 167 0
  430              		.cfi_startproc
  431              		@ args = 0, pretend = 0, frame = 0
  432              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -762,14 +763,14 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  434              		.cfi_def_cfa_offset 8
  435              		.cfi_offset 3, -8
  436              		.cfi_offset 14, -4
- 167:ADPD1080.c    **** }
- 437              		.loc 1 167 0
+ 168:ADPD1080.c    **** }
+ 437              		.loc 1 168 0
  438 0002 0121     		movs	r1, #1
  439 0004 0F20     		movs	r0, #15
  440 0006 FFF7FEFF 		bl	ADPD1080_WriteReg
  441              	.LVL57:
- 168:ADPD1080.c    **** 
- 442              		.loc 1 168 0
+ 169:ADPD1080.c    **** 
+ 442              		.loc 1 169 0
  443 000a 08BD     		pop	{r3, pc}
  444              		.cfi_endproc
  445              	.LFE542:
@@ -777,16 +778,16 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  447              		.section	.text.ADPD1080_SetOffset,"ax",%progbits
  448              		.align	2
  449              		.global	ADPD1080_SetOffset
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 14
+
+
  450              		.thumb
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 14
-
-
  451              		.thumb_func
  452              		.type	ADPD1080_SetOffset, %function
  453              	ADPD1080_SetOffset:
  454              	.LFB543:
- 171:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
- 455              		.loc 1 171 0
+ 172:ADPD1080.c    ****     if (enSlot == 0) { // SLOTA
+ 455              		.loc 1 172 0
  456              		.cfi_startproc
  457              		@ args = 4, pretend = 0, frame = 0
  458              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -800,29 +801,29 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  466 0002 1646     		mov	r6, r2
  467 0004 1D46     		mov	r5, r3
  468 0006 BDF81040 		ldrh	r4, [sp, #16]
- 172:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH1_OFFSET, ch1Offset);
- 469              		.loc 1 172 0
+ 173:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH1_OFFSET, ch1Offset);
+ 469              		.loc 1 173 0
  470 000a 78B9     		cbnz	r0, .L30
- 173:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH2_OFFSET, ch2Offset);
- 471              		.loc 1 173 0
+ 174:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH2_OFFSET, ch2Offset);
+ 471              		.loc 1 174 0
  472 000c 1820     		movs	r0, #24
  473              	.LVL59:
  474 000e FFF7FEFF 		bl	ADPD1080_WriteReg
  475              	.LVL60:
- 174:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH3_OFFSET, ch3Offset);
- 476              		.loc 1 174 0
+ 175:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH3_OFFSET, ch3Offset);
+ 476              		.loc 1 175 0
  477 0012 3146     		mov	r1, r6
  478 0014 1920     		movs	r0, #25
  479 0016 FFF7FEFF 		bl	ADPD1080_WriteReg
  480              	.LVL61:
- 175:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH4_OFFSET, ch4Offset);
- 481              		.loc 1 175 0
+ 176:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTA_CH4_OFFSET, ch4Offset);
+ 481              		.loc 1 176 0
  482 001a 2946     		mov	r1, r5
  483 001c 1A20     		movs	r0, #26
  484 001e FFF7FEFF 		bl	ADPD1080_WriteReg
  485              	.LVL62:
- 176:ADPD1080.c    ****     } else { // SLOTB
- 486              		.loc 1 176 0
+ 177:ADPD1080.c    ****     } else { // SLOTB
+ 486              		.loc 1 177 0
  487 0022 2146     		mov	r1, r4
  488 0024 1B20     		movs	r0, #27
  489 0026 FFF7FEFF 		bl	ADPD1080_WriteReg
@@ -830,29 +831,29 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  491 002a 70BD     		pop	{r4, r5, r6, pc}
  492              	.LVL64:
  493              	.L30:
- 178:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH2_OFFSET, ch2Offset);
- 494              		.loc 1 178 0
+ 179:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH2_OFFSET, ch2Offset);
+ 494              		.loc 1 179 0
  495 002c 1E20     		movs	r0, #30
  496              	.LVL65:
  497 002e FFF7FEFF 		bl	ADPD1080_WriteReg
  498              	.LVL66:
- 179:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH3_OFFSET, ch3Offset);
- 499              		.loc 1 179 0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 15
+ 180:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH3_OFFSET, ch3Offset);
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 15
 
 
+ 499              		.loc 1 180 0
  500 0032 3146     		mov	r1, r6
  501 0034 1F20     		movs	r0, #31
  502 0036 FFF7FEFF 		bl	ADPD1080_WriteReg
  503              	.LVL67:
- 180:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH4_OFFSET, ch4Offset);
- 504              		.loc 1 180 0
+ 181:ADPD1080.c    ****         ADPD1080_WriteReg(ADPD1080_SLOTB_CH4_OFFSET, ch4Offset);
+ 504              		.loc 1 181 0
  505 003a 2946     		mov	r1, r5
  506 003c 2020     		movs	r0, #32
  507 003e FFF7FEFF 		bl	ADPD1080_WriteReg
  508              	.LVL68:
- 181:ADPD1080.c    ****     }
- 509              		.loc 1 181 0
+ 182:ADPD1080.c    ****     }
+ 509              		.loc 1 182 0
  510 0042 2146     		mov	r1, r4
  511 0044 2120     		movs	r0, #33
  512 0046 FFF7FEFF 		bl	ADPD1080_WriteReg
@@ -869,8 +870,8 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  523              		.type	ADPD1080_DisableLed, %function
  524              	ADPD1080_DisableLed:
  525              	.LFB544:
- 186:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
- 526              		.loc 1 186 0
+ 187:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_LED_DISABLE);
+ 526              		.loc 1 187 0
  527              		.cfi_startproc
  528              		@ args = 0, pretend = 0, frame = 0
  529              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -879,28 +880,28 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  532              		.cfi_def_cfa_offset 8
  533              		.cfi_offset 3, -8
  534              		.cfi_offset 14, -4
- 187:ADPD1080.c    ****     (void) enSlot;
- 535              		.loc 1 187 0
+ 188:ADPD1080.c    ****     (void) enSlot;
+ 535              		.loc 1 188 0
  536 0002 3420     		movs	r0, #52
  537              	.LVL71:
  538 0004 FFF7FEFF 		bl	ADPD1080_ReadReg
  539              	.LVL72:
- 196:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
- 540              		.loc 1 196 0
+ 197:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
+ 540              		.loc 1 197 0
  541 0008 40F44071 		orr	r1, r0, #768
  542              	.LVL73:
- 197:ADPD1080.c    **** }
- 543              		.loc 1 197 0
+ 198:ADPD1080.c    **** }
+ 543              		.loc 1 198 0
  544 000c 89B2     		uxth	r1, r1
  545 000e 3420     		movs	r0, #52
  546 0010 FFF7FEFF 		bl	ADPD1080_WriteReg
  547              	.LVL74:
- 198:ADPD1080.c    **** 
- 548              		.loc 1 198 0
+ 199:ADPD1080.c    **** 
+ 548              		.loc 1 199 0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 16
+
+
  549 0014 08BD     		pop	{r3, pc}
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 16
-
-
  550              		.cfi_endproc
  551              	.LFE544:
  552              		.size	ADPD1080_DisableLed, .-ADPD1080_DisableLed
@@ -912,8 +913,8 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  558              		.type	ADPD1080_EnableLed, %function
  559              	ADPD1080_EnableLed:
  560              	.LFB545:
- 201:ADPD1080.c    ****     (void) enSlot;
- 561              		.loc 1 201 0
+ 202:ADPD1080.c    ****     (void) enSlot;
+ 561              		.loc 1 202 0
  562              		.cfi_startproc
  563              		@ args = 0, pretend = 0, frame = 0
  564              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -922,25 +923,25 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  567              		.cfi_def_cfa_offset 8
  568              		.cfi_offset 3, -8
  569              		.cfi_offset 14, -4
- 203:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
- 570              		.loc 1 203 0
+ 204:ADPD1080.c    ****     //if (enSlot == 0) { // SLOTA
+ 570              		.loc 1 204 0
  571 0002 3420     		movs	r0, #52
  572              	.LVL76:
  573 0004 FFF7FEFF 		bl	ADPD1080_ReadReg
  574              	.LVL77:
- 211:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
- 575              		.loc 1 211 0
+ 212:ADPD1080.c    ****     return ADPD1080_WriteReg(ADPD1080_LED_DISABLE, regValue);
+ 575              		.loc 1 212 0
  576 0008 20F44070 		bic	r0, r0, #768
  577              	.LVL78:
  578 000c 81B2     		uxth	r1, r0
  579              	.LVL79:
- 212:ADPD1080.c    **** }
- 580              		.loc 1 212 0
+ 213:ADPD1080.c    **** }
+ 580              		.loc 1 213 0
  581 000e 3420     		movs	r0, #52
  582 0010 FFF7FEFF 		bl	ADPD1080_WriteReg
  583              	.LVL80:
- 213:ADPD1080.c    **** 
- 584              		.loc 1 213 0
+ 214:ADPD1080.c    **** 
+ 584              		.loc 1 214 0
  585 0014 08BD     		pop	{r3, pc}
  586              		.cfi_endproc
  587              	.LFE545:
@@ -953,28 +954,28 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  594              		.type	ADPD1080_SetPulseNumberPeriod, %function
  595              	ADPD1080_SetPulseNumberPeriod:
  596              	.LFB546:
- 216:ADPD1080.c    ****     uint16_t u16Value = ((uint16_t)u8PulseCount << 8) | u8PulsePeriod;
- 597              		.loc 1 216 0
+ 217:ADPD1080.c    ****     uint16_t u16Value = ((uint16_t)u8PulseCount << 8) | u8PulsePeriod;
+ 597              		.loc 1 217 0
  598              		.cfi_startproc
  599              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 17
+
+
  600              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 17
-
-
  601              	.LVL81:
  602 0000 08B5     		push	{r3, lr}
  603              		.cfi_def_cfa_offset 8
  604              		.cfi_offset 3, -8
  605              		.cfi_offset 14, -4
- 217:ADPD1080.c    **** 
- 606              		.loc 1 217 0
+ 218:ADPD1080.c    **** 
+ 606              		.loc 1 218 0
  607 0002 42EA0121 		orr	r1, r2, r1, lsl #8
  608              	.LVL82:
- 219:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_NUMPULSES, u16Value);
- 609              		.loc 1 219 0
+ 220:ADPD1080.c    ****         return ADPD1080_WriteReg(ADPD1080_SLOTA_NUMPULSES, u16Value);
+ 609              		.loc 1 220 0
  610 0006 18B9     		cbnz	r0, .L38
- 220:ADPD1080.c    ****     } else { // SLOTB
- 611              		.loc 1 220 0
+ 221:ADPD1080.c    ****     } else { // SLOTB
+ 611              		.loc 1 221 0
  612 0008 3120     		movs	r0, #49
  613              	.LVL83:
  614 000a FFF7FEFF 		bl	ADPD1080_WriteReg
@@ -982,14 +983,14 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  616 000e 08BD     		pop	{r3, pc}
  617              	.LVL85:
  618              	.L38:
- 222:ADPD1080.c    ****     }
- 619              		.loc 1 222 0
+ 223:ADPD1080.c    ****     }
+ 619              		.loc 1 223 0
  620 0010 3620     		movs	r0, #54
  621              	.LVL86:
  622 0012 FFF7FEFF 		bl	ADPD1080_WriteReg
  623              	.LVL87:
- 224:ADPD1080.c    **** 
- 624              		.loc 1 224 0
+ 225:ADPD1080.c    **** 
+ 624              		.loc 1 225 0
  625 0016 08BD     		pop	{r3, pc}
  626              		.cfi_endproc
  627              	.LFE546:
@@ -1002,9 +1003,9 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  634              		.type	ADPD1080_ReadData, %function
  635              	ADPD1080_ReadData:
  636              	.LFB550:
- 251:ADPD1080.c    **** 
- 252:ADPD1080.c    **** void ADPD1080_ReadData(volatile uint16_t *data_Slot_A, volatile uint16_t *data_Slot_B, uint8_t coun
- 637              		.loc 1 252 0
+ 252:ADPD1080.c    **** 
+ 253:ADPD1080.c    **** void ADPD1080_ReadData(volatile uint16_t *data_Slot_A, volatile uint16_t *data_Slot_B, uint8_t coun
+ 637              		.loc 1 253 0
  638              		.cfi_startproc
  639              		@ args = 0, pretend = 0, frame = 0
  640              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1017,49 +1018,49 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  647              		.cfi_offset 6, -12
  648              		.cfi_offset 7, -8
  649              		.cfi_offset 14, -4
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 18
+
+
  650 0002 0746     		mov	r7, r0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 18
-
-
  651 0004 0E46     		mov	r6, r1
  652 0006 1546     		mov	r5, r2
  653              	.LVL89:
  654              	.LBB2:
- 253:ADPD1080.c    ****     for (uint8_t i = 0; i < count; i++) {
- 655              		.loc 1 253 0
+ 254:ADPD1080.c    ****     for (uint8_t i = 0; i < count; i++) {
+ 655              		.loc 1 254 0
  656 0008 0024     		movs	r4, #0
  657 000a 0FE0     		b	.L42
  658              	.LVL90:
  659              	.L43:
- 254:ADPD1080.c    ****         data_Slot_A[i] = ADPD1080_ReadReg(0x64 + i);
- 660              		.loc 1 254 0 discriminator 3
+ 255:ADPD1080.c    ****         data_Slot_A[i] = ADPD1080_ReadReg(0x64 + i);
+ 660              		.loc 1 255 0 discriminator 3
  661 000c 04F16400 		add	r0, r4, #100
  662 0010 C0B2     		uxtb	r0, r0
  663 0012 FFF7FEFF 		bl	ADPD1080_ReadReg
  664              	.LVL91:
  665 0016 27F81400 		strh	r0, [r7, r4, lsl #1]	@ movhi
- 255:ADPD1080.c    ****         data_Slot_B[i] = ADPD1080_ReadReg(0x68 + i);
- 666              		.loc 1 255 0 discriminator 3
+ 256:ADPD1080.c    ****         data_Slot_B[i] = ADPD1080_ReadReg(0x68 + i);
+ 666              		.loc 1 256 0 discriminator 3
  667 001a 04F16800 		add	r0, r4, #104
  668 001e C0B2     		uxtb	r0, r0
  669 0020 FFF7FEFF 		bl	ADPD1080_ReadReg
  670              	.LVL92:
  671 0024 26F81400 		strh	r0, [r6, r4, lsl #1]	@ movhi
- 253:ADPD1080.c    ****     for (uint8_t i = 0; i < count; i++) {
- 672              		.loc 1 253 0 discriminator 3
+ 254:ADPD1080.c    ****     for (uint8_t i = 0; i < count; i++) {
+ 672              		.loc 1 254 0 discriminator 3
  673 0028 0134     		adds	r4, r4, #1
  674              	.LVL93:
  675 002a E4B2     		uxtb	r4, r4
  676              	.LVL94:
  677              	.L42:
- 253:ADPD1080.c    ****     for (uint8_t i = 0; i < count; i++) {
- 678              		.loc 1 253 0 is_stmt 0 discriminator 1
+ 254:ADPD1080.c    ****     for (uint8_t i = 0; i < count; i++) {
+ 678              		.loc 1 254 0 is_stmt 0 discriminator 1
  679 002c AC42     		cmp	r4, r5
  680 002e EDD3     		bcc	.L43
  681              	.LBE2:
- 256:ADPD1080.c    ****     }
- 257:ADPD1080.c    **** }
- 682              		.loc 1 257 0 is_stmt 1
+ 257:ADPD1080.c    ****     }
+ 258:ADPD1080.c    **** }
+ 682              		.loc 1 258 0 is_stmt 1
  683 0030 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  684              		.cfi_endproc
  685              	.LFE550:
@@ -1072,81 +1073,81 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  692              		.type	ADPD1080_SetOperationMode, %function
  693              	ADPD1080_SetOperationMode:
  694              	.LFB551:
- 258:ADPD1080.c    **** 
- 259:ADPD1080.c    **** void ADPD1080_SetOperationMode(uint8_t mode) {
- 695              		.loc 1 259 0
+ 259:ADPD1080.c    **** 
+ 260:ADPD1080.c    **** void ADPD1080_SetOperationMode(uint8_t mode) {
+ 695              		.loc 1 260 0
  696              		.cfi_startproc
  697              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 19
+
+
  698              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 19
-
-
  699              	.LVL95:
  700 0000 10B5     		push	{r4, lr}
  701              		.cfi_def_cfa_offset 8
  702              		.cfi_offset 4, -8
  703              		.cfi_offset 14, -4
  704 0002 0446     		mov	r4, r0
- 260:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(0x10);
- 705              		.loc 1 260 0
+ 261:ADPD1080.c    ****     uint16_t regValue = ADPD1080_ReadReg(0x10);
+ 705              		.loc 1 261 0
  706 0004 1020     		movs	r0, #16
  707              	.LVL96:
  708 0006 FFF7FEFF 		bl	ADPD1080_ReadReg
  709              	.LVL97:
- 261:ADPD1080.c    ****     if(mode == 0){
- 710              		.loc 1 261 0
+ 262:ADPD1080.c    ****     if(mode == 0){
+ 710              		.loc 1 262 0
  711 000a 34B9     		cbnz	r4, .L46
- 262:ADPD1080.c    ****         regValue = (regValue & 0xFFFC);//!!!!!!!!!!!!!!!!!!!!!1101
- 712              		.loc 1 262 0
+ 263:ADPD1080.c    ****         regValue = (regValue & 0xFFFC);//!!!!!!!!!!!!!!!!!!!!!1101
+ 712              		.loc 1 263 0
  713 000c 20F00300 		bic	r0, r0, #3
  714              	.LVL98:
  715 0010 81B2     		uxth	r1, r0
  716              	.LVL99:
- 263:ADPD1080.c    ****         ADPD1080_WriteReg(0x10, regValue);
- 717              		.loc 1 263 0
+ 264:ADPD1080.c    ****         ADPD1080_WriteReg(0x10, regValue);
+ 717              		.loc 1 264 0
  718 0012 1020     		movs	r0, #16
  719 0014 FFF7FEFF 		bl	ADPD1080_WriteReg
  720              	.LVL100:
  721 0018 10BD     		pop	{r4, pc}
  722              	.LVL101:
  723              	.L46:
- 264:ADPD1080.c    ****     }
- 265:ADPD1080.c    ****     else if(mode == 1){
- 724              		.loc 1 265 0
+ 265:ADPD1080.c    ****     }
+ 266:ADPD1080.c    ****     else if(mode == 1){
+ 724              		.loc 1 266 0
  725 001a 012C     		cmp	r4, #1
  726 001c 09D1     		bne	.L48
- 266:ADPD1080.c    ****        regValue = (regValue & 0xFFFC) | 0x01;//!!!!!!!!!!!!!!!!!!!!!1101
- 727              		.loc 1 266 0
+ 267:ADPD1080.c    ****        regValue = (regValue & 0xFFFC) | 0x01;//!!!!!!!!!!!!!!!!!!!!!1101
+ 727              		.loc 1 267 0
  728 001e 20F00301 		bic	r1, r0, #3
  729 0022 41F00101 		orr	r1, r1, #1
  730 0026 09B2     		sxth	r1, r1
  731 0028 89B2     		uxth	r1, r1
  732              	.LVL102:
- 267:ADPD1080.c    ****         ADPD1080_WriteReg(0x10, regValue);
- 733              		.loc 1 267 0
+ 268:ADPD1080.c    ****         ADPD1080_WriteReg(0x10, regValue);
+ 733              		.loc 1 268 0
  734 002a 1020     		movs	r0, #16
  735 002c FFF7FEFF 		bl	ADPD1080_WriteReg
  736              	.LVL103:
  737 0030 10BD     		pop	{r4, pc}
  738              	.LVL104:
  739              	.L48:
- 268:ADPD1080.c    ****     }
- 269:ADPD1080.c    ****     else if(mode == 2){
- 740              		.loc 1 269 0
+ 269:ADPD1080.c    ****     }
+ 270:ADPD1080.c    ****     else if(mode == 2){
+ 740              		.loc 1 270 0
  741 0032 022C     		cmp	r4, #2
  742 0034 08D1     		bne	.L45
- 270:ADPD1080.c    ****         regValue = (regValue & 0xFFFC) | 0x02;//!!!!!!!!!!!!!!!!!!!!!1101
- 743              		.loc 1 270 0
+ 271:ADPD1080.c    ****         regValue = (regValue & 0xFFFC) | 0x02;//!!!!!!!!!!!!!!!!!!!!!1101
+ 743              		.loc 1 271 0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 20
+
+
  744 0036 20F00301 		bic	r1, r0, #3
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 20
-
-
  745 003a 41F00201 		orr	r1, r1, #2
  746 003e 09B2     		sxth	r1, r1
  747 0040 89B2     		uxth	r1, r1
  748              	.LVL105:
- 271:ADPD1080.c    ****         ADPD1080_WriteReg(0x10, regValue);
- 749              		.loc 1 271 0
+ 272:ADPD1080.c    ****         ADPD1080_WriteReg(0x10, regValue);
+ 749              		.loc 1 272 0
  750 0042 1020     		movs	r0, #16
  751 0044 FFF7FEFF 		bl	ADPD1080_WriteReg
  752              	.LVL106:
@@ -1163,12 +1164,12 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  763              		.type	ADPD1080_Set32KCLK, %function
  764              	ADPD1080_Set32KCLK:
  765              	.LFB552:
- 272:ADPD1080.c    ****     }
- 273:ADPD1080.c    ****     
- 274:ADPD1080.c    **** }
- 275:ADPD1080.c    **** 
- 276:ADPD1080.c    **** void ADPD1080_Set32KCLK(int set){
- 766              		.loc 1 276 0
+ 273:ADPD1080.c    ****     }
+ 274:ADPD1080.c    ****     
+ 275:ADPD1080.c    **** }
+ 276:ADPD1080.c    **** 
+ 277:ADPD1080.c    **** void ADPD1080_Set32KCLK(int set){
+ 766              		.loc 1 277 0
  767              		.cfi_startproc
  768              		@ args = 0, pretend = 0, frame = 0
  769              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1178,29 +1179,29 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  773              		.cfi_offset 4, -8
  774              		.cfi_offset 14, -4
  775 0002 0446     		mov	r4, r0
- 277:ADPD1080.c    ****     uint16_t origin = ADPD1080_ReadReg(0x4B);
- 776              		.loc 1 277 0
+ 278:ADPD1080.c    ****     uint16_t origin = ADPD1080_ReadReg(0x4B);
+ 776              		.loc 1 278 0
  777 0004 4B20     		movs	r0, #75
  778              	.LVL108:
  779 0006 FFF7FEFF 		bl	ADPD1080_ReadReg
  780              	.LVL109:
- 278:ADPD1080.c    ****     uint16_t mask = (set << 7);
- 781              		.loc 1 278 0
+ 279:ADPD1080.c    ****     uint16_t mask = (set << 7);
+ 781              		.loc 1 279 0
  782 000a E101     		lsls	r1, r4, #7
  783 000c 89B2     		uxth	r1, r1
  784              	.LVL110:
- 279:ADPD1080.c    ****     uint16_t new = origin | mask;
- 785              		.loc 1 279 0
+ 280:ADPD1080.c    ****     uint16_t new = origin | mask;
+ 785              		.loc 1 280 0
  786 000e 0143     		orrs	r1, r1, r0
  787              	.LVL111:
- 280:ADPD1080.c    ****     ADPD1080_WriteReg(0x4B, new);
- 788              		.loc 1 280 0
+ 281:ADPD1080.c    ****     ADPD1080_WriteReg(0x4B, new);
+ 788              		.loc 1 281 0
  789 0010 89B2     		uxth	r1, r1
  790 0012 4B20     		movs	r0, #75
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 21
+
+
  791              	.LVL112:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 21
-
-
  792 0014 FFF7FEFF 		bl	ADPD1080_WriteReg
  793              	.LVL113:
  794 0018 10BD     		pop	{r4, pc}
@@ -1215,10 +1216,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  803              		.type	ADPD1080_SetTimeSlotSwitch, %function
  804              	ADPD1080_SetTimeSlotSwitch:
  805              	.LFB553:
- 281:ADPD1080.c    **** }
- 282:ADPD1080.c    **** 
- 283:ADPD1080.c    **** void ADPD1080_SetTimeSlotSwitch(uint8_t slotA, uint8_t slotB){
- 806              		.loc 1 283 0
+ 282:ADPD1080.c    **** }
+ 283:ADPD1080.c    **** 
+ 284:ADPD1080.c    **** void ADPD1080_SetTimeSlotSwitch(uint8_t slotA, uint8_t slotB){
+ 806              		.loc 1 284 0
  807              		.cfi_startproc
  808              		@ args = 0, pretend = 0, frame = 0
  809              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1231,36 +1232,36 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  816              		.cfi_offset 14, -4
  817 0002 0546     		mov	r5, r0
  818 0004 0C46     		mov	r4, r1
- 284:ADPD1080.c    ****     uint16_t select_value = ADPD1080_ReadReg(0x14);
- 819              		.loc 1 284 0
+ 285:ADPD1080.c    ****     uint16_t select_value = ADPD1080_ReadReg(0x14);
+ 819              		.loc 1 285 0
  820 0006 1420     		movs	r0, #20
  821              	.LVL115:
  822 0008 FFF7FEFF 		bl	ADPD1080_ReadReg
  823              	.LVL116:
- 285:ADPD1080.c    ****     select_value &= ~(0x0F << 4);        // Clear bits 4-7
- 824              		.loc 1 285 0
+ 286:ADPD1080.c    ****     select_value &= ~(0x0F << 4);        // Clear bits 4-7
+ 824              		.loc 1 286 0
  825 000c 20F0F000 		bic	r0, r0, #240
  826              	.LVL117:
  827 0010 81B2     		uxth	r1, r0
  828              	.LVL118:
- 286:ADPD1080.c    ****     select_value |= (slotA << 4); // Set the new value for bits 4-7
- 829              		.loc 1 286 0
+ 287:ADPD1080.c    ****     select_value |= (slotA << 4); // Set the new value for bits 4-7
+ 829              		.loc 1 287 0
  830 0012 41EA0511 		orr	r1, r1, r5, lsl #4
  831              	.LVL119:
- 287:ADPD1080.c    ****     select_value &= ~(0x0F << 8);        // Clear bits 8-11
- 832              		.loc 1 287 0
+ 288:ADPD1080.c    ****     select_value &= ~(0x0F << 8);        // Clear bits 8-11
+ 832              		.loc 1 288 0
  833 0016 21F47061 		bic	r1, r1, #3840
  834              	.LVL120:
- 288:ADPD1080.c    ****     select_value |= (slotB << 8); // Set the new value for bits 8-11
- 289:ADPD1080.c    ****     
- 290:ADPD1080.c    ****     // Write the updated value back to the ADPD1080_PD_LED_SELECT register
- 291:ADPD1080.c    ****     ADPD1080_WriteReg(0x14, select_value);
- 835              		.loc 1 291 0
+ 289:ADPD1080.c    ****     select_value |= (slotB << 8); // Set the new value for bits 8-11
+ 290:ADPD1080.c    ****     
+ 291:ADPD1080.c    ****     // Write the updated value back to the ADPD1080_PD_LED_SELECT register
+ 292:ADPD1080.c    ****     ADPD1080_WriteReg(0x14, select_value);
+ 835              		.loc 1 292 0
  836 001a 41EA0421 		orr	r1, r1, r4, lsl #8
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 22
+
+
  837              	.LVL121:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 22
-
-
  838 001e 1420     		movs	r0, #20
  839              	.LVL122:
  840 0020 FFF7FEFF 		bl	ADPD1080_WriteReg
@@ -1277,10 +1278,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  851              		.type	turbidity_init, %function
  852              	turbidity_init:
  853              	.LFB554:
- 292:ADPD1080.c    **** }
- 293:ADPD1080.c    **** 
- 294:ADPD1080.c    **** void turbidity_init(void) {
- 854              		.loc 1 294 0
+ 293:ADPD1080.c    **** }
+ 294:ADPD1080.c    **** 
+ 295:ADPD1080.c    **** void turbidity_init(void) {
+ 854              		.loc 1 295 0
  855              		.cfi_startproc
  856              		@ args = 0, pretend = 0, frame = 0
  857              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1288,205 +1289,205 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  859              		.cfi_def_cfa_offset 8
  860              		.cfi_offset 3, -8
  861              		.cfi_offset 14, -4
- 295:ADPD1080.c    ****     
- 296:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x01);  // Set to program mode
- 862              		.loc 1 296 0
+ 296:ADPD1080.c    ****     
+ 297:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x01);  // Set to program mode
+ 862              		.loc 1 297 0
  863 0002 0120     		movs	r0, #1
  864 0004 FFF7FEFF 		bl	ADPD1080_SetOperationMode
  865              	.LVL124:
- 297:ADPD1080.c    ****     ADPD1080_WriteReg(0x0,0xFF);
- 866              		.loc 1 297 0
+ 298:ADPD1080.c    ****     ADPD1080_WriteReg(0x0,0xFF);
+ 866              		.loc 1 298 0
  867 0008 FF21     		movs	r1, #255
  868 000a 0020     		movs	r0, #0
  869 000c FFF7FEFF 		bl	ADPD1080_WriteReg
  870              	.LVL125:
- 298:ADPD1080.c    ****     ADPD1080_WriteReg(0x0F, 0x01);    // Reset
- 871              		.loc 1 298 0
+ 299:ADPD1080.c    ****     ADPD1080_WriteReg(0x0F, 0x01);    // Reset
+ 871              		.loc 1 299 0
  872 0010 0121     		movs	r1, #1
  873 0012 0F20     		movs	r0, #15
  874 0014 FFF7FEFF 		bl	ADPD1080_WriteReg
  875              	.LVL126:
- 299:ADPD1080.c    ****     
- 300:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x01);  // Set to program mode
- 876              		.loc 1 300 0
+ 300:ADPD1080.c    ****     
+ 301:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x01);  // Set to program mode
+ 876              		.loc 1 301 0
  877 0018 0120     		movs	r0, #1
  878 001a FFF7FEFF 		bl	ADPD1080_SetOperationMode
  879              	.LVL127:
- 301:ADPD1080.c    ****     ADPD1080_Set32KCLK(1);            // Enable 32K clock
- 880              		.loc 1 301 0
+ 302:ADPD1080.c    ****     ADPD1080_Set32KCLK(1);            // Enable 32K clock
+ 880              		.loc 1 302 0
  881 001e 0120     		movs	r0, #1
  882 0020 FFF7FEFF 		bl	ADPD1080_Set32KCLK
  883              	.LVL128:
- 302:ADPD1080.c    ****     ADPD1080_SetTimeSlotSwitch(0x5, 0x5);
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 23
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 23
 
 
- 884              		.loc 1 302 0
+ 303:ADPD1080.c    ****     ADPD1080_SetTimeSlotSwitch(0x5, 0x5);
+ 884              		.loc 1 303 0
  885 0024 0521     		movs	r1, #5
  886 0026 0846     		mov	r0, r1
  887 0028 FFF7FEFF 		bl	ADPD1080_SetTimeSlotSwitch
  888              	.LVL129:
- 303:ADPD1080.c    ****   /* Select LEDs for each time slot */
- 304:ADPD1080.c    ****     ADPD1080_SelectLED(0x02, 0x0);
- 889              		.loc 1 304 0
+ 304:ADPD1080.c    ****   /* Select LEDs for each time slot */
+ 305:ADPD1080.c    ****     ADPD1080_SelectLED(0x02, 0x0);
+ 889              		.loc 1 305 0
  890 002c 0021     		movs	r1, #0
  891 002e 0220     		movs	r0, #2
  892 0030 FFF7FEFF 		bl	ADPD1080_SelectLED
  893              	.LVL130:
- 305:ADPD1080.c    ****     //ADPD1080_SelectLED(0x01, 0x1);
- 306:ADPD1080.c    ****     
- 307:ADPD1080.c    ****     ADPD1080_WriteReg(0x24, 0x1004);  // LED configuration
- 894              		.loc 1 307 0
+ 306:ADPD1080.c    ****     //ADPD1080_SelectLED(0x01, 0x1);
+ 307:ADPD1080.c    ****     
+ 308:ADPD1080.c    ****     ADPD1080_WriteReg(0x24, 0x1004);  // LED configuration
+ 894              		.loc 1 308 0
  895 0034 41F20401 		movw	r1, #4100
  896 0038 2420     		movs	r0, #36
  897 003a FFF7FEFF 		bl	ADPD1080_WriteReg
  898              	.LVL131:
- 308:ADPD1080.c    ****     ADPD1080_WriteReg(0x23, 0x1000);  // LED configuration
- 899              		.loc 1 308 0
+ 309:ADPD1080.c    ****     ADPD1080_WriteReg(0x23, 0x1000);  // LED configuration
+ 899              		.loc 1 309 0
  900 003e 4FF48051 		mov	r1, #4096
  901 0042 2320     		movs	r0, #35
  902 0044 FFF7FEFF 		bl	ADPD1080_WriteReg
  903              	.LVL132:
- 309:ADPD1080.c    ****     ADPD1080_WriteReg(0x25, 0x67DF);  // LED fine
- 904              		.loc 1 309 0
+ 310:ADPD1080.c    ****     ADPD1080_WriteReg(0x25, 0x67DF);  // LED fine
+ 904              		.loc 1 310 0
  905 0048 46F2DF71 		movw	r1, #26591
  906 004c 2520     		movs	r0, #37
  907 004e FFF7FEFF 		bl	ADPD1080_WriteReg
  908              	.LVL133:
- 310:ADPD1080.c    **** 
- 311:ADPD1080.c    ****     ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period
- 909              		.loc 1 311 0
+ 311:ADPD1080.c    **** 
+ 312:ADPD1080.c    ****     ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period
+ 909              		.loc 1 312 0
  910 0052 41F21901 		movw	r1, #4121
  911 0056 3120     		movs	r0, #49
  912 0058 FFF7FEFF 		bl	ADPD1080_WriteReg
  913              	.LVL134:
- 312:ADPD1080.c    ****     ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period
- 914              		.loc 1 312 0
+ 313:ADPD1080.c    ****     ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period
+ 914              		.loc 1 313 0
  915 005c 41F21901 		movw	r1, #4121
  916 0060 3620     		movs	r0, #54
  917 0062 FFF7FEFF 		bl	ADPD1080_WriteReg
  918              	.LVL135:
- 313:ADPD1080.c    **** 
- 314:ADPD1080.c    ****     ADPD1080_WriteReg(0x30, 0x0220);  // LED width and offset
- 919              		.loc 1 314 0
+ 314:ADPD1080.c    **** 
+ 315:ADPD1080.c    ****     ADPD1080_WriteReg(0x30, 0x0220);  // LED width and offset
+ 919              		.loc 1 315 0
  920 0066 4FF40871 		mov	r1, #544
  921 006a 3020     		movs	r0, #48
  922 006c FFF7FEFF 		bl	ADPD1080_WriteReg
  923              	.LVL136:
- 315:ADPD1080.c    ****     ADPD1080_WriteReg(0x35, 0x0220);  // LED width and offset
- 924              		.loc 1 315 0
+ 316:ADPD1080.c    ****     ADPD1080_WriteReg(0x35, 0x0220);  // LED width and offset
+ 924              		.loc 1 316 0
  925 0070 4FF40871 		mov	r1, #544
  926 0074 3520     		movs	r0, #53
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 24
+
+
  927 0076 FFF7FEFF 		bl	ADPD1080_WriteReg
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 24
-
-
  928              	.LVL137:
- 316:ADPD1080.c    **** 
- 317:ADPD1080.c    ****     ADPD1080_WriteReg(0x39, 0x1AE0);  // AFE width and offset
- 929              		.loc 1 317 0
+ 317:ADPD1080.c    **** 
+ 318:ADPD1080.c    ****     ADPD1080_WriteReg(0x39, 0x1AE0);  // AFE width and offset
+ 929              		.loc 1 318 0
  930 007a 4FF4D751 		mov	r1, #6880
  931 007e 3920     		movs	r0, #57
  932 0080 FFF7FEFF 		bl	ADPD1080_WriteReg
  933              	.LVL138:
- 318:ADPD1080.c    ****     ADPD1080_WriteReg(0x3B, 0x1AE0);  // AFE width and offset
- 934              		.loc 1 318 0
+ 319:ADPD1080.c    ****     ADPD1080_WriteReg(0x3B, 0x1AE0);  // AFE width and offset
+ 934              		.loc 1 319 0
  935 0084 4FF4D751 		mov	r1, #6880
  936 0088 3B20     		movs	r0, #59
  937 008a FFF7FEFF 		bl	ADPD1080_WriteReg
  938              	.LVL139:
- 319:ADPD1080.c    **** 
- 320:ADPD1080.c    ****     //ADPD1080_WriteReg(0x4E, 0x40);  // ADC clock
- 321:ADPD1080.c    ****     //ADPD1080_WriteReg(0x58, 0x01);    // Digital clock
- 322:ADPD1080.c    **** 
- 323:ADPD1080.c    ****     ADPD1080_WriteReg(0x12, 0x5);     // Sampling frequency
- 939              		.loc 1 323 0
+ 320:ADPD1080.c    **** 
+ 321:ADPD1080.c    ****     //ADPD1080_WriteReg(0x4E, 0x40);  // ADC clock
+ 322:ADPD1080.c    ****     //ADPD1080_WriteReg(0x58, 0x01);    // Digital clock
+ 323:ADPD1080.c    **** 
+ 324:ADPD1080.c    ****     ADPD1080_WriteReg(0x12, 0x5);     // Sampling frequency
+ 939              		.loc 1 324 0
  940 008e 0521     		movs	r1, #5
  941 0090 1220     		movs	r0, #18
  942 0092 FFF7FEFF 		bl	ADPD1080_WriteReg
  943              	.LVL140:
- 324:ADPD1080.c    ****     
- 325:ADPD1080.c    ****     ADPD1080_WriteReg(0x42, 0x1C37);  // TIA gain
- 944              		.loc 1 325 0
+ 325:ADPD1080.c    ****     
+ 326:ADPD1080.c    ****     ADPD1080_WriteReg(0x42, 0x1C37);  // TIA gain
+ 944              		.loc 1 326 0
  945 0096 41F63741 		movw	r1, #7223
  946 009a 4220     		movs	r0, #66
  947 009c FFF7FEFF 		bl	ADPD1080_WriteReg
  948              	.LVL141:
- 326:ADPD1080.c    ****     ADPD1080_WriteReg(0x44, 0x1C37);  // TIA gain
- 949              		.loc 1 326 0
+ 327:ADPD1080.c    ****     ADPD1080_WriteReg(0x44, 0x1C37);  // TIA gain
+ 949              		.loc 1 327 0
  950 00a0 41F63741 		movw	r1, #7223
  951 00a4 4420     		movs	r0, #68
  952 00a6 FFF7FEFF 		bl	ADPD1080_WriteReg
  953              	.LVL142:
- 327:ADPD1080.c    **** 
- 328:ADPD1080.c    ****     ADPD1080_WriteReg(0x4B, 0x2695);  // Sample clock
- 954              		.loc 1 328 0
+ 328:ADPD1080.c    **** 
+ 329:ADPD1080.c    ****     ADPD1080_WriteReg(0x4B, 0x2695);  // Sample clock
+ 954              		.loc 1 329 0
  955 00aa 42F29561 		movw	r1, #9877
  956 00ae 4B20     		movs	r0, #75
  957 00b0 FFF7FEFF 		bl	ADPD1080_WriteReg
  958              	.LVL143:
- 329:ADPD1080.c    ****     ADPD1080_WriteReg(0x4D, 0x0098);  // Adjust clock
- 959              		.loc 1 329 0
+ 330:ADPD1080.c    ****     ADPD1080_WriteReg(0x4D, 0x0098);  // Adjust clock
+ 959              		.loc 1 330 0
  960 00b4 9821     		movs	r1, #152
  961 00b6 4D20     		movs	r0, #77
  962 00b8 FFF7FEFF 		bl	ADPD1080_WriteReg
  963              	.LVL144:
- 330:ADPD1080.c    ****     ADPD1080_WriteReg(0x4F, 0x2090);  // External sync
- 964              		.loc 1 330 0
+ 331:ADPD1080.c    ****     ADPD1080_WriteReg(0x4F, 0x2090);  // External sync
+ 964              		.loc 1 331 0
  965 00bc 42F29001 		movw	r1, #8336
  966 00c0 4F20     		movs	r0, #79
  967 00c2 FFF7FEFF 		bl	ADPD1080_WriteReg
  968              	.LVL145:
- 331:ADPD1080.c    ****     ADPD1080_WriteReg(0x50, 0x0000);  // Calibration
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 25
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 25
 
 
- 969              		.loc 1 331 0
+ 332:ADPD1080.c    ****     ADPD1080_WriteReg(0x50, 0x0000);  // Calibration
+ 969              		.loc 1 332 0
  970 00c6 0021     		movs	r1, #0
  971 00c8 5020     		movs	r0, #80
  972 00ca FFF7FEFF 		bl	ADPD1080_WriteReg
  973              	.LVL146:
- 332:ADPD1080.c    **** 
- 333:ADPD1080.c    ****     ADPD1080_WriteReg(0x3C, 0x7006);  // AFE power configuration
- 974              		.loc 1 333 0
+ 333:ADPD1080.c    **** 
+ 334:ADPD1080.c    ****     ADPD1080_WriteReg(0x3C, 0x7006);  // AFE power configuration
+ 974              		.loc 1 334 0
  975 00ce 47F20601 		movw	r1, #28678
  976 00d2 3C20     		movs	r0, #60
  977 00d4 FFF7FEFF 		bl	ADPD1080_WriteReg
  978              	.LVL147:
- 334:ADPD1080.c    ****     // FIFO setup
- 335:ADPD1080.c    ****     ADPD1080_WriteReg(0x11, 0x3131); 
- 979              		.loc 1 335 0
+ 335:ADPD1080.c    ****     // FIFO setup
+ 336:ADPD1080.c    ****     ADPD1080_WriteReg(0x11, 0x3131); 
+ 979              		.loc 1 336 0
  980 00d8 43F23111 		movw	r1, #12593
  981 00dc 1120     		movs	r0, #17
  982 00de FFF7FEFF 		bl	ADPD1080_WriteReg
  983              	.LVL148:
- 336:ADPD1080.c    ****     ADPD1080_WriteReg(0x06, 0x1F00);
- 984              		.loc 1 336 0
+ 337:ADPD1080.c    ****     ADPD1080_WriteReg(0x06, 0x1F00);
+ 984              		.loc 1 337 0
  985 00e2 4FF4F851 		mov	r1, #7936
  986 00e6 0620     		movs	r0, #6
  987 00e8 FFF7FEFF 		bl	ADPD1080_WriteReg
  988              	.LVL149:
- 337:ADPD1080.c    ****     ADPD1080_WriteReg(0x01, 0xC0FF);
- 989              		.loc 1 337 0
+ 338:ADPD1080.c    ****     ADPD1080_WriteReg(0x01, 0xC0FF);
+ 989              		.loc 1 338 0
  990 00ec 4CF2FF01 		movw	r1, #49407
  991 00f0 0120     		movs	r0, #1
  992 00f2 FFF7FEFF 		bl	ADPD1080_WriteReg
  993              	.LVL150:
- 338:ADPD1080.c    ****     ADPD1080_WriteReg(0x0B, 0x101);
- 994              		.loc 1 338 0
+ 339:ADPD1080.c    ****     ADPD1080_WriteReg(0x0B, 0x101);
+ 994              		.loc 1 339 0
  995 00f6 40F20111 		movw	r1, #257
  996 00fa 0B20     		movs	r0, #11
  997 00fc FFF7FEFF 		bl	ADPD1080_WriteReg
  998              	.LVL151:
- 339:ADPD1080.c    ****     ADPD1080_WriteReg(0x02, 0x05);
- 999              		.loc 1 339 0
+ 340:ADPD1080.c    ****     ADPD1080_WriteReg(0x02, 0x05);
+ 999              		.loc 1 340 0
  1000 0100 0521     		movs	r1, #5
  1001 0102 0220     		movs	r0, #2
  1002 0104 FFF7FEFF 		bl	ADPD1080_WriteReg
  1003              	.LVL152:
- 340:ADPD1080.c    ****     
- 341:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
- 1004              		.loc 1 341 0
+ 341:ADPD1080.c    ****     
+ 342:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
+ 1004              		.loc 1 342 0
  1005 0108 0220     		movs	r0, #2
  1006 010a FFF7FEFF 		bl	ADPD1080_SetOperationMode
  1007              	.LVL153:
@@ -1497,18 +1498,18 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1012              		.section	.text.turbidity_ChannelOffsetCalibration,"ax",%progbits
  1013              		.align	2
  1014              		.global	turbidity_ChannelOffsetCalibration
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 26
+
+
  1015              		.thumb
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 26
-
-
  1016              		.thumb_func
  1017              		.type	turbidity_ChannelOffsetCalibration, %function
  1018              	turbidity_ChannelOffsetCalibration:
  1019              	.LFB555:
- 342:ADPD1080.c    **** }
- 343:ADPD1080.c    **** 
- 344:ADPD1080.c    **** void turbidity_ChannelOffsetCalibration(void) {
- 1020              		.loc 1 344 0
+ 343:ADPD1080.c    **** }
+ 344:ADPD1080.c    **** 
+ 345:ADPD1080.c    **** void turbidity_ChannelOffsetCalibration(void) {
+ 1020              		.loc 1 345 0
  1021              		.cfi_startproc
  1022              		@ args = 0, pretend = 0, frame = 0
  1023              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1516,128 +1517,128 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1025              		.cfi_def_cfa_offset 8
  1026              		.cfi_offset 3, -8
  1027              		.cfi_offset 14, -4
- 345:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x01);  // Set to program mode
- 1028              		.loc 1 345 0
+ 346:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x01);  // Set to program mode
+ 1028              		.loc 1 346 0
  1029 0002 0120     		movs	r0, #1
  1030 0004 FFF7FEFF 		bl	ADPD1080_SetOperationMode
  1031              	.LVL154:
- 346:ADPD1080.c    ****     // ADPD1080_WriteReg(0x34, 0x0100);  // Disable LED
- 347:ADPD1080.c    ****     // ADPD1080_WriteReg(0x34, 0x0100);  // Disable LED/////////
- 348:ADPD1080.c    ****     //uint16_t reg34Value = ADPD1080_ReadReg(0x34);
- 349:ADPD1080.c    ****     //reg34Value |= 0x0300;
- 350:ADPD1080.c    ****     //ADPD1080_WriteReg(0x34, reg34Value);  // Disable LED/////////
- 351:ADPD1080.c    ****     ADPD1080_DisableLed(0);
- 1032              		.loc 1 351 0
+ 347:ADPD1080.c    ****     // ADPD1080_WriteReg(0x34, 0x0100);  // Disable LED
+ 348:ADPD1080.c    ****     // ADPD1080_WriteReg(0x34, 0x0100);  // Disable LED/////////
+ 349:ADPD1080.c    ****     //uint16_t reg34Value = ADPD1080_ReadReg(0x34);
+ 350:ADPD1080.c    ****     //reg34Value |= 0x0300;
+ 351:ADPD1080.c    ****     //ADPD1080_WriteReg(0x34, reg34Value);  // Disable LED/////////
+ 352:ADPD1080.c    ****     ADPD1080_DisableLed(0);
+ 1032              		.loc 1 352 0
  1033 0008 0020     		movs	r0, #0
  1034 000a FFF7FEFF 		bl	ADPD1080_DisableLed
  1035              	.LVL155:
- 352:ADPD1080.c    ****     //ADPD1080_DisableLed(1);
- 353:ADPD1080.c    **** 
- 354:ADPD1080.c    ****     //ADPD1080_WriteReg(0x18, 0x2078);  // Channel offset////////////////
- 355:ADPD1080.c    ****     //ADPD1080_WriteReg(0x19, 0x0000);  // Channel offset
- 356:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1A, 0x0000);  // Channel offset
- 357:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1B, 0x0000);  // Channel offset
- 358:ADPD1080.c    **** 
- 359:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1E, 0x2078);  // Channel offset
- 360:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1F, 0x0000);  // Channel offset
- 361:ADPD1080.c    ****     //ADPD1080_WriteReg(0x20, 0x0000);  // Channel offset
- 362:ADPD1080.c    ****     //ADPD1080_WriteReg(0x21, 0x0000);  // Channel offset
- 363:ADPD1080.c    **** 
- 364:ADPD1080.c    ****     ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period/////////////////
- 1036              		.loc 1 364 0
+ 353:ADPD1080.c    ****     //ADPD1080_DisableLed(1);
+ 354:ADPD1080.c    **** 
+ 355:ADPD1080.c    ****     //ADPD1080_WriteReg(0x18, 0x2078);  // Channel offset////////////////
+ 356:ADPD1080.c    ****     //ADPD1080_WriteReg(0x19, 0x0000);  // Channel offset
+ 357:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1A, 0x0000);  // Channel offset
+ 358:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1B, 0x0000);  // Channel offset
+ 359:ADPD1080.c    **** 
+ 360:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1E, 0x2078);  // Channel offset
+ 361:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1F, 0x0000);  // Channel offset
+ 362:ADPD1080.c    ****     //ADPD1080_WriteReg(0x20, 0x0000);  // Channel offset
+ 363:ADPD1080.c    ****     //ADPD1080_WriteReg(0x21, 0x0000);  // Channel offset
+ 364:ADPD1080.c    **** 
+ 365:ADPD1080.c    ****     ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period/////////////////
+ 1036              		.loc 1 365 0
  1037 000e 41F21901 		movw	r1, #4121
  1038 0012 3120     		movs	r0, #49
  1039 0014 FFF7FEFF 		bl	ADPD1080_WriteReg
  1040              	.LVL156:
- 365:ADPD1080.c    ****     ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period////////////////////
- 1041              		.loc 1 365 0
+ 366:ADPD1080.c    ****     ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period////////////////////
+ 1041              		.loc 1 366 0
  1042 0018 41F21901 		movw	r1, #4121
  1043 001c 3620     		movs	r0, #54
  1044 001e FFF7FEFF 		bl	ADPD1080_WriteReg
  1045              	.LVL157:
- 366:ADPD1080.c    **** 
- 367:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
- 1046              		.loc 1 367 0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 27
+ 367:ADPD1080.c    **** 
+ 368:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 27
 
 
+ 1046              		.loc 1 368 0
  1047 0022 0220     		movs	r0, #2
  1048 0024 FFF7FEFF 		bl	ADPD1080_SetOperationMode
  1049              	.LVL158:
- 368:ADPD1080.c    ****     CyDelay(1000);
- 1050              		.loc 1 368 0
+ 369:ADPD1080.c    ****     CyDelay(1000);
+ 1050              		.loc 1 369 0
  1051 0028 4FF47A70 		mov	r0, #1000
  1052 002c FFF7FEFF 		bl	Cy_SysLib_Delay
  1053              	.LVL159:
- 369:ADPD1080.c    **** 
- 370:ADPD1080.c    ****     ADPD1080_ReadData(au16DataSlotA, au16DataSlotB, 4);////////////////
- 1054              		.loc 1 370 0
+ 370:ADPD1080.c    **** 
+ 371:ADPD1080.c    ****     ADPD1080_ReadData(au16DataSlotA, au16DataSlotB, 4);////////////////
+ 1054              		.loc 1 371 0
  1055 0030 1148     		ldr	r0, .L58
  1056 0032 0422     		movs	r2, #4
  1057 0034 0146     		mov	r1, r0
  1058 0036 0830     		adds	r0, r0, #8
  1059 0038 FFF7FEFF 		bl	ADPD1080_ReadData
  1060              	.LVL160:
- 371:ADPD1080.c    **** 
- 372:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x01);  // Set to program mode
- 1061              		.loc 1 372 0
+ 372:ADPD1080.c    **** 
+ 373:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x01);  // Set to program mode
+ 1061              		.loc 1 373 0
  1062 003c 0120     		movs	r0, #1
  1063 003e FFF7FEFF 		bl	ADPD1080_SetOperationMode
  1064              	.LVL161:
- 373:ADPD1080.c    ****     //ADPD1080_WriteReg(0x18, au16DataSlotA[0] - 100);  // Set offset for slot A
- 374:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1E, au16DataSlotB[0] - 100);  // Set offset for slot B
- 375:ADPD1080.c    ****     
- 376:ADPD1080.c    ****     ADPD1080_EnableLed(0);
- 1065              		.loc 1 376 0
+ 374:ADPD1080.c    ****     //ADPD1080_WriteReg(0x18, au16DataSlotA[0] - 100);  // Set offset for slot A
+ 375:ADPD1080.c    ****     //ADPD1080_WriteReg(0x1E, au16DataSlotB[0] - 100);  // Set offset for slot B
+ 376:ADPD1080.c    ****     
+ 377:ADPD1080.c    ****     ADPD1080_EnableLed(0);
+ 1065              		.loc 1 377 0
  1066 0042 0020     		movs	r0, #0
  1067 0044 FFF7FEFF 		bl	ADPD1080_EnableLed
  1068              	.LVL162:
- 377:ADPD1080.c    ****     //ADPD1080_EnableLed(1);
- 378:ADPD1080.c    **** 
- 379:ADPD1080.c    ****     //reg34Value = ADPD1080_ReadReg(0x34);
- 380:ADPD1080.c    ****     //reg34Value |= 0x0000;
- 381:ADPD1080.c    ****     //ADPD1080_WriteReg(0x34, reg34Value);  // Enable LED
- 382:ADPD1080.c    ****     //ADPD1080_WriteReg(0x34, 0x0300);  // Enable LED
- 383:ADPD1080.c    **** 
- 384:ADPD1080.c    ****     ADPD1080_SelectLED(0x02, 0x0);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- 1069              		.loc 1 384 0
+ 378:ADPD1080.c    ****     //ADPD1080_EnableLed(1);
+ 379:ADPD1080.c    **** 
+ 380:ADPD1080.c    ****     //reg34Value = ADPD1080_ReadReg(0x34);
+ 381:ADPD1080.c    ****     //reg34Value |= 0x0000;
+ 382:ADPD1080.c    ****     //ADPD1080_WriteReg(0x34, reg34Value);  // Enable LED
+ 383:ADPD1080.c    ****     //ADPD1080_WriteReg(0x34, 0x0300);  // Enable LED
+ 384:ADPD1080.c    **** 
+ 385:ADPD1080.c    ****     ADPD1080_SelectLED(0x02, 0x0);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ 1069              		.loc 1 385 0
  1070 0048 0021     		movs	r1, #0
  1071 004a 0220     		movs	r0, #2
  1072 004c FFF7FEFF 		bl	ADPD1080_SelectLED
  1073              	.LVL163:
- 385:ADPD1080.c    ****     //ADPD1080_SelectLED(0x01, 0x1);//????????????
- 386:ADPD1080.c    ****     
- 387:ADPD1080.c    ****     //uint16_t reg14Value = ADPD1080_ReadReg(0x14);
- 388:ADPD1080.c    ****     //reg14Value = (reg14Value & 0xFCFF) | 0x0300;//!!!!!!!!!!!!!!!!!!!!!!!
- 389:ADPD1080.c    ****     //ADPD1080_WriteReg(0x14, reg14Value);
- 390:ADPD1080.c    ****     //ADPD1080_WriteReg(0x14, 0x0002);//??????????????????????????
- 391:ADPD1080.c    ****     // ADPD1080_WriteReg(0x14, 0x000F);////////
- 392:ADPD1080.c    **** 
- 393:ADPD1080.c    ****     ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period/////////////////
- 1074              		.loc 1 393 0
+ 386:ADPD1080.c    ****     //ADPD1080_SelectLED(0x01, 0x1);//????????????
+ 387:ADPD1080.c    ****     
+ 388:ADPD1080.c    ****     //uint16_t reg14Value = ADPD1080_ReadReg(0x14);
+ 389:ADPD1080.c    ****     //reg14Value = (reg14Value & 0xFCFF) | 0x0300;//!!!!!!!!!!!!!!!!!!!!!!!
+ 390:ADPD1080.c    ****     //ADPD1080_WriteReg(0x14, reg14Value);
+ 391:ADPD1080.c    ****     //ADPD1080_WriteReg(0x14, 0x0002);//??????????????????????????
+ 392:ADPD1080.c    ****     // ADPD1080_WriteReg(0x14, 0x000F);////////
+ 393:ADPD1080.c    **** 
+ 394:ADPD1080.c    ****     ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period/////////////////
+ 1074              		.loc 1 394 0
  1075 0050 41F21901 		movw	r1, #4121
  1076 0054 3120     		movs	r0, #49
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 28
+
+
  1077 0056 FFF7FEFF 		bl	ADPD1080_WriteReg
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 28
-
-
  1078              	.LVL164:
- 394:ADPD1080.c    ****     ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period////////////////////
- 1079              		.loc 1 394 0
+ 395:ADPD1080.c    ****     ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period////////////////////
+ 1079              		.loc 1 395 0
  1080 005a 41F21901 		movw	r1, #4121
  1081 005e 3620     		movs	r0, #54
  1082 0060 FFF7FEFF 		bl	ADPD1080_WriteReg
  1083              	.LVL165:
- 395:ADPD1080.c    **** 
- 396:ADPD1080.c    ****     ADPD1080_WriteReg(0x15, 0x0110); //?//////////////////
- 1084              		.loc 1 396 0
+ 396:ADPD1080.c    **** 
+ 397:ADPD1080.c    ****     ADPD1080_WriteReg(0x15, 0x0110); //?//////////////////
+ 1084              		.loc 1 397 0
  1085 0064 4FF48871 		mov	r1, #272
  1086 0068 1520     		movs	r0, #21
  1087 006a FFF7FEFF 		bl	ADPD1080_WriteReg
  1088              	.LVL166:
- 397:ADPD1080.c    **** 
- 398:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
- 1089              		.loc 1 398 0
+ 398:ADPD1080.c    **** 
+ 399:ADPD1080.c    ****     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
+ 1089              		.loc 1 399 0
  1090 006e 0220     		movs	r0, #2
  1091 0070 FFF7FEFF 		bl	ADPD1080_SetOperationMode
  1092              	.LVL167:
@@ -1677,10 +1678,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1124              		.file 6 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/scb/cy_scb_uart.h"
  1125              		.file 7 "Generated_Source\\PSoC6/ADC.h"
  1126              		.file 8 "Generated_Source\\PSoC6\\pdl\\cmsis/include/core_cm4.h"
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 29
+
+
  1127              		.file 9 "Generated_Source\\PSoC6/UART.h"
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 29
-
-
  1128              		.file 10 "Generated_Source\\PSoC6/I2C.h"
  1129              		.file 11 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4
  1130              		.file 12 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/syslib/cy_syslib.h"
@@ -1737,10 +1738,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1181 006d 02       		.uleb128 0x2
  1182 006e 04       		.byte	0x4
  1183 006f 05       		.byte	0x5
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 30
+
+
  1184 0070 B4020000 		.4byte	.LASF8
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 30
-
-
  1185 0074 03       		.uleb128 0x3
  1186 0075 99030000 		.4byte	.LASF9
  1187 0079 02       		.byte	0x2
@@ -1797,10 +1798,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1238 00dc 49060000 		.4byte	.LASF19
  1239 00e0 05       		.uleb128 0x5
  1240 00e1 CE000000 		.4byte	0xce
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 31
+
+
  1241 00e5 05       		.uleb128 0x5
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 31
-
-
  1242 00e6 B8000000 		.4byte	0xb8
  1243 00ea 06       		.uleb128 0x6
  1244 00eb A2000000 		.4byte	0xa2
@@ -1857,10 +1858,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1295 0151 09       		.uleb128 0x9
  1296 0152 B3040000 		.4byte	.LASF27
  1297 0156 04       		.byte	0x4
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 32
+
+
  1298 0157 3D       		.byte	0x3d
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 32
-
-
  1299 0158 CE000000 		.4byte	0xce
  1300 015c 18       		.byte	0x18
  1301 015d 09       		.uleb128 0x9
@@ -1917,10 +1918,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1352 01c3 48       		.byte	0x48
  1353 01c4 A2000000 		.4byte	0xa2
  1354 01c8 2D       		.byte	0x2d
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 33
+
+
  1355 01c9 09       		.uleb128 0x9
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 33
-
-
  1356 01ca 3D020000 		.4byte	.LASF37
  1357 01ce 04       		.byte	0x4
  1358 01cf 49       		.byte	0x49
@@ -1977,10 +1978,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1409 0235 09       		.uleb128 0x9
  1410 0236 D20B0000 		.4byte	.LASF46
  1411 023a 04       		.byte	0x4
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 34
+
+
  1412 023b 54       		.byte	0x54
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 34
-
-
  1413 023c AD000000 		.4byte	0xad
  1414 0240 3A       		.byte	0x3a
  1415 0241 09       		.uleb128 0x9
@@ -2037,10 +2038,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1466 02a7 5D       		.byte	0x5d
  1467 02a8 A2000000 		.4byte	0xa2
  1468 02ac 44       		.byte	0x44
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 35
+
+
  1469 02ad 09       		.uleb128 0x9
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 35
-
-
  1470 02ae E4050000 		.4byte	.LASF56
  1471 02b2 04       		.byte	0x4
  1472 02b3 5E       		.byte	0x5e
@@ -2097,10 +2098,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1523 0319 09       		.uleb128 0x9
  1524 031a BC040000 		.4byte	.LASF65
  1525 031e 04       		.byte	0x4
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 36
+
+
  1526 031f 67       		.byte	0x67
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 36
-
-
  1527 0320 A2000000 		.4byte	0xa2
  1528 0324 57       		.byte	0x57
  1529 0325 09       		.uleb128 0x9
@@ -2157,10 +2158,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1580 038b 76       		.byte	0x76
  1581 038c B8000000 		.4byte	0xb8
  1582 0390 68       		.byte	0x68
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 37
+
+
  1583 0391 09       		.uleb128 0x9
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 37
-
-
  1584 0392 37060000 		.4byte	.LASF75
  1585 0396 04       		.byte	0x4
  1586 0397 77       		.byte	0x77
@@ -2217,10 +2218,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1637 03fd 09       		.uleb128 0x9
  1638 03fe 18030000 		.4byte	.LASF84
  1639 0402 04       		.byte	0x4
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 38
+
+
  1640 0403 82       		.byte	0x82
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 38
-
-
  1641 0404 B8000000 		.4byte	0xb8
  1642 0408 78       		.byte	0x78
  1643 0409 09       		.uleb128 0x9
@@ -2277,10 +2278,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1694 046f 8F       		.byte	0x8f
  1695 0470 CE000000 		.4byte	0xce
  1696 0474 8C       		.byte	0x8c
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 39
+
+
  1697 0475 09       		.uleb128 0x9
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 39
-
-
  1698 0476 22060000 		.4byte	.LASF94
  1699 047a 04       		.byte	0x4
  1700 047b 90       		.byte	0x90
@@ -2337,10 +2338,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1751 04e1 09       		.uleb128 0x9
  1752 04e2 DF040000 		.4byte	.LASF103
  1753 04e6 04       		.byte	0x4
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 40
+
+
  1754 04e7 99       		.byte	0x99
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 40
-
-
  1755 04e8 B8000000 		.4byte	0xb8
  1756 04ec AC       		.byte	0xac
  1757 04ed 09       		.uleb128 0x9
@@ -2397,10 +2398,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1808 054e 0C       		.uleb128 0xc
  1809 054f C6080000 		.4byte	.LASF113
  1810 0553 01       		.byte	0x1
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 41
+
+
  1811 0554 0C       		.uleb128 0xc
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 41
-
-
  1812 0555 EE020000 		.4byte	.LASF114
  1813 0559 02       		.byte	0x2
  1814 055a 0C       		.uleb128 0xc
@@ -2457,10 +2458,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1865 05c5 9C080000 		.4byte	.LASF123
  1866 05c9 05       		.byte	0x5
  1867 05ca 0A05     		.2byte	0x50a
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 42
+
+
  1868 05cc CE000000 		.4byte	0xce
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 42
-
-
  1869 05d0 18       		.byte	0x18
  1870 05d1 0F       		.uleb128 0xf
  1871 05d2 65050000 		.4byte	.LASF124
@@ -2517,10 +2518,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1922 0643 07       		.uleb128 0x7
  1923 0644 D9000000 		.4byte	0xd9
  1924 0648 0F       		.byte	0xf
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 43
+
+
  1925 0649 00       		.byte	0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 43
-
-
  1926 064a 0D       		.uleb128 0xd
  1927 064b C3010000 		.4byte	.LASF132
  1928 064f 05       		.byte	0x5
@@ -2577,10 +2578,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  1979 06c0 10       		.byte	0x10
  1980 06c1 0F       		.uleb128 0xf
  1981 06c2 19080000 		.4byte	.LASF139
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 44
+
+
  1982 06c6 06       		.byte	0x6
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 44
-
-
  1983 06c7 7E02     		.2byte	0x27e
  1984 06c9 E0000000 		.4byte	0xe0
  1985 06cd 14       		.byte	0x14
@@ -2637,10 +2638,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2036 0738 550B0000 		.4byte	.LASF148
  2037 073c 06       		.byte	0x6
  2038 073d 9102     		.2byte	0x291
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 45
+
+
  2039 073f 73060000 		.4byte	0x673
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 45
-
-
  2040 0743 08       		.uleb128 0x8
  2041 0744 14       		.byte	0x14
  2042 0745 07       		.byte	0x7
@@ -2690,26 +2691,26 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2086 079e 15       		.uleb128 0x15
  2087 079f 010A0000 		.4byte	.LASF155
  2088 07a3 01       		.byte	0x1
- 2089 07a4 E8       		.byte	0xe8
+ 2089 07a4 E9       		.byte	0xe9
  2090 07a5 B8000000 		.4byte	0xb8
  2091 07a9 00000000 		.4byte	.LFB548
  2092 07ad 36000000 		.4byte	.LFE548-.LFB548
  2093 07b1 01       		.uleb128 0x1
  2094 07b2 9C       		.byte	0x9c
  2095 07b3 47080000 		.4byte	0x847
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 46
+
+
  2096 07b7 16       		.uleb128 0x16
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 46
-
-
  2097 07b8 72656700 		.ascii	"reg\000"
  2098 07bc 01       		.byte	0x1
- 2099 07bd E8       		.byte	0xe8
+ 2099 07bd E9       		.byte	0xe9
  2100 07be A2000000 		.4byte	0xa2
  2101 07c2 00000000 		.4byte	.LLST0
  2102 07c6 17       		.uleb128 0x17
  2103 07c7 38030000 		.4byte	.LASF221
  2104 07cb 01       		.byte	0x1
- 2105 07cc E9       		.byte	0xe9
+ 2105 07cc EA       		.byte	0xea
  2106 07cd EA000000 		.4byte	0xea
  2107 07d1 18       		.uleb128 0x18
  2108 07d2 0C000000 		.4byte	.LVL2
@@ -2757,10 +2758,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2150 0817 18       		.uleb128 0x18
  2151 0818 20000000 		.4byte	.LVL5
  2152 081c 70150000 		.4byte	0x1570
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 47
+
+
  2153 0820 2A080000 		.4byte	0x82a
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 47
-
-
  2154 0824 19       		.uleb128 0x19
  2155 0825 01       		.uleb128 0x1
  2156 0826 50       		.byte	0x50
@@ -2784,7 +2785,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2174 0847 15       		.uleb128 0x15
  2175 0848 7A0C0000 		.4byte	.LASF156
  2176 084c 01       		.byte	0x1
- 2177 084d E2       		.byte	0xe2
+ 2177 084d E3       		.byte	0xe3
  2178 084e 34050000 		.4byte	0x534
  2179 0852 00000000 		.4byte	.LFB547
  2180 0856 18000000 		.4byte	.LFE547-.LFB547
@@ -2794,7 +2795,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2184 0860 1B       		.uleb128 0x1b
  2185 0861 5E090000 		.4byte	.LASF162
  2186 0865 01       		.byte	0x1
- 2187 0866 E3       		.byte	0xe3
+ 2187 0866 E4       		.byte	0xe4
  2188 0867 B8000000 		.4byte	0xb8
  2189 086b 21000000 		.4byte	.LLST1
  2190 086f 18       		.uleb128 0x18
@@ -2817,14 +2818,14 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2207 088f 03       		.byte	0x3
  2208 0890 00000000 		.4byte	.LC0
  2209 0894 00       		.byte	0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 48
+
+
  2210 0895 00       		.byte	0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 48
-
-
  2211 0896 15       		.uleb128 0x15
  2212 0897 DA0C0000 		.4byte	.LASF157
  2213 089b 01       		.byte	0x1
- 2214 089c F3       		.byte	0xf3
+ 2214 089c F4       		.byte	0xf4
  2215 089d 34050000 		.4byte	0x534
  2216 08a1 00000000 		.4byte	.LFB549
  2217 08a5 28000000 		.4byte	.LFE549-.LFB549
@@ -2834,13 +2835,13 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2221 08af 16       		.uleb128 0x16
  2222 08b0 72656700 		.ascii	"reg\000"
  2223 08b4 01       		.byte	0x1
- 2224 08b5 F3       		.byte	0xf3
+ 2224 08b5 F4       		.byte	0xf4
  2225 08b6 A2000000 		.4byte	0xa2
  2226 08ba 34000000 		.4byte	.LLST2
  2227 08be 1D       		.uleb128 0x1d
  2228 08bf DD030000 		.4byte	.LASF158
  2229 08c3 01       		.byte	0x1
- 2230 08c4 F3       		.byte	0xf3
+ 2230 08c4 F4       		.byte	0xf4
  2231 08c5 B8000000 		.4byte	0xb8
  2232 08c9 55000000 		.4byte	.LLST3
  2233 08cd 18       		.uleb128 0x18
@@ -2877,10 +2878,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2264 0907 19       		.uleb128 0x19
  2265 0908 01       		.uleb128 0x1
  2266 0909 50       		.byte	0x50
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 49
+
+
  2267 090a 04       		.uleb128 0x4
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 49
-
-
  2268 090b 74       		.byte	0x74
  2269 090c 00       		.sleb128 0
  2270 090d 38       		.byte	0x38
@@ -2904,7 +2905,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2288 092e 15       		.uleb128 0x15
  2289 092f 03060000 		.4byte	.LASF159
  2290 0933 01       		.byte	0x1
- 2291 0934 67       		.byte	0x67
+ 2291 0934 68       		.byte	0x68
  2292 0935 34050000 		.4byte	0x534
  2293 0939 00000000 		.4byte	.LFB535
  2294 093d 1C000000 		.4byte	.LFE535-.LFB535
@@ -2914,19 +2915,19 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2298 0947 1D       		.uleb128 0x1d
  2299 0948 260C0000 		.4byte	.LASF160
  2300 094c 01       		.byte	0x1
- 2301 094d 67       		.byte	0x67
+ 2301 094d 68       		.byte	0x68
  2302 094e A2000000 		.4byte	0xa2
  2303 0952 76000000 		.4byte	.LLST4
  2304 0956 1D       		.uleb128 0x1d
  2305 0957 F3060000 		.4byte	.LASF161
  2306 095b 01       		.byte	0x1
- 2307 095c 67       		.byte	0x67
+ 2307 095c 68       		.byte	0x68
  2308 095d A2000000 		.4byte	0xa2
  2309 0961 97000000 		.4byte	.LLST5
  2310 0965 1B       		.uleb128 0x1b
  2311 0966 BD020000 		.4byte	.LASF163
  2312 096a 01       		.byte	0x1
- 2313 096b 6A       		.byte	0x6a
+ 2313 096b 6B       		.byte	0x6b
  2314 096c B8000000 		.4byte	0xb8
  2315 0970 B8000000 		.4byte	.LLST6
  2316 0974 18       		.uleb128 0x18
@@ -2937,10 +2938,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2321 0982 01       		.uleb128 0x1
  2322 0983 50       		.byte	0x50
  2323 0984 01       		.uleb128 0x1
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 50
+
+
  2324 0985 44       		.byte	0x44
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 50
-
-
  2325 0986 00       		.byte	0
  2326 0987 1C       		.uleb128 0x1c
  2327 0988 1A000000 		.4byte	.LVL24
@@ -2955,7 +2956,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2336 0997 15       		.uleb128 0x15
  2337 0998 99020000 		.4byte	.LASF164
  2338 099c 01       		.byte	0x1
- 2339 099d 75       		.byte	0x75
+ 2339 099d 76       		.byte	0x76
  2340 099e 34050000 		.4byte	0x534
  2341 09a2 00000000 		.4byte	.LFB536
  2342 09a6 1C000000 		.4byte	.LFE536-.LFB536
@@ -2965,25 +2966,25 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2346 09b0 1D       		.uleb128 0x1d
  2347 09b1 F3060000 		.4byte	.LASF161
  2348 09b5 01       		.byte	0x1
- 2349 09b6 75       		.byte	0x75
+ 2349 09b6 76       		.byte	0x76
  2350 09b7 A2000000 		.4byte	0xa2
  2351 09bb D6000000 		.4byte	.LLST7
  2352 09bf 1D       		.uleb128 0x1d
  2353 09c0 A20C0000 		.4byte	.LASF165
  2354 09c4 01       		.byte	0x1
- 2355 09c5 75       		.byte	0x75
+ 2355 09c5 76       		.byte	0x76
  2356 09c6 A2000000 		.4byte	0xa2
  2357 09ca 10010000 		.4byte	.LLST8
  2358 09ce 1D       		.uleb128 0x1d
  2359 09cf 2C050000 		.4byte	.LASF166
  2360 09d3 01       		.byte	0x1
- 2361 09d4 75       		.byte	0x75
+ 2361 09d4 76       		.byte	0x76
  2362 09d5 A2000000 		.4byte	0xa2
  2363 09d9 31010000 		.4byte	.LLST9
  2364 09dd 1B       		.uleb128 0x1b
  2365 09de BD020000 		.4byte	.LASF163
  2366 09e2 01       		.byte	0x1
- 2367 09e3 76       		.byte	0x76
+ 2367 09e3 77       		.byte	0x77
  2368 09e4 B8000000 		.4byte	0xb8
  2369 09e8 6B010000 		.4byte	.LLST10
  2370 09ec 18       		.uleb128 0x18
@@ -2997,10 +2998,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2378 09fd 08       		.byte	0x8
  2379 09fe 30       		.byte	0x30
  2380 09ff 00       		.byte	0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 51
+
+
  2381 0a00 1C       		.uleb128 0x1c
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 51
-
-
  2382 0a01 1A000000 		.4byte	.LVL32
  2383 0a05 96080000 		.4byte	0x896
  2384 0a09 19       		.uleb128 0x19
@@ -3014,7 +3015,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2392 0a11 15       		.uleb128 0x15
  2393 0a12 41050000 		.4byte	.LASF167
  2394 0a16 01       		.byte	0x1
- 2395 0a17 7F       		.byte	0x7f
+ 2395 0a17 80       		.byte	0x80
  2396 0a18 34050000 		.4byte	0x534
  2397 0a1c 00000000 		.4byte	.LFB537
  2398 0a20 14000000 		.4byte	.LFE537-.LFB537
@@ -3024,13 +3025,13 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2402 0a2a 1D       		.uleb128 0x1d
  2403 0a2b F3060000 		.4byte	.LASF161
  2404 0a2f 01       		.byte	0x1
- 2405 0a30 7F       		.byte	0x7f
+ 2405 0a30 80       		.byte	0x80
  2406 0a31 A2000000 		.4byte	0xa2
  2407 0a35 89010000 		.4byte	.LLST11
  2408 0a39 1D       		.uleb128 0x1d
  2409 0a3a 8D000000 		.4byte	.LASF168
  2410 0a3e 01       		.byte	0x1
- 2411 0a3f 7F       		.byte	0x7f
+ 2411 0a3f 80       		.byte	0x80
  2412 0a40 B8000000 		.4byte	0xb8
  2413 0a44 C3010000 		.4byte	.LLST12
  2414 0a48 18       		.uleb128 0x18
@@ -3057,11 +3058,11 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2435 0a6c 00       		.byte	0
  2436 0a6d 1E       		.uleb128 0x1e
  2437 0a6e 830D0000 		.4byte	.LASF177
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 52
+
+
  2438 0a72 01       		.byte	0x1
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 52
-
-
- 2439 0a73 88       		.byte	0x88
+ 2439 0a73 89       		.byte	0x89
  2440 0a74 00000000 		.4byte	.LFB538
  2441 0a78 34000000 		.4byte	.LFE538-.LFB538
  2442 0a7c 01       		.uleb128 0x1
@@ -3117,10 +3118,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2492 0acf 00       		.byte	0
  2493 0ad0 18       		.uleb128 0x18
  2494 0ad1 2A000000 		.4byte	.LVL42
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 53
+
+
  2495 0ad5 96080000 		.4byte	0x896
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 53
-
-
  2496 0ad9 EA0A0000 		.4byte	0xaea
  2497 0add 19       		.uleb128 0x19
  2498 0ade 01       		.uleb128 0x1
@@ -3152,7 +3153,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2524 0aff 15       		.uleb128 0x15
  2525 0b00 320C0000 		.4byte	.LASF169
  2526 0b04 01       		.byte	0x1
- 2527 0b05 91       		.byte	0x91
+ 2527 0b05 92       		.byte	0x92
  2528 0b06 34050000 		.4byte	0x534
  2529 0b0a 00000000 		.4byte	.LFB539
  2530 0b0e 12000000 		.4byte	.LFE539-.LFB539
@@ -3162,13 +3163,13 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2534 0b18 1D       		.uleb128 0x1d
  2535 0b19 D3000000 		.4byte	.LASF170
  2536 0b1d 01       		.byte	0x1
- 2537 0b1e 91       		.byte	0x91
+ 2537 0b1e 92       		.byte	0x92
  2538 0b1f B8000000 		.4byte	0xb8
  2539 0b23 FD010000 		.4byte	.LLST13
  2540 0b27 1B       		.uleb128 0x1b
  2541 0b28 680D0000 		.4byte	.LASF171
  2542 0b2c 01       		.byte	0x1
- 2543 0b2d 92       		.byte	0x92
+ 2543 0b2d 93       		.byte	0x93
  2544 0b2e B8000000 		.4byte	0xb8
  2545 0b32 1E020000 		.4byte	.LLST14
  2546 0b36 1C       		.uleb128 0x1c
@@ -3177,17 +3178,17 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2549 0b3f 19       		.uleb128 0x19
  2550 0b40 01       		.uleb128 0x1
  2551 0b41 50       		.byte	0x50
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 54
+
+
  2552 0b42 01       		.uleb128 0x1
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 54
-
-
  2553 0b43 42       		.byte	0x42
  2554 0b44 00       		.byte	0
  2555 0b45 00       		.byte	0
  2556 0b46 15       		.uleb128 0x15
  2557 0b47 5D060000 		.4byte	.LASF172
  2558 0b4b 01       		.byte	0x1
- 2559 0b4c 98       		.byte	0x98
+ 2559 0b4c 99       		.byte	0x99
  2560 0b4d 34050000 		.4byte	0x534
  2561 0b51 00000000 		.4byte	.LFB540
  2562 0b55 10000000 		.4byte	.LFE540-.LFB540
@@ -3197,13 +3198,13 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2566 0b5f 1D       		.uleb128 0x1d
  2567 0b60 C80B0000 		.4byte	.LASF173
  2568 0b64 01       		.byte	0x1
- 2569 0b65 98       		.byte	0x98
+ 2569 0b65 99       		.byte	0x99
  2570 0b66 A2000000 		.4byte	0xa2
  2571 0b6a 37020000 		.4byte	.LLST15
  2572 0b6e 1B       		.uleb128 0x1b
  2573 0b6f BD020000 		.4byte	.LASF163
  2574 0b73 01       		.byte	0x1
- 2575 0b74 99       		.byte	0x99
+ 2575 0b74 9A       		.byte	0x9a
  2576 0b75 B8000000 		.4byte	0xb8
  2577 0b79 58020000 		.4byte	.LLST16
  2578 0b7d 1C       		.uleb128 0x1c
@@ -3219,7 +3220,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2588 0b8d 15       		.uleb128 0x15
  2589 0b8e CC0A0000 		.4byte	.LASF174
  2590 0b92 01       		.byte	0x1
- 2591 0b93 9F       		.byte	0x9f
+ 2591 0b93 A0       		.byte	0xa0
  2592 0b94 34050000 		.4byte	0x534
  2593 0b98 00000000 		.4byte	.LFB541
  2594 0b9c 16000000 		.4byte	.LFE541-.LFB541
@@ -3229,18 +3230,18 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2598 0ba6 1B       		.uleb128 0x1b
  2599 0ba7 85090000 		.4byte	.LASF175
  2600 0bab 01       		.byte	0x1
- 2601 0bac A0       		.byte	0xa0
+ 2601 0bac A1       		.byte	0xa1
  2602 0bad B8000000 		.4byte	0xb8
  2603 0bb1 86020000 		.4byte	.LLST17
  2604 0bb5 1F       		.uleb128 0x1f
  2605 0bb6 6E657700 		.ascii	"new\000"
  2606 0bba 01       		.byte	0x1
- 2607 0bbb A1       		.byte	0xa1
+ 2607 0bbb A2       		.byte	0xa2
  2608 0bbc B8000000 		.4byte	0xb8
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 55
+
+
  2609 0bc0 99020000 		.4byte	.LLST18
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 55
-
-
  2610 0bc4 18       		.uleb128 0x18
  2611 0bc5 08000000 		.4byte	.LVL53
  2612 0bc9 9E070000 		.4byte	0x79e
@@ -3266,7 +3267,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2632 0be9 15       		.uleb128 0x15
  2633 0bea AC060000 		.4byte	.LASF176
  2634 0bee 01       		.byte	0x1
- 2635 0bef A6       		.byte	0xa6
+ 2635 0bef A7       		.byte	0xa7
  2636 0bf0 34050000 		.4byte	0x534
  2637 0bf4 00000000 		.4byte	.LFB542
  2638 0bf8 0C000000 		.4byte	.LFE542-.LFB542
@@ -3291,43 +3292,43 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2657 0c17 1E       		.uleb128 0x1e
  2658 0c18 270A0000 		.4byte	.LASF178
  2659 0c1c 01       		.byte	0x1
- 2660 0c1d AB       		.byte	0xab
+ 2660 0c1d AC       		.byte	0xac
  2661 0c1e 00000000 		.4byte	.LFB543
  2662 0c22 4C000000 		.4byte	.LFE543-.LFB543
  2663 0c26 01       		.uleb128 0x1
  2664 0c27 9C       		.byte	0x9c
  2665 0c28 320D0000 		.4byte	0xd32
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 56
+
+
  2666 0c2c 1D       		.uleb128 0x1d
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 56
-
-
  2667 0c2d F3060000 		.4byte	.LASF161
  2668 0c31 01       		.byte	0x1
- 2669 0c32 AB       		.byte	0xab
+ 2669 0c32 AC       		.byte	0xac
  2670 0c33 A2000000 		.4byte	0xa2
  2671 0c37 AC020000 		.4byte	.LLST19
  2672 0c3b 1D       		.uleb128 0x1d
  2673 0c3c C9000000 		.4byte	.LASF179
  2674 0c40 01       		.byte	0x1
- 2675 0c41 AB       		.byte	0xab
+ 2675 0c41 AC       		.byte	0xac
  2676 0c42 B8000000 		.4byte	0xb8
  2677 0c46 E6020000 		.4byte	.LLST20
  2678 0c4a 1D       		.uleb128 0x1d
  2679 0c4b 67090000 		.4byte	.LASF180
  2680 0c4f 01       		.byte	0x1
- 2681 0c50 AB       		.byte	0xab
+ 2681 0c50 AC       		.byte	0xac
  2682 0c51 B8000000 		.4byte	0xb8
  2683 0c55 20030000 		.4byte	.LLST21
  2684 0c59 1D       		.uleb128 0x1d
  2685 0c5a 41010000 		.4byte	.LASF181
  2686 0c5e 01       		.byte	0x1
- 2687 0c5f AB       		.byte	0xab
+ 2687 0c5f AC       		.byte	0xac
  2688 0c60 B8000000 		.4byte	0xb8
  2689 0c64 5A030000 		.4byte	.LLST22
  2690 0c68 1D       		.uleb128 0x1d
  2691 0c69 47080000 		.4byte	.LASF182
  2692 0c6d 01       		.byte	0x1
- 2693 0c6e AB       		.byte	0xab
+ 2693 0c6e AC       		.byte	0xac
  2694 0c6f B8000000 		.4byte	0xb8
  2695 0c73 94030000 		.4byte	.LLST23
  2696 0c77 18       		.uleb128 0x18
@@ -3357,10 +3358,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2720 0ca1 00       		.sleb128 0
  2721 0ca2 00       		.byte	0
  2722 0ca3 18       		.uleb128 0x18
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 57
+
+
  2723 0ca4 22000000 		.4byte	.LVL62
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 57
-
-
  2724 0ca8 96080000 		.4byte	0x896
  2725 0cac BC0C0000 		.4byte	0xcbc
  2726 0cb0 19       		.uleb128 0x19
@@ -3417,10 +3418,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2777 0cfe 76       		.byte	0x76
  2778 0cff 00       		.sleb128 0
  2779 0d00 00       		.byte	0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 58
+
+
  2780 0d01 18       		.uleb128 0x18
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 58
-
-
  2781 0d02 42000000 		.4byte	.LVL68
  2782 0d06 96080000 		.4byte	0x896
  2783 0d0a 1B0D0000 		.4byte	0xd1b
@@ -3457,7 +3458,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2814 0d32 15       		.uleb128 0x15
  2815 0d33 220B0000 		.4byte	.LASF183
  2816 0d37 01       		.byte	0x1
- 2817 0d38 BA       		.byte	0xba
+ 2817 0d38 BB       		.byte	0xbb
  2818 0d39 34050000 		.4byte	0x534
  2819 0d3d 00000000 		.4byte	.LFB544
  2820 0d41 16000000 		.4byte	.LFE544-.LFB544
@@ -3467,20 +3468,20 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2824 0d4b 1D       		.uleb128 0x1d
  2825 0d4c F3060000 		.4byte	.LASF161
  2826 0d50 01       		.byte	0x1
- 2827 0d51 BA       		.byte	0xba
+ 2827 0d51 BB       		.byte	0xbb
  2828 0d52 A2000000 		.4byte	0xa2
  2829 0d56 B4030000 		.4byte	.LLST24
  2830 0d5a 1B       		.uleb128 0x1b
  2831 0d5b BD020000 		.4byte	.LASF163
  2832 0d5f 01       		.byte	0x1
- 2833 0d60 BB       		.byte	0xbb
+ 2833 0d60 BC       		.byte	0xbc
  2834 0d61 B8000000 		.4byte	0xb8
  2835 0d65 D5030000 		.4byte	.LLST25
  2836 0d69 18       		.uleb128 0x18
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 59
+
+
  2837 0d6a 08000000 		.4byte	.LVL72
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 59
-
-
  2838 0d6e 9E070000 		.4byte	0x79e
  2839 0d72 7D0D0000 		.4byte	0xd7d
  2840 0d76 19       		.uleb128 0x19
@@ -3504,7 +3505,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2858 0d8e 15       		.uleb128 0x15
  2859 0d8f 27040000 		.4byte	.LASF184
  2860 0d93 01       		.byte	0x1
- 2861 0d94 C9       		.byte	0xc9
+ 2861 0d94 CA       		.byte	0xca
  2862 0d95 34050000 		.4byte	0x534
  2863 0d99 00000000 		.4byte	.LFB545
  2864 0d9d 16000000 		.4byte	.LFE545-.LFB545
@@ -3514,13 +3515,13 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2868 0da7 1D       		.uleb128 0x1d
  2869 0da8 F3060000 		.4byte	.LASF161
  2870 0dac 01       		.byte	0x1
- 2871 0dad C9       		.byte	0xc9
+ 2871 0dad CA       		.byte	0xca
  2872 0dae A2000000 		.4byte	0xa2
  2873 0db2 F3030000 		.4byte	.LLST26
  2874 0db6 1B       		.uleb128 0x1b
  2875 0db7 BD020000 		.4byte	.LASF163
  2876 0dbb 01       		.byte	0x1
- 2877 0dbc CB       		.byte	0xcb
+ 2877 0dbc CC       		.byte	0xcc
  2878 0dbd B8000000 		.4byte	0xb8
  2879 0dc1 14040000 		.4byte	.LLST27
  2880 0dc5 18       		.uleb128 0x18
@@ -3537,10 +3538,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2891 0dd9 1C       		.uleb128 0x1c
  2892 0dda 14000000 		.4byte	.LVL80
  2893 0dde 96080000 		.4byte	0x896
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 60
+
+
  2894 0de2 19       		.uleb128 0x19
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 60
-
-
  2895 0de3 01       		.uleb128 0x1
  2896 0de4 50       		.byte	0x50
  2897 0de5 02       		.uleb128 0x2
@@ -3551,7 +3552,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2902 0dea 15       		.uleb128 0x15
  2903 0deb 2C090000 		.4byte	.LASF185
  2904 0def 01       		.byte	0x1
- 2905 0df0 D8       		.byte	0xd8
+ 2905 0df0 D9       		.byte	0xd9
  2906 0df1 34050000 		.4byte	0x534
  2907 0df5 00000000 		.4byte	.LFB546
  2908 0df9 18000000 		.4byte	.LFE546-.LFB546
@@ -3561,25 +3562,25 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2912 0e03 1D       		.uleb128 0x1d
  2913 0e04 F3060000 		.4byte	.LASF161
  2914 0e08 01       		.byte	0x1
- 2915 0e09 D8       		.byte	0xd8
+ 2915 0e09 D9       		.byte	0xd9
  2916 0e0a A2000000 		.4byte	0xa2
  2917 0e0e 32040000 		.4byte	.LLST28
  2918 0e12 1D       		.uleb128 0x1d
  2919 0e13 E3030000 		.4byte	.LASF186
  2920 0e17 01       		.byte	0x1
- 2921 0e18 D8       		.byte	0xd8
+ 2921 0e18 D9       		.byte	0xd9
  2922 0e19 A2000000 		.4byte	0xa2
  2923 0e1d 6C040000 		.4byte	.LLST29
  2924 0e21 1D       		.uleb128 0x1d
  2925 0e22 8E080000 		.4byte	.LASF187
  2926 0e26 01       		.byte	0x1
- 2927 0e27 D8       		.byte	0xd8
+ 2927 0e27 D9       		.byte	0xd9
  2928 0e28 A2000000 		.4byte	0xa2
  2929 0e2c 8D040000 		.4byte	.LLST30
  2930 0e30 1B       		.uleb128 0x1b
  2931 0e31 23090000 		.4byte	.LASF188
  2932 0e35 01       		.byte	0x1
- 2933 0e36 D9       		.byte	0xd9
+ 2933 0e36 DA       		.byte	0xda
  2934 0e37 B8000000 		.4byte	0xb8
  2935 0e3b C7040000 		.4byte	.LLST31
  2936 0e3f 18       		.uleb128 0x18
@@ -3597,10 +3598,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2948 0e54 16000000 		.4byte	.LVL87
  2949 0e58 96080000 		.4byte	0x896
  2950 0e5c 19       		.uleb128 0x19
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 61
+
+
  2951 0e5d 01       		.uleb128 0x1
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 61
-
-
  2952 0e5e 50       		.byte	0x50
  2953 0e5f 02       		.uleb128 0x2
  2954 0e60 08       		.byte	0x8
@@ -3610,7 +3611,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2958 0e64 1E       		.uleb128 0x1e
  2959 0e65 F8040000 		.4byte	.LASF189
  2960 0e69 01       		.byte	0x1
- 2961 0e6a FC       		.byte	0xfc
+ 2961 0e6a FD       		.byte	0xfd
  2962 0e6b 00000000 		.4byte	.LFB550
  2963 0e6f 32000000 		.4byte	.LFE550-.LFB550
  2964 0e73 01       		.uleb128 0x1
@@ -3619,19 +3620,19 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2967 0e79 1D       		.uleb128 0x1d
  2968 0e7a 8C090000 		.4byte	.LASF190
  2969 0e7e 01       		.byte	0x1
- 2970 0e7f FC       		.byte	0xfc
+ 2970 0e7f FD       		.byte	0xfd
  2971 0e80 E40E0000 		.4byte	0xee4
  2972 0e84 E5040000 		.4byte	.LLST32
  2973 0e88 1D       		.uleb128 0x1d
  2974 0e89 98090000 		.4byte	.LASF191
  2975 0e8d 01       		.byte	0x1
- 2976 0e8e FC       		.byte	0xfc
+ 2976 0e8e FD       		.byte	0xfd
  2977 0e8f E40E0000 		.4byte	0xee4
  2978 0e93 03050000 		.4byte	.LLST33
  2979 0e97 1D       		.uleb128 0x1d
  2980 0e98 07000000 		.4byte	.LASF192
  2981 0e9c 01       		.byte	0x1
- 2982 0e9d FC       		.byte	0xfc
+ 2982 0e9d FD       		.byte	0xfd
  2983 0e9e A2000000 		.4byte	0xa2
  2984 0ea2 21050000 		.4byte	.LLST34
  2985 0ea6 20       		.uleb128 0x20
@@ -3640,7 +3641,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  2988 0eaf 1F       		.uleb128 0x1f
  2989 0eb0 6900     		.ascii	"i\000"
  2990 0eb2 01       		.byte	0x1
- 2991 0eb3 FD       		.byte	0xfd
+ 2991 0eb3 FE       		.byte	0xfe
  2992 0eb4 A2000000 		.4byte	0xa2
  2993 0eb8 42050000 		.4byte	.LLST35
  2994 0ebc 18       		.uleb128 0x18
@@ -3657,10 +3658,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3005 0ed1 1C       		.uleb128 0x1c
  3006 0ed2 24000000 		.4byte	.LVL92
  3007 0ed6 9E070000 		.4byte	0x79e
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 62
+
+
  3008 0eda 19       		.uleb128 0x19
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 62
-
-
  3009 0edb 01       		.uleb128 0x1
  3010 0edc 50       		.byte	0x50
  3011 0edd 03       		.uleb128 0x3
@@ -3675,7 +3676,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3020 0eea 21       		.uleb128 0x21
  3021 0eeb AA0C0000 		.4byte	.LASF193
  3022 0eef 01       		.byte	0x1
- 3023 0ef0 0301     		.2byte	0x103
+ 3023 0ef0 0401     		.2byte	0x104
  3024 0ef2 00000000 		.4byte	.LFB551
  3025 0ef6 4A000000 		.4byte	.LFE551-.LFB551
  3026 0efa 01       		.uleb128 0x1
@@ -3684,13 +3685,13 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3029 0f00 22       		.uleb128 0x22
  3030 0f01 630A0000 		.4byte	.LASF194
  3031 0f05 01       		.byte	0x1
- 3032 0f06 0301     		.2byte	0x103
+ 3032 0f06 0401     		.2byte	0x104
  3033 0f08 A2000000 		.4byte	0xa2
  3034 0f0c 6C050000 		.4byte	.LLST36
  3035 0f10 23       		.uleb128 0x23
  3036 0f11 BD020000 		.4byte	.LASF163
  3037 0f15 01       		.byte	0x1
- 3038 0f16 0401     		.2byte	0x104
+ 3038 0f16 0501     		.2byte	0x105
  3039 0f18 B8000000 		.4byte	0xb8
  3040 0f1c 8D050000 		.4byte	.LLST37
  3041 0f20 18       		.uleb128 0x18
@@ -3717,10 +3718,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3062 0f47 30000000 		.4byte	.LVL103
  3063 0f4b 96080000 		.4byte	0x896
  3064 0f4f 590F0000 		.4byte	0xf59
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 63
+
+
  3065 0f53 19       		.uleb128 0x19
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 63
-
-
  3066 0f54 01       		.uleb128 0x1
  3067 0f55 50       		.byte	0x50
  3068 0f56 01       		.uleb128 0x1
@@ -3739,7 +3740,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3081 0f69 21       		.uleb128 0x21
  3082 0f6a 43040000 		.4byte	.LASF195
  3083 0f6e 01       		.byte	0x1
- 3084 0f6f 1401     		.2byte	0x114
+ 3084 0f6f 1501     		.2byte	0x115
  3085 0f71 00000000 		.4byte	.LFB552
  3086 0f75 1A000000 		.4byte	.LFE552-.LFB552
  3087 0f79 01       		.uleb128 0x1
@@ -3748,25 +3749,25 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3090 0f7f 24       		.uleb128 0x24
  3091 0f80 73657400 		.ascii	"set\000"
  3092 0f84 01       		.byte	0x1
- 3093 0f85 1401     		.2byte	0x114
+ 3093 0f85 1501     		.2byte	0x115
  3094 0f87 94000000 		.4byte	0x94
  3095 0f8b D7050000 		.4byte	.LLST38
  3096 0f8f 23       		.uleb128 0x23
  3097 0f90 85090000 		.4byte	.LASF175
  3098 0f94 01       		.byte	0x1
- 3099 0f95 1501     		.2byte	0x115
+ 3099 0f95 1601     		.2byte	0x116
  3100 0f97 B8000000 		.4byte	0xb8
  3101 0f9b F5050000 		.4byte	.LLST39
  3102 0f9f 23       		.uleb128 0x23
  3103 0fa0 A4030000 		.4byte	.LASF196
  3104 0fa4 01       		.byte	0x1
- 3105 0fa5 1601     		.2byte	0x116
+ 3105 0fa5 1701     		.2byte	0x117
  3106 0fa7 B8000000 		.4byte	0xb8
  3107 0fab 08060000 		.4byte	.LLST40
  3108 0faf 25       		.uleb128 0x25
  3109 0fb0 6E657700 		.ascii	"new\000"
  3110 0fb4 01       		.byte	0x1
- 3111 0fb5 1701     		.2byte	0x117
+ 3111 0fb5 1801     		.2byte	0x118
  3112 0fb7 B8000000 		.4byte	0xb8
  3113 0fbb 2A060000 		.4byte	.LLST41
  3114 0fbf 18       		.uleb128 0x18
@@ -3777,10 +3778,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3119 0fcd 01       		.uleb128 0x1
  3120 0fce 50       		.byte	0x50
  3121 0fcf 02       		.uleb128 0x2
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 64
+
+
  3122 0fd0 08       		.byte	0x8
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 64
-
-
  3123 0fd1 4B       		.byte	0x4b
  3124 0fd2 00       		.byte	0
  3125 0fd3 1C       		.uleb128 0x1c
@@ -3797,7 +3798,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3136 0fe4 21       		.uleb128 0x21
  3137 0fe5 A3080000 		.4byte	.LASF197
  3138 0fe9 01       		.byte	0x1
- 3139 0fea 1B01     		.2byte	0x11b
+ 3139 0fea 1C01     		.2byte	0x11c
  3140 0fec 00000000 		.4byte	.LFB553
  3141 0ff0 26000000 		.4byte	.LFE553-.LFB553
  3142 0ff4 01       		.uleb128 0x1
@@ -3806,19 +3807,19 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3145 0ffa 22       		.uleb128 0x22
  3146 0ffb D8050000 		.4byte	.LASF198
  3147 0fff 01       		.byte	0x1
- 3148 1000 1B01     		.2byte	0x11b
+ 3148 1000 1C01     		.2byte	0x11c
  3149 1002 A2000000 		.4byte	0xa2
  3150 1006 3D060000 		.4byte	.LLST42
  3151 100a 22       		.uleb128 0x22
  3152 100b DE050000 		.4byte	.LASF199
  3153 100f 01       		.byte	0x1
- 3154 1010 1B01     		.2byte	0x11b
+ 3154 1010 1C01     		.2byte	0x11c
  3155 1012 A2000000 		.4byte	0xa2
  3156 1016 5E060000 		.4byte	.LLST43
  3157 101a 23       		.uleb128 0x23
  3158 101b 7B010000 		.4byte	.LASF200
  3159 101f 01       		.byte	0x1
- 3160 1020 1C01     		.2byte	0x11c
+ 3160 1020 1D01     		.2byte	0x11d
  3161 1022 B8000000 		.4byte	0xb8
  3162 1026 7F060000 		.4byte	.LLST44
  3163 102a 18       		.uleb128 0x18
@@ -3837,17 +3838,17 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3176 1046 19       		.uleb128 0x19
  3177 1047 01       		.uleb128 0x1
  3178 1048 50       		.byte	0x50
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 65
+
+
  3179 1049 01       		.uleb128 0x1
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 65
-
-
  3180 104a 44       		.byte	0x44
  3181 104b 00       		.byte	0
  3182 104c 00       		.byte	0
  3183 104d 21       		.uleb128 0x21
  3184 104e 27080000 		.4byte	.LASF201
  3185 1052 01       		.byte	0x1
- 3186 1053 2601     		.2byte	0x126
+ 3186 1053 2701     		.2byte	0x127
  3187 1055 00000000 		.4byte	.LFB554
  3188 1059 10010000 		.4byte	.LFE554-.LFB554
  3189 105d 01       		.uleb128 0x1
@@ -3897,10 +3898,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3233 10a7 18       		.uleb128 0x18
  3234 10a8 1E000000 		.4byte	.LVL127
  3235 10ac EA0E0000 		.4byte	0xeea
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 66
+
+
  3236 10b0 BA100000 		.4byte	0x10ba
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 66
-
-
  3237 10b4 19       		.uleb128 0x19
  3238 10b5 01       		.uleb128 0x1
  3239 10b6 50       		.byte	0x50
@@ -3957,10 +3958,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3290 110d 02       		.uleb128 0x2
  3291 110e 08       		.byte	0x8
  3292 110f 24       		.byte	0x24
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 67
+
+
  3293 1110 19       		.uleb128 0x19
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 67
-
-
  3294 1111 01       		.uleb128 0x1
  3295 1112 51       		.byte	0x51
  3296 1113 03       		.uleb128 0x3
@@ -4017,10 +4018,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3347 1164 03       		.uleb128 0x3
  3348 1165 0A       		.byte	0xa
  3349 1166 1910     		.2byte	0x1019
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 68
+
+
  3350 1168 00       		.byte	0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 68
-
-
  3351 1169 18       		.uleb128 0x18
  3352 116a 66000000 		.4byte	.LVL135
  3353 116e 96080000 		.4byte	0x896
@@ -4077,10 +4078,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3404 11bf 96080000 		.4byte	0x896
  3405 11c3 D5110000 		.4byte	0x11d5
  3406 11c7 19       		.uleb128 0x19
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 69
+
+
  3407 11c8 01       		.uleb128 0x1
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 69
-
-
  3408 11c9 50       		.byte	0x50
  3409 11ca 02       		.uleb128 0x2
  3410 11cb 08       		.byte	0x8
@@ -4137,10 +4138,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3461 121b 19       		.uleb128 0x19
  3462 121c 01       		.uleb128 0x1
  3463 121d 51       		.byte	0x51
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 70
+
+
  3464 121e 03       		.uleb128 0x3
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 70
-
-
  3465 121f 0A       		.byte	0xa
  3466 1220 371C     		.2byte	0x1c37
  3467 1222 00       		.byte	0
@@ -4197,10 +4198,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3518 1272 00       		.byte	0
  3519 1273 18       		.uleb128 0x18
  3520 1274 C6000000 		.4byte	.LVL145
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 71
+
+
  3521 1278 96080000 		.4byte	0x896
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 71
-
-
  3522 127c 8E120000 		.4byte	0x128e
  3523 1280 19       		.uleb128 0x19
  3524 1281 01       		.uleb128 0x1
@@ -4257,10 +4258,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3575 12d1 50       		.byte	0x50
  3576 12d2 01       		.uleb128 0x1
  3577 12d3 41       		.byte	0x41
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 72
+
+
  3578 12d4 19       		.uleb128 0x19
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 72
-
-
  3579 12d5 01       		.uleb128 0x1
  3580 12d6 51       		.byte	0x51
  3581 12d7 03       		.uleb128 0x3
@@ -4317,10 +4318,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3632 1329 00       		.byte	0
  3633 132a 18       		.uleb128 0x18
  3634 132b 08010000 		.4byte	.LVL152
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 73
+
+
  3635 132f 96080000 		.4byte	0x896
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 73
-
-
  3636 1333 42130000 		.4byte	0x1342
  3637 1337 19       		.uleb128 0x19
  3638 1338 01       		.uleb128 0x1
@@ -4346,7 +4347,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3658 1352 21       		.uleb128 0x21
  3659 1353 170D0000 		.4byte	.LASF202
  3660 1357 01       		.byte	0x1
- 3661 1358 5801     		.2byte	0x158
+ 3661 1358 5901     		.2byte	0x159
  3662 135a 00000000 		.4byte	.LFB555
  3663 135e 7C000000 		.4byte	.LFE555-.LFB555
  3664 1362 01       		.uleb128 0x1
@@ -4377,10 +4378,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3689 1393 96080000 		.4byte	0x896
  3690 1397 A9130000 		.4byte	0x13a9
  3691 139b 19       		.uleb128 0x19
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 74
+
+
  3692 139c 01       		.uleb128 0x1
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 74
-
-
  3693 139d 50       		.byte	0x50
  3694 139e 02       		.uleb128 0x2
  3695 139f 08       		.byte	0x8
@@ -4437,10 +4438,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3746 13f9 19       		.uleb128 0x19
  3747 13fa 01       		.uleb128 0x1
  3748 13fb 50       		.byte	0x50
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 75
+
+
  3749 13fc 05       		.uleb128 0x5
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 75
-
-
  3750 13fd 03       		.byte	0x3
  3751 13fe 08000000 		.4byte	.LANCHOR0+8
  3752 1402 19       		.uleb128 0x19
@@ -4497,10 +4498,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3803 145c 19       		.uleb128 0x19
  3804 145d 01       		.uleb128 0x1
  3805 145e 50       		.byte	0x50
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 76
+
+
  3806 145f 02       		.uleb128 0x2
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 76
-
-
  3807 1460 08       		.byte	0x8
  3808 1461 31       		.byte	0x31
  3809 1462 19       		.uleb128 0x19
@@ -4557,10 +4558,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3860 14b0 88010000 		.4byte	.LASF203
  3861 14b4 08       		.byte	0x8
  3862 14b5 F907     		.2byte	0x7f9
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 77
+
+
  3863 14b7 BB140000 		.4byte	0x14bb
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 77
-
-
  3864 14bb 05       		.uleb128 0x5
  3865 14bc C3000000 		.4byte	0xc3
  3866 14c0 27       		.uleb128 0x27
@@ -4609,7 +4610,7 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3909 1523 28       		.uleb128 0x28
  3910 1524 020C0000 		.4byte	.LASF208
  3911 1528 01       		.byte	0x1
- 3912 1529 59       		.byte	0x59
+ 3912 1529 5A       		.byte	0x5a
  3913 152a 34150000 		.4byte	0x1534
  3914 152e 05       		.uleb128 0x5
  3915 152f 03       		.byte	0x3
@@ -4617,12 +4618,12 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3917 1534 05       		.uleb128 0x5
  3918 1535 13150000 		.4byte	0x1513
  3919 1539 28       		.uleb128 0x28
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 78
+
+
  3920 153a 100C0000 		.4byte	.LASF209
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 78
-
-
  3921 153e 01       		.byte	0x1
- 3922 153f 5A       		.byte	0x5a
+ 3922 153f 5B       		.byte	0x5b
  3923 1540 4A150000 		.4byte	0x154a
  3924 1544 05       		.uleb128 0x5
  3925 1545 03       		.byte	0x3
@@ -4677,10 +4678,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  3974 0007 03       		.uleb128 0x3
  3975 0008 0E       		.uleb128 0xe
  3976 0009 1B       		.uleb128 0x1b
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 79
+
+
  3977 000a 0E       		.uleb128 0xe
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 79
-
-
  3978 000b 55       		.uleb128 0x55
  3979 000c 17       		.uleb128 0x17
  3980 000d 11       		.uleb128 0x11
@@ -4737,10 +4738,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4031 0040 49       		.uleb128 0x49
  4032 0041 13       		.uleb128 0x13
  4033 0042 01       		.uleb128 0x1
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 80
+
+
  4034 0043 13       		.uleb128 0x13
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 80
-
-
  4035 0044 00       		.byte	0
  4036 0045 00       		.byte	0
  4037 0046 07       		.uleb128 0x7
@@ -4797,10 +4798,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4088 0079 3A       		.uleb128 0x3a
  4089 007a 0B       		.uleb128 0xb
  4090 007b 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 81
+
+
  4091 007c 05       		.uleb128 0x5
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 81
-
-
  4092 007d 01       		.uleb128 0x1
  4093 007e 13       		.uleb128 0x13
  4094 007f 00       		.byte	0
@@ -4857,10 +4858,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4145 00b2 00       		.byte	0
  4146 00b3 10       		.uleb128 0x10
  4147 00b4 0F       		.uleb128 0xf
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 82
+
+
  4148 00b5 00       		.byte	0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 82
-
-
  4149 00b6 0B       		.uleb128 0xb
  4150 00b7 0B       		.uleb128 0xb
  4151 00b8 49       		.uleb128 0x49
@@ -4917,10 +4918,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4202 00eb 3B       		.uleb128 0x3b
  4203 00ec 0B       		.uleb128 0xb
  4204 00ed 27       		.uleb128 0x27
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 83
+
+
  4205 00ee 19       		.uleb128 0x19
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 83
-
-
  4206 00ef 49       		.uleb128 0x49
  4207 00f0 13       		.uleb128 0x13
  4208 00f1 11       		.uleb128 0x11
@@ -4977,10 +4978,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4259 0127 19       		.uleb128 0x19
  4260 0128 8A8201   		.uleb128 0x410a
  4261 012b 00       		.byte	0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 84
+
+
  4262 012c 02       		.uleb128 0x2
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 84
-
-
  4263 012d 18       		.uleb128 0x18
  4264 012e 9142     		.uleb128 0x2111
  4265 0130 18       		.uleb128 0x18
@@ -5037,10 +5038,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4316 0167 1E       		.uleb128 0x1e
  4317 0168 2E       		.uleb128 0x2e
  4318 0169 01       		.byte	0x1
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 85
+
+
  4319 016a 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 85
-
-
  4320 016b 19       		.uleb128 0x19
  4321 016c 03       		.uleb128 0x3
  4322 016d 0E       		.uleb128 0xe
@@ -5097,10 +5098,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4373 01a1 0B       		.uleb128 0xb
  4374 01a2 3B       		.uleb128 0x3b
  4375 01a3 05       		.uleb128 0x5
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 86
+
+
  4376 01a4 27       		.uleb128 0x27
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 86
-
-
  4377 01a5 19       		.uleb128 0x19
  4378 01a6 11       		.uleb128 0x11
  4379 01a7 01       		.uleb128 0x1
@@ -5157,10 +5158,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4430 01db 13       		.uleb128 0x13
  4431 01dc 02       		.uleb128 0x2
  4432 01dd 17       		.uleb128 0x17
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 87
+
+
  4433 01de 00       		.byte	0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 87
-
-
  4434 01df 00       		.byte	0
  4435 01e0 25       		.uleb128 0x25
  4436 01e1 34       		.uleb128 0x34
@@ -5217,10 +5218,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4487 0214 03       		.uleb128 0x3
  4488 0215 0E       		.uleb128 0xe
  4489 0216 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 88
+
+
  4490 0217 0B       		.uleb128 0xb
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 88
-
-
  4491 0218 3B       		.uleb128 0x3b
  4492 0219 0B       		.uleb128 0xb
  4493 021a 49       		.uleb128 0x49
@@ -5277,10 +5278,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4544 000f 36000000 		.4byte	.LFE548
  4545 0013 0400     		.2byte	0x4
  4546 0015 F3       		.byte	0xf3
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 89
+
+
  4547 0016 01       		.uleb128 0x1
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 89
-
-
  4548 0017 50       		.byte	0x50
  4549 0018 9F       		.byte	0x9f
  4550 0019 00000000 		.4byte	0
@@ -5337,10 +5338,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4601              	.LLST5:
  4602 0097 00000000 		.4byte	.LVL19
  4603 009b 07000000 		.4byte	.LVL21-1
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 90
+
+
  4604 009f 0100     		.2byte	0x1
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 90
-
-
  4605 00a1 51       		.byte	0x51
  4606 00a2 07000000 		.4byte	.LVL21-1
  4607 00a6 1C000000 		.4byte	.LFE535
@@ -5397,10 +5398,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4658 0123 0400     		.2byte	0x4
  4659 0125 F3       		.byte	0xf3
  4660 0126 01       		.uleb128 0x1
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 91
+
+
  4661 0127 51       		.byte	0x51
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 91
-
-
  4662 0128 9F       		.byte	0x9f
  4663 0129 00000000 		.4byte	0
  4664 012d 00000000 		.4byte	0
@@ -5457,10 +5458,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4715 01aa 0100     		.2byte	0x1
  4716 01ac 50       		.byte	0x50
  4717 01ad 0E000000 		.4byte	.LVL37
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 92
+
+
  4718 01b1 14000000 		.4byte	.LFE537
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 92
-
-
  4719 01b5 0400     		.2byte	0x4
  4720 01b7 F3       		.byte	0xf3
  4721 01b8 01       		.uleb128 0x1
@@ -5517,10 +5518,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4772 022c 00       		.sleb128 0
  4773 022d 1B       		.byte	0x1b
  4774 022e 9F       		.byte	0x9f
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 93
+
+
  4775 022f 00000000 		.4byte	0
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 93
-
-
  4776 0233 00000000 		.4byte	0
  4777              	.LLST15:
  4778 0237 00000000 		.4byte	.LVL48
@@ -5577,10 +5578,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4829 02a3 51       		.byte	0x51
  4830 02a4 00000000 		.4byte	0
  4831 02a8 00000000 		.4byte	0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 94
+
+
  4832              	.LLST19:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 94
-
-
  4833 02ac 00000000 		.4byte	.LVL58
  4834 02b0 0E000000 		.4byte	.LVL59
  4835 02b4 0100     		.2byte	0x1
@@ -5637,10 +5638,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4886 032a 52       		.byte	0x52
  4887 032b 11000000 		.4byte	.LVL60-1
  4888 032f 2C000000 		.4byte	.LVL64
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 95
+
+
  4889 0333 0400     		.2byte	0x4
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 95
-
-
  4890 0335 F3       		.byte	0xf3
  4891 0336 01       		.uleb128 0x1
  4892 0337 52       		.byte	0x52
@@ -5697,10 +5698,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  4943 03ac 00000000 		.4byte	0
  4944 03b0 00000000 		.4byte	0
  4945              	.LLST24:
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 96
+
+
  4946 03b4 00000000 		.4byte	.LVL70
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 96
-
-
  4947 03b8 04000000 		.4byte	.LVL71
  4948 03bc 0100     		.2byte	0x1
  4949 03be 50       		.byte	0x50
@@ -5757,10 +5758,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5000 043d 0A000000 		.4byte	.LVL83
  5001 0441 10000000 		.4byte	.LVL85
  5002 0445 0400     		.2byte	0x4
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 97
+
+
  5003 0447 F3       		.byte	0xf3
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 97
-
-
  5004 0448 01       		.uleb128 0x1
  5005 0449 50       		.byte	0x50
  5006 044a 9F       		.byte	0x9f
@@ -5817,10 +5818,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5057 04bf 00000000 		.4byte	0
  5058 04c3 00000000 		.4byte	0
  5059              	.LLST31:
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 98
+
+
  5060 04c7 06000000 		.4byte	.LVL82
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 98
-
-
  5061 04cb 0D000000 		.4byte	.LVL84-1
  5062 04cf 0100     		.2byte	0x1
  5063 04d1 51       		.byte	0x51
@@ -5877,10 +5878,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5114 0556 0100     		.2byte	0x1
  5115 0558 54       		.byte	0x54
  5116 0559 2C000000 		.4byte	.LVL94
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 99
+
+
  5117 055d 32000000 		.4byte	.LFE550
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 99
-
-
  5118 0561 0100     		.2byte	0x1
  5119 0563 54       		.byte	0x54
  5120 0564 00000000 		.4byte	0
@@ -5937,10 +5938,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5171 05ec 54       		.byte	0x54
  5172 05ed 00000000 		.4byte	0
  5173 05f1 00000000 		.4byte	0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 100
+
+
  5174              	.LLST39:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 100
-
-
  5175 05f5 0A000000 		.4byte	.LVL109
  5176 05f9 14000000 		.4byte	.LVL112
  5177 05fd 0100     		.2byte	0x1
@@ -5997,10 +5998,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5228 0676 9F       		.byte	0x9f
  5229 0677 00000000 		.4byte	0
  5230 067b 00000000 		.4byte	0
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 101
+
+
  5231              	.LLST44:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 101
-
-
  5232 067f 0C000000 		.4byte	.LVL116
  5233 0683 10000000 		.4byte	.LVL117
  5234 0687 0100     		.2byte	0x1
@@ -6057,10 +6058,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5285 0018 00000000 		.4byte	.LFB547
  5286 001c 18000000 		.4byte	.LFE547-.LFB547
  5287 0020 00000000 		.4byte	.LFB549
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 102
+
+
  5288 0024 28000000 		.4byte	.LFE549-.LFB549
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 102
-
-
  5289 0028 00000000 		.4byte	.LFB535
  5290 002c 1C000000 		.4byte	.LFE535-.LFB535
  5291 0030 00000000 		.4byte	.LFB536
@@ -6117,10 +6118,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5342 0034 34000000 		.4byte	.LFE538
  5343 0038 00000000 		.4byte	.LFB539
  5344 003c 12000000 		.4byte	.LFE539
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 103
+
+
  5345 0040 00000000 		.4byte	.LFB540
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 103
-
-
  5346 0044 10000000 		.4byte	.LFE540
  5347 0048 00000000 		.4byte	.LFB541
  5348 004c 16000000 		.4byte	.LFE541
@@ -6177,10 +6178,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5385      6667496E 
  5385      4F666673 
  5385      657400
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 104
+
+
  5386              	.LASF106:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 104
-
-
  5387 003e 6970634C 		.ascii	"ipcLockStatusOffset\000"
  5387      6F636B53 
  5387      74617475 
@@ -6237,10 +6238,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5409      656E6379 
  5409      00
  5410              	.LASF21:
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 105
+
+
  5411 00e0 63707573 		.ascii	"cpussBase\000"
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 105
-
-
  5411      73426173 
  5411      6500
  5412              	.LASF70:
@@ -6297,10 +6298,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5432              	.LASF203:
  5433 0188 49544D5F 		.ascii	"ITM_RxBuffer\000"
  5433      52784275 
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 106
+
+
  5433      66666572 
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 106
-
-
  5433      00
  5434              	.LASF59:
  5435 0195 666C6173 		.ascii	"flashPipeRequired\000"
@@ -6357,10 +6358,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5455      65727369 
  5455      6F6E00
  5456              	.LASF218:
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 107
+
+
  5457 0248 41445044 		.ascii	"ADPD1080.c\000"
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 107
-
-
  5457      31303830 
  5457      2E6300
  5458              	.LASF99:
@@ -6417,10 +6418,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5479 02ee 43595F53 		.ascii	"CY_SAR_RANGE_COND_ABOVE\000"
  5479      41525F52 
  5479      414E4745 
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 108
+
+
  5479      5F434F4E 
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 108
-
-
  5479      445F4142 
  5480              	.LASF45:
  5481 0306 63707573 		.ascii	"cpussFmIrq\000"
@@ -6477,10 +6478,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5503 0399 5F5F7569 		.ascii	"__uint32_t\000"
  5503      6E743332 
  5503      5F7400
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 109
+
+
  5504              	.LASF196:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 109
-
-
  5505 03a4 6D61736B 		.ascii	"mask\000"
  5505      00
  5506              	.LASF52:
@@ -6537,10 +6538,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5529      626C654C 
  5529      656400
  5530              	.LASF16:
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 110
+
+
  5531 043a 75696E74 		.ascii	"uint16_t\000"
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 110
-
-
  5531      31365F74 
  5531      00
  5532              	.LASF195:
@@ -6597,10 +6598,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5551      3143746C 
  5551      3000
  5552              	.LASF121:
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 111
+
+
  5553 04ed 72616E67 		.ascii	"rangeThres\000"
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 111
-
-
  5553      65546872 
  5553      657300
  5554              	.LASF189:
@@ -6657,10 +6658,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5575      66736574 
  5576              	.LASF53:
  5577 0591 65704D6F 		.ascii	"epMonitorNr\000"
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 112
+
+
  5577      6E69746F 
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 112
-
-
  5577      724E7200 
  5578              	.LASF138:
  5579 059d 72785269 		.ascii	"rxRingBufHead\000"
@@ -6717,10 +6718,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5599      5472436D 
  5599      64477253 
  5599      656C4D73 
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 113
+
+
  5599      6B00
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 113
-
-
  5600              	.LASF19:
  5601 0649 73697A65 		.ascii	"sizetype\000"
  5601      74797065 
@@ -6777,10 +6778,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5621 06e8 75646250 		.ascii	"udbPresent\000"
  5621      72657365 
  5621      6E7400
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 114
+
+
  5622              	.LASF161:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 114
-
-
  5623 06f3 656E536C 		.ascii	"enSlot\000"
  5623      6F7400
  5624              	.LASF135:
@@ -6837,10 +6838,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5642 0800 4932435F 		.ascii	"I2C_MasterSendStop\000"
  5642      4D617374 
  5642      65725365 
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 115
+
+
  5642      6E645374 
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 115
-
-
  5642      6F7000
  5643              	.LASF109:
  5644 0813 666C6F61 		.ascii	"float\000"
@@ -6897,10 +6898,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5666 08a3 41445044 		.ascii	"ADPD1080_SetTimeSlotSwitch\000"
  5666      31303830 
  5666      5F536574 
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 116
+
+
  5666      54696D65 
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 116
-
-
  5666      536C6F74 
  5667              	.LASF24:
  5668 08be 75646242 		.ascii	"udbBase\000"
@@ -6957,10 +6958,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5690      63654944 
  5690      00
  5691              	.LASF180:
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 117
+
+
  5692 0967 6368324F 		.ascii	"ch2Offset\000"
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 117
-
-
  5692      66667365 
  5692      7400
  5693              	.LASF78:
@@ -7017,10 +7018,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5714      5F526561 
  5714      64526567 
  5714      00
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 118
+
+
  5715              	.LASF100:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 118
-
-
  5716 0a12 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
  5716      73436D34 
  5716      4E6D6943 
@@ -7077,10 +7078,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5739              	.LASF36:
  5740 0aad 6873696F 		.ascii	"hsiomVersion\000"
  5740      6D566572 
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 119
+
+
  5740      73696F6E 
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 119
-
-
  5740      00
  5741              	.LASF61:
  5742 0aba 666C6173 		.ascii	"flashProgramDelay\000"
@@ -7137,10 +7138,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5762      6600
  5763              	.LASF148:
  5764 0b55 63795F73 		.ascii	"cy_stc_scb_uart_context_t\000"
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 120
+
+
  5764      74635F73 
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 120
-
-
  5764      63625F75 
  5764      6172745F 
  5764      636F6E74 
@@ -7197,10 +7198,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5785      62657200 
  5786              	.LASF169:
  5787 0c32 41445044 		.ascii	"ADPD1080_SetSamplingFrequency\000"
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 121
+
+
  5787      31303830 
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 121
-
-
  5787      5F536574 
  5787      53616D70 
  5787      6C696E67 
@@ -7257,10 +7258,10 @@ ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 1
  5807      77697463 
  5807      68537143 
  5807      74726C00 
+ARM GAS  C:\Users\shizh\AppData\Local\Temp\ccWx5CU2.s 			page 122
+
+
  5808              	.LASF33:
-ARM GAS  C:\Users\shizh\AppData\Local\Temp\cceXO8O5.s 			page 122
-
-
  5809 0d05 64775665 		.ascii	"dwVersion\000"
  5809      7273696F 
  5809      6E00
