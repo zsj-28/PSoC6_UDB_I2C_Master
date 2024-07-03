@@ -1,13 +1,13 @@
-Loading plugins phase: Elapsed time ==> 0s.184ms
+Loading plugins phase: Elapsed time ==> 2s.216ms
 <CYPRESSTAG name="CyDsfit arguments...">
 cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\shizh\Desktop\123\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj -d CYBLE-416045-02 -s C:\Users\shizh\Desktop\123\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\Generated_Source\PSoC6 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 </CYPRESSTAG>
 <CYPRESSTAG name="Design elaboration results...">
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 3s.387ms
+Elaboration phase: Elapsed time ==> 12s.343ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.132ms
+HDL generation phase: Elapsed time ==> 0s.186ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -41,7 +41,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\shizh
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Thu Jun 27 16:58:54 2024
+Wed Jul 03 17:21:21 2024
 
 
 ======================================================================
@@ -51,7 +51,7 @@ Options  :    -yv2 -q10 CY8CPROTO-063-BLE_Master.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Thu Jun 27 16:58:54 2024
+Wed Jul 03 17:21:21 2024
 
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\bI2C_v3_50\bI2C_v3_50.v'
@@ -96,7 +96,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\shizh
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Thu Jun 27 16:58:56 2024
+Wed Jul 03 17:21:23 2024
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -134,7 +134,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\shizh
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Thu Jun 27 16:58:56 2024
+Wed Jul 03 17:21:23 2024
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -214,8 +214,8 @@ Detecting unused logic.
 	\I2C:Net_975\
 	Net_8
 	Net_11
-	\UART:Net_22\
-	\UART:Net_23\
+	\UART1:Net_22\
+	\UART1:Net_23\
 	Net_53
 	Net_52
 	Net_58
@@ -243,7 +243,7 @@ Aliasing \I2C:bI2C_UDB:genblk6:MODULE_2:g1:a0:gx:u0:aeqb_0\ to one
 Aliasing \I2C:scl_x_wire\ to \I2C:bI2C_UDB:genblk6:MODULE_2:g1:a0:newa_0\
 Aliasing \I2C:Net_969\ to one
 Aliasing \I2C:Net_968\ to one
-Aliasing \UART:cts_wire\ to zero
+Aliasing \UART1:cts_wire\ to zero
 Aliasing \ADC:Net_40\ to zero
 Aliasing \ADC:Net_41\ to zero
 Aliasing \ADC:Net_42\ to zero
@@ -308,9 +308,9 @@ Removing Lhs of wire \I2C:Net_969\[218] = one[7]
 Removing Lhs of wire \I2C:Net_968\[219] = one[7]
 Removing Lhs of wire \I2C:tmpOE__Bufoe_scl_net_0\[229] = one[7]
 Removing Lhs of wire \I2C:tmpOE__Bufoe_sda_net_0\[232] = one[7]
-Removing Lhs of wire \UART:clock_wire\[251] = \UART:Net_847\[250]
-Removing Lhs of wire \UART:rx_wire\[263] = \UART:Net_1172\[260]
-Removing Lhs of wire \UART:cts_wire\[264] = zero[10]
+Removing Lhs of wire \UART1:clock_wire\[251] = \UART1:Net_847\[250]
+Removing Lhs of wire \UART1:rx_wire\[263] = \UART1:Net_1172\[260]
+Removing Lhs of wire \UART1:cts_wire\[264] = zero[10]
 Removing Lhs of wire \ADC:Net_40\[333] = zero[10]
 Removing Lhs of wire \ADC:Net_41\[334] = zero[10]
 Removing Lhs of wire \ADC:Net_42\[335] = zero[10]
@@ -462,14 +462,14 @@ CYPRESS_DIR    : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\wa
 Warp Program   : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\bin\warp.exe
 Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\shizh\Desktop\123\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj -dcpsoc3 CY8CPROTO-063-BLE_Master.v -verilog
 </CYPRESSTAG>
-Warp synthesis phase: Elapsed time ==> 3s.776ms
+Warp synthesis phase: Elapsed time ==> 3s.797ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Thursday, 27 June 2024 16:58:58
+cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Wednesday, 03 July 2024 17:21:25
 Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\shizh\Desktop\123\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj -d CYBLE-416045-02 CY8CPROTO-063-BLE_Master.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
-Design parsing phase: Elapsed time ==> 0s.919ms
+Design parsing phase: Elapsed time ==> 0s.959ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Tech Mapping">
 <CYPRESSTAG name="Initial Mapping" icon="FILE_RPT_TECHM">
@@ -479,7 +479,7 @@ Removing unused cells resulting from optimization
 Done removing unused cells.
 <CYPRESSTAG name="Global Clock Selection" icon="FILE_RPT_TECHM">
     Digital Clock 0: Automatic-assigning  clock 'CLK'. Fanout=1, Signal=Net_2_digital
-    Fixed Function Clock 0: Automatic-assigning  clock 'UART_SCBCLK'. Signal=\UART:Net_847_ff0\
+    Fixed Function Clock 0: Automatic-assigning  clock 'UART1_SCBCLK'. Signal=\UART1:Net_847_ff0\
     Fixed Function Clock 49: Automatic-assigning  clock 'ADC_intSarClock'. Signal=\ADC:Net_428_ff49\
 <CYPRESSTAG name="UDB Clock/Enable Remapping Results">
     UDB Clk/Enable \I2C:bI2C_UDB:ClkSync0\: with output requested to be synchronous
@@ -491,7 +491,7 @@ Done removing unused cells.
 
 Removing unused cells resulting from optimization
 Done removing unused cells.
-ADD: pft.M0040: information: The following 4 pin(s) will be assigned a location by the fitter: \UART:rx(0)\, \UART:tx(0)\, ADC_CH0(0), ADC_CH1(0)
+ADD: pft.M0040: information: The following 4 pin(s) will be assigned a location by the fitter: \UART1:rx(0)\, \UART1:tx(0)\, ADC_CH0(0), ADC_CH1(0)
 
 Info: plm.M0038: The pin named CY_CPUSS_SWJ_SWCLK_TCLK(0) at location P6[7] prevents usage of special purposes: SCB[6].uart_cts. (App=cydsfit)
 Info: plm.M0038: The pin named CY_CPUSS_SWJ_SWCLK_TCLK(0) at location P6[7] prevents usage of special purposes: SCB[6].spi_select[0]. (App=cydsfit)
@@ -712,7 +712,7 @@ Design Equations
         {
         }
 
-    Pin : Name = \UART:tx(0)\
+    Pin : Name = \UART1:tx(0)\
         Attributes:
             In Group/Port: True
             In Sync Option: AUTO
@@ -745,11 +745,11 @@ Design Equations
             Initial Value: 1
             IO Voltage: 0
         PORT MAP (
-            pa_out => \UART:tx(0)\__PA ,
-            pin_input => \UART:tx_wire\ ,
-            pad => \UART:tx(0)_PAD\ );
+            pa_out => \UART1:tx(0)\__PA ,
+            pin_input => \UART1:tx_wire\ ,
+            pad => \UART1:tx(0)_PAD\ );
 
-    Pin : Name = \UART:rx(0)\
+    Pin : Name = \UART1:rx(0)\
         Attributes:
             In Group/Port: True
             In Sync Option: NOSYNC
@@ -782,9 +782,9 @@ Design Equations
             Initial Value: 1
             IO Voltage: 0
         PORT MAP (
-            pa_out => \UART:rx(0)\__PA ,
-            fb => \UART:Net_1172\ ,
-            pad => \UART:rx(0)_PAD\ );
+            pa_out => \UART1:rx(0)\__PA ,
+            fb => \UART1:Net_1172\ ,
+            pad => \UART1:rx(0)_PAD\ );
 
     Pin : Name = ADC_CH0(0)
         Attributes:
@@ -1866,9 +1866,9 @@ Design Equations
             int_type = "00"
         }
 
-    interrupt: Name =\UART:SCB_IRQ\
+    interrupt: Name =\UART1:SCB_IRQ\
         PORT MAP (
-            interrupt => \UART:intr_wire\ );
+            interrupt => \UART1:intr_wire\ );
         Properties:
         {
             cy_registers = ""
@@ -1930,8 +1930,8 @@ Sample and Hold               :    0 :    1 :    1 :  0.00 %
 SAR ADC                       :    1 :    0 :    1 : 100.00 %
 DieTemp Sensor                :    0 :    1 :    1 :  0.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 0s.320ms
-Tech Mapping phase: Elapsed time ==> 0s.390ms
+Technology Mapping: Elapsed time ==> 0s.344ms
+Tech Mapping phase: Elapsed time ==> 0s.439ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 <CYPRESSTAG name="FFB & IO Pre Placement">
@@ -1956,22 +1956,22 @@ CPUSS                               : CPUSS_[FFB(CPUSS,0)]
 \ADC:vssa_kelvin_1\                 : Vref_[FFB(Vref,0)]                 
 \ADC:vRef_4\                        : Vref_[FFB(Vref,1)]                 
 \ADC:vRef_8\                        : Vref_[FFB(Vref,2)]                 
-\UART:rx(0)\                        : [IOP=(5)][IoId=(0)]                
-\UART:tx(0)\                        : [IOP=(5)][IoId=(1)]                
-\UART:SCB\                          : SCB_[FFB(SCB,5)]                   
+\UART1:rx(0)\                       : [IOP=(5)][IoId=(0)]                
+\UART1:tx(0)\                       : [IOP=(5)][IoId=(1)]                
+\UART1:SCB\                         : SCB_[FFB(SCB,5)]                   
 ADC_CH0(0)                          : [IOP=(10)][IoId=(3)]               
 ADC_CH1(0)                          : [IOP=(10)][IoId=(4)]               
 
 </CYPRESSTAG>
 </CYPRESSTAG>
 <CYPRESSTAG name="Real Analog Placement">
-Elapsed time ==> 0.1416463s
+Elapsed time ==> 0.1566495s
 </CYPRESSTAG>
-Analog Placement phase: Elapsed time ==> 0s.810ms
+Analog Placement phase: Elapsed time ==> 0s.889ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Routing">
 <CYPRESSTAG name="Analog Routing">
-Route success=True, Iterations=1 Elapsed=0.0722820 secs
+Route success=True, Iterations=1 Elapsed=0.0722476 secs
 </CYPRESSTAG>
 Analog Routing phase: Elapsed time ==> 0s.073ms
 </CYPRESSTAG>
@@ -2260,7 +2260,7 @@ Mux Info {
     }
   }
 }
-Analog Code Generation phase: Elapsed time ==> 0s.027ms
+Analog Code Generation phase: Elapsed time ==> 0s.028ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
@@ -2290,7 +2290,7 @@ PLD Packing Summary
 <CYPRESSTAG name="Packed PLD Contents">
 Packed PLD Contents not displayed at this verbose level.</CYPRESSTAG>
 </CYPRESSTAG>
-PLD Packing: Elapsed time ==> 0s.005ms
+PLD Packing: Elapsed time ==> 0s.004ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Partitioning">
 <CYPRESSTAG name="Initial Partitioning Summary">
@@ -3220,9 +3220,9 @@ UDB [UDB=(1,4)] is empty.
 UDB [UDB=(1,5)] is empty.
 Intr container @ [IntrContainer=(0)]: 
   Intr@ [IntrContainer=(0)][IntrId=(46)] 
-    interrupt: Name =\UART:SCB_IRQ\
+    interrupt: Name =\UART1:SCB_IRQ\
         PORT MAP (
-            interrupt => \UART:intr_wire\ );
+            interrupt => \UART1:intr_wire\ );
         Properties:
         {
             cy_registers = ""
@@ -3253,7 +3253,7 @@ Drq container @ [DrqContainer=(0)]: empty
 Port 0 contains the following IO cells:
 Port 5 contains the following IO cells:
 [IoId=0]: 
-Pin : Name = \UART:rx(0)\
+Pin : Name = \UART1:rx(0)\
     Attributes:
         In Group/Port: True
         In Sync Option: NOSYNC
@@ -3286,15 +3286,15 @@ Pin : Name = \UART:rx(0)\
         Initial Value: 1
         IO Voltage: 0
     PORT MAP (
-        pa_out => \UART:rx(0)\__PA ,
-        fb => \UART:Net_1172\ ,
-        pad => \UART:rx(0)_PAD\ );
+        pa_out => \UART1:rx(0)\__PA ,
+        fb => \UART1:Net_1172\ ,
+        pad => \UART1:rx(0)_PAD\ );
     Properties:
     {
     }
 
 [IoId=1]: 
-Pin : Name = \UART:tx(0)\
+Pin : Name = \UART1:tx(0)\
     Attributes:
         In Group/Port: True
         In Sync Option: AUTO
@@ -3327,9 +3327,9 @@ Pin : Name = \UART:tx(0)\
         Initial Value: 1
         IO Voltage: 0
     PORT MAP (
-        pa_out => \UART:tx(0)\__PA ,
-        pin_input => \UART:tx_wire\ ,
-        pad => \UART:tx(0)_PAD\ );
+        pa_out => \UART1:tx(0)\__PA ,
+        pin_input => \UART1:tx_wire\ ,
+        pad => \UART1:tx(0)_PAD\ );
     Properties:
     {
     }
@@ -3894,7 +3894,7 @@ Clock group 0:
             wco => ClockBlock_WCO ,
             lfclk => ClockBlock_LFClk ,
             udb_div_0 => dclk_to_genclk ,
-            ff_div_0 => \UART:Net_847_ff0\ ,
+            ff_div_0 => \UART1:Net_847_ff0\ ,
             ff_div_49 => \ADC:Net_428_ff49\ );
         Properties:
         {
@@ -3937,16 +3937,16 @@ Vref group 0:
 LPCOMP group 0: empty
 SCB group 0: 
     SCB @ F(SCB,5): 
-    SCB: Name =\UART:SCB\
+    SCB: Name =\UART1:SCB\
         PORT MAP (
-            clock => \UART:Net_847_ff0\ ,
-            uart_rx => \UART:Net_1172\ ,
-            uart_tx => \UART:tx_wire\ ,
-            uart_rts => \UART:rts_wire\ ,
-            interrupt => \UART:intr_wire\ ,
+            clock => \UART1:Net_847_ff0\ ,
+            uart_rx => \UART1:Net_1172\ ,
+            uart_tx => \UART1:tx_wire\ ,
+            uart_rts => \UART1:rts_wire\ ,
+            interrupt => \UART1:intr_wire\ ,
             tr_tx_req => Net_56 ,
             tr_rx_req => Net_55 ,
-            tr_i2c_scl_filtered => \UART:Net_161\ );
+            tr_i2c_scl_filtered => \UART1:Net_161\ );
         Properties:
         {
             cy_registers = ""
@@ -4068,8 +4068,8 @@ Port Configuration report
      |     |       | Interrupt |                  |                            | 
 Port | Pin | Fixed |      Type |       Drive Mode |                       Name | Connections
 -----+-----+-------+-----------+------------------+----------------------------+-------------------------------------------
-   5 |   0 |       |      NONE |      HI_Z_ANALOG |               \UART:rx(0)\ | FB(\UART:Net_1172\)
-     |   1 |       |      NONE |         CMOS_OUT |               \UART:tx(0)\ | In(\UART:tx_wire\)
+   5 |   0 |       |      NONE |      HI_Z_ANALOG |              \UART1:rx(0)\ | FB(\UART1:Net_1172\)
+     |   1 |       |      NONE |         CMOS_OUT |              \UART1:tx(0)\ | In(\UART1:tx_wire\)
 -----+-----+-------+-----------+------------------+----------------------------+-------------------------------------------
    6 |   6 |     * |      NONE |      RES_PULL_UP |  CY_CPUSS_SWJ_SWDIO_TMS(0) | FB(CPUSS_swj_swdio_tms)
      |   7 |     * |      NONE |    RES_PULL_DOWN | CY_CPUSS_SWJ_SWCLK_TCLK(0) | FB(CPUSS_swj_swclk_tclk)
@@ -4090,33 +4090,33 @@ Port | Pin | Fixed |      Type |       Drive Mode |                       Name |
 </CYPRESSTAG>
 </CYPRESSTAG>
 </CYPRESSTAG>
-Digital component placer commit/Report: Elapsed time ==> 0s.084ms
-Digital Placement phase: Elapsed time ==> 9s.279ms
+Digital component placer commit/Report: Elapsed time ==> 0s.088ms
+Digital Placement phase: Elapsed time ==> 9s.399ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\bin/sjrouter.exe" --xml-path "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/route_arch-rrg.cydata" --vh2-path "CY8CPROTO-063-BLE_Master_r.vh2" --pcf-path "CY8CPROTO-063-BLE_Master.pco" --des-name "CY8CPROTO-063-BLE_Master" --dsf-path "CY8CPROTO-063-BLE_Master.dsf" --sdc-path "CY8CPROTO-063-BLE_Master.sdc" --lib-path "CY8CPROTO-063-BLE_Master_r.lib"
 Routing successful.
-Digital Routing phase: Elapsed time ==> 4s.093ms
+Digital Routing phase: Elapsed time ==> 4s.375ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
-Bitstream Generation phase: Elapsed time ==> 0s.559ms
+Bitstream Generation phase: Elapsed time ==> 0s.580ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Verification">
 Bitstream Verification phase: Elapsed time ==> 0s.001ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Static timing analysis">
 Timing report is in CY8CPROTO-063-BLE_Master_timing.html.
-Static timing analysis phase: Elapsed time ==> 13s.050ms
+Static timing analysis phase: Elapsed time ==> 13s.177ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Data reporting">
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.251ms
+Design database save phase: Elapsed time ==> 0s.253ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 29s.516ms
+cydsfit: Elapsed time ==> 30s.239ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 29s.517ms
-API generation phase: Elapsed time ==> 1s.395ms
-Dependency generation phase: Elapsed time ==> 0s.012ms
+Fitter phase: Elapsed time ==> 30s.244ms
+API generation phase: Elapsed time ==> 1s.476ms
+Dependency generation phase: Elapsed time ==> 0s.014ms
 Cleanup phase: Elapsed time ==> 0s.002ms

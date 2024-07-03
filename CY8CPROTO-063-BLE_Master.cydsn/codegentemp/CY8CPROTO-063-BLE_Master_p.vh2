@@ -1,5 +1,5 @@
 -- Project:   CY8CPROTO-063-BLE_Master
--- Generated: 06/27/2024 16:59:08
+-- Generated: 07/03/2024 17:21:35
 -- PSoC Creator  4.4
 
 ENTITY \CY8CPROTO-063-BLE_Master\ IS
@@ -7,8 +7,8 @@ ENTITY \CY8CPROTO-063-BLE_Master\ IS
         RST(0)_PAD : IN std_ulogic;
         SDA(0)_PAD : INOUT std_ulogic;
         SCL(0)_PAD : INOUT std_ulogic;
-        \UART:tx(0)_PAD\ : OUT std_ulogic;
-        \UART:rx(0)_PAD\ : IN std_ulogic);
+        \UART1:tx(0)_PAD\ : OUT std_ulogic;
+        \UART1:rx(0)_PAD\ : IN std_ulogic);
     ATTRIBUTE voltage_VBACKUP OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CSD OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -134,15 +134,15 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     SIGNAL \I2C:bI2C_UDB:status_5\ : bit;
     SIGNAL \I2C:bI2C_UDB:tx_reg_empty\ : bit;
     SIGNAL \I2C:sda_x_wire\ : bit;
-    SIGNAL \UART:Net_1172\ : bit;
-    SIGNAL \UART:Net_161\ : bit;
-    SIGNAL \UART:Net_847_ff0\ : bit;
-    ATTRIBUTE global_signal OF \UART:Net_847_ff0\ : SIGNAL IS true;
-    SIGNAL \UART:intr_wire\ : bit;
-    SIGNAL \UART:rts_wire\ : bit;
-    SIGNAL \\\UART:rx(0)\\__PA\ : bit;
-    SIGNAL \\\UART:tx(0)\\__PA\ : bit;
-    SIGNAL \UART:tx_wire\ : bit;
+    SIGNAL \UART1:Net_1172\ : bit;
+    SIGNAL \UART1:Net_161\ : bit;
+    SIGNAL \UART1:Net_847_ff0\ : bit;
+    ATTRIBUTE global_signal OF \UART1:Net_847_ff0\ : SIGNAL IS true;
+    SIGNAL \UART1:intr_wire\ : bit;
+    SIGNAL \UART1:rts_wire\ : bit;
+    SIGNAL \\\UART1:rx(0)\\__PA\ : bit;
+    SIGNAL \\\UART1:tx(0)\\__PA\ : bit;
+    SIGNAL \UART1:tx_wire\ : bit;
     SIGNAL __ONE__ : bit;
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
@@ -165,8 +165,8 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE Location OF SDA(0) : LABEL IS "P10[2]";
     ATTRIBUTE lib_model OF SCL(0) : LABEL IS "iocell5";
     ATTRIBUTE Location OF SCL(0) : LABEL IS "P10[1]";
-    ATTRIBUTE lib_model OF \UART:tx(0)\ : LABEL IS "iocell6";
-    ATTRIBUTE lib_model OF \UART:rx(0)\ : LABEL IS "iocell7";
+    ATTRIBUTE lib_model OF \UART1:tx(0)\ : LABEL IS "iocell6";
+    ATTRIBUTE lib_model OF \UART1:rx(0)\ : LABEL IS "iocell7";
     ATTRIBUTE lib_model OF ADC_CH0(0) : LABEL IS "iocell8";
     ATTRIBUTE Location OF ADC_CH0(0) : LABEL IS "P10[3]";
     ATTRIBUTE lib_model OF ADC_CH1(0) : LABEL IS "iocell9";
@@ -840,7 +840,7 @@ BEGIN
             wco => ClockBlock_WCO,
             lfclk => ClockBlock_LFClk,
             udb_div_0 => dclk_to_genclk,
-            ff_div_0 => \UART:Net_847_ff0\,
+            ff_div_0 => \UART1:Net_847_ff0\,
             ff_div_49 => \ADC:Net_428_ff49\,
             periclk_App => periclk_App);
 
@@ -1124,7 +1124,7 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
-    \UART:tx\:logicalport
+    \UART1:tx\:logicalport
         GENERIC MAP(
             cy_registers => "",
             drive_mode => "110",
@@ -1159,20 +1159,20 @@ BEGIN
             out_clken_mode => 1,
             out_rst_inv => 0);
 
-    \UART:tx(0)\:iocell
+    \UART1:tx(0)\:iocell
         GENERIC MAP(
             in_sync_mode => 0,
             out_sync_mode => 0,
             oe_sync_mode => 0,
-            logicalport => "\UART:tx\",
+            logicalport => "\UART1:tx\",
             logicalport_pin_id => 0,
             io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
         PORT MAP(
-            pa_out => \\\UART:tx(0)\\__PA\,
+            pa_out => \\\UART1:tx(0)\\__PA\,
             oe => open,
-            pin_input => \UART:tx_wire\,
-            pad_out => \UART:tx(0)_PAD\,
-            pad_in => \UART:tx(0)_PAD\,
+            pin_input => \UART1:tx_wire\,
+            pad_out => \UART1:tx(0)_PAD\,
+            pad_in => \UART1:tx(0)_PAD\,
             in_clock => open,
             in_clock_en => open,
             in_reset => open,
@@ -1180,7 +1180,7 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
-    \UART:rx\:logicalport
+    \UART1:rx\:logicalport
         GENERIC MAP(
             cy_registers => "",
             drive_mode => "000",
@@ -1215,19 +1215,19 @@ BEGIN
             out_clken_mode => 1,
             out_rst_inv => 0);
 
-    \UART:rx(0)\:iocell
+    \UART1:rx(0)\:iocell
         GENERIC MAP(
             in_sync_mode => 0,
             out_sync_mode => 0,
             oe_sync_mode => 0,
-            logicalport => "\UART:rx\",
+            logicalport => "\UART1:rx\",
             logicalport_pin_id => 0,
             io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
         PORT MAP(
-            pa_out => \\\UART:rx(0)\\__PA\,
+            pa_out => \\\UART1:rx(0)\\__PA\,
             oe => open,
-            fb => \UART:Net_1172\,
-            pad_in => \UART:rx(0)_PAD\,
+            fb => \UART1:Net_1172\,
+            pad_in => \UART1:rx(0)_PAD\,
             in_clock => open,
             in_clock_en => open,
             in_reset => open,
@@ -1895,26 +1895,26 @@ BEGIN
             cl1_comb => \I2C:bI2C_UDB:clkgen_cl1\,
             busclk => periclk_App);
 
-    \UART:SCB_IRQ\:interrupt
+    \UART1:SCB_IRQ\:interrupt
         GENERIC MAP(
             cy_registers => "",
             deepsleep_required => 0,
             int_type => "10")
         PORT MAP(
-            interrupt => \UART:intr_wire\,
+            interrupt => \UART1:intr_wire\,
             clock => ClockBlock_PeriClk);
 
-    \UART:SCB\:SCB
+    \UART1:SCB\:SCB
         GENERIC MAP(
             cy_registers => "",
             master => 0,
             mode => 2,
             requires_io_preconfigure => 0)
         PORT MAP(
-            clock => \UART:Net_847_ff0\,
-            uart_rx => \UART:Net_1172\,
-            uart_tx => \UART:tx_wire\,
-            uart_rts => \UART:rts_wire\,
+            clock => \UART1:Net_847_ff0\,
+            uart_rx => \UART1:Net_1172\,
+            uart_tx => \UART1:tx_wire\,
+            uart_rts => \UART1:rts_wire\,
             uart_cts => open,
             spi_clk => open,
             spi_select_3 => open,
@@ -1923,10 +1923,10 @@ BEGIN
             spi_select_0 => open,
             spi_mosi => open,
             spi_miso => open,
-            interrupt => \UART:intr_wire\,
+            interrupt => \UART1:intr_wire\,
             tr_tx_req => Net_56,
             tr_rx_req => Net_55,
-            tr_i2c_scl_filtered => \UART:Net_161\);
+            tr_i2c_scl_filtered => \UART1:Net_161\);
 
     \ADC:SARMUX\:SARMUX
         GENERIC MAP(

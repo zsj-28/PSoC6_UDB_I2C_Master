@@ -1,9 +1,9 @@
 /***************************************************************************//**
-* \file     UART_SCBCLK.h
+* \file     UART1_SCBCLK.h
 * \version  1.0
 *
 * \brief
-* Provides the source code to the API for the UART_SCBCLK Component.
+* Provides the source code to the API for the UART1_SCBCLK Component.
 *
 ********************************************************************************
 * \copyright
@@ -13,8 +13,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_UART_SCBCLK_NAME_UART_SCBCLK_H)
-#define CY_UART_SCBCLK_NAME_UART_SCBCLK_H
+#if !defined(CY_UART1_SCBCLK_NAME_UART1_SCBCLK_H)
+#define CY_UART1_SCBCLK_NAME_UART1_SCBCLK_H
 
 /* For _DIV_TYPE and _DIV_NUM #defines */
 #include "cyfitter.h"
@@ -32,9 +32,9 @@
 * @{
 */
 /** The peripheral clock divider number */
-#define UART_SCBCLK_DIV_NUM ((uint32_t)UART_SCBCLK__DIV_NUM)
+#define UART1_SCBCLK_DIV_NUM ((uint32_t)UART1_SCBCLK__DIV_NUM)
 /** The peripheral clock divider type */
-#define UART_SCBCLK_DIV_TYPE ((cy_en_divider_types_t)UART_SCBCLK__DIV_TYPE)
+#define UART1_SCBCLK_DIV_TYPE ((cy_en_divider_types_t)UART1_SCBCLK__DIV_TYPE)
 /** @} group_macros */
 
 /***************************************
@@ -47,7 +47,7 @@
 */
 
 /*******************************************************************************
-* Function Name: UART_SCBCLK_Enable
+* Function Name: UART1_SCBCLK_Enable
 ****************************************************************************//**
 *
 * Enables the programmable clock divider assigned to this Component.
@@ -57,13 +57,13 @@
 * \return None
 *
 *******************************************************************************/
-__STATIC_INLINE void UART_SCBCLK_Enable(void)
+__STATIC_INLINE void UART1_SCBCLK_Enable(void)
 {
-    (void)Cy_SysClk_PeriphEnableDivider(UART_SCBCLK_DIV_TYPE, UART_SCBCLK_DIV_NUM);
+    (void)Cy_SysClk_PeriphEnableDivider(UART1_SCBCLK_DIV_TYPE, UART1_SCBCLK_DIV_NUM);
 }
 
 /*******************************************************************************
-* Function Name: UART_SCBCLK_Disable
+* Function Name: UART1_SCBCLK_Disable
 ****************************************************************************//**
 *
 * Disables the programmable clock divider assigned to this Component.
@@ -73,17 +73,17 @@ __STATIC_INLINE void UART_SCBCLK_Enable(void)
 * \return None
 *
 *******************************************************************************/
-__STATIC_INLINE void UART_SCBCLK_Disable(void)
+__STATIC_INLINE void UART1_SCBCLK_Disable(void)
 {
-    (void)Cy_SysClk_PeriphDisableDivider(UART_SCBCLK_DIV_TYPE, UART_SCBCLK_DIV_NUM);
+    (void)Cy_SysClk_PeriphDisableDivider(UART1_SCBCLK_DIV_TYPE, UART1_SCBCLK_DIV_NUM);
 }
 
 /*******************************************************************************
-* Function Name: UART_SCBCLK_SetDivider
+* Function Name: UART1_SCBCLK_SetDivider
 ****************************************************************************//**
 *
 * Sets the value of a programmable clock divider assigned to this Component.
-* This is only used for integer dividers. Use UART_SCBCLK_SetFracDivider()
+* This is only used for integer dividers. Use UART1_SCBCLK_SetFracDivider()
 * for setting factional dividers.
 *
 * \param dividerValue
@@ -95,18 +95,18 @@ __STATIC_INLINE void UART_SCBCLK_Disable(void)
 * \return None
 *
 *******************************************************************************/
-__STATIC_INLINE void UART_SCBCLK_SetDivider(uint32_t dividerValue)
+__STATIC_INLINE void UART1_SCBCLK_SetDivider(uint32_t dividerValue)
 {
-    (void)Cy_SysClk_PeriphSetDivider(UART_SCBCLK_DIV_TYPE, UART_SCBCLK_DIV_NUM, dividerValue);
+    (void)Cy_SysClk_PeriphSetDivider(UART1_SCBCLK_DIV_TYPE, UART1_SCBCLK_DIV_NUM, dividerValue);
 }
 
 /*******************************************************************************
-* Function Name: UART_SCBCLK_GetDivider
+* Function Name: UART1_SCBCLK_GetDivider
 ****************************************************************************//**
 *
 * Returns the integer divider value for the programmable clock divider assigned
 * to this Component. This is only used for integer dividers.
-* Use UART_SCBCLK_GetFracDivider() with a fractional divider.
+* Use UART1_SCBCLK_GetFracDivider() with a fractional divider.
 *
 * \param None
 *
@@ -116,17 +116,17 @@ __STATIC_INLINE void UART_SCBCLK_SetDivider(uint32_t dividerValue)
 * or division by 1 to 256 (8-bit divider) or 1 to 65536 (16-bit divider).
 *
 *******************************************************************************/
-__STATIC_INLINE uint32_t UART_SCBCLK_GetDivider(void)
+__STATIC_INLINE uint32_t UART1_SCBCLK_GetDivider(void)
 {
-    return Cy_SysClk_PeriphGetDivider(UART_SCBCLK_DIV_TYPE, UART_SCBCLK_DIV_NUM);
+    return Cy_SysClk_PeriphGetDivider(UART1_SCBCLK_DIV_TYPE, UART1_SCBCLK_DIV_NUM);
 }
 
 /*******************************************************************************
-* Function Name: UART_SCBCLK_SetFracDivider
+* Function Name: UART1_SCBCLK_SetFracDivider
 ****************************************************************************//**
 *
 * Sets the values of a programmable clock divider assigned to this Component.
-* This is only used for fractional dividers. Use UART_SCBCLK_SetDivider()
+* This is only used for fractional dividers. Use UART1_SCBCLK_SetDivider()
 * for setting integer dividers.
 *
 * \param dividerIntValue
@@ -143,18 +143,18 @@ __STATIC_INLINE uint32_t UART_SCBCLK_GetDivider(void)
 * \return None
 *
 *******************************************************************************/
-__STATIC_INLINE void UART_SCBCLK_SetFracDivider(uint32_t dividerIntValue, uint32_t dividerFracValue)
+__STATIC_INLINE void UART1_SCBCLK_SetFracDivider(uint32_t dividerIntValue, uint32_t dividerFracValue)
 {
-    (void)Cy_SysClk_PeriphSetFracDivider(UART_SCBCLK_DIV_TYPE, UART_SCBCLK_DIV_NUM, dividerIntValue, dividerFracValue);
+    (void)Cy_SysClk_PeriphSetFracDivider(UART1_SCBCLK_DIV_TYPE, UART1_SCBCLK_DIV_NUM, dividerIntValue, dividerFracValue);
 }
 
 /*******************************************************************************
-* Function Name: UART_SCBCLK_GetFracDivider
+* Function Name: UART1_SCBCLK_GetFracDivider
 ****************************************************************************//**
 *
 * Returns the divider values for the programmable clock divider assigned to this
 * Component. This is only used for fractional dividers.
-* Use UART_SCBCLK_GetDivider() with an integer divider.
+* Use UART1_SCBCLK_GetDivider() with an integer divider.
 *
 * \param *dividerIntValue
 * pointer to return integer divider value
@@ -165,13 +165,13 @@ __STATIC_INLINE void UART_SCBCLK_SetFracDivider(uint32_t dividerIntValue, uint32
 * \return None. Loads pointed-to variables.
 *
 *******************************************************************************/
-__STATIC_INLINE void UART_SCBCLK_GetFracDivider(uint32_t *dividerIntValue, uint32_t *dividerFracValue)
+__STATIC_INLINE void UART1_SCBCLK_GetFracDivider(uint32_t *dividerIntValue, uint32_t *dividerFracValue)
 {
-    Cy_SysClk_PeriphGetFracDivider(UART_SCBCLK_DIV_TYPE, UART_SCBCLK_DIV_NUM, dividerIntValue, dividerFracValue);
+    Cy_SysClk_PeriphGetFracDivider(UART1_SCBCLK_DIV_TYPE, UART1_SCBCLK_DIV_NUM, dividerIntValue, dividerFracValue);
 }
 
 /** @} general */
 
-#endif /* CY_CLOCK_UART_SCBCLK_H */
+#endif /* CY_CLOCK_UART1_SCBCLK_H */
 
 /* [] END OF FILE */

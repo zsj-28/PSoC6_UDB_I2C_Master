@@ -71,7 +71,7 @@ int main(void)
     
 
     // Initialize UART for serial communication
-    UART_Start();
+    UART1_Start();
     
     // Initialize I2C for sensor communication
     I2C_Start();
@@ -121,87 +121,95 @@ uint8_t GetCrc8(uint8_t crc8, const uint8_t* Data, uint16_t len)
 	return crc8;
 }
 
-void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
-    uint8_t packet[2 + length + 1];
-    packet[0] = opcode;
-    packet[1] = length;
-    memcpy(&packet[2], data, length);
-    packet[2 + length] = calculate_crc8(packet, 2 + length);
-    for(uint8_t i= 0 ;i<4;i++){
-        printf("%d    ", packet[i]);
-    }
-    printf("Packet ends\n");
-    //Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
-    uint8_t myPacket[5]={1,2,3,4,5};
-    //Cy_SCB_UART_PutArray(UART_HW,myPacket, 5);
-    //cy_en_scb_uart_status_t status = Cy_SCB_UART_PutArray(UART_HW,myPacket, 5);
+// void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
+//     uint8_t packet[2 + length + 1];
+//     packet[0] = opcode;
+//     packet[1] = length;
+//     memcpy(&packet[2], data, length);
+//     packet[2 + length] = calculate_crc8(packet, 2 + length);
+//     for(uint8_t i= 0 ;i<4;i++){
+//         printf("%d    ", packet[i]);
+//     }
+//     printf("Packet ends\n");
+//     //Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
+//     uint8_t myPacket[5]={1,2,3,4,5};
+//     //Cy_SCB_UART_PutArray(UART_HW,myPacket, 5);
+//     //cy_en_scb_uart_status_t status = Cy_SCB_UART_PutArray(UART_HW,myPacket, 5);
 
-    //printf("Put ends with status %d\n", status);
-}
+//     //printf("Put ends with status %d\n", status);
+// }
 
-/*  send data 
-    adc_channel goes from 0 - 8 
-    0x0-0x7 are 8 ADC channels, 0x8 is the I2C ADPD readings*/
-void send_data(uint16_t adc_value, uint16_t adc_channel) {
-    uint8_t data[2];
-    data[0] = (adc_value >> 8) & 0xFF;
-    data[1] = adc_value & 0xFF;
-    wrap_data(OPCODE_ADC_0 + adc_channel, data, 2);
-}
-
+// /*  send data 
+//     adc_channel goes from 0 - 8 
+//     0x0-0x7 are 8 ADC channels, 0x8 is the I2C ADPD readings*/
 // void send_data(uint16_t adc_value, uint16_t adc_channel) {
 //     uint8_t data[2];
 //     data[0] = (adc_value >> 8) & 0xFF;
 //     data[1] = adc_value & 0xFF;
-
-//     uint8_t opcode = OPCODE_ADC_0 + adc_channel;
-//     printf("Opcode: %d\r\n", opcode);
-
-//     cy_en_scb_uart_status_t status;
-    
-//     // Add a small delay to ensure UART is ready
-//     vTaskDelay(pdMS_TO_TICKS(10));
- 
-//     //status = Cy_SCB_UART_Put(UART_HW, opcode);
-//     if (status != CY_SCB_UART_SUCCESS) {
-//       //  printf("%d\r\n", status);
-//         printf("Failed to send opcode, status: %d\r\n", status);
-//         //return;
-//     }
-
-//     uint8_t crc = GetCrc8(0, &opcode, 1);
-
-//     uint8_t length = 2;
-//     //status = Cy_SCB_UART_Put(UART_HW, length);
-//     if (status != CY_SCB_UART_SUCCESS) {
-//         printf("Failed to send length, status: %d\r\n", status);
-//         //return;
-//     }
-//     printf("Length: %d\r\n", length);
-//     crc = GetCrc8(crc, &length, 1);
-
-//     //status = Cy_SCB_UART_Put(UART_HW, data[0]);
-//     if (status != CY_SCB_UART_SUCCESS) {
-//         printf("Failed to send data[0], status: %d\r\n", status);
-//        // return;
-//     }
-//     printf("Data[0]: %d\r\n", data[0]);
-
-//     //status = Cy_SCB_UART_Put(UART_HW, data[1]);
-//     if (status != CY_SCB_UART_SUCCESS) {
-//         printf("Failed to send data[1], status: %d\r\n", status);
-//         //return;
-//     }
-//     printf("Data[1]: %d\r\n", data[1]);
-
-//     crc = GetCrc8(crc, data, 2);
-//     printf("CRC: %d\r\n", crc);
-
-//     //status = Cy_SCB_UART_Put(UART_HW, crc);
-//     if (status != CY_SCB_UART_SUCCESS) {
-//         printf("Failed to send CRC, status: %d\r\n", status);
-//     }
+//     wrap_data(OPCODE_ADC_0 + adc_channel, data, 2);
 // }
+
+void send_data(uint16_t adc_value, uint16_t adc_channel) {
+    uint8_t data[2];
+    data[0] = (adc_value >> 8) & 0xFF;
+    data[1] = adc_value & 0xFF;
+
+    uint8_t opcode = OPCODE_ADC_0 + adc_channel;
+    printf("Opcode: %d\r\n", opcode);
+
+    cy_en_scb_uart_status_t status;
+    
+    // Add a small delay to ensure UART is ready
+    vTaskDelay(pdMS_TO_TICKS(10));
+
+    // char_t str[] = "Hello World/r/n";
+    // /* Initialize SCB for UART operation with GUI selected settings */
+    // (void) Cy_SCB_UART_Init(SCB0, &UART1_config, NULL);
+    // /* Enable UART */
+    // Cy_SCB_UART_Enable(SCB0);
+    // /* Put data into TX FIFO to be transferred */
+    // Cy_SCB_UART_PutString(SCB0, str);
+ 
+    status = Cy_SCB_UART_Put(SCB0, opcode);
+    if (status != CY_SCB_UART_SUCCESS) {
+      //  printf("%d\r\n", status);
+        printf("Failed to send opcode, status: %d\r\n", status);
+        //return;
+    }
+
+    uint8_t crc = GetCrc8(0, &opcode, 1);
+
+    uint8_t length = 2;
+    status = Cy_SCB_UART_Put(SCB0, length);
+    if (status != CY_SCB_UART_SUCCESS) {
+        printf("Failed to send length, status: %d\r\n", status);
+        //return;
+    }
+    printf("Length: %d\r\n", length);
+    crc = GetCrc8(crc, &length, 1);
+
+    status = Cy_SCB_UART_Put(SCB0, data[0]);
+    if (status != CY_SCB_UART_SUCCESS) {
+        printf("Failed to send data[0], status: %d\r\n", status);
+       // return;
+    }
+    printf("Data[0]: %d\r\n", data[0]);
+
+    status = Cy_SCB_UART_Put(SCB0, data[1]);
+    if (status != CY_SCB_UART_SUCCESS) {
+        printf("Failed to send data[1], status: %d\r\n", status);
+        //return;
+    }
+    printf("Data[1]: %d\r\n", data[1]);
+
+    crc = GetCrc8(crc, data, 2);
+    printf("CRC: %d\r\n", crc);
+
+    status = Cy_SCB_UART_Put(SCB0, crc);
+    if (status != CY_SCB_UART_SUCCESS) {
+        printf("Failed to send CRC, status: %d\r\n", status);
+    }
+}
 
 
 // Task to handle ADPD1080 sensor data
