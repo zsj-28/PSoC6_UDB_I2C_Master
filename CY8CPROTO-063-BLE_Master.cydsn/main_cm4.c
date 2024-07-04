@@ -1,4 +1,6 @@
-/* main_cm4.c */
+/**
+ * @file main_cm4.c 
+ */
 
 /* Include Files */
 #include "project.h"
@@ -6,18 +8,22 @@
 #include "task.h"
 #include "ADPD1080.h"
 #include <stdio.h>
+#include <math.h>
 
-// Task configuration
-#define ADPD1080_TASK_STACK_SIZE 1024
-#define ADC_TASK_STACK_SIZE 1024
-#define ADPD1080_TASK_PRIORITY   2
-#define ADC_Task_PRIORITY   3
-#define READ_INTERVAL_MS         15
-#define ADC_READ_INTERVAL_MS 1000
+/* Task configuration */
+#define ADPD1080_TASK_STACK_SIZE          1024
+#define ADC_TASK_STACK_SIZE               1024
+#define ADPD1080_TASK_PRIORITY            2
+#define ADC_TASK_PRIORITY                 3
+#define ADPD1080_READ_INTERVAL_MS         15
+#define ADC_READ_INTERVAL_MS              100
 
-// Function prototypes
-void ADPD1080_Task(void *pvParameters);
-void ADC_TASK(void *pvParameters);
+/* Function prototypes */
+void vADPD1080(void *pvParameters);
+void vADC(void *pvParameters);
+
+/* Constants */
+static size_t SMOOTHED_SAMPLE_SIZE = 50;
 
 int main(void)
 {
@@ -31,9 +37,11 @@ int main(void)
 
     // Start ADC module 
     //ADC_Start();
+    
     // Create the ADPD1080 task
-    xTaskCreate(ADPD1080_Task, "ADPD1080 Task", ADPD1080_TASK_STACK_SIZE, NULL, ADPD1080_TASK_PRIORITY, NULL);
-    //xTaskCreate(ADC_TASK, "ADC Task", ADC_TASK_STACK_SIZE, NULL, ADC_Task_PRIORITY, NULL);
+    xTaskCreate(vADPD1080, "ADPD1080", ADPD1080_TASK_STACK_SIZE, NULL, ADPD1080_TASK_PRIORITY, NULL);
+    //xTaskCreate(vADC, "ADC", ADC_TASK_STACK_SIZE, NULL, ADC_TASK_PRIORITY, NULL);
+    
     // Start the FreeRTOS scheduler
     vTaskStartScheduler();
 
@@ -42,12 +50,30 @@ int main(void)
     }
 }
 
-// Task to handle ADPD1080 sensor data
-void ADPD1080_Task(void *pvParameters)
+/* Task to handle ADPD1080 sensor data */
+void vADPD1080(void *pvParameters)
 {
     (void) pvParameters;
 
+    // Stores sensor data to print to stdout
     char buffer[1024];
+    
+    // Variables for SO2 calc in loop()
+    float R;
+    float SO2;
+    float R_avg;
+    float SO2_avg;
+    float del680;
+    float del850;
+    unsigned long t;
+    unsigned long t0;
+    float avg_valA;
+    float avg_valB;
+    
+    volatile uint16_t L680 ; // Time Slot A Channel 1 (680 nm laser)
+    volatile uint16_t L850 ; // Time Slot B Channel 1 (850 nm laser)
+    
+    // Running average
 
     // Initialize and configure the ADPD1080 sensor
     printf("Initializing ADPD1080 sensor...\r\n");
@@ -56,36 +82,45 @@ void ADPD1080_Task(void *pvParameters)
         printf("ADPD1080 initialization failed!\r\n");
         vTaskSuspend(NULL); // Suspend task on failure
     }
-
-    printf("ADPD1080 initialization successful.\r\n");
     
+    // Initialize sensor registers
     turbidity_Init();
-    //while(1){}
     //turbidity_ChannelOffsetCalibration();
+    
+    printf("ADPD1080 initialization successful.\r\n");
     
     for (;;) {
         // Read data from the sensor
         turbidity_ReadDataInterrupt();
+        
+        // Raw and time avg light intensity
+        L680 = au16DataSlotA[0];
+        L850 = au16DataSlotB[0];
+        
+        // SO2%
+        R = log(L680)/log(L850);
+        SO2 = 188.1*(R) - 89.95;
+        
+        // Hemoglobin concentration
 
         // Format and print the data via UART
-        snprintf(buffer, sizeof(buffer), "Slot A: %d %d %d %d | Slot B: %d %d %d %d\n",
-                 au16DataSlotA[0], au16DataSlotA[1], au16DataSlotA[2], au16DataSlotA[3],
-                 au16DataSlotB[0], au16DataSlotB[1], au16DataSlotB[2], au16DataSlotB[3]);
+        snprintf(buffer, sizeof(buffer), "RawA: %d, RawB: %d, LogR: %f, RawSO2: %f\n",
+                 L680, L850, R, SO2);
 
         printf("%s\r\n", buffer);
 
         // Delay task for the specified interval
-        vTaskDelay(pdMS_TO_TICKS(READ_INTERVAL_MS));
+        vTaskDelay(pdMS_TO_TICKS(ADPD1080_READ_INTERVAL_MS));
     }
 }
 
-void ADC_TASK(void *pvParameter){
+void vADC(void *pvParameter){
     (void) pvParameter;
     int16_t adc_val0, adc_val1, adc_val2, adc_val3, adc_val4, adc_val5, adc_val6, adc_val7;
     ADC_StartConvert();
-    printf("Start ADC Convertion\n");
-    for(;;){
-        //wait for conversion
+    printf("Start ADC Conversion\n");
+    for (;;) {
+        // wait for conversion
         while(!ADC_IsEndConversion(CY_SAR_WAIT_FOR_RESULT));
         adc_val0 = Cy_SAR_GetResult16(SAR, 0);
         float32_t result0 = Cy_SAR_CountsTo_Volts(SAR,0,adc_val0);
@@ -104,9 +139,9 @@ void ADC_TASK(void *pvParameter){
         adc_val7 = Cy_SAR_GetResult16(SAR, 7);
         float32_t result7 = Cy_SAR_CountsTo_Volts(SAR,7,adc_val7);
     
-        printf("0 to 7 is %f, %f, %f, %f, %f, %f, %f, %f\r\n", result0, result1, 
-            result2, result3, result4, result5, result6, result7);
+        printf("0 to 7 is %f, %f, %f, %f, %f, %f, %f, %f\r\n", 
+            result0, result1, result2, result3, result4, result5, result6, result7);
         
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(pdMS_TO_TICKS(ADC_READ_INTERVAL_MS));
     }
 }
