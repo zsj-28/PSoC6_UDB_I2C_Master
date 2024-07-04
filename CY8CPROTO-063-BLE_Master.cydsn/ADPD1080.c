@@ -161,6 +161,7 @@ bool ADPD1080_SetDigitalClock(void) {
     uint16_t origin = ADPD1080_ReadReg(0x4B);
     uint16_t new = origin | 0x1;
     ADPD1080_WriteReg(0x5F, new);
+    return true;
 }
 
 /* Software reset of the ADPD1080 */

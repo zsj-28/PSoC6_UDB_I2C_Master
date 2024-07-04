@@ -1,6 +1,6 @@
 -- ======================================================================
 -- uart_test.ctl generated from uart_test
--- 07/04/2024 at 03:35
+-- 07/04/2024 at 15:15
 -- This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 -- ======================================================================
 

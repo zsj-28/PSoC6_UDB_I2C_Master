@@ -106,9 +106,9 @@
 #include "I2C.h"
 #include "I2C_PVT.h"
 #include "CLK.h"
-#include "UART1.h"
+#include "UART.h"
 #include "ADC.h"
-#include "UART1_SCBCLK.h"
+#include "UART_SCBCLK.h"
 #include "ADC_intSarClock.h"
 
 /*[]*/
