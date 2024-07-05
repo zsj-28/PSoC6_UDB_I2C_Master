@@ -25,7 +25,7 @@ void vADC(void *pvParameters);
 float movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum);
 
 /* Constants */
-static size_t SMOOTHED_SAMPLE_SIZE = 50;
+#define SMOOTHED_SAMPLE_SIZE 50
 
 int main(void) {
     __enable_irq();  // Enable global interrupts
@@ -72,8 +72,8 @@ void vADPD1080(void *pvParameters) {
     // unsigned long t0;
     
     // Running average
-    uint16_t slotA_avg[SMOOTHED_SAMPLE_SIZE];
-    uint16_t slotB_avg[SMOOTHED_SAMPLE_SIZE];
+    uint16_t slotA_avg[SMOOTHED_SAMPLE_SIZE] = { 0 };
+    uint16_t slotB_avg[SMOOTHED_SAMPLE_SIZE] = { 0 };
     
     size_t posA = 0;
     size_t posB = 0;
@@ -109,6 +109,7 @@ void vADPD1080(void *pvParameters) {
         avg_valA = movingAvg(slotA_avg, &sumA, posA, lenA, L680);
         avg_valB = movingAvg(slotB_avg, &sumB, posB, lenB, L850);
         
+        // Update ring buffer current position
         posA++;
         if (posA >= lenA) posA = 0;
         posB++;
