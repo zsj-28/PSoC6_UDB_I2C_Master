@@ -1,4 +1,6 @@
-/* ADPD1080.c */
+/**
+ * @file ADPD1080.c 
+ */
 
 /* Include Files */
 #include "project.h"  // Include PSoC project header for PSoC-specific functions
@@ -9,14 +11,18 @@
 volatile uint16_t au16DataSlotA[4] = {0,0,0,0};
 volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
 
+/* Constants */
+const uint8_t PULSE_A = 32;
+const uint8_t PULSE_B = 32;
+
 /* Sensor Function Definitions */
 /**
- *    @brief  Sets up the hardware and initializes I2C
- *    @param  i2cAddr
- *            The I2C address to be used.
- *    @param  sensorId
- *            The unique ID to differentiate the sensors from others
- *    @return True if initialization was successful, otherwise false.
+ * @brief  Sets up the hardware and initializes I2C
+ * @param  i2cAddr
+ *         The I2C address to be used.
+ * @param  sensorId
+ *         The unique ID to differentiate the sensors from others
+ * @return True if initialization was successful, otherwise false.
  */
 bool ADPD1080_Begin(uint8_t i2cAddr, int32_t sensorId) {
     (void) i2cAddr;
@@ -132,7 +138,7 @@ bool ADPD1080_Set32KCLK(bool enableSampleClk){
  *  
  * @return none
  * 
- * @remarks INT_MASK settings are a bit weird ... (see ADPD_1Sensor.ino code)
+ * @remarks INT_MASK settings are a bit weird ... (see ADPD_1    ADPD1080_ino code)
  */
 void ADPD1080_SetFIFO(void) {
     ADPD1080_SetOperationMode(PROGRAM);
@@ -404,41 +410,41 @@ void turbidity_Init(void) {
     ADPD1080_Set32KCLK(true);            // Enable 32K clock
     ADPD1080_SetTimeSlotSwitch(PD_1_4_CONNECTED, PD_1_4_CONNECTED); // Select photodiodes 1-4, datasheet p.21
     
-    /* Select LEDs for each time slot */
+    // Select LEDs for each time slot
     ADPD1080_SelectLED(LEDX1, SLOTA);
     ADPD1080_SelectLED(LEDX2, SLOTB);
     
-    /* Set led coarse value 100% and 10% */
+    // Set led coarse value 100% and 10%
     ADPD1080_WriteReg(ADPD1080_ILED1_COARSE, 0x1031);  // LED configuration
     ADPD1080_WriteReg(ADPD1080_ILED2_COARSE, 0x1034);  // LED configuration
     ADPD1080_WriteReg(ADPD1080_ILED_FINE, 0x67DF);  // LED fine
 
-    /* Set LED pulse count */
-    ADPD1080_SetPulseNumberPeriod(SLOTA, 127, 0x19);    // One pulse, 19 µs period   0x0113  275
-    ADPD1080_SetPulseNumberPeriod(SLOTB, 127, 0x19);    // One pulse, 19 µs period
+    // Set LED pulse count
+    ADPD1080_SetPulseNumberPeriod(SLOTA, PULSE_A, 0x19);    // One pulse, 19 µs period   0x0113  275
+    ADPD1080_SetPulseNumberPeriod(SLOTB, PULSE_B, 0x19);    // One pulse, 19 µs period
 
-    /* Set LED pulse width and offset */
+    // Set LED pulse width and offset
     ADPD1080_SetLEDWidthOffset(SLOTA, 3, 25);           // 3 µs pulse width, 23 µs LED Offset  
     ADPD1080_SetLEDWidthOffset(SLOTB, 3, 25);           // 3 µs pulse width, 23 µs LED Offset
 
-    /* Set AFE width and offset */
+    // Set AFE width and offset
     ADPD1080_SetAFEWidthOffset(SLOTA, 4, 16, 4);        // (slot, AFE width, offset, fine offset) - AFE width is usually LED pulse width + 1µs
     ADPD1080_SetAFEWidthOffset(SLOTB, 4, 16, 4);        // 3 µs AFE width, 13 µs offset
 
-    /* Set ADC clock speed */
+    // Set ADC clock speed
     ADPD1080_SetADCClock(ADC_CLOCK_100MHz);
     
-    /* Enable digital clock */
+    // Enable digital clock
     ADPD1080_SetDigitalClock();
 
-    /* Set sampling frequency */
+    // Set sampling frequency
     ADPD1080_SetSamplingFrequency(400); // For 400 Hz sampling frequency set to 1600. Currently 100 Hz
     
-    /* Set TIA gain */
+    // Set TIA gain
     ADPD1080_SetTIAGain(SLOTA, TIA_25);
     ADPD1080_SetTIAGain(SLOTB, TIA_25);
 
-    /* Set sample clock */
+    // Set sample clock
     ADPD1080_WriteReg(ADPD1080_SAMPLE_CLK, 0x2695);  // 0080,2695
     ADPD1080_WriteReg(ADPD1080_CLK32M_ADJUST, 0x0098);  // 0x005e,0098
     ADPD1080_WriteReg(ADPD1080_EXT_SYNC_SEL, 0x2090);  // 20d0,2090
@@ -453,12 +459,13 @@ void turbidity_Init(void) {
     ADPD1080_SetOffset(SLOTA, stOffsetA);
     ADPD1080_SetOffset(SLOTB, stOffsetB);
     
-    /* Set FIFO and start measurement */
+    // Set FIFO and start measurement
     ADPD1080_SetFIFO();
     
     ADPD1080_SetOperationMode(NORMAL_OPERATION);
 }
 
+/* Debug only (remove soon) */
 void turbidity_init(void) {
     
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
@@ -468,7 +475,7 @@ void turbidity_init(void) {
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
     ADPD1080_Set32KCLK(1);            // Enable 32K clock
     ADPD1080_SetTimeSlotSwitch(0x5, 0x5);
-  /* Select LEDs for each time slot */
+    // Select LEDs for each time slot
     ADPD1080_SelectLED(0x02, 0x0);
     //ADPD1080_SelectLED(0x01, 0x1);
     
@@ -528,6 +535,7 @@ void turbidity_ReadDataInterrupt(void) {
     ADPD1080_WriteReg(ADPD1080_STATUS, 0xFF);      
 }
 
+/* Not in use */
 void turbidity_ChannelOffsetCalibration(void) {
     ADPD1080_SetOperationMode(0x01);  // Set to program mode
     // ADPD1080_WriteReg(0x34, 0x0100);  // Disable LED

@@ -1,4 +1,6 @@
-/* ADPD1080.h */
+/**
+ * @file ADPD1080.h 
+ */
 
 #ifndef _ADPD1080_H
 #define _ADPD1080_H
