@@ -2,7 +2,7 @@
 --	Conversion of CY8CPROTO-063-BLE_Master.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Fri Jul 05 03:09:42 2024
+--	Tue Jul 09 14:35:53 2024
 --
 
 USE cypress.cypress.all;
@@ -305,9 +305,9 @@ SIGNAL \I2C:Net_974\ : bit;
 SIGNAL \I2C:scl_yfb\ : bit;
 SIGNAL \I2C:sda_yfb\ : bit;
 SIGNAL \I2C:tmpOE__Bufoe_scl_net_0\ : bit;
-SIGNAL Net_42 : bit;
+SIGNAL Net_157 : bit;
 SIGNAL \I2C:tmpOE__Bufoe_sda_net_0\ : bit;
-SIGNAL Net_21 : bit;
+SIGNAL Net_156 : bit;
 SIGNAL \I2C:timeout_clk\ : bit;
 SIGNAL Net_4 : bit;
 SIGNAL \I2C:Net_975\ : bit;
@@ -316,8 +316,10 @@ SIGNAL Net_11 : bit;
 SIGNAL tmpIO_0__RST_net_0 : bit;
 TERMINAL tmpSIOVREF__RST_net_0 : bit;
 SIGNAL tmpFB_0__SDA_net_0 : bit;
+TERMINAL Net_170 : bit;
 TERMINAL tmpSIOVREF__SDA_net_0 : bit;
 SIGNAL tmpFB_0__SCL_net_0 : bit;
+TERMINAL Net_159 : bit;
 TERMINAL tmpSIOVREF__SCL_net_0 : bit;
 SIGNAL \UART:Net_847\ : bit;
 SIGNAL \UART:clock_wire\ : bit;
@@ -725,6 +727,7 @@ TERMINAL tmpSIOVREF__ADC_CH6_net_0 : bit;
 SIGNAL tmpFB_0__ADC_CH7_net_0 : bit;
 SIGNAL tmpIO_0__ADC_CH7_net_0 : bit;
 TERMINAL tmpSIOVREF__ADC_CH7_net_0 : bit;
+TERMINAL Net_164 : bit;
 SIGNAL \I2C:bI2C_UDB:sda_in_reg\\D\ : bit;
 SIGNAL \I2C:bI2C_UDB:m_state_4\\D\ : bit;
 SIGNAL \I2C:bI2C_UDB:m_state_3\\D\ : bit;
@@ -1126,12 +1129,12 @@ zero <=  ('0') ;
 \I2C:Bufoe_scl\:cy_bufoe
 	PORT MAP(x=>\I2C:Net_643_3\,
 		oe=>one,
-		y=>Net_42,
+		y=>Net_157,
 		yfb=>\I2C:Net_1109_0\);
 \I2C:Bufoe_sda\:cy_bufoe
 	PORT MAP(x=>\I2C:sda_x_wire\,
 		oe=>one,
-		y=>Net_21,
+		y=>Net_156,
 		yfb=>\I2C:Net_1109_1\);
 CLK:cy_clock_v1_0
 	GENERIC MAP(cy_registers=>"",
@@ -1198,14 +1201,14 @@ SDA:cy_mxs40_gpio_v1_0
 		pin_mode=>"B",
 		slew_rate=>"0",
 		vtrip=>"0",
-		use_annotation=>"0",
+		use_annotation=>"1",
 		hotswap_needed=>"0")
 	PORT MAP(oe=>(one),
 		y=>(zero),
 		fb=>(tmpFB_0__SDA_net_0),
 		analog=>(open),
-		io=>Net_21,
-		annotation=>(open),
+		io=>Net_156,
+		annotation=>Net_170,
 		siovref=>(tmpSIOVREF__SDA_net_0));
 SCL:cy_mxs40_gpio_v1_0
 	GENERIC MAP(cy_registers=>"",
@@ -1230,14 +1233,14 @@ SCL:cy_mxs40_gpio_v1_0
 		pin_mode=>"B",
 		slew_rate=>"0",
 		vtrip=>"0",
-		use_annotation=>"0",
+		use_annotation=>"1",
 		hotswap_needed=>"0")
 	PORT MAP(oe=>(one),
 		y=>(zero),
 		fb=>(tmpFB_0__SCL_net_0),
 		analog=>(open),
-		io=>Net_42,
-		annotation=>(open),
+		io=>Net_157,
+		annotation=>Net_159,
 		siovref=>(tmpSIOVREF__SCL_net_0));
 \UART:SCBCLK\:cy_clock_v1_0
 	GENERIC MAP(cy_registers=>"",
@@ -2689,6 +2692,21 @@ ADC_CH7:cy_mxs40_gpio_v1_0
 		io=>(tmpIO_0__ADC_CH7_net_0),
 		annotation=>(open),
 		siovref=>(tmpSIOVREF__ADC_CH7_net_0));
+R_1:cy_annotation_universal_v1_0
+	GENERIC MAP(comp_name=>"Resistor_v1_0",
+		port_names=>"T1, T2",
+		width=>2)
+	PORT MAP(connect=>(Net_170, Net_164));
+PWR_1:cy_annotation_universal_v1_0
+	GENERIC MAP(comp_name=>"Power_v1_0",
+		port_names=>"T1",
+		width=>1)
+	PORT MAP(connect=>Net_164);
+R_2:cy_annotation_universal_v1_0
+	GENERIC MAP(comp_name=>"Resistor_v1_0",
+		port_names=>"T1, T2",
+		width=>2)
+	PORT MAP(connect=>(Net_159, Net_164));
 \I2C:bI2C_UDB:sda_in_reg\:cy_dff
 	PORT MAP(d=>\I2C:Net_1109_1\,
 		clk=>\I2C:bI2C_UDB:op_clk\,

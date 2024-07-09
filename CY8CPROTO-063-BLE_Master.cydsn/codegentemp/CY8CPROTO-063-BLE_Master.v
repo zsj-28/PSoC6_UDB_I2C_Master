@@ -1,6 +1,6 @@
 // ======================================================================
 // CY8CPROTO-063-BLE_Master.v generated from TopDesign.cysch
-// 07/05/2024 at 03:09
+// 07/09/2024 at 14:35
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1960,6 +1960,12 @@ module top ;
           wire  Net_4;
           wire  Net_3;
           wire  Net_1;
+    electrical  Net_164;
+    electrical  Net_159;
+    electrical  Net_170;
+          wire  Net_157;
+          wire  Net_156;
+          wire  Net_2;
     electrical  Net_127;
     electrical  Net_126;
     electrical  Net_125;
@@ -1969,9 +1975,6 @@ module top ;
     electrical  Net_87;
     electrical  Net_86;
           wire  Net_5;
-          wire  Net_2;
-          wire  Net_42;
-          wire  Net_21;
 
     I2C_v3_50_0 I2C (
         .bclk(Net_1),
@@ -1979,10 +1982,10 @@ module top ;
         .iclk(Net_3),
         .itclk(Net_4),
         .reset(Net_5),
-        .scl(Net_42),
+        .scl(Net_157),
         .scl_i(1'b0),
         .scl_o(Net_8),
-        .sda(Net_21),
+        .sda(Net_156),
         .sda_i(1'b0),
         .sda_o(Net_11));
 
@@ -2058,14 +2061,15 @@ module top ;
 		  .pin_mode("B"),
 		  .slew_rate("0"),
 		  .vtrip("0"),
-		  .use_annotation("0"),
+		  .use_annotation("1"),
 		  .hotswap_needed("0"))
 		SDA
 		 (.oe({1'b1}),
 		  .y({1'b0}),
 		  .fb({tmpFB_0__SDA_net[0:0]}),
-		  .io({Net_21}),
-		  .siovref(tmpSIOVREF__SDA_net));
+		  .io({Net_156}),
+		  .siovref(tmpSIOVREF__SDA_net),
+		  .annotation({Net_170}));
 
 
 	wire [0:0] tmpFB_0__SCL_net;
@@ -2093,14 +2097,15 @@ module top ;
 		  .pin_mode("B"),
 		  .slew_rate("0"),
 		  .vtrip("0"),
-		  .use_annotation("0"),
+		  .use_annotation("1"),
 		  .hotswap_needed("0"))
 		SCL
 		 (.oe({1'b1}),
 		  .y({1'b0}),
 		  .fb({tmpFB_0__SCL_net[0:0]}),
-		  .io({Net_42}),
-		  .siovref(tmpSIOVREF__SCL_net));
+		  .io({Net_157}),
+		  .siovref(tmpSIOVREF__SCL_net),
+		  .annotation({Net_159}));
 
 
     SCB_UART_PDL_v2_0_1 UART (
@@ -2430,6 +2435,35 @@ module top ;
 		  .io({tmpIO_0__ADC_CH7_net[0:0]}),
 		  .siovref(tmpSIOVREF__ADC_CH7_net));
 
+
+    cy_annotation_universal_v1_0 R_1 (
+        .connect({
+            Net_170,
+            Net_164
+        })
+    );
+    defparam R_1.comp_name = "Resistor_v1_0";
+    defparam R_1.port_names = "T1, T2";
+    defparam R_1.width = 2;
+
+    cy_annotation_universal_v1_0 PWR_1 (
+        .connect({
+            Net_164
+        })
+    );
+    defparam PWR_1.comp_name = "Power_v1_0";
+    defparam PWR_1.port_names = "T1";
+    defparam PWR_1.width = 1;
+
+    cy_annotation_universal_v1_0 R_2 (
+        .connect({
+            Net_159,
+            Net_164
+        })
+    );
+    defparam R_2.comp_name = "Resistor_v1_0";
+    defparam R_2.port_names = "T1, T2";
+    defparam R_2.width = 2;
 
 
 
