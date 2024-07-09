@@ -37,11 +37,11 @@ int main(void) {
     I2C_Start();
 
     // Start ADC module 
-    ADC_Start();
+    //ADC_Start();
     
     // Create the ADPD1080 task
     xTaskCreate(vADPD1080, "ADPD1080", ADPD1080_TASK_STACK_SIZE, NULL, ADPD1080_TASK_PRIORITY, NULL);
-    xTaskCreate(vADC, "ADC", ADC_TASK_STACK_SIZE, NULL, ADC_TASK_PRIORITY, NULL);
+    //xTaskCreate(vADC, "ADC", ADC_TASK_STACK_SIZE, NULL, ADC_TASK_PRIORITY, NULL);
     
     // Start the FreeRTOS scheduler
     vTaskStartScheduler();
@@ -128,7 +128,7 @@ void vADPD1080(void *pvParameters) {
 
         // Format and print the data via UART
         snprintf(buffer, sizeof(buffer), "RawA:%d, AvgA:%f, RawB:%d, AvgB:%f, LogR:%f, \
-            RawSO2:%f. AvgSO2:%f, ConA:%f, ConB:%f",
+            RawSO2:%f. AvgSO2:%f, ConA:%f, ConB:%f\r\n",
             L680, avg_valA, L850, avg_valB, R, SO2, SO2_avg, del680, del850);
 
         printf("%s\r\n", buffer);
