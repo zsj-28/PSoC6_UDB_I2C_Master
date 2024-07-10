@@ -1,3 +1,7 @@
+/*
+
+*/
+#include "PSoC_Data.h"
 // CRC-8 calculation table
 const uint8_t crcTable[256] = {
   0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D,
@@ -26,57 +30,67 @@ void setup() {
   Serial1.begin(115200, SERIAL_8N1, 16, 17); // Adjust RX and TX pin numbers if necessary
 }
 
-void loop() {
-  // Check if there is at least 3 bytes of data available (opcode, length, CRC)
-  if (Serial1.available() >= 3) {
-    // Read the opcode
-    uint8_t opCode = Serial1.read();
-    
-    // Read the data length
-    uint8_t dataLength = Serial1.read();
-    
-    // Ensure there is enough data available for the specified length + CRC
-    if (Serial1.available() >= dataLength + 1) {
-      // Read the data bytes
-      uint8_t data[dataLength];
-      for (uint8_t i = 0; i < dataLength; i++) {
-        data[i] = Serial1.read();
+/// UART glocal variables
+uint8_t opCode;
+uint8_t dataLength = 0;
+uint8_t buffer_index = 0;
+uint8_t UART_buffer[30];
+uint8_t receivedCRC = 0;
+uint8_t calculatedCRC = 0;
+
+void UART_receive(){
+  
+    while(Serial1.available() > 0){
+      UART_buffer[buffer_index] = Serial1.read();
+      buffer_index++;
+      //Reset buffer index if buffer is full 
+      //If data stream exceeds buffer size, data will not be parsed
+      if(buffer_index >= 30){
+        buffer_index = 0;
       }
-      
-      // Read the CRC byte
-      uint8_t receivedCRC = Serial1.read();
-      
-      // Calculate the CRC-8 for the received data
-      uint8_t calculatedCRC = calculateCRC8(opCode, dataLength, data);
-      
-      // Print the decoded information
-      Serial.print("Op Code: 0x");
-      Serial.println(opCode, HEX);
-      Serial.print("Data Length: ");
-      Serial.println(dataLength);
-      Serial.print("Data: ");
-      for (uint8_t i = 0; i < dataLength; i++) {
-        Serial.print("0x");
-        if (data[i] < 0x10) {
-          Serial.print("0");
+
+      //The following conditions check that if all the data bytes are received and
+      //if buffer index count has exceeded the "length" byte, which is the second byte 
+      //in the data stream
+      //UART_buffer[1] + 3 means opcode + length + all data bytes + crc
+      if((buffer_index == UART_buffer[1] + 3) && (buffer_index > 1)){
+        //Parse opcode and length
+        opCode = UART_buffer[0];
+        dataLength = UART_buffer[1];
+        receivedCRC = UART_buffer[dataLength + 2];
+        //Calculate CRC8
+        calculatedCRC = calculateCRC8(opCode, dataLength, &UART_buffer[2]);
+        buffer_index = 0;
+
+
+
+        Serial.print("Received CRC: 0x");
+        Serial.println(receivedCRC, HEX);
+        Serial.print("Calculated CRC: 0x");
+        Serial.println(calculatedCRC, HEX);
+        //Check if the received CRC mathces the calculated one
+        if(receivedCRC == calculatedCRC){
+          Serial.println("CRC check passed.");
+          for (uint8_t i = 0; i < dataLength; i++) {
+            Serial.print("0x");
+            if (UART_buffer[i + 2] < 0x10) {
+              Serial.print("0");
+            }
+            Serial.print(UART_buffer[i + 2], HEX);
+            Serial.print(" ");
+          }
         }
-        Serial.print(data[i], HEX);
-        Serial.print(" ");
-      }
-      Serial.println();
-      Serial.print("Received CRC: 0x");
-      Serial.println(receivedCRC, HEX);
-      Serial.print("Calculated CRC: 0x");
-      Serial.println(calculatedCRC, HEX);
-      
-      // Check if the received CRC matches the calculated CRC
-      if (receivedCRC == calculatedCRC) {
-        Serial.println("CRC check passed.");
-      } else {
-        Serial.println("CRC check failed.");
+        else {
+          Serial.println("CRC check failed.");
+        }
       }
     }
-  }
+  
+}
+
+void loop() {
+  
+  UART_receive();
 
   // Add a small delay to avoid overwhelming the Serial Monitor
   delay(100);
