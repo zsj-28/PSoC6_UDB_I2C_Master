@@ -7,6 +7,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "ADPD1080.h"
+#include "bq34z100.h"
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
@@ -14,10 +15,13 @@
 /* Task configuration */
 #define ADPD1080_TASK_STACK_SIZE          1024
 #define ADC_TASK_STACK_SIZE               1024
+#define BQ34Z100_TASK_STACK_SIZE          1024
 #define ADPD1080_TASK_PRIORITY            2
 #define ADC_TASK_PRIORITY                 3
+#define BQ34Z100_TASK_PRIORITY            4
 #define ADPD1080_READ_INTERVAL_MS         15
 #define ADC_READ_INTERVAL_MS              100
+#define BQ34Z100_READ_INTERVAL_MS         1000
 
 #define OPCODE_ADC_0 0x01
 #define OPCODE_ADC_1 0x02
@@ -52,6 +56,7 @@ const uint8_t crcTable[256] = {
 /* Function prototypes */
 void vADPD1080(void *pvParameters);
 void vADC(void *pvParameters);
+void vBQ34Z100(void *pvParameters);
 
 float movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum);
 
@@ -73,6 +78,7 @@ int main(void) {
     // Create the ADPD1080 task
     xTaskCreate(vADPD1080, "ADPD1080", ADPD1080_TASK_STACK_SIZE, NULL, ADPD1080_TASK_PRIORITY, NULL);
     xTaskCreate(vADC, "ADC", ADC_TASK_STACK_SIZE, NULL, ADC_TASK_PRIORITY, NULL);
+    xTaskCreate(vBQ34Z100, "BQ34Z100", BQ34Z100_TASK_STACK_SIZE, NULL, BQ34Z100_TASK_PRIORITY, NULL);
     
     // Start the FreeRTOS scheduler
     vTaskStartScheduler();
@@ -81,6 +87,39 @@ int main(void) {
         // This point should never be reached
     }
 }
+
+void vBQ34Z100(void *pvParameters) {
+    (void) pvParameters;
+
+    // Declare and initialize BQ34Z100 device structure
+    BQ34Z100_t bq34z100Device;
+
+    for (;;) {
+        // Ensure the device is ready and communicate with it
+        BQ34Z100_Unseal(&bq34z100Device);  // Unseal the device to enable full access
+
+        // Read and print the battery voltage
+        uint16_t voltage = BQ34Z100_GetVoltage(&bq34z100Device);
+        printf("Battery Voltage: %u mV\n", voltage);
+
+        // Read and print the State of Charge
+        uint8_t soc = BQ34Z100_GetSOC(&bq34z100Device);
+        printf("State of Charge: %u%%\n", soc);
+
+        // Read and print the battery current
+        int16_t current = BQ34Z100_GetCurrent(&bq34z100Device);
+        printf("Battery Current: %d mA\n", current);
+
+        // Read and print device type and firmware version as an example of control commands
+        uint16_t deviceType = BQ34Z100_ReadDeviceType(&bq34z100Device);
+        uint16_t fwVersion = BQ34Z100_ReadFWVersion(&bq34z100Device);
+        printf("Device Type: 0x%04X, Firmware Version: 0x%04X\n", deviceType, fwVersion);
+
+        // Delay between reads to prevent overwhelming the device and the I2C bus
+        vTaskDelay(pdMS_TO_TICKS(BQ34Z100_READ_INTERVAL_MS));
+    }
+}
+
 
 uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
   uint8_t crc = 0x00; // Initialize CRC value
