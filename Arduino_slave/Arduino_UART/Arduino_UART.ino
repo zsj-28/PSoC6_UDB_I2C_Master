@@ -78,6 +78,20 @@ void UART_receive(){
             }
             Serial.print(UART_buffer[i + 2], HEX);
             Serial.print(" ");
+            switch(opCode){
+            case 0x00:
+              Command_Matrix[0].Data[0] = UART_buffer[2]; //ADC CH0
+              Command_Matrix[0].Data[1] = UART_buffer[3];
+              Command_Matrix[1].Data[0] = UART_buffer[4]; //ADC CH1
+              Command_Matrix[1].Data[1] = UART_buffer[5];
+              Command_Matrix[2].Data[0] = UART_buffer[6]; //ADC CH2
+              Command_Matrix[2].Data[1] = UART_buffer[7];
+              Command_Matrix[3].Data[0] = UART_buffer[8]; //ADC CH3
+              Command_Matrix[3].Data[1] = UART_buffer[9];
+              Command_Matrix[4].Data[0] = UART_buffer[10]; //ADC CH4
+              Command_Matrix[4].Data[1] = UART_buffer[11];
+            break;
+            }
           }
         }
         else {
@@ -89,7 +103,21 @@ void UART_receive(){
 }
 
 void loop() {
-  
+  //This part sends dummy data and is used for testing, delete if not needed
+  /*
+  uint8_t crc = 0;
+  uint8_t op_code = 0x00;
+  const uint8_t length = 0x0B;
+  uint8_t data[length] = {0,1,2,3,4,5,6,7,8,9,10};
+  Serial1.write(op_code);
+  Serial1.write(length); //LENGTH
+  for(int i = 0; i < length; i++){
+    Serial1.write(data[i]);
+  }
+  crc = calculateCRC8(op_code, length, data);
+  Serial1.write(crc);
+  */
+
   UART_receive();
 
   // Add a small delay to avoid overwhelming the Serial Monitor
