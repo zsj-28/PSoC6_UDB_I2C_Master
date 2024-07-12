@@ -9,13 +9,15 @@
 <projects>
 <v>.\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj</v>
 <v>.\uart_test.cydsn\uart_test.cyprj</v>
+<v>.\AES_Demonstration.cydsn\AES_Demonstration.cyprj</v>
 </projects>
 <workspace_id v="5c2da6c8-4309-4b7e-a9bb-54830b362428" />
 <WriteAppVersionLastSavedWith v="4.4.0.80" />
 <WriteAppMarketingVersionLastSavedWith v="4.4" />
 <CyGuid_dcbd9771-0334-43dc-9cc3-fe99dc3c5316 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWorkspaceSerialize+CyPrjDependencyList" version="4">
 <wrkspc_dependencies>
-<wrkspc_dependency project="CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj" dependency="..\..\..\Downloads\PSoC6_UDB_I2C.cylib\PSoC6_UDB_I2C.cylib\PSoC6_UDB_I2C.cyprj" />
+<wrkspc_dependency project="CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj" dependency="..\PSoC6_UDB_I2C.cylib\PSoC6_UDB_I2C.cyprj" />
+<wrkspc_dependency project="uart_test.cydsn\uart_test.cyprj" dependency="${CyRoot}\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj" />
 </wrkspc_dependencies>
 </CyGuid_dcbd9771-0334-43dc-9cc3-fe99dc3c5316>
 <CyGuid_63b68103-67f5-4406-8da6-5c8625765b82 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWorkspaceSerialize+CyIgnoredSystemDepsList" version="1">

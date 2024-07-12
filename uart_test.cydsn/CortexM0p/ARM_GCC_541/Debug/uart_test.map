@@ -1233,6 +1233,8 @@ LOAD c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm
 LOAD c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtbegin.o
 LOAD c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv6-m/crt0.o
 START GROUP
+LOAD Generated_Source\PSoC6\pdl\drivers\peripheral\crypto\libs\cy_crypto_client_gcc.a
+LOAD Generated_Source\PSoC6\pdl\drivers\peripheral\crypto\libs\cy_crypto_server_gcc.a
 LOAD .\CortexM0p\ARM_GCC_541\Debug\startup_psoc6_01_cm0plus.o
 LOAD .\CortexM0p\ARM_GCC_541\Debug\main_cm0p.o
 LOAD .\CortexM0p\ARM_GCC_541\Debug\system_psoc6_cm0plus.o
