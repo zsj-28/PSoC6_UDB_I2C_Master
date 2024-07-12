@@ -24,18 +24,19 @@ void vADC(void *pvParameters);
 float movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum);
 
 /* Constants */
-#define SMOOTHED_SAMPLE_SIZE 50U
-#define ADCNumChannels        4U
+#define SMOOTHED_SAMPLE_SIZE    50U
+#define ADC_NUM_CHANNELS         4U
+#define ADPD_TO_ADC_RATIO        5U 
 
 /* Global variables */
 volatile uint16_t timerCount = 0;
 volatile bool ADCDataReady = false;
-volatile int16_t ADCResults[ADCNumChannels];
+volatile int16_t ADCResults[ADC_NUM_CHANNELS];
 
 /* Functions */
 /**
  * @brief handles interrupt on timer overflow with frequency 100Hz
- * every 10 interrupts, gets previous conversion results and starts next conversion
+ * every ADPD_TO_ADC_RATIO interrupts, gets previous conversion results and starts next conversion
  * 
  * @param TimerInt_Handler - interrupt handler function name
  *
@@ -47,19 +48,22 @@ CY_ISR (Timer_Int_Handler) {
     // Clear timer overflow interrupt
     Timer_ClearInterrupt(CY_TCPWM_INT_ON_TC);
     timerCount++;
+    // printf("%u", timerCount); debug only
     
     // Read ADC conversion results with frequency 10 Hz
-    if (timerCount == 10) {
+    if (timerCount == ADPD_TO_ADC_RATIO) {
         timerCount = 0;
         // Check conversion status without blocking
-        if (ADC_IsEndConversion(CY_SAR_RETURN_STATUS)) {
-            for (uint16_t i = 0; i < ADCNumChannels; i++) {
+        uint32_t conversionStatus = ADC_IsEndConversion(CY_SAR_RETURN_STATUS);
+        if (conversionStatus) {
+            for (uint16_t i = 0; i < ADC_NUM_CHANNELS; i++) {
                 ADCResults[i] = ADC_GetResult16(i);
             }
             ADCDataReady = true;
+            VDAC_SetValueBuffered(ADCResults[0]); // debug only
         }
         else {
-            printf("Conversion not finished yet!\r\n");
+            printf("***Conversion not finished yet! Status is %lu***\r\n", conversionStatus);
             return;
         }
         
@@ -84,9 +88,9 @@ int main(void) {
     
     // Intialize ADC for receiving analog sensor data
     ADC_Start();
-
-    // Initialize Timer for periodic handling of ADC conversion results
-    Timer_Start();
+    
+    // Initialize DAC (debug only)
+    VDAC_Start();
     
     // Register Timer interrupt handler
     Cy_SysInt_Init(&Timer_Int_cfg, Timer_Int_Handler);
@@ -96,8 +100,8 @@ int main(void) {
     char buffer[1024];
     
     // Stores valid ADC conversion results
-    int16_t ADCNewReading[ADCNumChannels];
-    float ADCNewVolts[ADCNumChannels];
+    int16_t ADCNewReading[ADC_NUM_CHANNELS];
+    float ADCNewVolts[ADC_NUM_CHANNELS];
     
     // Variables for SO2 and hemoglobin concentration calculations
     volatile uint16_t L680 ; // Time Slot A Channel 1 (680 nm laser)
@@ -139,26 +143,18 @@ int main(void) {
     
     printf("ADPD1080 initialization successful.\r\n");
     
-    // TODO: trigger SW start of timer?
-    Timer_TriggerStart();
+    // Begin first ADC scan
+    ADC_StartConvert();
+    
+    // Initialize and start Timer to periodically handle ADC conversion results
+    Timer_Start();
     
     // Begin superloop
     uint16_t ADPDCount = 0; // Number of ADPD sensor reads in the current 10 Hz period
     for (;;) {
-        // Process ADC results if ready
-        if (ADCDataReady) {
-            ADCDataReady = false;
-            for (uint16_t i = 0; i < ADCNumChannels; i++) {
-                ADCNewReading[i] = ADCResults[i];
-                ADCNewVolts[i] = Cy_SAR_CountsTo_Volts(SAR, i, ADCNewReading[i]);
-            }
-            // Format and print the data via UART
-            printf("ADC: CH1 %f, CH2 %f, CH3 %f, CH4 %f\r\n", ADCNewVolts[0], ADCNewVolts[1],
-                ADCNewVolts[2], ADCNewVolts[3]);
-        }
         // Do a data register read if not synced up with the 100 Hz timer interrupt
         if (timerCount != ADPDCount) {
-            ADPDCount = (ADPDCount + 1) % 10;
+            ADPDCount = (ADPDCount + 1) % ADPD_TO_ADC_RATIO;
             
             // Read data from the sensor data registers
             turbidity_ReadDataNoInterrupt();
@@ -187,12 +183,23 @@ int main(void) {
             del680 = -3.412*log(64*avg_valA / 127) + 43.02; // TODO: is PULSE_A = 127?
             del850 = -2.701*log(64*avg_valB / 127) + 35.27; // -0.1049
 
+//            // Format and print the data via UART
+//            snprintf(buffer, sizeof(buffer), "RawA:%d, AvgA:%f, RawB:%d, AvgB:%f, LogR:%f, \
+//                RawSO2:%f. AvgSO2:%f, ConA:%f, ConB:%f, #%u\r\n",
+//                L680, avg_valA, L850, avg_valB, R, SO2, SO2_avg, del680, del850, ADPDCount);
+//
+//            printf("%s\r\n", buffer);
+        }
+        // Process ADC results if ready
+        if (ADCDataReady) {
+            ADCDataReady = false;
+            for (uint16_t i = 0; i < ADC_NUM_CHANNELS; i++) {
+                ADCNewReading[i] = ADCResults[i];
+                ADCNewVolts[i] = Cy_SAR_CountsTo_Volts(SAR, i, ADCNewReading[i]);
+            }
             // Format and print the data via UART
-            snprintf(buffer, sizeof(buffer), "RawA:%d, AvgA:%f, RawB:%d, AvgB:%f, LogR:%f, \
-                RawSO2:%f. AvgSO2:%f, ConA:%f, ConB:%f\r\n",
-                L680, avg_valA, L850, avg_valB, R, SO2, SO2_avg, del680, del850);
-
-            printf("%s\r\n", buffer);
+            printf("***\r\nADC: CH1 %f, CH2 %f, CH3 %f, CH4 %f #%u\r\n***\r\n", ADCNewVolts[0], 
+                ADCNewVolts[1], ADCNewVolts[2], ADCNewVolts[3], ADPDCount);
         }
     }
 }

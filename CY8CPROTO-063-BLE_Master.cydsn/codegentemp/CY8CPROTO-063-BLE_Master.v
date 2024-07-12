@@ -1,6 +1,6 @@
 // ======================================================================
 // CY8CPROTO-063-BLE_Master.v generated from TopDesign.cysch
-// 07/12/2024 at 10:54
+// 07/12/2024 at 17:51
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -2743,42 +2743,6 @@ module top ;
 		  .fb({tmpFB_0__Int_Debug_net[0:0]}),
 		  .io({tmpIO_0__Int_Debug_net[0:0]}),
 		  .siovref(tmpSIOVREF__Int_Debug_net));
-
-
-	wire [0:0] tmpFB_0__OVERFLOW_net;
-	wire [0:0] tmpIO_0__OVERFLOW_net;
-	electrical [0:0] tmpSIOVREF__OVERFLOW_net;
-
-	cy_mxs40_gpio_v1_0
-		#(.id("01dabdf9-f331-4000-bd55-04d1a30eebec"),
-		  .width(1),
-		  .sio_grp_cnt(0),
-		  .drive_mode("6"),
-		  .ibuf_enabled("0"),
-		  .init_dr_st("1"),
-		  .input_sync("0"),
-		  .intr_mode("0"),
-		  .io_voltage(""),
-		  .output_conn("1"),
-		  .oe_conn("0"),
-		  .output_sync("0"),
-		  .oe_sync("0"),
-		  .drive_strength("0"),
-		  .max_frequency("100"),
-		  .i2c_mode("0"),
-		  .output_current_cap("8"),
-		  .pin_aliases(""),
-		  .pin_mode("O"),
-		  .slew_rate("0"),
-		  .vtrip("0"),
-		  .use_annotation("0"),
-		  .hotswap_needed("0"))
-		OVERFLOW
-		 (.oe({1'b1}),
-		  .y({Net_189}),
-		  .fb({tmpFB_0__OVERFLOW_net[0:0]}),
-		  .io({tmpIO_0__OVERFLOW_net[0:0]}),
-		  .siovref(tmpSIOVREF__OVERFLOW_net));
 
 
 

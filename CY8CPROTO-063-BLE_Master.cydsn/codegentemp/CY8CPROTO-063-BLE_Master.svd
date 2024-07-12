@@ -317,7 +317,7 @@
         <register>
           <name>I2C_CSR</name>
           <description>I2C Status Register</description>
-          <addressOffset>0x40341608</addressOffset>
+          <addressOffset>0x4034161C</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -377,7 +377,7 @@
         <register>
           <name>I2C_CFG</name>
           <description>I2C Configuration Register</description>
-          <addressOffset>0x40341710</addressOffset>
+          <addressOffset>0x4034170C</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -430,7 +430,7 @@
         <register>
           <name>I2C_INT_MASK</name>
           <description>I2C Interrupt Enable Mask</description>
-          <addressOffset>0x40341808</addressOffset>
+          <addressOffset>0x4034181C</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
