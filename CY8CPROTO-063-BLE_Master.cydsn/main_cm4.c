@@ -90,6 +90,7 @@ int main(void) {
     
     // Register Timer interrupt handler
     Cy_SysInt_Init(&Timer_Int_cfg, Timer_Int_Handler);
+    NVIC_EnableIRQ(Timer_Int_cfg.intrSrc);
     
     // Stores output data to print to terminal
     char buffer[1024];
@@ -139,6 +140,7 @@ int main(void) {
     printf("ADPD1080 initialization successful.\r\n");
     
     // TODO: trigger SW start of timer?
+    Timer_TriggerStart();
     
     // Begin superloop
     uint16_t ADPDCount = 0; // Number of ADPD sensor reads in the current 10 Hz period

@@ -5,6 +5,12 @@
   </Group>
   <Data key="DataVersionKey" value="2" />
   <Group key="DWRInstGuidMapping">
+    <Group key="Interrupt">
+      <Data key="72463f96-822d-40d2-aad2-bc2cd379f7ff/2629bb23-3eac-4b03-b076-507a73c88e0d" value="I2C_I2C_IRQ" />
+      <Data key="af8629ba-ac4c-423d-9ff5-21939cfe0e60/9260d369-b684-4310-b925-f618d77b89d7" value="UART_SCB_IRQ" />
+      <Data key="c3699cc9-ef27-46ef-aac5-e29eb9b4eed6" value="Timer_Int" />
+      <Data key="d9703dfa-a5a5-4390-8694-d444aa9df2d7/76cc9645-f3bd-4d51-b91b-2975c83cdda3" value="ADC_IRQ" />
+    </Group>
     <Group key="Pin">
       <Data key="3bebfee8-790b-4297-b73a-27818bdce71c" value="SDA" />
       <Data key="4cca878b-77b5-471d-8aeb-ad6925202455" value="RST" />
@@ -19,6 +25,15 @@
       <Data key="ba4d4955-0115-4df6-9fb0-e81346f58fe2" value="ADC_CH4" />
       <Data key="c268b1f3-4963-4b98-8f34-55813e07c8ed" value="SCL" />
       <Data key="f33aa665-cd07-4e22-a86e-569bbb5b0261" value="ADC_CH5" />
+    </Group>
+  </Group>
+  <Group key="Interrupt">
+    <Group key="c3699cc9-ef27-46ef-aac5-e29eb9b4eed6">
+      <Group key="CortexM4">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="7" />
+        <Data key="Vector" value="-1" />
+      </Group>
     </Group>
   </Group>
   <Group key="M0S8Clock">
