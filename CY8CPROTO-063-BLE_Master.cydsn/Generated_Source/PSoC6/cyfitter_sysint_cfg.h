@@ -24,6 +24,9 @@
     #define UART_SCB_IRQ__INTC_ASSIGNED 1u
     extern const cy_stc_sysint_t UART_SCB_IRQ_cfg;
 
+    #define Timer_Int__INTC_ASSIGNED 1u
+    extern const cy_stc_sysint_t Timer_Int_cfg;
+
     #define I2C_I2C_IRQ__INTC_ASSIGNED 1u
     extern const cy_stc_sysint_t I2C_I2C_IRQ_cfg;
 

@@ -184,19 +184,21 @@ bool ADPD1080_DeselectLEDs(void){
 }
 
 /**
- * @brief Reads the data register for each time slot
+ * @brief Reads the data registers for each time slot
  * 
- * @param *dataSlotA - 
+ * @param *dataSlotA - global array holding data from Time Slot A
  * 
- * @param *dataSlotB - 
+ * @param *dataSlotB - global array holding data from Time Slot B
  * 
- * @param count - 
- *  
- * @return none
+ * @param count - number of registers (channels) to read from each data slot
  * 
- * @remarks timer_sleep has been commented but it may be required ...
+ * @return true if successful, false if failure
+ * 
+ * @remarks if not called within ISR, should use the data hold mechanism
+ * to ensure new samples don't arrive while reading - see datasheet pg. 35
  */
 void ADPD1080_ReadDataRegs(volatile uint16_t *dataSlotA, volatile uint16_t *dataSlotB, uint8_t count) {
+    // Read data registers
     for (uint8_t i = 0; i < count; i++) {
         dataSlotA[i] = ADPD1080_ReadReg(ADPD1080_SLOTA_PD1_16BIT + i);
         dataSlotB[i] = ADPD1080_ReadReg(ADPD1080_SLOTB_PD1_16BIT + i);
@@ -264,13 +266,14 @@ bool ADPD1080_SetTIAGain(uint8_t enSlot, ADPD1080_TIAGain enTIAGain) {
 
 /**
  * @brief Set the sampling frequency value.
+ * f_sample = 32 kHz / (regValue * 4) - see datasheet pg.71
  * 
- * @param u16Frequency - sampling frequency value
+ * @param frequency - desired sampling frequency value
  * 
  * @return true if successful - false if failure 
  */
 bool ADPD1080_SetSamplingFrequency(uint16_t frequency) {
-    uint16_t regValue = 32000 / frequency / 4;
+    uint16_t regValue = (32000 / frequency) / 4;
 
     return ADPD1080_WriteReg(ADPD1080_FSAMPLE, regValue);
 }
@@ -278,11 +281,11 @@ bool ADPD1080_SetSamplingFrequency(uint16_t frequency) {
 /**
  * @brief Set the value of the average factor N.
  * 
- * @param enAverage - average factor value
+ * @param enAverage - number of samples to average
  * 
  * @return true if successful - false if failure 
  */
-bool ADPD1080_SetAverageFactor(ADPD1080_AverageN enAverage) { // TODO: define enAverage better
+bool ADPD1080_SetAverageFactor(ADPD1080_AverageN enAverage) {
     uint16_t regValue = (enAverage << 4) | (enAverage << 8);
 
     return ADPD1080_WriteReg(ADPD1080_NUM_AVG, regValue);
@@ -410,6 +413,8 @@ void turbidity_Init(void) {
     ADPD1080_Set32KCLK(true);            // Enable 32K clock
     ADPD1080_SetTimeSlotSwitch(PD_1_4_CONNECTED, PD_1_4_CONNECTED); // Select photodiodes 1-4, datasheet p.21
     
+    // TODO: disable AFE channels 2-4 to save power - see datasheet pg. 41
+    
     // Select LEDs for each time slot
     ADPD1080_SelectLED(LEDX1, SLOTA);
     ADPD1080_SelectLED(LEDX2, SLOTB);
@@ -438,7 +443,7 @@ void turbidity_Init(void) {
     ADPD1080_SetDigitalClock();
 
     // Set sampling frequency
-    ADPD1080_SetSamplingFrequency(400); // For 400 Hz sampling frequency set to 1600. Currently 100 Hz
+    ADPD1080_SetSamplingFrequency(0x0050); // Currently set to 100 Hz sampling frequency
     
     // Set TIA gain
     ADPD1080_SetTIAGain(SLOTA, TIA_25);
@@ -465,58 +470,6 @@ void turbidity_Init(void) {
     ADPD1080_SetOperationMode(NORMAL_OPERATION);
 }
 
-/* Debug only (remove soon) */
-void turbidity_init(void) {
-    
-    ADPD1080_SetOperationMode(0x01);  // Set to program mode
-    ADPD1080_WriteReg(0x0,0xFF);
-    ADPD1080_WriteReg(0x0F, 0x01);    // Reset
-    
-    ADPD1080_SetOperationMode(0x01);  // Set to program mode
-    ADPD1080_Set32KCLK(1);            // Enable 32K clock
-    ADPD1080_SetTimeSlotSwitch(0x5, 0x5);
-    // Select LEDs for each time slot
-    ADPD1080_SelectLED(0x02, 0x0);
-    //ADPD1080_SelectLED(0x01, 0x1);
-    
-    ADPD1080_WriteReg(0x24, 0x1004);  // LED configuration
-    ADPD1080_WriteReg(0x23, 0x1000);  // LED configuration
-    ADPD1080_WriteReg(0x25, 0x67DF);  // LED fine
-
-    ADPD1080_WriteReg(0x31, 0x1019);  // Pulse number and period
-    ADPD1080_WriteReg(0x36, 0x1019);  // Pulse number and period
-
-    ADPD1080_WriteReg(0x30, 0x0220);  // LED width and offset
-    ADPD1080_WriteReg(0x35, 0x0220);  // LED width and offset
-
-    ADPD1080_WriteReg(0x39, 0x1AE0);  // AFE width and offset
-    ADPD1080_WriteReg(0x3B, 0x1AE0);  // AFE width and offset
-
-    //ADPD1080_WriteReg(0x4E, 0x40);  // ADC clock
-    //ADPD1080_WriteReg(0x58, 0x01);    // Digital clock
-
-    ADPD1080_WriteReg(0x12, 0x5);     // Sampling frequency
-    
-    ADPD1080_WriteReg(0x42, 0x1C37);  // TIA gain
-    ADPD1080_WriteReg(0x44, 0x1C37);  // TIA gain
-
-    ADPD1080_WriteReg(0x4B, 0x2695);  // Sample clock
-    ADPD1080_WriteReg(0x4D, 0x0098);  // Adjust clock
-    ADPD1080_WriteReg(0x4F, 0x2090);  // External sync
-    ADPD1080_WriteReg(0x50, 0x0000);  // Calibration
-
-    ADPD1080_WriteReg(0x3C, 0x7006);  // AFE power configuration
-    // FIFO setup
-    ADPD1080_WriteReg(0x11, 0x3131); 
-    ADPD1080_WriteReg(0x06, 0x1F00);
-    ADPD1080_WriteReg(0x01, 0xC0FF);
-    ADPD1080_WriteReg(0x0B, 0x101);
-    ADPD1080_WriteReg(0x02, 0x05);
-    
-    ADPD1080_SetOperationMode(0x02);  // Set to normal operation
-}
-
-
 /* 
 The interrupt handler must perform the following:
 a. Read Register 0x00 and observe Bit 5 or Bit 6 to confirm
@@ -533,6 +486,22 @@ void turbidity_ReadDataInterrupt(void) {
   
     // Clear all interrupts
     ADPD1080_WriteReg(ADPD1080_STATUS, 0xFF);      
+}
+
+/**
+ * @brief Reads all 4 16-bit data registers for each time slot without using interrupts 
+ * 
+ * @return true if successful - false if failure 
+ */
+bool turbidity_ReadDataNoInterrupt(void) {
+    // Enable data hold
+    uint16_t regValue = ADPD1080_ReadReg(ADPD1080_DATA_ACCESS_CTL);
+    if (!ADPD1080_WriteReg(ADPD1080_DATA_ACCESS_CTL, regValue | (0x3 << 1))) {
+        return false;
+    }
+    ADPD1080_ReadDataRegs(au16DataSlotA, au16DataSlotB, 4);
+    // Disable data hold
+    return ADPD1080_WriteReg(ADPD1080_DATA_ACCESS_CTL, regValue & ~(0x3 << 1));
 }
 
 /* Not in use */
@@ -593,7 +562,7 @@ void turbidity_ChannelOffsetCalibration(void) {
     ADPD1080_SetOperationMode(0x02);  // Set to normal operation
 }
 
-/* Helper function for turbidity_Init() */
+/* Helper function for turbidity_Init() - exactly the same as ADPD1_Sensor.ino version */
 void register_settings(void) {
 
     ADPD1080_WriteReg(0x00,0x0000); 

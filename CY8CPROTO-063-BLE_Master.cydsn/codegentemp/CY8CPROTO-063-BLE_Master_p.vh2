@@ -1,5 +1,5 @@
 -- Project:   CY8CPROTO-063-BLE_Master
--- Generated: 07/09/2024 14:36:11
+-- Generated: 07/12/2024 03:26:17
 -- PSoC Creator  4.4
 
 ENTITY \CY8CPROTO-063-BLE_Master\ IS
@@ -8,7 +8,8 @@ ENTITY \CY8CPROTO-063-BLE_Master\ IS
         SDA(0)_PAD : INOUT std_ulogic;
         SCL(0)_PAD : INOUT std_ulogic;
         \UART:tx(0)_PAD\ : OUT std_ulogic;
-        \UART:rx(0)_PAD\ : IN std_ulogic);
+        \UART:rx(0)_PAD\ : IN std_ulogic;
+        Int_Debug(0)_PAD : OUT std_ulogic);
     ATTRIBUTE voltage_VBACKUP OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CSD OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -52,32 +53,43 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE global_signal OF ClockBlock_PeriClk : SIGNAL IS true;
     SIGNAL ClockBlock_SlowClk : bit;
     SIGNAL ClockBlock_WCO : bit;
+    SIGNAL DAC_out(0)__PA : bit;
+    SIGNAL Int_Debug(0)__PA : bit;
+    SIGNAL Net_188 : bit;
+    SIGNAL Net_189 : bit;
+    SIGNAL Net_190 : bit;
+    SIGNAL Net_191 : bit;
+    SIGNAL Net_192_ff11 : bit;
+    ATTRIBUTE global_signal OF Net_192_ff11 : SIGNAL IS true;
+    SIGNAL Net_257 : bit;
+    SIGNAL Net_258 : bit;
+    SIGNAL Net_259_0 : bit;
+    SIGNAL Net_259_1 : bit;
+    SIGNAL Net_259_2 : bit;
+    SIGNAL Net_259_3 : bit;
+    SIGNAL Net_260 : bit;
+    SIGNAL Net_261_0 : bit;
+    SIGNAL Net_261_1 : bit;
+    SIGNAL Net_261_10 : bit;
+    SIGNAL Net_261_11 : bit;
+    SIGNAL Net_261_2 : bit;
+    SIGNAL Net_261_3 : bit;
+    SIGNAL Net_261_4 : bit;
+    SIGNAL Net_261_5 : bit;
+    SIGNAL Net_261_6 : bit;
+    SIGNAL Net_261_7 : bit;
+    SIGNAL Net_261_8 : bit;
+    SIGNAL Net_261_9 : bit;
+    SIGNAL Net_262 : bit;
+    SIGNAL Net_284_ff47 : bit;
+    ATTRIBUTE global_signal OF Net_284_ff47 : SIGNAL IS true;
+    SIGNAL Net_286 : bit;
     SIGNAL Net_2_digital : bit;
     ATTRIBUTE udbclken_assigned OF Net_2_digital : SIGNAL IS "True";
     ATTRIBUTE global_signal OF Net_2_digital : SIGNAL IS true;
     SIGNAL Net_5 : bit;
     SIGNAL Net_55 : bit;
     SIGNAL Net_56 : bit;
-    SIGNAL Net_74 : bit;
-    SIGNAL Net_75 : bit;
-    SIGNAL Net_76_0 : bit;
-    SIGNAL Net_76_1 : bit;
-    SIGNAL Net_76_2 : bit;
-    SIGNAL Net_76_3 : bit;
-    SIGNAL Net_77 : bit;
-    SIGNAL Net_78_0 : bit;
-    SIGNAL Net_78_1 : bit;
-    SIGNAL Net_78_10 : bit;
-    SIGNAL Net_78_11 : bit;
-    SIGNAL Net_78_2 : bit;
-    SIGNAL Net_78_3 : bit;
-    SIGNAL Net_78_4 : bit;
-    SIGNAL Net_78_5 : bit;
-    SIGNAL Net_78_6 : bit;
-    SIGNAL Net_78_7 : bit;
-    SIGNAL Net_78_8 : bit;
-    SIGNAL Net_78_9 : bit;
-    SIGNAL Net_79 : bit;
     SIGNAL RST(0)__PA : bit;
     SIGNAL SCL(0)__PA : bit;
     SIGNAL SDA(0)__PA : bit;
@@ -134,6 +146,8 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     SIGNAL \I2C:bI2C_UDB:status_5\ : bit;
     SIGNAL \I2C:bI2C_UDB:tx_reg_empty\ : bit;
     SIGNAL \I2C:sda_x_wire\ : bit;
+    SIGNAL \Timer:Net_1\ : bit;
+    SIGNAL \Timer:Net_2\ : bit;
     SIGNAL \UART:Net_1172\ : bit;
     SIGNAL \UART:Net_161\ : bit;
     SIGNAL \UART:Net_847_ff0\ : bit;
@@ -185,6 +199,9 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE Location OF ADC_CH6(0) : LABEL IS "P9[2]";
     ATTRIBUTE lib_model OF ADC_CH7(0) : LABEL IS "iocell15";
     ATTRIBUTE Location OF ADC_CH7(0) : LABEL IS "P9[3]";
+    ATTRIBUTE lib_model OF DAC_out(0) : LABEL IS "iocell16";
+    ATTRIBUTE Location OF DAC_out(0) : LABEL IS "P9[6]";
+    ATTRIBUTE lib_model OF Int_Debug(0) : LABEL IS "iocell17";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_5\ : LABEL IS "macrocell2";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_4\ : LABEL IS "macrocell3";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:cnt_reset\ : LABEL IS "macrocell4";
@@ -198,6 +215,7 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:Shifter:u0\ : LABEL IS "datapathcell1";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:Master:ClkGen:u0\ : LABEL IS "datapathcell2";
     ATTRIBUTE Location OF \ADC:SAR\ : LABEL IS "F(SARADC,0)";
+    ATTRIBUTE Location OF \VDAC:CTDAC\ : LABEL IS "F(CTDAC,0)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:sda_in_reg\ : LABEL IS "macrocell10";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_state_4\ : LABEL IS "macrocell11";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:m_state_3\ : LABEL IS "macrocell12";
@@ -536,6 +554,13 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
             trace_data_3 : OUT std_ulogic;
             clock_trace_in : IN std_ulogic);
     END COMPONENT;
+    COMPONENT CTDAC
+        PORT (
+            clock : IN std_ulogic;
+            dsi_ctdac_strobe : IN std_ulogic;
+            tr_ctdac_empty : OUT std_ulogic;
+            interrupt_dac : OUT std_ulogic);
+    END COMPONENT;
     COMPONENT datapathcell
         PORT (
             clock : IN std_ulogic;
@@ -795,6 +820,21 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE udb_clk OF statusicell : COMPONENT IS "clock";
     ATTRIBUTE udb_clken OF statusicell : COMPONENT IS "clk_en";
     ATTRIBUTE udb_reset OF statusicell : COMPONENT IS "reset";
+    COMPONENT TCPWM
+        PORT (
+            clock : IN std_ulogic;
+            capture : IN std_ulogic;
+            count : IN std_ulogic;
+            reload : IN std_ulogic;
+            stop : IN std_ulogic;
+            start : IN std_ulogic;
+            tr_underflow : OUT std_ulogic;
+            tr_compare_match : OUT std_ulogic;
+            tr_overflow : OUT std_ulogic;
+            line_compl : OUT std_ulogic;
+            line : OUT std_ulogic;
+            interrupt : OUT std_ulogic);
+    END COMPONENT;
 BEGIN
 
     \I2C:bI2C_UDB:m_state_4_split\:macrocell
@@ -843,7 +883,9 @@ BEGIN
             lfclk => ClockBlock_LFClk,
             udb_div_0 => dclk_to_genclk,
             ff_div_0 => \UART:Net_847_ff0\,
+            ff_div_11 => Net_192_ff11,
             ff_div_49 => \ADC:Net_428_ff49\,
+            ff_div_47 => Net_284_ff47,
             periclk_App => periclk_App);
 
     CPUSS:CPUSS
@@ -1661,6 +1703,113 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
+    DAC_out:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "a707f313-56c7-4e7c-8c97-ca4d22b2bb7f",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    DAC_out(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "DAC_out",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => DAC_out(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    Int_Debug:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "110",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "a61270bc-07ec-447d-ac9e-34cfe85c30e9",
+            init_dr_st => "0",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    Int_Debug(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "Int_Debug",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => Int_Debug(0)__PA,
+            oe => open,
+            pad_in => Int_Debug(0)_PAD,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
     \I2C:bI2C_UDB:status_5\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * main_1 * main_2 * main_3 * !main_4)",
@@ -1949,28 +2098,28 @@ BEGIN
     \ADC:SAR\:SARADC
         GENERIC MAP(
             cy_registers => "",
-            edge_trigger => 0)
+            edge_trigger => 1)
         PORT MAP(
-            dsi_sar_sample_done => Net_75,
-            dsi_sar_chan_id_valid => Net_77,
-            dsi_sar_data_valid => Net_79,
-            tr_sar_out => Net_74,
-            dsi_sar_data_11 => Net_78_11,
-            dsi_sar_data_10 => Net_78_10,
-            dsi_sar_data_9 => Net_78_9,
-            dsi_sar_data_8 => Net_78_8,
-            dsi_sar_data_7 => Net_78_7,
-            dsi_sar_data_6 => Net_78_6,
-            dsi_sar_data_5 => Net_78_5,
-            dsi_sar_data_4 => Net_78_4,
-            dsi_sar_data_3 => Net_78_3,
-            dsi_sar_data_2 => Net_78_2,
-            dsi_sar_data_1 => Net_78_1,
-            dsi_sar_data_0 => Net_78_0,
-            dsi_sar_chan_id_3 => Net_76_3,
-            dsi_sar_chan_id_2 => Net_76_2,
-            dsi_sar_chan_id_1 => Net_76_1,
-            dsi_sar_chan_id_0 => Net_76_0,
+            dsi_sar_sample_done => Net_258,
+            dsi_sar_chan_id_valid => Net_260,
+            dsi_sar_data_valid => Net_262,
+            tr_sar_out => Net_257,
+            dsi_sar_data_11 => Net_261_11,
+            dsi_sar_data_10 => Net_261_10,
+            dsi_sar_data_9 => Net_261_9,
+            dsi_sar_data_8 => Net_261_8,
+            dsi_sar_data_7 => Net_261_7,
+            dsi_sar_data_6 => Net_261_6,
+            dsi_sar_data_5 => Net_261_5,
+            dsi_sar_data_4 => Net_261_4,
+            dsi_sar_data_3 => Net_261_3,
+            dsi_sar_data_2 => Net_261_2,
+            dsi_sar_data_1 => Net_261_1,
+            dsi_sar_data_0 => Net_261_0,
+            dsi_sar_chan_id_3 => Net_259_3,
+            dsi_sar_chan_id_2 => Net_259_2,
+            dsi_sar_chan_id_1 => Net_259_1,
+            dsi_sar_chan_id_0 => Net_259_0,
             dsi_sar_cfg_st_sel_1 => open,
             dsi_sar_cfg_st_sel_0 => open,
             dsi_sar_cfg_average => open,
@@ -1980,6 +2129,42 @@ BEGIN
             tr_sar_in => open,
             clock => \ADC:Net_428_ff49\,
             interrupt => \ADC:Net_423\);
+
+    \Timer:TCPWM\:TCPWM
+        GENERIC MAP(
+            cy_registers => "",
+            exact_width => 0,
+            width => 16)
+        PORT MAP(
+            clock => Net_192_ff11,
+            capture => '0',
+            count => '1',
+            reload => '0',
+            stop => '0',
+            start => '0',
+            tr_underflow => Net_190,
+            tr_compare_match => Net_191,
+            tr_overflow => Net_189,
+            line_compl => \Timer:Net_1\,
+            line => \Timer:Net_2\,
+            interrupt => Net_188);
+
+    Timer_Int:interrupt
+        GENERIC MAP(
+            cy_registers => "",
+            deepsleep_required => 0,
+            int_type => "10")
+        PORT MAP(
+            interrupt => Net_188,
+            clock => ClockBlock_PeriClk);
+
+    \VDAC:CTDAC\:CTDAC
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            clock => Net_284_ff47,
+            dsi_ctdac_strobe => open,
+            tr_ctdac_empty => Net_286);
 
     \I2C:bI2C_UDB:sda_in_reg\:macrocell
         GENERIC MAP(

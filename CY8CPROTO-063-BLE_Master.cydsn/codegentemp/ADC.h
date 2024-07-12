@@ -144,7 +144,7 @@ The parameters that are set in the customizer are redefined as constants here.
 #define ADC_CFG0_CHANNEL_COUNT           (8u)
 #define ADC_CFG0_VREF_SEL_MASK           (0x70u)
 #define ADC_CFG0_NOMINAL_CLOCK_FREQ      (16666666u)
-#define ADC_CFG0_CHANNEL_EN              (0xffu)
+#define ADC_CFG0_CHANNEL_EN              (0xfu)
 
 /* Sample Control Register */
 #define ADC_CFG0_SINGLE_ENDED_FORMAT     (1uL)
@@ -155,11 +155,11 @@ The parameters that are set in the customizer are redefined as constants here.
 #define ADC_CFG0_VNEG_INPUT_SEL          (0)
 #define ADC_CFG0_SINGLE_PRESENT          (1)
 #define ADC_CFG0_VREF_MV_VALUE           (3300)
-#define ADC_CFG0_APERTURE_TIME0          (27uL)
-#define ADC_CFG0_APERTURE_TIME1          (4uL)
+#define ADC_CFG0_APERTURE_TIME0          (4uL)
+#define ADC_CFG0_APERTURE_TIME1          (2uL)
 #define ADC_CFG0_APERTURE_TIME2          (2uL)
 #define ADC_CFG0_APERTURE_TIME3          (2uL)
-#define ADC_CFG0_FREERUNNING             (1u)
+#define ADC_CFG0_FREERUNNING             (0u)
 #define ADC_CFG0_AVGERAGING_MODE         (1uL)
 #define ADC_CFG0_LOW_LIMIT               (512u)
 #define ADC_CFG0_HIGH_LIMIT              (3584u)

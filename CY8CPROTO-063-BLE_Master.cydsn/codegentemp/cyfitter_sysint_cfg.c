@@ -26,6 +26,12 @@
         .intrPriority = UART_SCB_IRQ__INTC_CORTEXM4_PRIORITY
     };
 
+    /* Timer_Int */
+    const cy_stc_sysint_t Timer_Int_cfg = {
+        .intrSrc = (IRQn_Type)Timer_Int__INTC_NUMBER,
+        .intrPriority = Timer_Int__INTC_CORTEXM4_PRIORITY
+    };
+
     /* I2C_I2C_IRQ */
     const cy_stc_sysint_t I2C_I2C_IRQ_cfg = {
         .intrSrc = (IRQn_Type)I2C_I2C_IRQ__INTC_NUMBER,

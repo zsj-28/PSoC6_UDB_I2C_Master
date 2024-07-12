@@ -2,7 +2,7 @@
 --	Conversion of CY8CPROTO-063-BLE_Master.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue Jul 09 14:35:53 2024
+--	Fri Jul 12 03:26:03 2024
 --
 
 USE cypress.cypress.all;
@@ -409,26 +409,26 @@ TERMINAL Net_86 : bit;
 SIGNAL \ADC:Net_34\ : bit;
 SIGNAL \ADC:Net_33\ : bit;
 TERMINAL \ADC:vref\ : bit;
-SIGNAL Net_75 : bit;
-SIGNAL Net_77 : bit;
-SIGNAL Net_79 : bit;
-SIGNAL Net_74 : bit;
-SIGNAL Net_78_11 : bit;
-SIGNAL Net_78_10 : bit;
-SIGNAL Net_78_9 : bit;
-SIGNAL Net_78_8 : bit;
-SIGNAL Net_78_7 : bit;
-SIGNAL Net_78_6 : bit;
-SIGNAL Net_78_5 : bit;
-SIGNAL Net_78_4 : bit;
-SIGNAL Net_78_3 : bit;
-SIGNAL Net_78_2 : bit;
-SIGNAL Net_78_1 : bit;
-SIGNAL Net_78_0 : bit;
-SIGNAL Net_76_3 : bit;
-SIGNAL Net_76_2 : bit;
-SIGNAL Net_76_1 : bit;
-SIGNAL Net_76_0 : bit;
+SIGNAL Net_258 : bit;
+SIGNAL Net_260 : bit;
+SIGNAL Net_262 : bit;
+SIGNAL Net_257 : bit;
+SIGNAL Net_261_11 : bit;
+SIGNAL Net_261_10 : bit;
+SIGNAL Net_261_9 : bit;
+SIGNAL Net_261_8 : bit;
+SIGNAL Net_261_7 : bit;
+SIGNAL Net_261_6 : bit;
+SIGNAL Net_261_5 : bit;
+SIGNAL Net_261_4 : bit;
+SIGNAL Net_261_3 : bit;
+SIGNAL Net_261_2 : bit;
+SIGNAL Net_261_1 : bit;
+SIGNAL Net_261_0 : bit;
+SIGNAL Net_259_3 : bit;
+SIGNAL Net_259_2 : bit;
+SIGNAL Net_259_1 : bit;
+SIGNAL Net_259_0 : bit;
 TERMINAL \ADC:Net_107\ : bit;
 TERMINAL Net_87 : bit;
 TERMINAL \ADC:Net_110\ : bit;
@@ -693,16 +693,16 @@ TERMINAL \ADC:Net_458\ : bit;
 TERMINAL \ADC:vrefBus_3\ : bit;
 TERMINAL \ADC:Net_459\ : bit;
 TERMINAL \ADC:Net_1448\ : bit;
-SIGNAL Net_80 : bit;
-TERMINAL Net_81_0 : bit;
-TERMINAL Net_81_1 : bit;
+SIGNAL Net_263 : bit;
+TERMINAL Net_264_0 : bit;
+TERMINAL Net_264_1 : bit;
 TERMINAL \ADC:Net_1379\ : bit;
 TERMINAL \ADC:Net_1385\ : bit;
 TERMINAL \ADC:Net_1388\ : bit;
 TERMINAL \ADC:Net_1382\ : bit;
 TERMINAL \ADC:Net_102\ : bit;
-TERMINAL Net_83 : bit;
-TERMINAL Net_82 : bit;
+TERMINAL Net_266 : bit;
+TERMINAL Net_265 : bit;
 SIGNAL tmpFB_0__ADC_CH0_net_0 : bit;
 SIGNAL tmpIO_0__ADC_CH0_net_0 : bit;
 TERMINAL tmpSIOVREF__ADC_CH0_net_0 : bit;
@@ -728,6 +728,40 @@ SIGNAL tmpFB_0__ADC_CH7_net_0 : bit;
 SIGNAL tmpIO_0__ADC_CH7_net_0 : bit;
 TERMINAL tmpSIOVREF__ADC_CH7_net_0 : bit;
 TERMINAL Net_164 : bit;
+SIGNAL Net_192 : bit;
+SIGNAL \Timer:capture\ : bit;
+SIGNAL \Timer:count\ : bit;
+SIGNAL \Timer:reload\ : bit;
+SIGNAL \Timer:stop\ : bit;
+SIGNAL \Timer:start\ : bit;
+SIGNAL Net_190 : bit;
+SIGNAL Net_191 : bit;
+SIGNAL Net_189 : bit;
+SIGNAL \Timer:Net_1\ : bit;
+SIGNAL \Timer:Net_2\ : bit;
+SIGNAL Net_188 : bit;
+SIGNAL \VDAC:Net_1\ : bit;
+TERMINAL \VDAC:ref_drive\ : bit;
+TERMINAL \VDAC:Net_3\ : bit;
+TERMINAL \VDAC:ct_vout\ : bit;
+TERMINAL \VDAC:ct_vout_sw\ : bit;
+SIGNAL \VDAC:strobe\ : bit;
+SIGNAL Net_286 : bit;
+TERMINAL Net_285 : bit;
+TERMINAL \VDAC:ct_vout_buf\ : bit;
+TERMINAL \VDAC:Net_16\ : bit;
+TERMINAL \VDAC:Net_9\ : bit;
+TERMINAL \VDAC:Net_10\ : bit;
+TERMINAL \VDAC:Net_42\ : bit;
+SIGNAL \VDAC:Net_44\ : bit;
+SIGNAL Net_284 : bit;
+TERMINAL Net_287 : bit;
+SIGNAL tmpFB_0__DAC_out_net_0 : bit;
+SIGNAL tmpIO_0__DAC_out_net_0 : bit;
+TERMINAL tmpSIOVREF__DAC_out_net_0 : bit;
+SIGNAL tmpFB_0__Int_Debug_net_0 : bit;
+SIGNAL tmpIO_0__Int_Debug_net_0 : bit;
+TERMINAL tmpSIOVREF__Int_Debug_net_0 : bit;
 SIGNAL \I2C:bI2C_UDB:sda_in_reg\\D\ : bit;
 SIGNAL \I2C:bI2C_UDB:m_state_4\\D\ : bit;
 SIGNAL \I2C:bI2C_UDB:m_state_3\\D\ : bit;
@@ -808,8 +842,8 @@ zero <=  ('0') ;
 \I2C:bI2C_UDB:m_state_0\\D\ <= ((not \I2C:bI2C_UDB:control_5\ and not \I2C:bI2C_UDB:m_state_2\ and not \I2C:bI2C_UDB:m_state_1\ and not \I2C:bI2C_UDB:m_state_0\ and not \I2C:bI2C_UDB:m_reset\ and not \I2C:bI2C_UDB:lost_arb2_reg\ and \I2C:bI2C_UDB:control_4\ and \I2C:bI2C_UDB:m_state_3\ and \I2C:bI2C_UDB:clkgen_tc1_reg\)
 	OR (not \I2C:bI2C_UDB:m_state_4\ and not \I2C:bI2C_UDB:m_reset\ and \I2C:bI2C_UDB:m_state_3\ and \I2C:bI2C_UDB:m_state_2\ and \I2C:bI2C_UDB:m_state_1\ and \I2C:bI2C_UDB:clkgen_tc1_reg\)
 	OR (not \I2C:bI2C_UDB:m_state_3\ and not \I2C:bI2C_UDB:m_state_2\ and not \I2C:bI2C_UDB:m_state_0\ and not \I2C:bI2C_UDB:m_reset\ and \I2C:bI2C_UDB:control_7\ and \I2C:bI2C_UDB:m_state_1\ and \I2C:bI2C_UDB:clkgen_tc1_reg\)
-	OR (not \I2C:bI2C_UDB:tx_reg_empty\ and not \I2C:bI2C_UDB:m_state_3\ and not \I2C:bI2C_UDB:m_state_1\ and not \I2C:bI2C_UDB:m_state_0\ and not \I2C:bI2C_UDB:m_reset\ and \I2C:bI2C_UDB:clkgen_tc1_reg\)
 	OR (not \I2C:bI2C_UDB:m_state_3\ and not \I2C:bI2C_UDB:m_state_1\ and not \I2C:bI2C_UDB:m_state_0\ and not \I2C:bI2C_UDB:m_reset\ and \I2C:bI2C_UDB:m_state_2\ and \I2C:bI2C_UDB:clkgen_tc1_reg\)
+	OR (not \I2C:bI2C_UDB:tx_reg_empty\ and not \I2C:bI2C_UDB:m_state_3\ and not \I2C:bI2C_UDB:m_state_1\ and not \I2C:bI2C_UDB:m_state_0\ and not \I2C:bI2C_UDB:m_reset\ and \I2C:bI2C_UDB:clkgen_tc1_reg\)
 	OR (not \I2C:bI2C_UDB:m_state_4\ and not \I2C:bI2C_UDB:m_reset\ and not \I2C:bI2C_UDB:lost_arb_reg\ and \I2C:bI2C_UDB:control_6\ and \I2C:bI2C_UDB:m_state_2\ and \I2C:bI2C_UDB:m_state_1\ and \I2C:bI2C_UDB:m_state_0\)
 	OR (not \I2C:bI2C_UDB:m_state_4\ and not \I2C:bI2C_UDB:m_reset\ and \I2C:bI2C_UDB:tx_reg_empty\ and \I2C:bI2C_UDB:m_state_2\ and \I2C:bI2C_UDB:m_state_1\ and \I2C:bI2C_UDB:m_state_0\)
 	OR (not \I2C:bI2C_UDB:m_state_2\ and not \I2C:bI2C_UDB:m_state_1\ and not \I2C:bI2C_UDB:m_reset\ and \I2C:bI2C_UDB:m_state_4\ and \I2C:bI2C_UDB:m_state_3\ and \I2C:bI2C_UDB:m_state_0\)
@@ -1414,19 +1448,19 @@ SCL:cy_mxs40_gpio_v1_0
 		signal2=>Net_86);
 \ADC:SAR\:cy_mxs40_sar_v1_0
 	GENERIC MAP(cy_registers=>"",
-		edge_trigger=>'0')
+		edge_trigger=>'1')
 	PORT MAP(vplus=>\ADC:muxoutPlus\,
 		vminus=>\ADC:muxoutMinus\,
 		vref=>\ADC:vref\,
 		ext_vref=>\ADC:Net_408\,
-		dsi_sar_sample_done=>Net_75,
-		dsi_sar_chan_id_valid=>Net_77,
-		dsi_sar_data_valid=>Net_79,
-		tr_sar_out=>Net_74,
-		dsi_sar_data=>(Net_78_11, Net_78_10, Net_78_9, Net_78_8,
-			Net_78_7, Net_78_6, Net_78_5, Net_78_4,
-			Net_78_3, Net_78_2, Net_78_1, Net_78_0),
-		dsi_sar_chan_id=>(Net_76_3, Net_76_2, Net_76_1, Net_76_0),
+		dsi_sar_sample_done=>Net_258,
+		dsi_sar_chan_id_valid=>Net_260,
+		dsi_sar_data_valid=>Net_262,
+		tr_sar_out=>Net_257,
+		dsi_sar_data=>(Net_261_11, Net_261_10, Net_261_9, Net_261_8,
+			Net_261_7, Net_261_6, Net_261_5, Net_261_4,
+			Net_261_3, Net_261_2, Net_261_1, Net_261_0),
+		dsi_sar_chan_id=>(Net_259_3, Net_259_2, Net_259_1, Net_259_0),
 		dsi_sar_cfg_st_sel=>(zero, zero),
 		dsi_sar_cfg_average=>zero,
 		dsi_sar_cfg_differential=>zero,
@@ -2396,9 +2430,9 @@ SCL:cy_mxs40_gpio_v1_0
 \ADC:cy_analog_noconnect_87\:cy_analog_noconnect_v1_0
 	PORT MAP(noconnect=>\ADC:Net_1448\);
 \ADC:cy_analog_noconnect_fvint\:cy_analog_noconnect_v1_0
-	PORT MAP(noconnect=>Net_81_0);
+	PORT MAP(noconnect=>Net_264_0);
 \ADC:cy_analog_noconnect_fvint_1\:cy_analog_noconnect_v1_0
-	PORT MAP(noconnect=>Net_81_1);
+	PORT MAP(noconnect=>Net_264_1);
 \ADC:vRef_4\:cy_vref_v1_0
 	GENERIC MAP(guid=>"6E0C5DC9-D531-4D01-9B49-536487FE4A82",
 		name=>"Bandgap Reference",
@@ -2434,8 +2468,8 @@ SCL:cy_mxs40_gpio_v1_0
 \ADC:vagnd__cy_connect_v1_0\:cy_connect_v1_0
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
-	PORT MAP(signal1=>Net_83,
-		signal2=>Net_82);
+	PORT MAP(signal1=>Net_266,
+		signal2=>Net_265);
 ADC_CH0:cy_mxs40_gpio_v1_0
 	GENERIC MAP(cy_registers=>"",
 		width=>1,
@@ -2707,6 +2741,146 @@ R_2:cy_annotation_universal_v1_0
 		port_names=>"T1, T2",
 		width=>2)
 	PORT MAP(connect=>(Net_159, Net_164));
+\Timer:TCPWM\:cy_mxs40_tcpwm_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>16,
+		exact_width=>'0')
+	PORT MAP(clock=>Net_192,
+		capture=>zero,
+		count=>one,
+		reload=>zero,
+		stop=>zero,
+		start=>zero,
+		tr_underflow=>Net_190,
+		tr_compare_match=>Net_191,
+		tr_overflow=>Net_189,
+		line_compl=>\Timer:Net_1\,
+		line=>\Timer:Net_2\,
+		interrupt=>Net_188);
+Clock_1:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"83d0eefd-830e-4cdf-8faa-b2895adca444",
+		source_clock_id=>"2FB4EC85-8328-4C5A-9ED9-8B63060178EB",
+		divisor=>0,
+		period=>"1000000000",
+		is_direct=>'0',
+		is_digital=>'0')
+	PORT MAP(clock_out=>Net_192,
+		dig_domain_out=>open);
+Timer_Int:cy_mxs40_isr_v1_0
+	GENERIC MAP(cy_registers=>"",
+		deepsleep_required=>'0',
+		int_type=>"10")
+	PORT MAP(int_signal=>Net_188);
+\VDAC:CTDAC\:cy_mxs40_ctdac_v1_0
+	GENERIC MAP(cy_registers=>"")
+	PORT MAP(clock=>Net_284,
+		ctdrefdrive=>\VDAC:ref_drive\,
+		ctdrefsense=>\VDAC:Net_3\,
+		ctdvout=>\VDAC:ct_vout\,
+		ctdvoutsw=>\VDAC:ct_vout_sw\,
+		dsi_ctdac_strobe=>zero,
+		tr_ctdac_empty=>Net_286);
+\VDAC:cy_analog_virtualmux_1_connect\:cy_connect_v1_0
+	GENERIC MAP(sig_width=>1,
+		is_net_join=>'0')
+	PORT MAP(signal1=>Net_285,
+		signal2=>\VDAC:ct_vout_sw\);
+\VDAC:cy_analog_virtualmux_3_connect\:cy_connect_v1_0
+	GENERIC MAP(sig_width=>1,
+		is_net_join=>'0')
+	PORT MAP(signal1=>\VDAC:ct_vout_buf\,
+		signal2=>\VDAC:Net_16\);
+\VDAC:cy_analog_noconnect_2\:cy_analog_noconnect_v1_0
+	PORT MAP(noconnect=>\VDAC:Net_9\);
+\VDAC:cy_analog_virtualmux_2_connect\:cy_connect_v1_0
+	GENERIC MAP(sig_width=>1,
+		is_net_join=>'0')
+	PORT MAP(signal1=>\VDAC:Net_10\,
+		signal2=>\VDAC:Net_42\);
+\VDAC:cy_analog_noconnect_3\:cy_analog_noconnect_v1_0
+	PORT MAP(noconnect=>\VDAC:Net_42\);
+\VDAC:cy_analog_noconnect_4\:cy_analog_noconnect_v1_0
+	PORT MAP(noconnect=>\VDAC:Net_3\);
+\VDAC:vref_out__cy_connect_v1_0\:cy_connect_v1_0
+	GENERIC MAP(sig_width=>1,
+		is_net_join=>'0')
+	PORT MAP(signal1=>Net_287,
+		signal2=>\VDAC:ref_drive\);
+Clock_2:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"af109006-5c76-4af9-b1ff-1f736dafbae0",
+		source_clock_id=>"2FB4EC85-8328-4C5A-9ED9-8B63060178EB",
+		divisor=>0,
+		period=>"1000000000000",
+		is_direct=>'0',
+		is_digital=>'0')
+	PORT MAP(clock_out=>Net_284,
+		dig_domain_out=>open);
+DAC_out:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"a707f313-56c7-4e7c-8c97-ca4d22b2bb7f",
+		drive_mode=>"0",
+		ibuf_enabled=>"0",
+		init_dr_st=>"1",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"A",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__DAC_out_net_0),
+		analog=>Net_285,
+		io=>(tmpIO_0__DAC_out_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__DAC_out_net_0));
+Int_Debug:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"a61270bc-07ec-447d-ac9e-34cfe85c30e9",
+		drive_mode=>"6",
+		ibuf_enabled=>"0",
+		init_dr_st=>"0",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"O",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__Int_Debug_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__Int_Debug_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__Int_Debug_net_0));
 \I2C:bI2C_UDB:sda_in_reg\:cy_dff
 	PORT MAP(d=>\I2C:Net_1109_1\,
 		clk=>\I2C:bI2C_UDB:op_clk\,

@@ -131,13 +131,13 @@ typedef enum {
 
 typedef enum {
   AVERAGE1 = 0,
-  AVERAGE2,
-  AVERAGE4,
-  AVERAGE8,
-  AVERAGE16,
-  AVERAGE32,
-  AVERAGE64,
-  AVERAGE128
+  AVERAGE2 = 1,
+  AVERAGE4 = 2,
+  AVERAGE8 = 3,
+  AVERAGE16 = 4,
+  AVERAGE32 = 5,
+  AVERAGE64 = 6,
+  AVERAGE128 = 7
 } ADPD1080_AverageN;
 
 typedef enum {
@@ -177,9 +177,9 @@ bool ADPD1080_EnableLed(ADPD1080_TimeSlot enSlot);
 bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t u8PulseCount, uint8_t u8PulsePeriod);
 
 /* Controller function prototypes */
-void turbidity_init(void); // Debug only
 void turbidity_Init(void);
 void turbidity_ReadDataInterrupt(void);
+bool turbidity_ReadDataNoInterrupt(void);
 void turbidity_ChannelOffsetCalibration(void);
 void register_settings(void);
 
