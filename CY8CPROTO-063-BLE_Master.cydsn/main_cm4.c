@@ -183,12 +183,12 @@ int main(void) {
             del680 = -3.412*log(64*avg_valA / 127) + 43.02; // TODO: is PULSE_A = 127?
             del850 = -2.701*log(64*avg_valB / 127) + 35.27; // -0.1049
 
-//            // Format and print the data via UART
-//            snprintf(buffer, sizeof(buffer), "RawA:%d, AvgA:%f, RawB:%d, AvgB:%f, LogR:%f, \
-//                RawSO2:%f. AvgSO2:%f, ConA:%f, ConB:%f, #%u\r\n",
-//                L680, avg_valA, L850, avg_valB, R, SO2, SO2_avg, del680, del850, ADPDCount);
-//
-//            printf("%s\r\n", buffer);
+            // Format and print the data via UART
+            snprintf(buffer, sizeof(buffer), "RawA:%d, AvgA:%f, RawB:%d, AvgB:%f, LogR:%f, \
+                RawSO2:%f. AvgSO2:%f, ConA:%f, ConB:%f, #%u\r\n",
+                L680, avg_valA, L850, avg_valB, R, SO2, SO2_avg, del680, del850, ADPDCount);
+
+            printf("%s\r\n", buffer);
         }
         // Process ADC results if ready
         if (ADCDataReady) {

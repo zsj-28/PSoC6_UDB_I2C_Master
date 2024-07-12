@@ -333,7 +333,7 @@
 #define Int_Debug_0_INIT_MUXSEL 0u
 #define Int_Debug_0_INPUT_SYNC 2u
 #define Int_Debug_0_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
-#define Int_Debug_0_NUM 5u
+#define Int_Debug_0_NUM 0u
 #define Int_Debug_0_PORT GPIO_PRT0
 #define Int_Debug_0_SLEWRATE CY_GPIO_SLEW_FAST
 #define Int_Debug_0_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
@@ -343,7 +343,7 @@
 #define Int_Debug_INIT_MUXSEL 0u
 #define Int_Debug_INPUT_SYNC 2u
 #define Int_Debug_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
-#define Int_Debug_NUM 5u
+#define Int_Debug_NUM 0u
 #define Int_Debug_PORT GPIO_PRT0
 #define Int_Debug_SLEWRATE CY_GPIO_SLEW_FAST
 #define Int_Debug_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
