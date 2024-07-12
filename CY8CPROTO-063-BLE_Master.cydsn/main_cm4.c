@@ -24,8 +24,8 @@ void vADC(void *pvParameters);
 float movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum);
 
 /* Constants */
-#define SMOOTHED_SAMPLE_SIZE 50
-#define ADCNumChannels        4u
+#define SMOOTHED_SAMPLE_SIZE 50U
+#define ADCNumChannels        4U
 
 /* Global variables */
 volatile uint16_t timerCount = 0;
@@ -89,7 +89,7 @@ int main(void) {
     Timer_Start();
     
     // Register Timer interrupt handler
-    Timer_Int_StartEx(Timer_Int_Handler);
+    Cy_SysInt_Init(&Timer_Int_cfg, Timer_Int_Handler);
     
     // Stores output data to print to terminal
     char buffer[1024];
