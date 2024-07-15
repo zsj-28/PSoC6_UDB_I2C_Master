@@ -19,6 +19,14 @@ uint8_t ADCCH8_data[2];
 uint8_t ADCCH8_stamp;
 uint8_t ADCCH9_data[2];
 uint8_t ADCCH9_stamp;
+uint8_t sO2_data[2];
+uint8_t sO2_stamp;
+uint8_t sO2_avg_data[2];
+uint8_t sO2_avg_stamp;
+uint8_t HemoglobinA_data[2];
+uint8_t HemoglobinA_stamp;
+uint8_t HemoglobinB_data[2];
+uint8_t HemoglobinB_stamp;
 uint8_t Reserved_data[2] = {0,0};
 uint8_t Reserved_stamp = 0;
 typedef struct command{   // Structure declaration
@@ -43,10 +51,10 @@ command_struct Command_Matrix[256] = {
   {Reserved_data, &Reserved_stamp}, //0x0D
   {Reserved_data, &Reserved_stamp}, //0x0E
   {Reserved_data, &Reserved_stamp}, //0x0F  
-  {Reserved_data, &Reserved_stamp}, //0x10
-  {Reserved_data, &Reserved_stamp}, //0x11
-  {Reserved_data, &Reserved_stamp}, //0x12
-  {Reserved_data, &Reserved_stamp}, //0x13
+  {sO2_data, &sO2_stamp}, //0x10
+  {sO2_avg_data, &sO2_avg_stamp}, //0x11
+  {HemoglobinA_data, &HemoglobinA_stamp}, //0x12
+  {HemoglobinB_data, &HemoglobinA_stamp}, //0x13
   {Reserved_data, &Reserved_stamp}, //0x14
   {Reserved_data, &Reserved_stamp}, //0x15
   {Reserved_data, &Reserved_stamp}, //0x16

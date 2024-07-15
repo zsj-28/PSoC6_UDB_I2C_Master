@@ -82,14 +82,58 @@ void UART_receive(){
             case 0x00:
               Command_Matrix[0].Data[0] = UART_buffer[2]; //ADC CH0
               Command_Matrix[0].Data[1] = UART_buffer[3];
+              *(Command_Matrix[0].Time_Stamp) = UART_buffer[12];
               Command_Matrix[1].Data[0] = UART_buffer[4]; //ADC CH1
               Command_Matrix[1].Data[1] = UART_buffer[5];
+              *(Command_Matrix[1].Time_Stamp) = UART_buffer[12];
               Command_Matrix[2].Data[0] = UART_buffer[6]; //ADC CH2
               Command_Matrix[2].Data[1] = UART_buffer[7];
+              *(Command_Matrix[2].Time_Stamp) = UART_buffer[12];
               Command_Matrix[3].Data[0] = UART_buffer[8]; //ADC CH3
               Command_Matrix[3].Data[1] = UART_buffer[9];
+              *(Command_Matrix[3].Time_Stamp) = UART_buffer[12];
               Command_Matrix[4].Data[0] = UART_buffer[10]; //ADC CH4
               Command_Matrix[4].Data[1] = UART_buffer[11];
+              *(Command_Matrix[4].Time_Stamp) = UART_buffer[12];
+            break;
+            case 0x01:
+              Command_Matrix[5].Data[0] = UART_buffer[2]; //ADC CH5
+              Command_Matrix[5].Data[1] = UART_buffer[3];
+              *(Command_Matrix[5].Time_Stamp) = UART_buffer[12];
+              Command_Matrix[6].Data[0] = UART_buffer[4]; //ADC CH6
+              Command_Matrix[6].Data[1] = UART_buffer[5];
+              *(Command_Matrix[6].Time_Stamp) = UART_buffer[12];
+              Command_Matrix[7].Data[0] = UART_buffer[6]; //ADC CH7
+              Command_Matrix[7].Data[1] = UART_buffer[7];
+              *(Command_Matrix[7].Time_Stamp) = UART_buffer[12];
+              Command_Matrix[8].Data[0] = UART_buffer[8]; //ADC CH8
+              Command_Matrix[8].Data[1] = UART_buffer[9];
+              *(Command_Matrix[8].Time_Stamp) = UART_buffer[12];
+              Command_Matrix[9].Data[0] = UART_buffer[10]; //ADC CH9
+              Command_Matrix[9].Data[1] = UART_buffer[11];
+              *(Command_Matrix[9].Time_Stamp) = UART_buffer[12];
+            break;
+            case 0x03:
+              Command_Matrix[0x10].Data[0] = UART_buffer[2]; //s02
+              Command_Matrix[0x10].Data[1] = UART_buffer[3];
+              Command_Matrix[0x10].Data[2] = UART_buffer[4]; 
+              Command_Matrix[0x10].Data[3] = UART_buffer[5];
+              *(Command_Matrix[0x10].Time_Stamp) = UART_buffer[18];
+              Command_Matrix[0x11].Data[0] = UART_buffer[6]; //s02_avg
+              Command_Matrix[0x11].Data[1] = UART_buffer[7];
+              Command_Matrix[0x11].Data[2] = UART_buffer[8]; 
+              Command_Matrix[0x11].Data[3] = UART_buffer[9];
+              *(Command_Matrix[0x11].Time_Stamp) = UART_buffer[18];
+              Command_Matrix[0x12].Data[0] = UART_buffer[10]; //Hemoglobin A
+              Command_Matrix[0x12].Data[1] = UART_buffer[11];
+              Command_Matrix[0x12].Data[2] = UART_buffer[12]; 
+              Command_Matrix[0x12].Data[3] = UART_buffer[13];
+              *(Command_Matrix[0x12].Time_Stamp) = UART_buffer[18];
+              Command_Matrix[0x13].Data[0] = UART_buffer[14]; //Hemoglobin B
+              Command_Matrix[0x13].Data[1] = UART_buffer[15];
+              Command_Matrix[0x13].Data[2] = UART_buffer[16]; 
+              Command_Matrix[0x13].Data[3] = UART_buffer[17];
+              *(Command_Matrix[0x13].Time_Stamp) = UART_buffer[18];
             break;
             }
           }
