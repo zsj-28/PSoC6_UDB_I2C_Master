@@ -28,6 +28,12 @@ void setup() {
   
   // Initialize the UART port (Serial1) with the desired baud rate
   Serial1.begin(115200, SERIAL_8N1, 16, 17); // Adjust RX and TX pin numbers if necessary
+
+  // Timer 0, 1ms timer
+  hw_timer_t *systiktimer = timerBegin(0, 80, true); // Timer 1, prescaler 80 (1MHz clock)
+  timerAttachInterrupt(systiktimer, &onSysTikTimer, true);
+  timerAlarmWrite(systiktimer, 1000ULL, true); 
+  timerAlarmEnable(systiktimer); // Enable the timer interrupt
 }
 
 /// UART glocal variables
@@ -183,4 +189,9 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
   }
 
   return crc;
+}
+
+//1ms timer interrupt
+void onSysTikTimer(){
+
 }
