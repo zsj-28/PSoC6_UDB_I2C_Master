@@ -27,6 +27,7 @@ uint8_t HemoglobinA_data[4];
 uint8_t HemoglobinA_stamp;
 uint8_t HemoglobinB_data[4];
 uint8_t HemoglobinB_stamp;
+uint8_t UART_error[1];
 uint8_t Reserved_data[2] = {0,0};
 uint8_t Reserved_stamp = 0;
 typedef struct command{   // Structure declaration
@@ -289,7 +290,7 @@ command_struct Command_Matrix[256] = {
   {Reserved_data, &Reserved_stamp}, //0xFB
   {Reserved_data, &Reserved_stamp}, //0xFC
   {Reserved_data, &Reserved_stamp}, //0xFD
-  {Reserved_data, &Reserved_stamp}, //0xFE
+  {UART_error, &Reserved_stamp}, //0xFE
   {Reserved_data, &Reserved_stamp}  //0xFF
 
 };

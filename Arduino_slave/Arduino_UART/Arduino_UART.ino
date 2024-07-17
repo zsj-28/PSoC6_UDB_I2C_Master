@@ -3,6 +3,7 @@
 */
 #include "PSoC_Data.h"
 // CRC-8 calculation table
+void onSysTikTimer(void);
 const uint8_t crcTable[256] = {
   0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D,
   0x70, 0x77, 0x7E, 0x79, 0x6C, 0x6B, 0x62, 0x65, 0x48, 0x4F, 0x46, 0x41, 0x54, 0x53, 0x5A, 0x5D,
@@ -43,10 +44,18 @@ uint8_t buffer_index = 0;
 uint8_t UART_buffer[30];
 uint8_t receivedCRC = 0;
 uint8_t calculatedCRC = 0;
+uint8_t UART_timeout = 0;
+
 
 void UART_receive(){
-  
+    //This reset mechanism prevents incorrect datastream format from 
+    //disrupting future datastream
+    //If UART does not receive data within 10ms, reset buffer index 
+    if(UART_timeout >= 10){
+      buffer_index = 0;
+    }
     while(Serial1.available() > 0){
+      UART_timeout = 0;
       UART_buffer[buffer_index] = Serial1.read();
       buffer_index++;
       //Reset buffer index if buffer is full 
@@ -166,10 +175,10 @@ void loop() {
   }
   crc = calculateCRC8(op_code, length, data);
   Serial1.write(crc);
+  delay(110);
   */
 
   UART_receive();
-
   // Add a small delay to avoid overwhelming the Serial Monitor
   delay(100);
 }
@@ -193,5 +202,14 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
 
 //1ms timer interrupt
 void onSysTikTimer(){
-
+  UART_timeout ++;
+  if(UART_timeout > 100){
+    UART_timeout = 100; // 10ms UART timeout
+    //Set UART error timeout bit
+    Command_Matrix[0xFE].Data[0] |= 0x01;
+  }
+  else{
+    //Clear UART error timeout bit
+    Command_Matrix[0xFE].Data[0] &= 0xFE;
+  }
 }
