@@ -93,7 +93,9 @@ void UART_receive(){
             }
             Serial.print(UART_buffer[i + 2], HEX);
             Serial.print(" ");
-            switch(opCode){
+            
+          }
+          switch(opCode){
             case 0x00:
               Command_Matrix[0].Data[0] = UART_buffer[2]; //ADC CH0
               Command_Matrix[0].Data[1] = UART_buffer[3];
@@ -150,7 +152,6 @@ void UART_receive(){
               Command_Matrix[0x13].Data[3] = UART_buffer[17];
               *(Command_Matrix[0x13].Time_Stamp) = UART_buffer[18];
             break;
-            }
           }
         }
         else {
