@@ -2,7 +2,7 @@
 --	Conversion of CY8CPROTO-063-BLE_Master.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Fri Jul 12 18:25:05 2024
+--	Tue Jul 16 17:20:22 2024
 --
 
 USE cypress.cypress.all;
@@ -762,6 +762,9 @@ TERMINAL tmpSIOVREF__DAC_out_net_0 : bit;
 SIGNAL tmpFB_0__Int_Debug_net_0 : bit;
 SIGNAL tmpIO_0__Int_Debug_net_0 : bit;
 TERMINAL tmpSIOVREF__Int_Debug_net_0 : bit;
+SIGNAL tmpFB_0__Debug_net_0 : bit;
+SIGNAL tmpIO_0__Debug_net_0 : bit;
+TERMINAL tmpSIOVREF__Debug_net_0 : bit;
 SIGNAL \I2C:bI2C_UDB:sda_in_reg\\D\ : bit;
 SIGNAL \I2C:bI2C_UDB:m_state_4\\D\ : bit;
 SIGNAL \I2C:bI2C_UDB:m_state_3\\D\ : bit;
@@ -2881,6 +2884,38 @@ Int_Debug:cy_mxs40_gpio_v1_0
 		io=>(tmpIO_0__Int_Debug_net_0),
 		annotation=>(open),
 		siovref=>(tmpSIOVREF__Int_Debug_net_0));
+Debug:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"0e1266fa-c062-4cac-9112-4de7fd51b1e9",
+		drive_mode=>"6",
+		ibuf_enabled=>"0",
+		init_dr_st=>"0",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"O",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__Debug_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__Debug_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__Debug_net_0));
 \I2C:bI2C_UDB:sda_in_reg\:cy_dff
 	PORT MAP(d=>\I2C:Net_1109_1\,
 		clk=>\I2C:bI2C_UDB:op_clk\,

@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <math.h>
 
-/* Task configuration */
+/* UNUSED - Task configuration */
 #define ADPD1080_TASK_STACK_SIZE          1024
 #define ADC_TASK_STACK_SIZE               1024
 #define ADPD1080_TASK_PRIORITY            2
@@ -24,9 +24,9 @@ void vADC(void *pvParameters);
 float movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum);
 
 /* Constants */
-#define SMOOTHED_SAMPLE_SIZE    50U
+#define SMOOTHED_SAMPLE_SIZE   200U
 #define ADC_NUM_CHANNELS         4U
-#define ADPD_TO_ADC_RATIO        5U 
+#define ADPD_TO_ADC_RATIO       10U
 
 /* Global variables */
 volatile uint16_t timerCount = 0;
@@ -43,7 +43,7 @@ volatile int16_t ADCResults[ADC_NUM_CHANNELS];
  * @return none
  */
 CY_ISR (Timer_Int_Handler) {
-    Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 1);
+    //Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 1);
     
     // Clear timer overflow interrupt
     Timer_ClearInterrupt(CY_TCPWM_INT_ON_TC);
@@ -74,7 +74,7 @@ CY_ISR (Timer_Int_Handler) {
     // Flush write to hardware by reading from same register
     Timer_GetInterruptStatus();
     
-    Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 0);
+    //Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 0);
 }
 
 int main(void) {
@@ -154,10 +154,14 @@ int main(void) {
     for (;;) {
         // Do a data register read if not synced up with the 100 Hz timer interrupt
         if (timerCount != ADPDCount) {
-            ADPDCount = (ADPDCount + 1) % ADPD_TO_ADC_RATIO;
+            Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 1);
+            //ADPDCount = (ADPDCount + 1) % ADPD_TO_ADC_RATIO;
+            ADPDCount = timerCount;
             
             // Read data from the sensor data registers
             turbidity_ReadDataNoInterrupt();
+            
+            Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 0);
             
             // Raw and time avg light intensity
             L680 = au16DataSlotA[0];
@@ -192,6 +196,7 @@ int main(void) {
         }
         // Process ADC results if ready
         if (ADCDataReady) {
+            Cy_GPIO_Write(Debug_PORT, Debug_NUM, 1);
             ADCDataReady = false;
             for (uint16_t i = 0; i < ADC_NUM_CHANNELS; i++) {
                 ADCNewReading[i] = ADCResults[i];
@@ -200,6 +205,7 @@ int main(void) {
             // Format and print the data via UART
             printf("***\r\nADC: CH1 %f, CH2 %f, CH3 %f, CH4 %f #%u\r\n***\r\n", ADCNewVolts[0], 
                 ADCNewVolts[1], ADCNewVolts[2], ADCNewVolts[3], ADPDCount);
+            Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
         }
     }
 }

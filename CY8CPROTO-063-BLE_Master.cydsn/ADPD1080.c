@@ -15,7 +15,7 @@ volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
 const uint8_t PULSE_A = 32;
 const uint8_t PULSE_B = 32;
 
-/* Sensor Function Definitions */
+/* Driver Function Definitions */
 /**
  * @brief  Sets up the hardware and initializes I2C
  * @param  i2cAddr
@@ -403,7 +403,7 @@ bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t pulseCount,
     }
 }
 
-/* Controller Function Definitions */
+/* Control Function Definitions */
 void turbidity_Init(void) {
     ADPD1080_SetOperationMode(PROGRAM);  // Set to program mode
     ADPD1080_Reset();
@@ -468,6 +468,9 @@ void turbidity_Init(void) {
     ADPD1080_SetFIFO();
     
     ADPD1080_SetOperationMode(NORMAL_OPERATION);
+    
+    // Wait 50ms to let initialization take effect
+    Cy_SysLib_Delay(50U);
 }
 
 /* 

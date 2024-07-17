@@ -84,6 +84,28 @@
 #define SDA_SLEWRATE CY_GPIO_SLEW_FAST
 #define SDA_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
 
+/* Debug */
+#define Debug_0_DRIVEMODE CY_GPIO_DM_STRONG_IN_OFF
+#define Debug_0_INBUF_ENABLED 0u
+#define Debug_0_INIT_DRIVESTATE 0u
+#define Debug_0_INIT_MUXSEL 0u
+#define Debug_0_INPUT_SYNC 2u
+#define Debug_0_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
+#define Debug_0_NUM 5u
+#define Debug_0_PORT GPIO_PRT9
+#define Debug_0_SLEWRATE CY_GPIO_SLEW_FAST
+#define Debug_0_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
+#define Debug_DRIVEMODE CY_GPIO_DM_STRONG_IN_OFF
+#define Debug_INBUF_ENABLED 0u
+#define Debug_INIT_DRIVESTATE 0u
+#define Debug_INIT_MUXSEL 0u
+#define Debug_INPUT_SYNC 2u
+#define Debug_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
+#define Debug_NUM 5u
+#define Debug_PORT GPIO_PRT9
+#define Debug_SLEWRATE CY_GPIO_SLEW_FAST
+#define Debug_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
+
 /* ADC_CH0 */
 #define ADC_CH0_0_DRIVEMODE CY_GPIO_DM_ANALOG
 #define ADC_CH0_0_INBUF_ENABLED 0u
@@ -333,7 +355,7 @@
 #define Int_Debug_0_INIT_MUXSEL 0u
 #define Int_Debug_0_INPUT_SYNC 2u
 #define Int_Debug_0_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
-#define Int_Debug_0_NUM 0u
+#define Int_Debug_0_NUM 5u
 #define Int_Debug_0_PORT GPIO_PRT0
 #define Int_Debug_0_SLEWRATE CY_GPIO_SLEW_FAST
 #define Int_Debug_0_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
@@ -343,7 +365,7 @@
 #define Int_Debug_INIT_MUXSEL 0u
 #define Int_Debug_INPUT_SYNC 2u
 #define Int_Debug_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
-#define Int_Debug_NUM 0u
+#define Int_Debug_NUM 5u
 #define Int_Debug_PORT GPIO_PRT0
 #define Int_Debug_SLEWRATE CY_GPIO_SLEW_FAST
 #define Int_Debug_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS

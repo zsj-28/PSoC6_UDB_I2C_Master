@@ -1,5 +1,5 @@
 -- Project:   C:\Users\thoma\Documents\PSoC Creator\ecmo\szhang\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj
--- Generated: 07/12/2024 18:25:36
+-- Generated: 07/16/2024 17:20:58
 -- PSoC Creator  4.4
 
 ENTITY \CY8CPROTO-063-BLE_Master\ IS
@@ -9,7 +9,8 @@ ENTITY \CY8CPROTO-063-BLE_Master\ IS
         SCL(0)_PAD : INOUT std_ulogic;
         \UART:tx(0)_PAD\ : OUT std_ulogic;
         \UART:rx(0)_PAD\ : IN std_ulogic;
-        Int_Debug(0)_PAD : OUT std_ulogic);
+        Int_Debug(0)_PAD : OUT std_ulogic;
+        Debug(0)_PAD : OUT std_ulogic);
     ATTRIBUTE voltage_VBACKUP OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CSD OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -54,6 +55,7 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     SIGNAL ClockBlock_SlowClk : bit;
     SIGNAL ClockBlock_WCO : bit;
     SIGNAL DAC_out(0)__PA : bit;
+    SIGNAL Debug(0)__PA : bit;
     SIGNAL Int_Debug(0)__PA : bit;
     SIGNAL Net_189 : bit;
     SIGNAL Net_190 : bit;
@@ -238,7 +240,9 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE lib_model OF DAC_out(0) : LABEL IS "iocell16";
     ATTRIBUTE Location OF DAC_out(0) : LABEL IS "P9[6]";
     ATTRIBUTE lib_model OF Int_Debug(0) : LABEL IS "iocell17";
-    ATTRIBUTE Location OF Int_Debug(0) : LABEL IS "P0[0]";
+    ATTRIBUTE Location OF Int_Debug(0) : LABEL IS "P0[5]";
+    ATTRIBUTE lib_model OF Debug(0) : LABEL IS "iocell18";
+    ATTRIBUTE Location OF Debug(0) : LABEL IS "P9[5]";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_5\ : LABEL IS "macrocell2";
     ATTRIBUTE Location OF \I2C:bI2C_UDB:status_5\ : LABEL IS "U(0,3)";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_4\ : LABEL IS "macrocell3";
@@ -1878,6 +1882,60 @@ BEGIN
             pa_out => Int_Debug(0)__PA,
             oe => open,
             pad_in => Int_Debug(0)_PAD,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    Debug:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "110",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "0e1266fa-c062-4cac-9112-4de7fd51b1e9",
+            init_dr_st => "0",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    Debug(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "Debug",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => Debug(0)__PA,
+            oe => open,
+            pad_in => Debug(0)_PAD,
             in_clock => open,
             in_clock_en => open,
             in_reset => open,
