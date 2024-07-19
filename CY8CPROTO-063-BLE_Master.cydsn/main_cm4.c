@@ -277,6 +277,15 @@ int main(void) {
     
     printf("ADPD1080 initialization successful.\r\n");
     
+    /* Initialization of Crypto Driver */
+	Cy_Crypto_Init(&cryptoConfig, &cryptoScratch);
+
+	/* Enable Crypto Hardware */
+	Cy_Crypto_Enable();
+
+	/* Wait for Crypto Block to be available */
+	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
+    
     // Begin first ADC scan
     ADC_StartConvert();
     
@@ -313,7 +322,7 @@ int main(void) {
                 SO2_avg = 188.1*(R_avg) - 89.95;
                 
                 // Hemoglobin concentration
-                del680 = -3.412*log(64*avg_valA / PULSE_A) + 43.02; // TODO: is PULSE_A = 127?
+                del680 = -3.412*log(64*avg_valA / PULSE_A) + 43.02; // TODO: is PULSE_A/PULSE_B = 127?
                 del850 = -2.701*log(64*avg_valB / PULSE_B) + 35.27; // -0.1049
                 
                 // Populate packet buffer
@@ -341,6 +350,25 @@ int main(void) {
 								  (packetsize/AES128_ENCRYPTION_LENGTH) \
 								  : (1 + packetsize/AES128_ENCRYPTION_LENGTH);
                                 
+            /* Initializes the AES operation by setting key and key length */
+			Cy_Crypto_Aes_Init((uint32_t*)AES_Key, CY_CRYPTO_KEY_AES_128, &cryptoAES);
+
+			/* Wait for Crypto Block to be available */
+			Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
+
+			for(int i = 0; i < AESBlock_count ; i++) {
+				/* Perform AES ECB Encryption mode of operation */
+				Cy_Crypto_Aes_Ecb_Run(CY_CRYPTO_ENCRYPT,\
+				(uint32_t*) (encrypted_pkt + AES128_ENCRYPTION_LENGTH * i),\
+				(uint32_t*) (packet + AES128_ENCRYPTION_LENGTH * i), &cryptoAES);
+
+				/* Wait for Crypto Block to be available */
+				Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING);
+			}
+            
+            // Transmit packet
+                    
+            
             // Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
         }
     }

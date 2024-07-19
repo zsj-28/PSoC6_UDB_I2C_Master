@@ -94,8 +94,8 @@
 #define ADPD1080_SENSITIVITY 1.64f
     
 /* Constants */
-const uint8_t PULSE_A = 32;
-const uint8_t PULSE_B = 32;
+extern const uint8_t PULSE_A;
+extern const uint8_t PULSE_B;
     
 /* Define volatile data slots */
 extern volatile uint16_t au16DataSlotA[4];
