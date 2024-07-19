@@ -15,6 +15,9 @@
 ********************************************************************************/
 
 #include "cyble_416045_02.h"
+#include "cy_crypto.h"
+#include "cy_crypto_common.h"
+#include "cy_crypto_server.h"
 #include "cy_ctb.h"
 #include "cy_ctdac.h"
 #include "cy_efuse.h"

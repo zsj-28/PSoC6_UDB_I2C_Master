@@ -1,8 +1,7 @@
 /**
  * @file ADPD1080.c 
- */
+*/
 
-/* Include Files */
 #include "project.h"  // Include PSoC project header for PSoC-specific functions
 #include "ADPD1080.h"
 #include <stdio.h>

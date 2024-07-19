@@ -1,8 +1,7 @@
 /**
  * @file main_cm4.c 
- */
+*/
 
-/* Include files */
 #include "project.h"
 #include "FreeRTOS.h"
 #include "task.h"
@@ -24,6 +23,7 @@
 #define ADC_READ_INTERVAL_MS              100
 #define BQ34Z100_READ_INTERVAL_MS         100
 
+/* Constants */
 #define OPCODE_ADC_0 0x01
 #define OPCODE_ADC_1 0x02
 #define OPCODE_ADC_2 0x03
@@ -35,7 +35,6 @@
 #define OPCODE_ADPD  0x09
 #define OPCODE_ALL   0x0A
 
-/* Constants */
 #define SMOOTHED_SAMPLE_SIZE     200U
 
 #define ADC_NUM_CHANNELS         4U
@@ -61,7 +60,7 @@
 /* CM0+ ERROR interrupt mux number the Crypto server */
 #define MY_INTR_CRYPTO_ERR_MUX 				(IRQn_Type)(4u)
 
-#define MAX_PACKET_SIZE          1000U // Maximum number of bytes in a packet
+#define MAX_PACKET_SIZE                     (1000u) // Maximum number of bytes in a packet
 
 /* Size of the message block that can be processed by Crypto hardware for
  * AES encryption */
@@ -464,3 +463,5 @@ void vBQ34Z100(void *pvParameters) {
         vTaskDelay(pdMS_TO_TICKS(BQ34Z100_READ_INTERVAL_MS));
     }
 }
+
+/* [] END OF FILE */
