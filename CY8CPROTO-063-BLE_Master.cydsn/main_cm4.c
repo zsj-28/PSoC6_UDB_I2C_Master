@@ -149,24 +149,6 @@ CY_ISR (Timer_Int_Handler) {
  * @brief main function
  */
 int main(void) {
-    // Initialize UART for serial communication
-    UART_Start();
-    
-    // Initialize I2C for digital sensor communication
-    I2C_Start();
-    
-    // Intialize ADC for receiving analog sensor data
-    ADC_Start();
-    
-    // Initialize DAC (debug only)
-    VDAC_Start();
-    
-    // Register Timer interrupt handler
-    Cy_SysInt_Init(&Timer_Int_cfg, Timer_Int_Handler);
-    NVIC_EnableIRQ(Timer_Int_cfg.intrSrc);
-    
-    __enable_irq();  // Enable global interrupts
-    
     // Variables for calculating oxygen saturation and hemoglobin concentration
     uint16_t L680 ; // Time Slot A Channel 1 (680 nm laser)
     uint16_t L850 ; // Time Slot B Channel 1 (850 nm laser)
@@ -192,6 +174,27 @@ int main(void) {
     uint32_t sumB = 0;
     size_t lenA = sizeof(slotA_avg)/sizeof(uint16_t);
     size_t lenB = sizeof(slotB_avg)/sizeof(uint16_t);
+    
+    // Store current size of sensor data UART packet and number of AES blocks
+    uint8_t packetsize = 0, AESBlock_count = 0;
+    
+    // Initialize UART for serial communication
+    UART_Start();
+    
+    // Initialize I2C for digital sensor communication
+    I2C_Start();
+    
+    // Intialize ADC for receiving analog sensor data
+    ADC_Start();
+    
+    // Initialize DAC (debug only)
+    VDAC_Start();
+    
+    // Register Timer interrupt handler
+    Cy_SysInt_Init(&Timer_Int_cfg, Timer_Int_Handler);
+    NVIC_EnableIRQ(Timer_Int_cfg.intrSrc);
+    
+    __enable_irq();  // Enable global interrupts
 
     // Initialize and configure the ADPD1080 sensor
     printf("Initializing ADPD1080 sensor...\r\n");
@@ -247,12 +250,23 @@ int main(void) {
                 del850 = -2.701*log(64*avg_valB / PULSE_B) + 35.27; // -0.1049
                 
                 // Populate packet buffer
+                float2Bytes(SO2, &packet[packetsize]);
+                packetsize += sizeof(float32_t);
                 
+                float2Bytes(SO2_avg, &packet[packetsize]);
+                packetsize += sizeof(float32_t);
+                
+                float2Bytes(del680, &packet[packetsize]);
+                packetsize += sizeof(float32_t);
+                
+                float2Bytes(del850, &packet[packetsize]);
+                packetsize += sizeof(float32_t);
             }
             
             // Process ADC data
             for (uint8_t i = 0; i < ADC_NUM_CHANNELS; i++) {
-                float2Bytes(Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]), &packet[i]);
+                float2Bytes(Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]), &packet[packetsize]);
+                packetsize += sizeof(float32_t);
             }
             
             // TODO: Format + encrypt packet
