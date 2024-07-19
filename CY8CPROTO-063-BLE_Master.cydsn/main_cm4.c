@@ -86,8 +86,8 @@ void vBQ34Z100(void *pvParameters);
 uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data);
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length);
 void send_data(uint16_t adc_value, uint16_t adc_channel);
-float movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum);
-void float2Bytes(float val, uint8_t *bytes_array);
+float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum);
+void float2Bytes(float32_t val, uint8_t *bytes_array);
 
 /* Interrupt service routines */
 /**
@@ -171,12 +171,12 @@ int main(void) {
     uint16_t L680 ; // Time Slot A Channel 1 (680 nm laser)
     uint16_t L850 ; // Time Slot B Channel 1 (850 nm laser)
 
-    float R;                 // Ratio of L680 to L850
-    float SO2;               // Oxygen saturation
-    float R_avg;             // Running average R
-    float SO2_avg;           // Running average SO2
-    float del680;            // L680 Hemoglobin concentration
-    float del850;            // L850 Hemoglobin concentration
+    float32_t R;                 // Ratio of L680 to L850
+    float32_t SO2;               // Oxygen saturation
+    float32_t R_avg;             // Running average R
+    float32_t SO2_avg;           // Running average SO2
+    float32_t del680;            // L680 Hemoglobin concentration
+    float32_t del850;            // L850 Hemoglobin concentration
     // unsigned long t;
     // unsigned long t0;
 
@@ -186,15 +186,12 @@ int main(void) {
 
     size_t posA = 0;
     size_t posB = 0;
-    float avg_valA = 0;
-    float avg_valB = 0;
+    float32_t avg_valA = 0;
+    float32_t avg_valB = 0;
     uint32_t sumA = 0;
     uint32_t sumB = 0;
     size_t lenA = sizeof(slotA_avg)/sizeof(uint16_t);
     size_t lenB = sizeof(slotB_avg)/sizeof(uint16_t);
-    
-    // Stores valid ADC conversion results
-    float ADCNewVolts[ADC_NUM_CHANNELS];
 
     // Initialize and configure the ADPD1080 sensor
     printf("Initializing ADPD1080 sensor...\r\n");
@@ -255,7 +252,7 @@ int main(void) {
             
             // Process ADC data
             for (uint8_t i = 0; i < ADC_NUM_CHANNELS; i++) {
-                ADCNewVolts[i] = Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]);
+                float2Bytes(Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]), &packet[i]);
             }
             
             // TODO: Format + encrypt packet
@@ -288,10 +285,10 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     packet[1] = length;
     memcpy(&packet[2], data, length);
     packet[2 + length] = calculateCRC8(opcode, length, data);
-    Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
+    // Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
 }
 
-/*  send data 
+/*  send data (UNUSED)
  *  adc_channel goes from 0 - 8 
  *  0x0-0x7 are 8 ADC channels, 0x8 is the I2C ADPD readings
  */
@@ -315,7 +312,7 @@ void send_data(uint16_t adc_value, uint16_t adc_channel) {
  *
  * @return int - the moving average after nextNum added
  */
-float movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum) {
+float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum) {
     // Subtract the oldest number from the prev sum, add the new number
     *ptrSum = *ptrSum - ptrArrNumbers[pos] + nextNum;
     
@@ -323,7 +320,7 @@ float movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t le
     ptrArrNumbers[pos] = nextNum;
     
     // return the average
-    return (float)*ptrSum / len;
+    return (float32_t)*ptrSum / len;
 }
 
 /**
@@ -331,15 +328,15 @@ float movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t le
  * 
  * @author <Floris> - https://stackoverflow.com/questions/24420246/c-function-to-convert-float-to-byte-array
  * 
- * @param float val - float value (32 bits) to be converted to uint8_t array of length 4
+ * @param float32_t val - single precision float value to be converted to uint8_t array of length 4
  * @param uint8_t *bytesArray - pointer to uint8_t array in memory
  *
  * @return none
  */
-void float2Bytes(float val, uint8_t *bytes_array) {
+void float2Bytes(float32_t val, uint8_t *bytes_array) {
   // Create union of shared memory space
   union {
-    float float_variable;
+    float32_t float_variable;
     uint8_t temp_array[4];
   } u;
   // Overite bytes of union with float variable
