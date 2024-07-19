@@ -26,7 +26,7 @@ extern "C" {
 *   Initial Parameter Constants
 ****************************************/
 
-#define UART_DIRECTION  (3U)
+#define UART_DIRECTION  (2U)
 #define UART_ENABLE_RTS (0U)
 #define UART_ENABLE_CTS (0U)
 

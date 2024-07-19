@@ -1,6 +1,6 @@
 (DELAYFILE
  (SDFVERSION "IEEE 1497 4.0")
- (DATE "2024-07-16T21:20:58Z")
+ (DATE "2024-07-19T08:02:31Z")
  (DESIGN "CY8CPROTO-063-BLE_Master")
  (VENDOR "Cypress Semiconductor")
  (PROGRAM "PSoC Creator")
@@ -259,7 +259,6 @@
     (INTERCONNECT \\I2C\:bI2C_UDB\:Shifter\:u0\\.f1_blk_stat_comb \\I2C\:bI2C_UDB\:m_state_4_split\\.main_3 (2.866:4.105:4.105))
     (INTERCONNECT \\I2C\:sda_x_wire\\.q SDA\(0\).pin_input (8.041:9.436:9.436))
     (INTERCONNECT \\I2C\:sda_x_wire\\.q \\I2C\:sda_x_wire\\.main_0 (0.740:1.059:1.059))
-    (INTERCONNECT \\UART\:rx\(0\)\\.fb \\UART\:SCB\\.uart_rx (0.000:0.000:0.000))
     (INTERCONNECT ClockBlock.ff_div_5 \\UART\:SCB\\.clock (0.000:0.000:0.000))
     (INTERCONNECT \\UART\:SCB\\.interrupt \\UART\:SCB_IRQ\\.interrupt (0.000:0.000:0.000))
     (INTERCONNECT \\UART\:tx\(0\)\\.pad_out \\UART\:tx\(0\)\\.pad_in (0.000:0.000:0.000))
@@ -275,7 +274,6 @@
     (INTERCONNECT SCL\(0\)_PAD SCL\(0\).pad_in (0.000:0.000:0.000))
     (INTERCONNECT \\UART\:tx\(0\)\\.pad_out \\UART\:tx\(0\)_PAD\\ (0.000:0.000:0.000))
     (INTERCONNECT \\UART\:tx\(0\)_PAD\\ \\UART\:tx\(0\)\\.pad_in (0.000:0.000:0.000))
-    (INTERCONNECT \\UART\:rx\(0\)_PAD\\ \\UART\:rx\(0\)\\.pad_in (0.000:0.000:0.000))
     (INTERCONNECT Int_Debug\(0\)_PAD Int_Debug\(0\).pad_in (0.000:0.000:0.000))
     (INTERCONNECT Debug\(0\)_PAD Debug\(0\).pad_in (0.000:0.000:0.000))
    )

@@ -1309,14 +1309,6 @@ net \I2C:bI2C_UDB:status_5\
 	switch ":UDB_Array:UDBroute3:TUI_Sel35.tui35==>:UDB_Array:udb@[UDB=(0,2)]:StatusControl:statusicell.status_5"
 	term   ":UDB_Array:udb@[UDB=(0,2)]:StatusControl:statusicell.status_5"
 end \I2C:bI2C_UDB:status_5\
-net \UART:Net_1172\
-	term   ":ioport5:pin0.fb"
-	switch ":ioport5:pin0.fb==>:ioport5:smartio_mux_out0.direct_in"
-	switch ":ioport5:smartio_mux_out0.smartio_mux_out==>:ioport5:hsiomIn0.hsiomIn0"
-	switch ":ioport5:hsiomIn0.fixedOut0_ACT_6==>:SCB[5]uart_rx_input_permute.ioport5_fixedOut0_ACT_6"
-	switch ":SCB[5]uart_rx_input_permute.SCB[5]uart_rx==>:SCBcontainer:SCB[5].uart_rx"
-	term   ":SCBcontainer:SCB[5].uart_rx"
-end \UART:Net_1172\
 net \UART:Net_847_ff0\
 	term   ":Clockcontainer:Clock[0].ff_div_5"
 	switch ":Clockcontainer:Clock[0].ff_div_5==>:Clockcontainer:ff_permute.ff_div_5"

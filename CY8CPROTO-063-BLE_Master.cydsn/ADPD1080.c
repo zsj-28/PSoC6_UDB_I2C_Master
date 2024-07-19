@@ -11,10 +11,6 @@
 volatile uint16_t au16DataSlotA[4] = {0,0,0,0};
 volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
 
-/* Constants */
-const uint8_t PULSE_A = 32;
-const uint8_t PULSE_B = 32;
-
 /* Driver Function Definitions */
 /**
  * @brief  Sets up the hardware and initializes I2C
@@ -494,15 +490,17 @@ void turbidity_ReadDataInterrupt(void) {
 /**
  * @brief Reads all 4 16-bit data registers for each time slot without using interrupts 
  * 
+ * @param uint8_t count - number of channels to read for each time slot (A and B)
+ *
  * @return true if successful - false if failure 
  */
-bool turbidity_ReadDataNoInterrupt(void) {
+bool turbidity_ReadDataNoInterrupt(uint8_t count) {
     // Enable data hold
     uint16_t regValue = ADPD1080_ReadReg(ADPD1080_DATA_ACCESS_CTL);
     if (!ADPD1080_WriteReg(ADPD1080_DATA_ACCESS_CTL, regValue | (0x3 << 1))) {
         return false;
     }
-    ADPD1080_ReadDataRegs(au16DataSlotA, au16DataSlotB, 4);
+    ADPD1080_ReadDataRegs(au16DataSlotA, au16DataSlotB, count);
     // Disable data hold
     return ADPD1080_WriteReg(ADPD1080_DATA_ACCESS_CTL, regValue & ~(0x3 << 1));
 }

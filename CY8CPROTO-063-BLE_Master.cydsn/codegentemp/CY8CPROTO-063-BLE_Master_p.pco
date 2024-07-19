@@ -38,18 +38,17 @@ set_location "\I2C:bI2C_UDB:m_reset\" macrocell 0 0 0 2
 set_location "\I2C:sda_x_wire\" macrocell 1 2 0 0
 set_location "\I2C:bI2C_UDB:m_state_1\" macrocell 1 0 1 0
 set_location "\I2C:bI2C_UDB:m_state_0\" macrocell 1 4 1 0
-set_io "\UART:rx(0)\" iocell 5 0
+set_location "\UART:SCB_IRQ\" interrupt -1 -1 46
 set_location "Timer_Int" interrupt -1 -1 90
 set_location "\ADC:IRQ\" interrupt -1 -1 138
 set_location "\I2C:I2C_IRQ\" interrupt -1 -1 122
-set_location "\UART:SCB_IRQ\" interrupt -1 -1 46
-set_location "\UART:SCB\" SCB -1 -1 5
 set_location "ClockBlock" Clock -1 -1 0
 set_io "SCL(0)" iocell 10 1
 # Warning: unknown type "SARMUX"
 #set_location "\ADC:SARMUX\" SARMUX -1 -1 -1 -1
 set_location "\ADC:SAR\" SARADC -1 -1 0
 set_location "\Timer:TCPWM\" TCPWM -1 -1 0
+set_location "\UART:SCB\" SCB -1 -1 5
 set_io "RST(0)" iocell 10 0
 set_io "CY_CPUSS_SWJ_SWCLK_TCLK(0)" iocell 6 7
 set_io "SDA(0)" iocell 10 2

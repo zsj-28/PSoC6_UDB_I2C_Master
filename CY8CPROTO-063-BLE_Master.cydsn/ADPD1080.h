@@ -93,6 +93,10 @@
 /* Sensitivity */
 #define ADPD1080_SENSITIVITY 1.64f
     
+/* Constants */
+const uint8_t PULSE_A = 32;
+const uint8_t PULSE_B = 32;
+    
 /* Define volatile data slots */
 extern volatile uint16_t au16DataSlotA[4];
 extern volatile uint16_t au16DataSlotB[4];
@@ -179,7 +183,7 @@ bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t u8PulseCoun
 /* Controller function prototypes */
 void turbidity_Init(void);
 void turbidity_ReadDataInterrupt(void);
-bool turbidity_ReadDataNoInterrupt(void);
+bool turbidity_ReadDataNoInterrupt(uint8_t count);
 void turbidity_ChannelOffsetCalibration(void);
 void register_settings(void);
 
