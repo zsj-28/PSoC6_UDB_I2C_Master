@@ -367,7 +367,7 @@ int main(void) {
 			}
             
             // Transmit packet
-                    
+            wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
             
             // Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
         }
@@ -398,7 +398,7 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     packet[1] = length;
     memcpy(&packet[2], data, length);
     packet[2 + length] = calculateCRC8(opcode, length, data);
-    // Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
+    Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
 }
 
 /*  send data (UNUSED)
