@@ -145,7 +145,7 @@ CY_ALIGN(4) uint8_t AES_Key[AES128_KEY_LENGTH]={0xAA,0xBB,0xCC,0xDD,0xEE,0xFF,0x
 /* Variables to hold the user message and the corresponding encrypted message */
 CY_ALIGN(4) uint8_t packet[MAX_PACKET_SIZE];
 CY_ALIGN(4) uint8_t encrypted_pkt[MAX_PACKET_SIZE];
-CY_ALIGN(4) uint8_t decrypted_msg[MAX_PACKET_SIZE]; // debug only
+// CY_ALIGN(4) uint8_t decrypted_pkt[MAX_PACKET_SIZE]; // debug only
 
 /* Function prototypes */
 void vADPD1080(void *pvParameters);
@@ -344,6 +344,9 @@ int main(void) {
                 
                 float2Bytes(del850, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
+                
+                // printf("L850: %d, L850_Avg: %f, SO2: %f, SO2_Avg: %f, del680: %f, del850: %f\r\n",
+                       // L850, avg_valB, SO2, SO2_avg, del680, del850); // debug only
             }
             
             // Process ADC data
@@ -457,6 +460,23 @@ void float2Bytes(float32_t val, uint8_t *bytes_array) {
   u.float_variable = val;
   // Assign bytes to input array
   memcpy(bytes_array, u.temp_array, 4);
+}
+
+/**
+ * @brief: Debug-only function used to display the data in hexadecimal format
+ *
+ * @param: uint8_t* - Pointer to location of data to be printed
+ *
+ * @return: void
+*/
+void PrintData(uint8_t* data, uint8_t len) {
+	printf("\r\n");
+	char print[10];
+	for(uint32 i=0; i < len; i++) {
+		sprintf(print,"0x%02X ", *(data+i));
+		printf("%s", print);
+	}
+	printf("\r\n");
 }
 
 /* FreeRTOS Task Functions */
