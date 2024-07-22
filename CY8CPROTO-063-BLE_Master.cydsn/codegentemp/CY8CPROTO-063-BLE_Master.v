@@ -1,6 +1,6 @@
 // ======================================================================
 // CY8CPROTO-063-BLE_Master.v generated from TopDesign.cysch
-// 07/19/2024 at 06:37
+// 07/21/2024 at 15:49
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -2114,7 +2114,7 @@ module top ;
 		#(.id("9512ef11-c061-4462-9429-dae061e68c31"),
 		  .source_clock_id("2FB4EC85-8328-4C5A-9ED9-8B63060178EB"),
 		  .divisor(0),
-		  .period("625000000"),
+		  .period("62500000"),
 		  .is_direct(0),
 		  .is_digital(0))
 		CLK

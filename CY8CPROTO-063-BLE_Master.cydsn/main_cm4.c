@@ -145,6 +145,7 @@ CY_ALIGN(4) uint8_t AES_Key[AES128_KEY_LENGTH]={0xAA,0xBB,0xCC,0xDD,0xEE,0xFF,0x
 /* Variables to hold the user message and the corresponding encrypted message */
 CY_ALIGN(4) uint8_t packet[MAX_PACKET_SIZE];
 CY_ALIGN(4) uint8_t encrypted_pkt[MAX_PACKET_SIZE];
+CY_ALIGN(4) uint8_t decrypted_msg[MAX_PACKET_SIZE]; // debug only
 
 /* Function prototypes */
 void vADPD1080(void *pvParameters);
@@ -153,7 +154,7 @@ void vBQ34Z100(void *pvParameters);
 uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data);
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length);
 void send_data(uint16_t adc_value, uint16_t adc_channel);
-float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum);
+float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, uint32_t pos, uint32_t len, uint16_t nextNum);
 void float2Bytes(float32_t val, uint8_t *bytes_array);
 
 /* Interrupt service routines */
@@ -167,7 +168,7 @@ void float2Bytes(float32_t val, uint8_t *bytes_array);
  * @return none
  */
 CY_ISR (Timer_Int_Handler) {
-    //Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 1);
+    Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 1);
     
     // Clear timer overflow interrupt
     Timer_ClearInterrupt(CY_TCPWM_INT_ON_TC);
@@ -209,7 +210,7 @@ CY_ISR (Timer_Int_Handler) {
     // Flush write to hardware by reading from same register
     Timer_GetInterruptStatus();
     
-    //Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 0);
+    Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 0);
 }
 
 /**
@@ -233,14 +234,14 @@ int main(void) {
     uint16_t slotA_avg[SMOOTHED_SAMPLE_SIZE] = {0};
     uint16_t slotB_avg[SMOOTHED_SAMPLE_SIZE] = {0};
 
-    size_t posA = 0;
-    size_t posB = 0;
+    uint32_t posA = 0;
+    uint32_t posB = 0;
     float32_t avg_valA = 0;
     float32_t avg_valB = 0;
     uint32_t sumA = 0;
     uint32_t sumB = 0;
-    size_t lenA = sizeof(slotA_avg)/sizeof(uint16_t);
-    size_t lenB = sizeof(slotB_avg)/sizeof(uint16_t);
+    uint32_t lenA = sizeof(slotA_avg)/sizeof(uint16_t);
+    uint32_t lenB = sizeof(slotB_avg)/sizeof(uint16_t);
     
     // Store current size of sensor data UART packet and number of AES blocks
     uint8_t packetsize = 0, AESBlock_count = 0;
@@ -286,6 +287,12 @@ int main(void) {
 	/* Wait for Crypto Block to be available */
 	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
     
+    /* Initializes the AES operation by setting key and key length */
+	Cy_Crypto_Aes_Init((uint32_t*)AES_Key, CY_CRYPTO_KEY_AES_128, &cryptoAES);
+
+	/* Wait for Crypto Block to be available */
+	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
+    
     // Begin first ADC scan
     ADC_StartConvert();
     
@@ -296,7 +303,7 @@ int main(void) {
     for (;;) {
         // When data is ready, process, encrypt, and transmit packet
         if (dataReady) {
-            // Cy_GPIO_Write(Debug_PORT, Debug_NUM, 1);
+            Cy_GPIO_Write(Debug_PORT, Debug_NUM, 1);
             dataReady = false;
             
             // Process adpd1080 data
@@ -349,12 +356,6 @@ int main(void) {
             AESBlock_count =  (packetsize % AES128_ENCRYPTION_LENGTH == 0) ? \
 								  (packetsize/AES128_ENCRYPTION_LENGTH) \
 								  : (1 + packetsize/AES128_ENCRYPTION_LENGTH);
-                                
-            /* Initializes the AES operation by setting key and key length */
-			Cy_Crypto_Aes_Init((uint32_t*)AES_Key, CY_CRYPTO_KEY_AES_128, &cryptoAES);
-
-			/* Wait for Crypto Block to be available */
-			Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
 
 			for(int i = 0; i < AESBlock_count ; i++) {
 				/* Perform AES ECB Encryption mode of operation */
@@ -369,7 +370,7 @@ int main(void) {
             // Transmit packet
             wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
             
-            // Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
+            Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
         }
     }
 }
@@ -425,7 +426,7 @@ void send_data(uint16_t adc_value, uint16_t adc_channel) {
  *
  * @return int - the moving average after nextNum added
  */
-float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, size_t pos, size_t len, uint16_t nextNum) {
+float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, uint32_t pos, uint32_t len, uint16_t nextNum) {
     // Subtract the oldest number from the prev sum, add the new number
     *ptrSum = *ptrSum - ptrArrNumbers[pos] + nextNum;
     
