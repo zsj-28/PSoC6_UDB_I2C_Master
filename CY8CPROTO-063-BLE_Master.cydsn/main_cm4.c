@@ -156,6 +156,7 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length);
 void send_data(uint16_t adc_value, uint16_t adc_channel);
 float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, uint32_t pos, uint32_t len, uint16_t nextNum);
 void float2Bytes(float32_t val, uint8_t *bytes_array);
+void PrintData(uint8_t* data, uint8_t len);
 
 /* Interrupt service routines */
 /**
@@ -359,16 +360,25 @@ int main(void) {
             AESBlock_count =  (packetsize % AES128_ENCRYPTION_LENGTH == 0) ? \
 								  (packetsize/AES128_ENCRYPTION_LENGTH) \
 								  : (1 + packetsize/AES128_ENCRYPTION_LENGTH);
-
-			for(int i = 0; i < AESBlock_count ; i++) {
+                                
+			for (int i = 0; i < AESBlock_count ; i++) {
 				/* Perform AES ECB Encryption mode of operation */
-				Cy_Crypto_Aes_Ecb_Run(CY_CRYPTO_ENCRYPT,\
+				cy_en_crypto_status_t status;
+                status = Cy_Crypto_Aes_Ecb_Run(CY_CRYPTO_ENCRYPT,\
 				(uint32_t*) (encrypted_pkt + AES128_ENCRYPTION_LENGTH * i),\
 				(uint32_t*) (packet + AES128_ENCRYPTION_LENGTH * i), &cryptoAES);
+                if (status != CY_CRYPTO_SUCCESS) {
+                    printf("big oops!\r\n");
+                }
 
 				/* Wait for Crypto Block to be available */
 				Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING);
 			}
+            
+            // debug only
+            printf("\r\n\npacket, encrypted_pkt\r\n");
+            PrintData(packet, packetsize);
+            PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
             
             // Transmit packet
             wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
