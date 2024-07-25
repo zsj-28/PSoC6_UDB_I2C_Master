@@ -1,5 +1,5 @@
 -- Project:   CY8CPROTO-063-BLE_Master
--- Generated: 07/24/2024 18:56:56
+-- Generated: 07/25/2024 02:37:08
 -- PSoC Creator  4.4
 
 ENTITY \CY8CPROTO-063-BLE_Master\ IS
@@ -11,6 +11,7 @@ ENTITY \CY8CPROTO-063-BLE_Master\ IS
         Int_Debug(0)_PAD : OUT std_ulogic;
         Debug(0)_PAD : OUT std_ulogic);
     ATTRIBUTE voltage_VBACKUP OF __DEFAULT__ : ENTITY IS 3.3e0;
+    ATTRIBUTE voltage_VDD_NS OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CSD OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -19,7 +20,9 @@ ENTITY \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE voltage_VDDIO_0 OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_0_RCV OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_1 OF __DEFAULT__ : ENTITY IS 3.3e0;
-    ATTRIBUTE voltage_VDD_NS OF __DEFAULT__ : ENTITY IS 3.3e0;
+    ATTRIBUTE voltage_VDDR_HVL_2 OF __DEFAULT__ : ENTITY IS 3.3e0;
+    ATTRIBUTE voltage_VDDR_HVL_3 OF __DEFAULT__ : ENTITY IS 3.3e0;
+    ATTRIBUTE voltage_vddd OF __DEFAULT__ : ENTITY IS 3.3e0;
 END \CY8CPROTO-063-BLE_Master\;
 
 ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
@@ -175,33 +178,33 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE lib_model OF RST(0) : LABEL IS "iocell3";
     ATTRIBUTE Location OF RST(0) : LABEL IS "P10[0]";
     ATTRIBUTE lib_model OF SDA(0) : LABEL IS "iocell4";
-    ATTRIBUTE Location OF SDA(0) : LABEL IS "P10[2]";
+    ATTRIBUTE Location OF SDA(0) : LABEL IS "P13[1]";
     ATTRIBUTE lib_model OF SCL(0) : LABEL IS "iocell5";
-    ATTRIBUTE Location OF SCL(0) : LABEL IS "P10[1]";
+    ATTRIBUTE Location OF SCL(0) : LABEL IS "P13[0]";
     ATTRIBUTE lib_model OF \UART:tx(0)\ : LABEL IS "iocell6";
     ATTRIBUTE Location OF \UART:tx(0)\ : LABEL IS "P5[1]";
     ATTRIBUTE lib_model OF ADC_CH0(0) : LABEL IS "iocell7";
-    ATTRIBUTE Location OF ADC_CH0(0) : LABEL IS "P10[3]";
+    ATTRIBUTE Location OF ADC_CH0(0) : LABEL IS "P10[1]";
     ATTRIBUTE lib_model OF ADC_CH1(0) : LABEL IS "iocell8";
-    ATTRIBUTE Location OF ADC_CH1(0) : LABEL IS "P10[4]";
+    ATTRIBUTE Location OF ADC_CH1(0) : LABEL IS "P10[2]";
     ATTRIBUTE lib_model OF ADC_CH2(0) : LABEL IS "iocell9";
-    ATTRIBUTE Location OF ADC_CH2(0) : LABEL IS "P10[5]";
+    ATTRIBUTE Location OF ADC_CH2(0) : LABEL IS "P10[3]";
     ATTRIBUTE lib_model OF ADC_CH3(0) : LABEL IS "iocell10";
-    ATTRIBUTE Location OF ADC_CH3(0) : LABEL IS "P10[6]";
+    ATTRIBUTE Location OF ADC_CH3(0) : LABEL IS "P10[4]";
     ATTRIBUTE lib_model OF ADC_CH4(0) : LABEL IS "iocell11";
-    ATTRIBUTE Location OF ADC_CH4(0) : LABEL IS "P9[0]";
+    ATTRIBUTE Location OF ADC_CH4(0) : LABEL IS "P10[5]";
     ATTRIBUTE lib_model OF ADC_CH5(0) : LABEL IS "iocell12";
-    ATTRIBUTE Location OF ADC_CH5(0) : LABEL IS "P9[1]";
+    ATTRIBUTE Location OF ADC_CH5(0) : LABEL IS "P10[6]";
     ATTRIBUTE lib_model OF ADC_CH6(0) : LABEL IS "iocell13";
-    ATTRIBUTE Location OF ADC_CH6(0) : LABEL IS "P9[2]";
+    ATTRIBUTE Location OF ADC_CH6(0) : LABEL IS "P9[3]";
     ATTRIBUTE lib_model OF ADC_CH7(0) : LABEL IS "iocell14";
-    ATTRIBUTE Location OF ADC_CH7(0) : LABEL IS "P9[3]";
+    ATTRIBUTE Location OF ADC_CH7(0) : LABEL IS "P9[2]";
     ATTRIBUTE lib_model OF DAC_out(0) : LABEL IS "iocell15";
     ATTRIBUTE Location OF DAC_out(0) : LABEL IS "P9[6]";
     ATTRIBUTE lib_model OF Int_Debug(0) : LABEL IS "iocell16";
-    ATTRIBUTE Location OF Int_Debug(0) : LABEL IS "P0[5]";
+    ATTRIBUTE Location OF Int_Debug(0) : LABEL IS "P5[6]";
     ATTRIBUTE lib_model OF Debug(0) : LABEL IS "iocell17";
-    ATTRIBUTE Location OF Debug(0) : LABEL IS "P9[5]";
+    ATTRIBUTE Location OF Debug(0) : LABEL IS "P5[5]";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_5\ : LABEL IS "macrocell2";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_4\ : LABEL IS "macrocell3";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:cnt_reset\ : LABEL IS "macrocell4";

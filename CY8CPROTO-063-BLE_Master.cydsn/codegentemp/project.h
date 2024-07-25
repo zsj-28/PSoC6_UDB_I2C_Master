@@ -14,7 +14,7 @@
 * the software package with which this file was provided.
 ********************************************************************************/
 
-#include "cyble_416045_02.h"
+#include "cy8c6347bzi_bld53.h"
 #include "cy_crypto.h"
 #include "cy_crypto_common.h"
 #include "cy_crypto_server.h"
@@ -54,7 +54,7 @@
 #endif /*(__CORTEX_M == 0) || (__CORTEX_M == 4)*/
 #include "cy_device_headers.h"
 #if ((__CORTEX_M == 0) || (__CORTEX_M == 4))
-    #include "gpio_psoc6_01_43_smt.h"
+    #include "gpio_psoc6_01_116_bga_ble.h"
 #endif /*(__CORTEX_M == 0) || (__CORTEX_M == 4)*/
 #include "cyip_backup.h"
 #include "cyip_ble.h"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <device schemaVersion="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_0.xsd">
-  <name>CYBLE_416045_02</name>
+  <name>CY8C6347BZI_BLD53</name>
   <version>0.1</version>
   <description>PSoC 63</description>
   <addressUnitBits>8</addressUnitBits>
@@ -299,7 +299,7 @@
         <register>
           <name>I2C_DATA</name>
           <description>I2C Data Register</description>
-          <addressOffset>0x4034101C</addressOffset>
+          <addressOffset>0x40341018</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -317,7 +317,7 @@
         <register>
           <name>I2C_CSR</name>
           <description>I2C Status Register</description>
-          <addressOffset>0x40341610</addressOffset>
+          <addressOffset>0x4034161C</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -377,7 +377,7 @@
         <register>
           <name>I2C_CFG</name>
           <description>I2C Configuration Register</description>
-          <addressOffset>0x40341710</addressOffset>
+          <addressOffset>0x40341714</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -430,7 +430,7 @@
         <register>
           <name>I2C_INT_MASK</name>
           <description>I2C Interrupt Enable Mask</description>
-          <addressOffset>0x40341810</addressOffset>
+          <addressOffset>0x4034181C</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>

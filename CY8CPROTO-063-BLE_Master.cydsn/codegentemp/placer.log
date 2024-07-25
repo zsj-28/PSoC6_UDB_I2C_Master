@@ -6,7 +6,7 @@
 
 #Build Date:         Sep  9 2019 11:47:43
 
-#File Generated:     Jul 24 2024 18:56:56
+#File Generated:     Jul 25 2024 02:37:08
 
 #Purpose:            
 
@@ -14,7 +14,7 @@
 
 #***************************************************************************
 
-Executing : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\bin/sjplacer.exe --proj-name CY8CPROTO-063-BLE_Master --netlist-vh2 CY8CPROTO-063-BLE_Master_p.vh2 --arch p6_udb2x6 --arch-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\arch/udbdsi2_2x6_12.cydata --ip-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/ip_blocks.cydata --rrg-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/route_arch-rrg.cydata --irq-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/irqconn.cydata --drq-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/triggerconn.cydata --dsi-conn-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/dsiconn.cydata --pins-file pins_43-SMT.xml --lib-file CY8CPROTO-063-BLE_Master_p.lib --sdc-file CY8CPROTO-063-BLE_Master.sdc --io-pcf CY8CPROTO-063-BLE_Master.pci --outdir .
+Executing : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\bin/sjplacer.exe --proj-name CY8CPROTO-063-BLE_Master --netlist-vh2 CY8CPROTO-063-BLE_Master_p.vh2 --arch p6_udb2x6 --arch-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\arch/udbdsi2_2x6_12.cydata --ip-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/ip_blocks.cydata --rrg-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/route_arch-rrg.cydata --irq-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/irqconn.cydata --drq-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/triggerconn.cydata --dsi-conn-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc6/0/dsiconn.cydata --pins-file pins_116-BGA-BLE.xml --lib-file CY8CPROTO-063-BLE_Master_p.lib --sdc-file CY8CPROTO-063-BLE_Master.sdc --io-pcf CY8CPROTO-063-BLE_Master.pci --outdir .
 
 		Softjin Techologies Placer, Version 1.1
 
@@ -96,7 +96,7 @@ Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
                      End of Clock Summary
 ######################################################################
 
-D2088: Phase 6, elapsed time : 0.7 (sec)
+D2088: Phase 6, elapsed time : 0.0 (sec)
 
 Phase 7
 ######################################################################
@@ -104,7 +104,7 @@ Phase 7
 ======================================================================
 Number of clocks: 14
 Clock: ADC_intSarClock      | Frequency: N/A       | Target:   1.0 MHz
-Clock: CLK_App              | Frequency:  39.4 MHz | Target:  16.7 MHz
+Clock: CLK_App              | Frequency:  36.2 MHz | Target:  16.7 MHz
 Clock: Clock_1              | Frequency: N/A       | Target:   1.0 MHz
 Clock: Clock_2              | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyClk_Fast           | Frequency: N/A       | Target: 100.0 MHz
@@ -153,7 +153,7 @@ analysis after routing.
 ======================================================================
 Number of clocks: 14
 Clock: ADC_intSarClock      | Frequency: N/A       | Target:   1.0 MHz
-Clock: CLK_App              | Frequency:  42.2 MHz | Target:  18.2 MHz
+Clock: CLK_App              | Frequency:  40.8 MHz | Target:  18.2 MHz
 Clock: Clock_1              | Frequency: N/A       | Target:   1.0 MHz
 Clock: Clock_2              | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyClk_Fast           | Frequency: N/A       | Target: 100.0 MHz
@@ -176,5 +176,5 @@ D2088: Phase 8, elapsed time : 0.0 (sec)
 
 D2054: Placement of the design completed successfully
 
-I2076: Total run-time: 1.5 sec.
+I2076: Total run-time: 0.8 sec.
 
