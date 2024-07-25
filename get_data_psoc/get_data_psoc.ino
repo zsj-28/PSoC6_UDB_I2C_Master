@@ -103,8 +103,8 @@ void UART_receive() {
             data = &UART_buffer[2];
             receivedCRC = UART_buffer[dataLength + 2];
 
-            // Serial.printf("opCode: %d\r\n", opCode);
-            // Serial.printf("dataLength: %d\r\n", dataLength);
+            Serial.printf("opCode: %d\r\n", opCode);
+            Serial.printf("dataLength: %d\r\n", dataLength);
             
             // Decrypt the received packet
             uint8_t decrypted_packet[dataLength];
@@ -116,13 +116,13 @@ void UART_receive() {
             calculatedCRC = calculateCRC8(opCode, dataLength, data);
             buffer_index = 0;
 
-            // Serial.print("Received CRC: 0x");
-            // Serial.println(receivedCRC, HEX);
-            // Serial.print("Calculated CRC: 0x");
-            // Serial.println(calculatedCRC, HEX);
+            Serial.print("Received CRC: 0x");
+            Serial.println(receivedCRC, HEX);
+            Serial.print("Calculated CRC: 0x");
+            Serial.println(calculatedCRC, HEX);
             // Check if the received CRC matches the calculated one
             if (receivedCRC == calculatedCRC) {
-                // Serial.println("CRC check passed."); 
+                Serial.println("CRC check passed."); 
                 for (uint8_t i = 0; i < dataLength; i = i + 4) {
                     Serial.print(bytes2Float(&decrypted_packet[i]));
                     Serial.print(" ");

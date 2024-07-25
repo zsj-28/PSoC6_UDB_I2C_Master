@@ -202,7 +202,7 @@ CY_ISR (Timer_Int_Handler) {
             VDAC_SetValueBuffered(ADCData[0]); // debug only
         }
         else {
-            printf("***Conversion not finished yet! Status is %lu***\r\n", conversionStatus);
+            printf("error: Conversion not finished yet! Status %lu\r\n", conversionStatus);
             return;
         }        
         // Start next conversion
@@ -308,6 +308,9 @@ int main(void) {
             Cy_GPIO_Write(Debug_PORT, Debug_NUM, 1);
             dataReady = false;
             
+            // Reset packetsize and AESBlock_count
+            packetsize = 0, AESBlock_count = 0;
+            
             // Process adpd1080 data
             for (uint8_t i = 0; i < ADPD_SAMPLES_PER_PACKET; i++) {
                 // Raw and time avg light intensity
@@ -369,7 +372,7 @@ int main(void) {
 				(uint32_t*) (encrypted_pkt + AES128_ENCRYPTION_LENGTH * i),\
 				(uint32_t*) (packet + AES128_ENCRYPTION_LENGTH * i), &cryptoAES);
                 if (status != CY_CRYPTO_SUCCESS) {
-                    printf("big oops!\r\n");
+                    printf("error: AES Encryption failed!\r\n");
                 }
 
 				/* Wait for Crypto Block to be available */
@@ -377,7 +380,7 @@ int main(void) {
 			}
             
             // debug only
-            // printf("\r\n\nPacket being Encrypted:\r\n");
+            // printf("\r\n\nPacketsize being Encrypted: %d, %d\r\n", packetsize, AESBlock_count);
             // PrintData(packet, packetsize);
             // printf("\r\n\nKey used for Encryption:\r\n");
             // PrintData(AES_Key, AES128_KEY_LENGTH);
