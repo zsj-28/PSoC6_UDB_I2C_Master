@@ -377,12 +377,12 @@ int main(void) {
 			}
             
             // debug only
-            printf("\r\n\nPacket being Encrypted:\r\n");
-            PrintData(packet, packetsize);
-            printf("\r\n\nKey used for Encryption:\r\n");
-            PrintData(AES_Key, AES128_KEY_LENGTH);
-            printf("\r\nResult of Encryption:\r\n");
-            PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
+            // printf("\r\n\nPacket being Encrypted:\r\n");
+            // PrintData(packet, packetsize);
+            // printf("\r\n\nKey used for Encryption:\r\n");
+            // PrintData(AES_Key, AES128_KEY_LENGTH);
+            // printf("\r\nResult of Encryption:\r\n");
+            // PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
             
             // Transmit packet
             wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
@@ -465,15 +465,15 @@ float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, uint32_t pos, uin
  * @return none
  */
 void float2Bytes(float32_t val, uint8_t *bytes_array) {
-  // Create union of shared memory space
-  union {
-    float32_t float_variable;
-    uint8_t temp_array[4];
-  } u;
-  // Overite bytes of union with float variable
-  u.float_variable = val;
-  // Assign bytes to input array
-  memcpy(bytes_array, u.temp_array, 4);
+    // Create union of shared memory space
+    union {
+        float32_t float_variable;
+        uint8_t temp_array[4];
+    } u;
+    // Overite bytes of union with float variable
+    u.float_variable = val;
+    // Assign bytes to input array
+    memcpy(bytes_array, u.temp_array, 4);
 }
 
 /**
