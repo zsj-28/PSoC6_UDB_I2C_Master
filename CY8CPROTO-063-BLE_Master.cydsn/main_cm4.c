@@ -281,10 +281,10 @@ int main(void) {
     printf("ADPD1080 initialization successful.\r\n");
     
     /* Initialization of Crypto Driver */
-	Cy_Crypto_Init(&cryptoConfig, &cryptoScratch);
+	while (Cy_Crypto_Init(&cryptoConfig, &cryptoScratch) != CY_CRYPTO_SUCCESS) {}
 
 	/* Enable Crypto Hardware */
-	Cy_Crypto_Enable();
+	while (Cy_Crypto_Enable() != CY_CRYPTO_SUCCESS) {}
 
 	/* Wait for Crypto Block to be available */
 	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
