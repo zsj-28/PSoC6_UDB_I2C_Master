@@ -44,7 +44,6 @@
 
 #include "project.h"
 #include "cy_crypto.h"
-#include "cy_crypto_server.h"
 #include "stdio_user.h"
 #include <stdio.h>
 #include <string.h>
@@ -210,14 +209,17 @@ int main(void)
 
 	printf(CLEAR_SCREEN);
 
-	/* Start the Crypto Server */
-	Cy_Crypto_Server_Start(&cryptoConfig, &cryptoServerContext);
-
 	/*Initialization of Crypto Driver */
 	Cy_Crypto_Init(&cryptoConfig, &cryptoScratch);
 
 	/* Enable Crypto Hardware */
 	Cy_Crypto_Enable();
+
+	/* Wait for Crypto Block to be available */
+	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING);
+    
+    /* Initializes the AES operation by setting key and key length */
+	Cy_Crypto_Aes_Init((uint32_t*)AES_Key, CY_CRYPTO_KEY_AES_128, &cryptoAES);
 
 	/* Wait for Crypto Block to be available */
 	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING);
@@ -275,12 +277,6 @@ int main(void)
 				AESBlock_count =  (messagesize % AES128_ENCRYPTION_LENGTH == 0) ? \
 								  (messagesize/AES128_ENCRYPTION_LENGTH) \
 								  : (1 + messagesize/AES128_ENCRYPTION_LENGTH);
-
-				/* Initializes the AES operation by setting key and key length */
-				Cy_Crypto_Aes_Init((uint32_t*)AES_Key, CY_CRYPTO_KEY_AES_128, &cryptoAES);
-
-				/* Wait for Crypto Block to be available */
-				Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING);
 
 				for(int i = 0; i < AESBlock_count ; i++)
 				{
