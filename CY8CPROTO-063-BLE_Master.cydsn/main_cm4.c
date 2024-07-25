@@ -99,6 +99,7 @@ volatile uint16_t adpdDataB[ADPD_SAMPLES_PER_PACKET*ADPD_NUM_CHANNELS];
 cy_stc_crypto_context_t cryptoScratch;
 cy_stc_crypto_context_aes_t cryptoAES;
 cy_stc_crypto_server_context_t cryptoServerContext;
+cy_en_crypto_status_t cryptoStatus;
 
 /* Crypto configuration structure */
 const cy_stc_crypto_config_t cryptoConfig =
@@ -289,7 +290,7 @@ int main(void) {
 	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
     
     /* Initializes the AES operation by setting key and key length */
-	Cy_Crypto_Aes_Init((uint32_t*)AES_Key, CY_CRYPTO_KEY_AES_128, &cryptoAES);
+	while (Cy_Crypto_Aes_Init((uint32_t*)AES_Key, CY_CRYPTO_KEY_AES_128, &cryptoAES) != CY_CRYPTO_SUCCESS) {}
 
 	/* Wait for Crypto Block to be available */
 	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
@@ -376,8 +377,11 @@ int main(void) {
 			}
             
             // debug only
-            printf("\r\n\npacket, encrypted_pkt\r\n");
+            printf("\r\n\nPacket being Encrypted:\r\n");
             PrintData(packet, packetsize);
+            printf("\r\n\nKey used for Encryption:\r\n");
+            PrintData(AES_Key, AES128_KEY_LENGTH);
+            printf("\r\nResult of Encryption:\r\n");
             PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
             
             // Transmit packet

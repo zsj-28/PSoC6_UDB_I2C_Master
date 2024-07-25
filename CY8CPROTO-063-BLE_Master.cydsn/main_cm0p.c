@@ -77,10 +77,7 @@ int main(void) {
     __enable_irq(); /* Enable global interrupts. */
     
     /* Start Crypto server before enabling CM4. */
-    cryptoStatus = Cy_Crypto_Server_Start_Base(&cryptoConfig, &cryptoServerContext);
-    while (cryptoStatus != CY_CRYPTO_SUCCESS) {
-        cryptoStatus = Cy_Crypto_Server_Start_Base(&cryptoConfig, &cryptoServerContext);
-    }
+    while (Cy_Crypto_Server_Start_Base(&cryptoConfig, &cryptoServerContext) != CY_CRYPTO_SUCCESS) {}
     
     /* Enable CM4.  CY_CORTEX_M4_APPL_ADDR must be updated if CM4 memory layout is changed. */
     Cy_SysEnableCM4(CY_CORTEX_M4_APPL_ADDR); 
