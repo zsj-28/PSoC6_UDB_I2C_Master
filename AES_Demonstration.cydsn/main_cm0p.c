@@ -116,8 +116,8 @@ int main(void)
 {     
       __enable_irq();
        
-    /* Start the Crypto Server */
-	while (Cy_Crypto_Server_Start_Base(&cryptoConfig, &cryptoServerContext) != CY_CRYPTO_SUCCESS) {}
+    /* Start the Crypto Server */ // TODO: try full
+	while (Cy_Crypto_Server_Start(&cryptoConfig, &cryptoServerContext) != CY_CRYPTO_SUCCESS) {}
     
     /* Start the CM4 core */
     Cy_SysEnableCM4(CY_CORTEX_M4_APPL_ADDR);
