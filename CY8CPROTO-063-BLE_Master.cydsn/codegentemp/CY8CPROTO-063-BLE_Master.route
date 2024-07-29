@@ -1122,7 +1122,7 @@ net Net_300
 	switch ":TCPWMcontainer:TCPWM[0].interrupt==>:intc_0:interrupt90.interrupt"
 	term   ":intc_0:interrupt90.interrupt"
 end Net_300
-net Net_5
+net Net_315
 	term   ":ioport10:pin0.fb"
 	switch ":ioport10:pin0.fb==>:ioport10:smartio_mux_out0.direct_in"
 	switch ":ioport10:smartio_mux_out0.smartio_mux_out==>:IO[10]_out[0]_input_permute.ioport10_dsiOut0"
@@ -1137,7 +1137,7 @@ net Net_5
 	switch ":UDB_Array:UDBroute3:TUI_Sel13.tui13==>:UDB_Array:udb@[UDB=(0,2)]:PLD[1]:permute_input.10"
 	switch ":UDB_Array:udb@[UDB=(0,2)]:PLD[1]:permute_input.mc[3]_main_1==>:UDB_Array:udb@[UDB=(0,2)]:PLD[1]:mc[3].main_1"
 	term   ":UDB_Array:udb@[UDB=(0,2)]:PLD[1]:mc[3].main_1"
-end Net_5
+end Net_315
 net \ADC:Net_423\
 	term   ":SARADCcontainer:SARADC[0].interrupt"
 	switch ":SARADCcontainer:SARADC[0].interrupt==>:intc_0:interrupt138.interrupt"

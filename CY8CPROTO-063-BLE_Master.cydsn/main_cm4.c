@@ -420,6 +420,10 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     memcpy(&packet[2], data, length);
     packet[2 + length] = calculateCRC8(opcode, length, data);
     Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
+    // TODO: print out opcode and length
+    // TODO: make sure UART bus data looks right
+    // TODO: make sure first data packet looks right after reset
+    // TODO: or use GPIO before and after PutArray
 }
 
 /*  send data (UNUSED)

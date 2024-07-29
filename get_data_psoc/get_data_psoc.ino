@@ -26,6 +26,10 @@ uint8_t ADCCH7_stamp;
 uint8_t ADCCH8_data[2];
 uint8_t ADCCH8_stamp;
 
+// Global variables for UART
+uint8_t buffer_index = 0;
+uint8_t UART_buffer[200] = {0};
+
 typedef struct command {   // Structure declaration
     uint8_t* Data;       // Member (char variable)
     uint8_t* Time_Stamp;
@@ -71,6 +75,8 @@ void setup() {
     Serial1.begin(115200, SERIAL_8N1, 16, 17); // Adjust RX and TX pin numbers if necessary
 
     cipher.set_key(aes_key, 16);
+
+    pinMode(13, OUTPUT);
 }
 
 void UART_receive() {
@@ -78,25 +84,29 @@ void UART_receive() {
     uint8_t opCode;
     uint8_t dataLength = 0;
     uint8_t *data;
-    uint8_t buffer_index = 0;
-    uint8_t UART_buffer[100] = {0};
     uint8_t receivedCRC = 0;
     uint8_t calculatedCRC = 0;
 
+    // Serial.println("Function called.");
     while (Serial1.available() > 0) {
+        digitalWrite(13, HIGH);
+        
         UART_buffer[buffer_index] = Serial1.read();
         buffer_index++;
+        
         // Reset buffer index if buffer is full 
         // If data stream exceeds buffer size, data will not be parsed
-        if (buffer_index >= 100) {
+        if (buffer_index >= 200) {
             buffer_index = 0;
         }
+        Serial.println(buffer_index);
 
-        // The following conditions check that if all the data bytes are received and
-        // if buffer index count has exceeded the "length" byte, which is the second byte 
-        // in the data stream
-        // buffer_index == UART_buffer[1] + 3 means opcode byte + length byte + all data bytes + crc byte were received
-        if ((buffer_index > 1) && (buffer_index == UART_buffer[1] + 3)) { // allow short-circuiting
+        // The following conditions check that all the data bytes are received by
+        // comparing buffer index count to the "length" byte, which is the second byte in the data stream
+        // UART_buffer[1] + 3 bytes means opcode byte + length byte + all data bytes + crc byte
+        if ((buffer_index > 1) && (buffer_index < 200) && (buffer_index == UART_buffer[1] + 3)) { // short-circuit until after at least 2 bytes are read
+            buffer_index = 0;
+            
             // Parse opcode and length
             opCode = UART_buffer[0];
             dataLength = UART_buffer[1];
@@ -105,16 +115,15 @@ void UART_receive() {
 
             Serial.printf("opCode: %d\r\n", opCode);
             Serial.printf("dataLength: %d\r\n", dataLength);
+
+            // Calculate CRC8
+            calculatedCRC = calculateCRC8(opCode, dataLength, data);
             
             // Decrypt the received packet
             uint8_t decrypted_packet[dataLength];
             for (int i = 0; i < dataLength/16; i++) {
                 cipher.decrypt(data + i * 16, decrypted_packet + i * 16); // ECB doesn't use an IV
             }
-
-            // Calculate CRC8
-            calculatedCRC = calculateCRC8(opCode, dataLength, data);
-            buffer_index = 0;
 
             Serial.print("Received CRC: 0x");
             Serial.println(receivedCRC, HEX);
@@ -131,14 +140,18 @@ void UART_receive() {
             } else {
                 Serial.println("CRC check failed.");
             }
+            Serial.println("Data parsed.");
         }
+        digitalWrite(13, LOW);
     }
+    // Serial.println("Function exiting.");
 }
 
 void loop() {
     UART_receive();
     // Add a small delay to avoid overwhelming the Serial Monitor
-    delay(100);
+    // Serial.println("Delaying 5ms.");
+    // delay(50);
 }
 
 uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {

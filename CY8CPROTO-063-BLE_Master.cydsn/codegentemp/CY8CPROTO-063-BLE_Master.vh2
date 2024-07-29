@@ -2,7 +2,7 @@
 --	Conversion of CY8CPROTO-063-BLE_Master.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu Jul 25 18:27:45 2024
+--	Fri Jul 26 15:55:29 2024
 --
 
 USE cypress.cypress.all;
@@ -291,7 +291,7 @@ ATTRIBUTE port_state_att of \I2C:bI2C_UDB:genblk6:MODULE_2:neq\:SIGNAL IS 2;
 SIGNAL \I2C:bI2C_UDB:m_scl_out_reg\ : bit;
 SIGNAL \I2C:bI2C_UDB:m_sda_out_reg\ : bit;
 SIGNAL \I2C:bI2C_UDB:slave_rst_reg\ : bit;
-SIGNAL Net_5 : bit;
+SIGNAL Net_315 : bit;
 SIGNAL \I2C:bI2C_UDB:master_rst_reg\ : bit;
 SIGNAL \I2C:scl_x_wire\ : bit;
 SIGNAL \I2C:Net_969\ : bit;
@@ -305,7 +305,7 @@ SIGNAL \I2C:Net_974\ : bit;
 SIGNAL \I2C:scl_yfb\ : bit;
 SIGNAL \I2C:sda_yfb\ : bit;
 SIGNAL \I2C:tmpOE__Bufoe_scl_net_0\ : bit;
-SIGNAL Net_157 : bit;
+SIGNAL Net_314 : bit;
 SIGNAL \I2C:tmpOE__Bufoe_sda_net_0\ : bit;
 SIGNAL Net_156 : bit;
 SIGNAL \I2C:timeout_clk\ : bit;
@@ -953,10 +953,10 @@ zero <=  ('0') ;
 	OR (not \I2C:bI2C_UDB:m_state_4\ and \I2C:bI2C_UDB:clkgen_tc\ and \I2C:bI2C_UDB:m_state_3\));
 
 \I2C:bI2C_UDB:slave_rst_reg\\D\ <= ((not \I2C:bI2C_UDB:sda_in_last_reg\ and \I2C:bI2C_UDB:scl_in_reg\ and \I2C:bI2C_UDB:scl_in_last_reg\ and \I2C:bI2C_UDB:scl_in_last2_reg\ and \I2C:bI2C_UDB:sda_in_last2_reg\)
-	OR Net_5
+	OR Net_315
 	OR not \I2C:bI2C_UDB:control_0\);
 
-\I2C:bI2C_UDB:master_rst_reg\\D\ <= (Net_5
+\I2C:bI2C_UDB:master_rst_reg\\D\ <= (Net_315
 	OR not \I2C:bI2C_UDB:control_1\);
 
 \I2C:I2C_IRQ\:cy_mxs40_isr_v1_0
@@ -1163,7 +1163,7 @@ zero <=  ('0') ;
 \I2C:Bufoe_scl\:cy_bufoe
 	PORT MAP(x=>\I2C:Net_643_3\,
 		oe=>one,
-		y=>Net_157,
+		y=>Net_314,
 		yfb=>\I2C:Net_1109_0\);
 \I2C:Bufoe_sda\:cy_bufoe
 	PORT MAP(x=>\I2C:sda_x_wire\,
@@ -1207,7 +1207,7 @@ RST:cy_mxs40_gpio_v1_0
 		hotswap_needed=>"0")
 	PORT MAP(oe=>(one),
 		y=>(zero),
-		fb=>Net_5,
+		fb=>Net_315,
 		analog=>(open),
 		io=>(tmpIO_0__RST_net_0),
 		annotation=>(open),
@@ -1273,7 +1273,7 @@ SCL:cy_mxs40_gpio_v1_0
 		y=>(zero),
 		fb=>(tmpFB_0__SCL_net_0),
 		analog=>(open),
-		io=>Net_157,
+		io=>Net_314,
 		annotation=>Net_159,
 		siovref=>(tmpSIOVREF__SCL_net_0));
 \UART:SCBCLK\:cy_clock_v1_0

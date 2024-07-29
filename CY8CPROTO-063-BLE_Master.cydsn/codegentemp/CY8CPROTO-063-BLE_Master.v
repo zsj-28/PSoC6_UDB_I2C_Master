@@ -1,6 +1,6 @@
 // ======================================================================
 // CY8CPROTO-063-BLE_Master.v generated from TopDesign.cysch
-// 07/25/2024 at 18:27
+// 07/26/2024 at 15:55
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -2078,6 +2078,7 @@ module top ;
           wire  Net_4;
           wire  Net_3;
           wire  Net_1;
+          wire  Net_156;
           wire  Net_300;
     electrical  Net_285;
     electrical  Net_125;
@@ -2087,22 +2088,21 @@ module top ;
     electrical  Net_164;
     electrical  Net_159;
     electrical  Net_170;
-          wire  Net_157;
-          wire  Net_156;
+          wire  Net_314;
           wire  Net_2;
     electrical  Net_123;
     electrical  Net_122;
     electrical  Net_87;
     electrical  Net_86;
-          wire  Net_5;
+          wire  Net_315;
 
     I2C_v3_50_0 I2C (
         .bclk(Net_1),
         .clock(Net_2),
         .iclk(Net_3),
         .itclk(Net_4),
-        .reset(Net_5),
-        .scl(Net_157),
+        .reset(Net_315),
+        .scl(Net_314),
         .scl_i(1'b0),
         .scl_o(Net_8),
         .sda(Net_156),
@@ -2151,7 +2151,7 @@ module top ;
 		RST
 		 (.oe({1'b1}),
 		  .y({1'b0}),
-		  .fb({Net_5}),
+		  .fb({Net_315}),
 		  .io({tmpIO_0__RST_net[0:0]}),
 		  .siovref(tmpSIOVREF__RST_net));
 
@@ -2223,7 +2223,7 @@ module top ;
 		 (.oe({1'b1}),
 		  .y({1'b0}),
 		  .fb({tmpFB_0__SCL_net[0:0]}),
-		  .io({Net_157}),
+		  .io({Net_314}),
 		  .siovref(tmpSIOVREF__SCL_net),
 		  .annotation({Net_159}));
 
