@@ -121,8 +121,10 @@
 #include "Clock_1.h"
 #include "VDAC.h"
 #include "Clock_2.h"
+#include "UART_1.h"
 #include "UART_SCBCLK.h"
 #include "ADC_intSarClock.h"
+#include "UART_1_SCBCLK.h"
 
 /*[]*/
 

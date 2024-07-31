@@ -195,6 +195,7 @@ void loop() {
 
     UART_receive();
     // Add a small delay to avoid overwhelming the Serial Monitor
+    // Serial1.write('?'); debug only
     delay(100);
 }
 

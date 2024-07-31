@@ -6,7 +6,7 @@
 
 #Build Date:         Sep  9 2019 11:47:43
 
-#File Generated:     Jul 26 2024 15:55:48
+#File Generated:     Jul 31 2024 02:31:20
 
 #Purpose:            
 
@@ -55,7 +55,7 @@ Design Statistics after Packing
 Device Utilization Summary after Packing
     Macrocells                  :	33/96
     UDBS                        :	7/12
-    IOs                         :	17/96
+    IOs                         :	18/96
 
 
 D2088: Phase 3, elapsed time : 0.0 (sec)
@@ -76,7 +76,7 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 14
+Number of clocks: 15
 Clock: ADC_intSarClock      | Frequency: N/A       | Target:   1.0 MHz
 Clock: CLK_App              | Frequency:  33.6 MHz | Target:  16.7 MHz
 Clock: Clock_1              | Frequency: N/A       | Target:   1.0 MHz
@@ -90,6 +90,7 @@ Clock: CyFLL                | Frequency: N/A       | Target: 100.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:   8.0 MHz
 Clock: CyPeriClk_App        | Frequency: N/A       | Target:  50.0 MHz
+Clock: UART_1_SCBCLK        | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 
 ======================================================================
@@ -102,9 +103,9 @@ Phase 7
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 14
+Number of clocks: 15
 Clock: ADC_intSarClock      | Frequency: N/A       | Target:   1.0 MHz
-Clock: CLK_App              | Frequency:  39.4 MHz | Target:  16.7 MHz
+Clock: CLK_App              | Frequency:  38.5 MHz | Target:  16.7 MHz
 Clock: Clock_1              | Frequency: N/A       | Target:   1.0 MHz
 Clock: Clock_2              | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyClk_Fast           | Frequency: N/A       | Target: 100.0 MHz
@@ -116,6 +117,7 @@ Clock: CyFLL                | Frequency: N/A       | Target: 100.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:   8.0 MHz
 Clock: CyPeriClk_App        | Frequency: N/A       | Target:  50.0 MHz
+Clock: UART_1_SCBCLK        | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 
 ======================================================================
@@ -131,11 +133,11 @@ Final Design Statistics
     Number of Status            	:	1
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
-    Number of IOs       	:	17
+    Number of IOs       	:	18
 
 Device Utilization Summary
     Macrocells                  :	33/96
-    IOs                         :	17/96
+    IOs                         :	18/96
 
 
 
@@ -151,7 +153,7 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 14
+Number of clocks: 15
 Clock: ADC_intSarClock      | Frequency: N/A       | Target:   1.0 MHz
 Clock: CLK_App              | Frequency:  42.2 MHz | Target:  18.2 MHz
 Clock: Clock_1              | Frequency: N/A       | Target:   1.0 MHz
@@ -165,6 +167,7 @@ Clock: CyFLL                | Frequency: N/A       | Target: 100.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:   8.0 MHz
 Clock: CyPeriClk_App        | Frequency: N/A       | Target:  50.0 MHz
+Clock: UART_1_SCBCLK        | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 
 ======================================================================
@@ -176,5 +179,5 @@ D2088: Phase 8, elapsed time : 0.0 (sec)
 
 D2054: Placement of the design completed successfully
 
-I2076: Total run-time: 1.7 sec.
+I2076: Total run-time: 1.3 sec.
 

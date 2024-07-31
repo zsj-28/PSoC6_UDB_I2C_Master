@@ -248,8 +248,11 @@ int main(void) {
     // Store current size of sensor data UART packet and number of AES blocks
     uint8_t packetsize = 0, AESBlock_count = 0;
     
-    // Initialize UART for serial communication
+    // Initialize UART for debugging purposes
     UART_Start();
+    
+    // Intialize UART_1 for data transmission to ESP32
+    UART_1_Start();
     
     // Initialize I2C for digital sensor communication
     I2C_Start();
@@ -424,14 +427,14 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     packet[1] = length;
     memcpy(&packet[2], data, length);
     packet[2 + length] = calculateCRC8(opcode, length, data);
-    //uint32_t bytesSent = Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
-    status = UART_GetTransmitStatus();
+    //uint32_t bytesSent = Cy_SCB_UART_PutArray(UART_1_HW, packet, 2 + length + 1);
+    status = UART_1_GetTransmitStatus();
     printf("\r\nPre-Tx status: 0x%x\r\n", status);
-    status = UART_Transmit(packet, 2 + length + 1);
+    status = UART_1_Transmit(packet, 2 + length + 1);
     printf("\r\nTx status: 0x%x\r\n", status);
     // debug only
     printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, packet[2 + length]);
-    status = UART_GetTransmitStatus();
+    status = UART_1_GetTransmitStatus();
     printf("\r\nPost-Tx status: 0x%x\r\n", status);
     
     // TODO: make sure UART bus data looks right
