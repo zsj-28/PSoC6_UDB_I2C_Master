@@ -35,6 +35,14 @@ void setup() {
     // Initialize the built-in Serial port for communication with the Serial Monitor
     Serial.begin(115200);
 
+    // size_t newSize = Serial1.setRxBufferSize(200);
+    // Serial.println(newSize);
+    // while (newSize != 200) {
+    //     newSize = Serial1.setRxBufferSize(200);
+    //     Serial.println(newSize);
+    // }
+    // while (!Serial1.setRxFIFOFull(127)) {}
+
     // Initialize the UART port (Serial1) with the desired baud rate
     Serial1.begin(115200, SERIAL_8N1, 16, 17); // Adjust RX and TX pin numbers if necessary
 
@@ -63,16 +71,21 @@ void UART_receive() {
     if (UART_timeout >= 10) {
         buffer_index = 0;
     }
-    while (Serial1.available() > 0) {
+    while (int bytesAvail = Serial1.available() > 0) {
         UART_timeout = 0;
-        UART_buffer[buffer_index] = Serial1.read();
-        // Serial.printf("incoming byte: 0x%x\r\n", UART_buffer[buffer_index]);
-        buffer_index++;
-        //Reset buffer index if buffer is full 
-        //If data stream exceeds buffer size, data will not be parsed
-        if (buffer_index >= 200) {
+        // Reset buffer index if buffer is full; if data stream exceeds buffer size, data will not be parsed
+        if (buffer_index + bytesAvail >= 200) {
             buffer_index = 0;
         }
+
+        size_t bytesRead = Serial1.readBytes(&UART_buffer[buffer_index], bytesAvail);
+        if (bytesAvail != bytesRead) {
+            Serial.println("not all available bytes were read!");
+        }
+        for (uint8_t i = buffer_index; i < buffer_index + bytesRead; i++) {
+            Serial.printf("incoming byte: 0x%x\r\n", UART_buffer[i]);
+        }
+        buffer_index += bytesRead;
 
         // The following conditions check that all the data bytes are received and
         // that buffer index count has exceeded the "length" byte, which is the second byte in the data stream
@@ -177,21 +190,6 @@ void UART_receive() {
 }
 
 void loop() {
-    //This part sends dummy data and is used for testing, delete if not needed
-    /*
-    uint8_t crc = 0;
-    uint8_t op_code = 0x00;
-    const uint8_t length = 0x0B;
-    uint8_t data[length] = {0,1,2,3,4,5,6,7,8,9,10};
-    Serial1.write(op_code);
-    Serial1.write(length); //LENGTH
-    for(int i = 0; i < length; i++){
-        Serial1.write(data[i]);
-    }
-    crc = calculateCRC8(op_code, length, data);
-    Serial1.write(crc);
-    delay(110);
-    */
 
     UART_receive();
     // Add a small delay to avoid overwhelming the Serial Monitor
@@ -216,16 +214,16 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
     return crc;
 }
 
-//1ms timer interrupt
+// 1ms timer interrupt
 void onSysTikTimer() {
     UART_timeout++;
     if (UART_timeout > 100) {
         UART_timeout = 100; // 10ms UART timeout
-        //Set UART error timeout bit
+        // Set UART error timeout bit
         Command_Matrix[0xFE].Data[0] |= 0x01;
     }
     else {
-        //Clear UART error timeout bit
+        // Clear UART error timeout bit
         Command_Matrix[0xFE].Data[0] &= 0xFE;
     }
 }

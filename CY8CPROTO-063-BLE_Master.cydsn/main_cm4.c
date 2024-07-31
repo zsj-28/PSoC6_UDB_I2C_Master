@@ -390,12 +390,12 @@ int main(void) {
             
             // Transmit packet
             for (uint8_t i = 0; i < 176; i++) {
-                encrypted_pkt[i] = (float32_t)i;
+                encrypted_pkt[i] = i;
             }
             //printf("\r\nResult of Encryption:\r\n");
             //PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
             
-            wrap_data(OPCODE_ALL, encrypted_pkt, 112); //AESBlock_count*AES128_ENCRYPTION_LENGTH);        
+            wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
             
             Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
         }
