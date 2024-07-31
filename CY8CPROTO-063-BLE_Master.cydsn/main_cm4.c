@@ -384,11 +384,15 @@ int main(void) {
             // PrintData(packet, packetsize);
             // printf("\r\n\nKey used for Encryption:\r\n");
             // PrintData(AES_Key, AES128_KEY_LENGTH);
-            // printf("\r\nResult of Encryption:\r\n");
-            // PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
             
             // Transmit packet
-            wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
+            for (uint8_t i = 0; i < 176; i++) {
+                encrypted_pkt[i] = (float32_t)i;
+            }
+            //printf("\r\nResult of Encryption:\r\n");
+            //PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
+            
+            wrap_data(OPCODE_ALL, encrypted_pkt, 112); //AESBlock_count*AES128_ENCRYPTION_LENGTH);        
             
             Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
         }
@@ -415,17 +419,26 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
 
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     uint8_t packet[2 + length + 1];
+    cy_en_scb_uart_status_t status;
     packet[0] = opcode;
     packet[1] = length;
     memcpy(&packet[2], data, length);
     packet[2 + length] = calculateCRC8(opcode, length, data);
-    Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
-    // TODO: print out opcode and length
+    //uint32_t bytesSent = Cy_SCB_UART_PutArray(UART_HW, packet, 2 + length + 1);
+    status = UART_GetTransmitStatus();
+    printf("\r\nPre-Tx status: 0x%x\r\n", status);
+    status = UART_Transmit(packet, 2 + length + 1);
+    printf("\r\nTx status: 0x%x\r\n", status);
+    // debug only
+    printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, packet[2 + length]);
+    status = UART_GetTransmitStatus();
+    printf("\r\nPost-Tx status: 0x%x\r\n", status);
+    
     // TODO: make sure UART bus data looks right
     // TODO: make sure first data packet looks right after reset
     // TODO: or use GPIO before and after PutArray
 }
-
+    
 /*  send data (UNUSED)
  *  adc_channel goes from 0 - 8 
  *  0x0-0x7 are 8 ADC channels, 0x8 is the I2C ADPD readings
