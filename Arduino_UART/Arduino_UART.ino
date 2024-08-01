@@ -11,13 +11,21 @@
 #include "PSoC_Data.h"
 #include "AES.h"
 
+// UART global variables
+uint8_t opCode;
+uint8_t dataLength = 0;
+uint8_t *data;
+uint8_t buffer_index = 0;
+uint8_t UART_buffer[200];
+uint8_t receivedCRC = 0;
+uint8_t calculatedCRC = 0;
+uint8_t UART_timeout = 0;
+
 // AES key (must be 16 bytes for AES-128)
 const byte aes_key[16] = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0xFF, 0xEE, 0xDD, 0xCC, 0xBB, 0xAA, 0xAA, 0xBB, 0xCC, 0xDD};
-
 AES cipher = AES();
 
 // CRC-8 calculation table
-void onSysTikTimer(void);
 const uint8_t crcTable[256] = {
     0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D,
     0x70, 0x77, 0x7E, 0x79, 0x6C, 0x6B, 0x62, 0x65, 0x48, 0x4F, 0x46, 0x41, 0x54, 0x53, 0x5A, 0x5D,
@@ -36,6 +44,9 @@ const uint8_t crcTable[256] = {
     0xAE, 0xA9, 0xA0, 0xA7, 0xB2, 0xB5, 0xBC, 0xBB, 0x96, 0x91, 0x98, 0x9F, 0x8A, 0x8D, 0x84, 0x83,
     0xDE, 0xD9, 0xD0, 0xD7, 0xC2, 0xC5, 0xCC, 0xCB, 0xE6, 0xE1, 0xE8, 0xEF, 0xFA, 0xFD, 0xF4, 0xF3
 };
+
+// Function prototypes
+void onSysTikTimer(void);
 
 void setup() {
     // Initialize the built-in Serial port for communication with the Serial Monitor
@@ -62,17 +73,6 @@ void setup() {
     timerStart(systiktimer); // Enable the timer interrupt
 }
 
-/// UART glocal variables
-uint8_t opCode;
-uint8_t dataLength = 0;
-uint8_t *data;
-uint8_t buffer_index = 0;
-uint8_t UART_buffer[200];
-uint8_t receivedCRC = 0;
-uint8_t calculatedCRC = 0;
-uint8_t UART_timeout = 0;
-
-
 void UART_receive() {
     //This reset mechanism prevents incorrect datastream format from 
     //disrupting future datastream
@@ -92,7 +92,7 @@ void UART_receive() {
             Serial.println("not all available bytes were read!");
         }
         // for (uint8_t i = buffer_index; i < buffer_index + bytesRead; i++) {
-        //    Serial.printf("incoming byte: 0x%x\r\n", UART_buffer[i]);
+        //    Serial.printf("incoming byte %d: 0x%x\r\n", i, UART_buffer[i]);
         // }
         buffer_index += bytesRead;
 
@@ -116,13 +116,14 @@ void UART_receive() {
                 cipher.decrypt(data + i * 16, decrypted_packet + i * 16); // ECB doesn't use an IV
             }
 
-            Serial.printf("opCode: %d\r\n", opCode);
-            Serial.printf("dataLength: %d\r\n", dataLength);
+            // debug only
+            // Serial.printf("opCode: %d\r\n", opCode);
+            // Serial.printf("dataLength: %d\r\n", dataLength);
 
-            Serial.print("Received CRC: 0x");
-            Serial.println(receivedCRC, HEX);
-            Serial.print("Calculated CRC: 0x");
-            Serial.println(calculatedCRC, HEX);
+            // Serial.print("Received CRC: 0x");
+            // Serial.println(receivedCRC, HEX);
+            // Serial.print("Calculated CRC: 0x");
+            // Serial.println(calculatedCRC, HEX);
 
             // Check if the received CRC mathces the calculated one
             if (receivedCRC == calculatedCRC) {
@@ -131,23 +132,48 @@ void UART_receive() {
                 for (uint8_t i = 0; i < dataLength; i = i + 4) {
                     switch (dataElem) {
                         case 0:
-                            Serial.println("Slot A avg: ");
+                            if (i + 16 >= dataLength) {
+                                Serial.print("\r\n   ADC CH1: ");
+                            }
+                            else {
+                                Serial.print("Slot A avg: ");
+                            }
                         break;
                         case 1:
-                            Serial.println("Slot B avg: ");
+                            if (i + 16 >= dataLength) {
+                                Serial.print("   ADC CH2: ");
+                            }
+                            else {
+                                Serial.print("Slot B avg: ");
+                            }
                         break;
                         case 2:
-                            Serial.println("SO2: ");
+                            if (i + 16 >= dataLength) {
+                                Serial.print("ADC CH3: ");
+                            }
+                            else {
+                                Serial.print("Raw SO2: ");
+                            }
                         break;
                         case 3:
-                            Serial.println("SO2 avg: ");
+                            if (i + 16 >= dataLength) {
+                                Serial.print("ADC CH4: ");
+                            }
+                            else {
+                                Serial.print("SO2 avg: ");
+                            }
                         break;
                         default:
                         break;
                     }
                     dataElem = (dataElem + 1) % 4;
-                    Serial.print(bytes2Float(&decrypted_packet[i]));
-                    Serial.print(" ");
+                    Serial.printf("%15f", bytes2Float(&decrypted_packet[i]));
+                    if (dataElem == 0) {
+                        Serial.println();
+                    } 
+                    else {
+                        Serial.print(",\t");
+                    }
                 }
                 Serial.println();
                 switch (opCode) {

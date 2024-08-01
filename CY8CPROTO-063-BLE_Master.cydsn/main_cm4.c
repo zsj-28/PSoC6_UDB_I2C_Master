@@ -16,6 +16,9 @@
 #include <math.h>
 #include <string.h>
 
+#define UNUSEDdel680 (void)(del680)
+#define UNUSEDdel850 (void)(del850)
+
 /* UNUSED - Task configuration */
 #define BQ34Z100_TASK_STACK_SIZE          1024
 #define BQ34Z100_TASK_PRIORITY            3     // RMS based on read interval
@@ -362,8 +365,8 @@ int main(void) {
                 // float2Bytes(del850, &packet[packetsize]);
                 // packetsize += sizeof(float32_t);
                 
-                printf("L850: %d, L850_Avg: %f, SO2: %f, SO2_Avg: %f, del680: %f, del850: %f\r\n",
-                       L850, avg_valB, SO2, SO2_avg, del680, del850); // debug only
+                // printf("L850: %d\r\n", L850); // L850_Avg: %f, SO2: %f, SO2_Avg: %f, del680: %f, del850: %f\r\n",
+                //       L850, avg_valB, SO2, SO2_avg, del680, del850); // debug only
             }
             
             // Process ADC data
@@ -373,7 +376,7 @@ int main(void) {
             }
             
             // Encrypt packet
-            AESBlock_count =  (packetsize % AES128_ENCRYPTION_LENGTH == 0) ? \
+            AESBlock_count = (packetsize % AES128_ENCRYPTION_LENGTH == 0) ? \
 								  (packetsize/AES128_ENCRYPTION_LENGTH) \
 								  : (1 + packetsize/AES128_ENCRYPTION_LENGTH);
                                 
@@ -397,13 +400,13 @@ int main(void) {
             // printf("\r\n\nKey used for Encryption:\r\n");
             // PrintData(AES_Key, AES128_KEY_LENGTH);
             
-            // Transmit packet
             // for (uint8_t i = 0; i < 176; i++) {
             //    encrypted_pkt[i] = i;
             // }
             //printf("\r\nResult of Encryption:\r\n");
             //PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
             
+            // Transmit packet
             wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
             
             Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
@@ -443,7 +446,9 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
 */
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     // Ensure previous transmission is not ongoing before modifying transmit buffer
-    while (UART_1_GetTransmitStatus() == CY_SCB_UART_TRANSMIT_ACTIVE) {}
+    while (UART_1_GetTransmitStatus() == CY_SCB_UART_TRANSMIT_ACTIVE) {
+        printf("Waiting for previous transmission to complete\r\n");
+    }
     
     cy_en_scb_uart_status_t status;
     txBuffer[0] = opcode;
@@ -454,12 +459,14 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     // uint32_t bytesSent = Cy_SCB_UART_PutArray(UART_1_HW, txBuffer, 2 + length + 1);
     // printf("\r\nPre-Tx status: 0x%x\r\n", status);
     status = UART_1_Transmit(txBuffer, 2 + length + 1);
-    printf("\r\nTx status: 0x%x\r\n", status);
+    if (status != CY_SCB_UART_SUCCESS) {
+        printf("\r\nTx status: 0x%x\r\n", status);
+    }
     
     // debug only
     printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, txBuffer[2 + length]);
-    status = UART_1_GetTransmitStatus();
-    printf("\r\nPost-Tx status: 0x%x\r\n", status);
+    // status = UART_1_GetTransmitStatus();
+    // printf("\r\nPost-Tx status: 0x%x\r\n", status);
     
     // TODO: make sure UART bus data looks right
     // TODO: make sure first data packet looks right after reset
