@@ -252,7 +252,7 @@ static void ClockInit(void)
 	Cy_SysLib_SetWaitStates(false, 100);
 
 	/* Configure peripheral clock dividers */
-	Cy_SysClk_PeriphAssignDivider(PCLK_SCB4_CLOCK, CY_SYSCLK_DIV_8_BIT, 1u);
+	Cy_SysClk_PeriphAssignDivider(PCLK_SCB2_CLOCK, CY_SYSCLK_DIV_8_BIT, 1u);
 	Cy_SysClk_PeriphSetDivider(CY_SYSCLK_DIV_8_BIT, 1u, 35u);
 	Cy_SysClk_PeriphEnableDivider(CY_SYSCLK_DIV_8_BIT, 1u);
 	Cy_SysClk_PeriphAssignDivider(PCLK_SCB5_CLOCK, CY_SYSCLK_DIV_8_BIT, 2u);
@@ -294,6 +294,8 @@ static void ClockInit(void)
 static void AnalogSetDefault(void);
 static void AnalogSetDefault(void)
 {
+	CY_SET_REG32(CYREG_HSIOM_AMUX_SPLIT_CTL4, 0x00000030u);
+	CY_SET_REG32(CYREG_HSIOM_AMUX_SPLIT_CTL5, 0x00000030u);
 	CY_SET_REG32(CYREG_CTBM0_CTB_CTRL, 0x80000000u);
 	CY_SET_REG32(CYREG_CTBM0_OA0_SW, 0x00240000u);
 	CY_SET_REG32(CYREG_CTBM0_OA1_SW, 0x00240000u);
@@ -1006,14 +1008,14 @@ void Cy_SystemInit(void)
 	{
 	    const cy_stc_gpio_prt_config_t port5_cfg =
 	    {
-	        .out        = 0x00000002u,
+	        .out        = 0x00000006u,
 	        .intrMask   = 0x00000000u,
 	        .intrCfg    = 0x00000000u,
 	        .cfg        = 0x00000060u,
 	        .cfgIn      = 0x00000000u,
 	        .cfgOut     = 0x00000000u,
 	        .cfgSIO     = 0x00000000u,
-	        .sel0Active = 0x00001200u,
+	        .sel0Active = 0x00051200u,
 	        .sel1Active = 0x00000000u,
 	    };
 	    (void)Cy_GPIO_Port_Init(GPIO_PRT5, &port5_cfg);
@@ -1036,36 +1038,19 @@ void Cy_SystemInit(void)
 	    (void)Cy_GPIO_Port_Init(GPIO_PRT6, &port6_cfg);
 	}
 
-	/* Port7 configuration */
-	{
-	    const cy_stc_gpio_prt_config_t port7_cfg =
-	    {
-	        .out        = 0x00000002u,
-	        .intrMask   = 0x00000000u,
-	        .intrCfg    = 0x00000000u,
-	        .cfg        = 0x00000060u,
-	        .cfgIn      = 0x00000000u,
-	        .cfgOut     = 0x00000000u,
-	        .cfgSIO     = 0x00000000u,
-	        .sel0Active = 0x00001200u,
-	        .sel1Active = 0x00000000u,
-	    };
-	    (void)Cy_GPIO_Port_Init(GPIO_PRT7, &port7_cfg);
-	}
-
 	/* Port9 configuration */
 	{
 	    const cy_stc_gpio_prt_config_t port9_cfg =
 	    {
-	        .out        = 0x0000004Fu,
+	        .out        = 0x0000005Fu,
 	        .intrMask   = 0x00000000u,
 	        .intrCfg    = 0x00000000u,
-	        .cfg        = 0x00600000u,
+	        .cfg        = 0x00600068u,
 	        .cfgIn      = 0x00000000u,
 	        .cfgOut     = 0x00000000u,
 	        .cfgSIO     = 0x00000000u,
-	        .sel0Active = 0x00000504u,
-	        .sel1Active = 0x00000000u,
+	        .sel0Active = 0x00001212u,
+	        .sel1Active = 0x00000004u,
 	    };
 	    (void)Cy_GPIO_Port_Init(GPIO_PRT9, &port9_cfg);
 	}

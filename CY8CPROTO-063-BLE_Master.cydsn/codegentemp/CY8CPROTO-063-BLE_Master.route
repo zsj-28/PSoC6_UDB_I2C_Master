@@ -1295,23 +1295,31 @@ net \UART:tx_wire\
 	switch ":ioport5:smartio_mux_in1.smartio_mux_in==>:ioport5:pin1.pin_input"
 	term   ":ioport5:pin1.pin_input"
 end \UART:tx_wire\
+net \UART_1:Net_1172\
+	term   ":ioport9:pin0.fb"
+	switch ":ioport9:pin0.fb==>:ioport9:smartio_mux_out0.direct_in"
+	switch ":ioport9:smartio_mux_out0.smartio_mux_out==>:ioport9:hsiomIn0.hsiomIn0"
+	switch ":ioport9:hsiomIn0.fixedOut0_ACT_6==>:SCB[2]uart_rx_input_permute.ioport9_fixedOut0_ACT_6"
+	switch ":SCB[2]uart_rx_input_permute.SCB[2]uart_rx==>:SCBcontainer:SCB[2].uart_rx"
+	term   ":SCBcontainer:SCB[2].uart_rx"
+end \UART_1:Net_1172\
 net \UART_1:Net_847_ff0\
-	term   ":Clockcontainer:Clock[0].ff_div_4"
-	switch ":Clockcontainer:Clock[0].ff_div_4==>:Clockcontainer:ff_permute.ff_div_4"
-	switch ":Clockcontainer:ff_permute.Clock[0]ff_div_4==>:SCBcontainer:SCB[4].clock"
-	term   ":SCBcontainer:SCB[4].clock"
+	term   ":Clockcontainer:Clock[0].ff_div_2"
+	switch ":Clockcontainer:Clock[0].ff_div_2==>:Clockcontainer:ff_permute.ff_div_2"
+	switch ":Clockcontainer:ff_permute.Clock[0]ff_div_2==>:SCBcontainer:SCB[2].clock"
+	term   ":SCBcontainer:SCB[2].clock"
 end \UART_1:Net_847_ff0\
 net \UART_1:intr_wire\
-	term   ":SCBcontainer:SCB[4].interrupt"
-	switch ":SCBcontainer:SCB[4].interrupt==>:intc_0:interrupt45.interrupt"
-	term   ":intc_0:interrupt45.interrupt"
+	term   ":SCBcontainer:SCB[2].interrupt"
+	switch ":SCBcontainer:SCB[2].interrupt==>:intc_0:interrupt43.interrupt"
+	term   ":intc_0:interrupt43.interrupt"
 end \UART_1:intr_wire\
 net \UART_1:tx_wire\
-	term   ":SCBcontainer:SCB[4].uart_tx"
-	switch ":SCBcontainer:SCB[4].uart_tx==>:ioport7:hsiomOut1.fixedIn1_ACT_6"
-	switch ":ioport7:hsiomOut1.hsiomOut1==>:ioport7:smartio_mux_in1.direct_out"
-	switch ":ioport7:smartio_mux_in1.smartio_mux_in==>:ioport7:pin1.pin_input"
-	term   ":ioport7:pin1.pin_input"
+	term   ":SCBcontainer:SCB[2].uart_tx"
+	switch ":SCBcontainer:SCB[2].uart_tx==>:ioport9:hsiomOut1.fixedIn1_ACT_6"
+	switch ":ioport9:hsiomOut1.hsiomOut1==>:ioport9:smartio_mux_in1.direct_out"
+	switch ":ioport9:smartio_mux_in1.smartio_mux_in==>:ioport9:pin1.pin_input"
+	term   ":ioport9:pin1.pin_input"
 end \UART_1:tx_wire\
 net dclk_to_genclk
 	term   ":Clockcontainer:Clock[0].udb_div_0"

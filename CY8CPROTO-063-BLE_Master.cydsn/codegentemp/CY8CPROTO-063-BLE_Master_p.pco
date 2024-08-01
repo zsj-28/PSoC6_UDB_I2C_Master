@@ -39,21 +39,22 @@ set_location "\I2C:bI2C_UDB:status_5\" macrocell 0 3 1 2
 set_location "\I2C:bI2C_UDB:cs_addr_shifter_0\" macrocell 1 1 0 1
 set_location "\I2C:bI2C_UDB:cs_addr_clkgen_0\" macrocell 1 1 0 0
 set_location "Timer_Int" interrupt -1 -1 90
+set_location "\UART_1:SCB_IRQ\" interrupt -1 -1 43
 set_location "\I2C:I2C_IRQ\" interrupt -1 -1 122
 set_location "\ADC:IRQ\" interrupt -1 -1 138
 set_location "\UART:SCB_IRQ\" interrupt -1 -1 46
-set_location "\UART_1:SCB_IRQ\" interrupt -1 -1 45
+set_location "\UART_1:SCB\" SCB -1 -1 2
 set_io "SCL(0)" iocell 10 1
 set_location "\ADC:SAR\" SARADC -1 -1 0
 # Warning: unknown type "SARMUX"
 #set_location "\ADC:SARMUX\" SARMUX -1 -1 -1 -1
+set_io "\UART_1:rx(0)\" iocell 9 0
 set_location "\Timer:TCPWM\" TCPWM -1 -1 0
 set_location "\UART:SCB\" SCB -1 -1 5
-set_location "\UART_1:SCB\" SCB -1 -1 4
 set_location "ClockBlock" Clock -1 -1 0
 set_io "RST(0)" iocell 10 0
 set_io "CY_CPUSS_SWJ_SWCLK_TCLK(0)" iocell 6 7
-set_io "\UART_1:tx(0)\" iocell 7 1
+set_io "\UART_1:tx(0)\" iocell 9 1
 set_io "SDA(0)" iocell 10 2
 set_location "\I2C:bI2C_UDB:SyncCtl:CtrlReg\" controlcell 0 2 6 
 set_location "ClockGenBlock" CLK_GEN -1 -1 0
@@ -64,8 +65,8 @@ set_io "ADC_CH0(0)" iocell 10 3
 set_io "ADC_CH1(0)" iocell 10 4
 set_io "ADC_CH2(0)" iocell 10 5
 set_io "ADC_CH3(0)" iocell 10 6
-set_io "ADC_CH4(0)" iocell 9 0
-set_io "ADC_CH5(0)" iocell 9 1
+set_io "ADC_CH4(0)" iocell 5 2
+set_io "ADC_CH5(0)" iocell 9 4
 set_io "ADC_CH6(0)" iocell 9 2
 set_io "ADC_CH7(0)" iocell 9 3
 set_io "DAC_out(0)" iocell 9 6
