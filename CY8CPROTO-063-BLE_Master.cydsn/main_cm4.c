@@ -395,7 +395,7 @@ int main(void) {
             //printf("\r\nResult of Encryption:\r\n");
             //PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
             
-            wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
+            wrap_data(OPCODE_ALL, encrypted_pkt, 88); //AESBlock_count*AES128_ENCRYPTION_LENGTH);
             
             Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
         }
@@ -427,15 +427,19 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     packet[1] = length;
     memcpy(&packet[2], data, length);
     packet[2 + length] = calculateCRC8(opcode, length, data);
-    //uint32_t bytesSent = Cy_SCB_UART_PutArray(UART_1_HW, packet, 2 + length + 1);
-    status = UART_1_GetTransmitStatus();
-    printf("\r\nPre-Tx status: 0x%x\r\n", status);
-    status = UART_1_Transmit(packet, 2 + length + 1);
-    printf("\r\nTx status: 0x%x\r\n", status);
+    // uint32_t bytesSent = Cy_SCB_UART_PutArray(UART_1_HW, packet, 2 + length + 1);
+    // status = UART_1_GetTransmitStatus();
+    // printf("\r\nPre-Tx status: 0x%x\r\n", status);
+    // PrintData(&packet[2], length);
+    // printf("Left to transmit: %d\r\n", UART_1_GetNumLeftToTransmit());
+    // status = UART_1_Transmit(packet, 2 + length + 1);
+    UART_1_PutArrayBlocking(packet, 2 + length + 1);
+    // printf("Left to transmit: %d\r\n", UART_1_GetNumLeftToTransmit());
+    // printf("\r\nTx status: 0x%x\r\n", status);
     // debug only
-    printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, packet[2 + length]);
-    status = UART_1_GetTransmitStatus();
-    printf("\r\nPost-Tx status: 0x%x\r\n", status);
+    // printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, packet[2 + length]);
+    // status = UART_1_GetTransmitStatus();
+    // printf("\r\nPost-Tx status: 0x%x\r\n", status);
     
     // TODO: make sure UART bus data looks right
     // TODO: make sure first data packet looks right after reset
