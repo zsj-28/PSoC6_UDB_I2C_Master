@@ -83,7 +83,7 @@ void UART_receive() {
             Serial.println("not all available bytes were read!");
         }
         for (uint8_t i = buffer_index; i < buffer_index + bytesRead; i++) {
-            Serial.printf("byte %d: 0x%x\r\n", i + 1, UART_buffer[i]);
+            Serial.printf("incoming byte: 0x%x\r\n", UART_buffer[i]);
         }
         buffer_index += bytesRead;
 
@@ -217,11 +217,10 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
 // 1ms timer interrupt
 void onSysTikTimer() {
     UART_timeout++;
-    if (UART_timeout > 25) {
-        UART_timeout = 25; // 5ms UART timeout
+    if (UART_timeout > 100) {
+        UART_timeout = 100; // 10ms UART timeout
         // Set UART error timeout bit
         Command_Matrix[0xFE].Data[0] |= 0x01;
-        buffer_index = 0;
     }
     else {
         // Clear UART error timeout bit
