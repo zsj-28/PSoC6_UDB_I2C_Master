@@ -9,9 +9,23 @@
 */
 
 #include "PSoC_Data.h"
+#include "AES.h"
+
+// UART global variables
+uint8_t opCode;
+uint8_t dataLength = 0;
+uint8_t *data;
+uint8_t buffer_index = 0;
+uint8_t UART_buffer[200];
+uint8_t receivedCRC = 0;
+uint8_t calculatedCRC = 0;
+uint8_t UART_timeout = 0;
+
+// AES key (must be 16 bytes for AES-128)
+const byte aes_key[16] = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0xFF, 0xEE, 0xDD, 0xCC, 0xBB, 0xAA, 0xAA, 0xBB, 0xCC, 0xDD};
+AES cipher = AES();
 
 // CRC-8 calculation table
-void onSysTikTimer(void);
 const uint8_t crcTable[256] = {
     0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D,
     0x70, 0x77, 0x7E, 0x79, 0x6C, 0x6B, 0x62, 0x65, 0x48, 0x4F, 0x46, 0x41, 0x54, 0x53, 0x5A, 0x5D,
@@ -31,6 +45,9 @@ const uint8_t crcTable[256] = {
     0xDE, 0xD9, 0xD0, 0xD7, 0xC2, 0xC5, 0xCC, 0xCB, 0xE6, 0xE1, 0xE8, 0xEF, 0xFA, 0xFD, 0xF4, 0xF3
 };
 
+// Function prototypes
+void onSysTikTimer(void);
+
 void setup() {
     // Initialize the built-in Serial port for communication with the Serial Monitor
     Serial.begin(115200);
@@ -46,23 +63,15 @@ void setup() {
     // Initialize the UART port (Serial1) with the desired baud rate
     Serial1.begin(115200, SERIAL_8N1, 16, 17); // Adjust RX and TX pin numbers if necessary
 
+    // Initialize AES key
+    cipher.set_key(aes_key, 16);
+
     // Timer 0, 1ms timer
     hw_timer_t *systiktimer = timerBegin(1000000); // was Timer 1, prescaler 80 (1MHz clock), now 1000 Hz
     timerAttachInterrupt(systiktimer, &onSysTikTimer);
     timerAlarm(systiktimer, 1000ULL, true, 0ULL); 
     timerStart(systiktimer); // Enable the timer interrupt
 }
-
-/// UART glocal variables
-uint8_t opCode;
-uint8_t dataLength = 0;
-uint8_t *data;
-uint8_t buffer_index = 0;
-uint8_t UART_buffer[200];
-uint8_t receivedCRC = 0;
-uint8_t calculatedCRC = 0;
-uint8_t UART_timeout = 0;
-
 
 void UART_receive() {
     //This reset mechanism prevents incorrect datastream format from 
@@ -82,9 +91,9 @@ void UART_receive() {
         if (bytesAvail != bytesRead) {
             Serial.println("not all available bytes were read!");
         }
-        for (uint8_t i = buffer_index; i < buffer_index + bytesRead; i++) {
-            Serial.printf("incoming byte: 0x%x\r\n", UART_buffer[i]);
-        }
+        // for (uint8_t i = buffer_index; i < buffer_index + bytesRead; i++) {
+        //    Serial.printf("incoming byte %d: 0x%x\r\n", i, UART_buffer[i]);
+        // }
         buffer_index += bytesRead;
 
         // The following conditions check that all the data bytes are received and
@@ -101,25 +110,72 @@ void UART_receive() {
             calculatedCRC = calculateCRC8(opCode, dataLength, data);
             buffer_index = 0;
 
-            Serial.printf("opCode: %d\r\n", opCode);
-            Serial.printf("dataLength: %d\r\n", dataLength);
+            // Decrypt the received packet
+            uint8_t decrypted_packet[dataLength];
+            for (int i = 0; i < dataLength/16; i++) {
+                cipher.decrypt(data + i * 16, decrypted_packet + i * 16); // ECB doesn't use an IV
+            }
 
-            Serial.print("Received CRC: 0x");
-            Serial.println(receivedCRC, HEX);
-            Serial.print("Calculated CRC: 0x");
-            Serial.println(calculatedCRC, HEX);
+            // debug only
+            // Serial.printf("opCode: %d\r\n", opCode);
+            // Serial.printf("dataLength: %d\r\n", dataLength);
+
+            // Serial.print("Received CRC: 0x");
+            // Serial.println(receivedCRC, HEX);
+            // Serial.print("Calculated CRC: 0x");
+            // Serial.println(calculatedCRC, HEX);
 
             // Check if the received CRC mathces the calculated one
             if (receivedCRC == calculatedCRC) {
-                Serial.println("CRC check passed.");
-                for (uint8_t i = 0; i < dataLength; i++) {
-                    Serial.print("0x");
-                    if (UART_buffer[i + 2] < 0x10) {
-                        Serial.print("0");
+                uint8_t dataElem = 0;
+                // Serial.println("CRC check passed.");
+                for (uint8_t i = 0; i < dataLength; i = i + 4) {
+                    switch (dataElem) {
+                        case 0:
+                            if (i + 16 >= dataLength) {
+                                Serial.print("\r\n   ADC CH1: ");
+                            }
+                            else {
+                                Serial.print("Slot A avg: ");
+                            }
+                        break;
+                        case 1:
+                            if (i + 16 >= dataLength) {
+                                Serial.print("   ADC CH2: ");
+                            }
+                            else {
+                                Serial.print("Slot B avg: ");
+                            }
+                        break;
+                        case 2:
+                            if (i + 16 >= dataLength) {
+                                Serial.print("ADC CH3: ");
+                            }
+                            else {
+                                Serial.print("Raw SO2: ");
+                            }
+                        break;
+                        case 3:
+                            if (i + 16 >= dataLength) {
+                                Serial.print("ADC CH4: ");
+                            }
+                            else {
+                                Serial.print("SO2 avg: ");
+                            }
+                        break;
+                        default:
+                        break;
                     }
-                    Serial.print(UART_buffer[i + 2], HEX);
-                    Serial.print(" ");
+                    dataElem = (dataElem + 1) % 4;
+                    Serial.printf("%15f", bytes2Float(&decrypted_packet[i]));
+                    if (dataElem == 0) {
+                        Serial.println();
+                    } 
+                    else {
+                        Serial.print(",\t");
+                    }
                 }
+                Serial.println();
                 switch (opCode) {
                     case 0x00:
                         Command_Matrix[0].Data[0] = UART_buffer[2]; //ADC CH0
@@ -212,6 +268,19 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
     }
 
     return crc;
+}
+
+float bytes2Float(byte* bytes_array){
+    // Create union of shared memory space
+    union {
+        float float_variable;
+        byte temp_array[4];
+    } u;
+    // Overite bytes of union with float variable
+    for (int i = 0; i < 4; i++) {
+        u.temp_array[i] = bytes_array[i];
+    }
+    return u.float_variable;
 }
 
 // 1ms timer interrupt

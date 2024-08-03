@@ -35,9 +35,9 @@
 #define ADC_SARMUX__CH_2_PORT 0
 #define ADC_SARMUX__CH_3_PIN 6
 #define ADC_SARMUX__CH_3_PORT 0
-#define ADC_SARMUX__CH_4_PIN 2
+#define ADC_SARMUX__CH_4_PIN 3
 #define ADC_SARMUX__CH_4_PORT 7
-#define ADC_SARMUX__CH_5_PIN 3
+#define ADC_SARMUX__CH_5_PIN 2
 #define ADC_SARMUX__CH_5_PORT 7
 #define ADC_SARMUX__CH_6_PIN 2
 #define ADC_SARMUX__CH_6_PORT 1
@@ -187,8 +187,8 @@
 #define I2C_bI2C_UDB_SyncCtl_CtrlReg__SC_CFG1 0x403426D8u
 
 /* UART */
-#define UART_1_SCB__HW SCB4
-#define UART_1_SCB__IDX 4
+#define UART_1_SCB__HW SCB2
+#define UART_1_SCB__IDX 2
 #define UART_1_SCB__SS0_POSITION 0u
 #define UART_1_SCB__SS1_POSITION 1u
 #define UART_1_SCB__SS2_POSITION 2u

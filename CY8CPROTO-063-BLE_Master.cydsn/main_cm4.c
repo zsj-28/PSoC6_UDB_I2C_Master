@@ -1,50 +1,55 @@
 /**
+ * Biorobotics Lab Project 4.2 Summer 2024
  * @file main_cm4.c 
+ *
 */
 
-#include "project.h"
+/* UNUSED - FreeRTOS/unintegrated */
 #include "FreeRTOS.h"
-#include "task.h"
+#include "task.h" 
+#include "bq34z100.h"
+
+#include "project.h"
 #include "cy_crypto.h"
 #include "ADPD1080.h"
-#include "bq34z100.h"
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
 
+#define UNUSEDdel680 (void)(del680)
+#define UNUSEDdel850 (void)(del850)
+
 /* UNUSED - Task configuration */
-#define ADPD1080_TASK_STACK_SIZE          1024
-#define ADC_TASK_STACK_SIZE               1024
 #define BQ34Z100_TASK_STACK_SIZE          1024
-#define ADPD1080_TASK_PRIORITY            2
-#define ADC_TASK_PRIORITY                 3
-#define BQ34Z100_TASK_PRIORITY            3
-#define ADPD1080_READ_INTERVAL_MS         10
-#define ADC_READ_INTERVAL_MS              100
+#define BQ34Z100_TASK_PRIORITY            3     // RMS based on read interval
 #define BQ34Z100_READ_INTERVAL_MS         100
 
-/* Constants */
-#define OPCODE_ADC_0 0x01
-#define OPCODE_ADC_1 0x02
-#define OPCODE_ADC_2 0x03
-#define OPCODE_ADC_3 0x04
-#define OPCODE_ADC_4 0x05
-#define OPCODE_ADC_5 0x06
-#define OPCODE_ADC_6 0x07
-#define OPCODE_ADC_7 0x08
-#define OPCODE_ADPD  0x09
-#define OPCODE_ALL   0x0A
-
-#define SMOOTHED_SAMPLE_SIZE     200U
-
+/* Sensor properties */
 #define ADC_NUM_CHANNELS         4U
-#define ADPD_NUM_CHANNELS        1U
-
+#define ADC_SAMPLES_PER_PACKET   1U
 #define ADC_SAMPLE_RATE_DIV      10U
+
+#define ADPD_NUM_CHANNELS        1U
+#define ADPD_SAMPLES_PER_PACKET  10U
 #define ADPD_SAMPLE_RATE_DIV     1U // TODO: nonfunctional, need to implement (make nicer with math?)
 
-#define ADC_SAMPLES_PER_PACKET   1U
-#define ADPD_SAMPLES_PER_PACKET  10U
+/* Firmware averaging */
+#define SMOOTHED_SAMPLE_SIZE     (200U)
+
+// Maximum number of bytes in a packet
+#define MAX_PACKET_SIZE          (255u)
+
+/* Foreground-background shared variables */
+volatile bool dataReady = false;
+volatile int16_t ADCData[ADC_SAMPLES_PER_PACKET*ADC_NUM_CHANNELS];
+volatile uint16_t adpdDataA[ADPD_SAMPLES_PER_PACKET*ADPD_NUM_CHANNELS];
+volatile uint16_t adpdDataB[ADPD_SAMPLES_PER_PACKET*ADPD_NUM_CHANNELS];
+
+/* Foreground variables */
+volatile uint16_t timerCount = 0;
+
+/* Background variables */
+uint8_t txBuffer[MAX_PACKET_SIZE + 3];
 
 /* Macros to configure the Crypto block */
 /* IPC data channel for the Crypto */
@@ -55,45 +60,16 @@
 #define MY_INTR_CRYPTO_CLI     				(uint32_t)(2u)
 /* CM0+ IPC interrupt mux number the Crypto server */
 #define MY_INTR_CRYPTO_SRV_MUX 				(IRQn_Type)(2u)
- /* CM0+ IPC interrupt mux number the Crypto client */
+/* CM0+ IPC interrupt mux number the Crypto client */
 #define MY_INTR_CRYPTO_CLI_MUX 				(IRQn_Type)(3u)
 /* CM0+ ERROR interrupt mux number the Crypto server */
 #define MY_INTR_CRYPTO_ERR_MUX 				(IRQn_Type)(4u)
-
-#define MAX_PACKET_SIZE                     (1000u) // Maximum number of bytes in a packet
 
 /* Size of the message block that can be processed by Crypto hardware for
  * AES encryption */
 #define AES128_ENCRYPTION_LENGTH 			(uint32_t)(16u)
 
 #define AES128_KEY_LENGTH  					(uint32_t)(16u)
-
-// CRC-8 calculation table
-const uint8_t crcTable[256] = {
-    0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D,
-    0x70, 0x77, 0x7E, 0x79, 0x6C, 0x6B, 0x62, 0x65, 0x48, 0x4F, 0x46, 0x41, 0x54, 0x53, 0x5A, 0x5D,
-    0xE0, 0xE7, 0xEE, 0xE9, 0xFC, 0xFB, 0xF2, 0xF5, 0xD8, 0xDF, 0xD6, 0xD1, 0xC4, 0xC3, 0xCA, 0xCD,
-    0x90, 0x97, 0x9E, 0x99, 0x8C, 0x8B, 0x82, 0x85, 0xA8, 0xAF, 0xA6, 0xA1, 0xB4, 0xB3, 0xBA, 0xBD,
-    0xC7, 0xC0, 0xC9, 0xCE, 0xDB, 0xDC, 0xD5, 0xD2, 0xFF, 0xF8, 0xF1, 0xF6, 0xE3, 0xE4, 0xED, 0xEA,
-    0xB7, 0xB0, 0xB9, 0xBE, 0xAB, 0xAC, 0xA5, 0xA2, 0x8F, 0x88, 0x81, 0x86, 0x93, 0x94, 0x9D, 0x9A,
-    0x27, 0x20, 0x29, 0x2E, 0x3B, 0x3C, 0x35, 0x32, 0x1F, 0x18, 0x11, 0x16, 0x03, 0x04, 0x0D, 0x0A,
-    0x57, 0x50, 0x59, 0x5E, 0x4B, 0x4C, 0x45, 0x42, 0x6F, 0x68, 0x61, 0x66, 0x73, 0x74, 0x7D, 0x7A,
-    0x89, 0x8E, 0x87, 0x80, 0x95, 0x92, 0x9B, 0x9C, 0xB1, 0xB6, 0xBF, 0xB8, 0xAD, 0xAA, 0xA3, 0xA4,
-    0xF9, 0xFE, 0xF7, 0xF0, 0xE5, 0xE2, 0xEB, 0xEC, 0xC1, 0xC6, 0xCF, 0xC8, 0xDD, 0xDA, 0xD3, 0xD4,
-    0x69, 0x6E, 0x67, 0x60, 0x75, 0x72, 0x7B, 0x7C, 0x51, 0x56, 0x5F, 0x58, 0x4D, 0x4A, 0x43, 0x44,
-    0x19, 0x1E, 0x17, 0x10, 0x05, 0x02, 0x0B, 0x0C, 0x21, 0x26, 0x2F, 0x28, 0x3D, 0x3A, 0x33, 0x34,
-    0x4E, 0x49, 0x40, 0x47, 0x52, 0x55, 0x5C, 0x5B, 0x76, 0x71, 0x78, 0x7F, 0x6A, 0x6D, 0x64, 0x63,
-    0x3E, 0x39, 0x30, 0x37, 0x22, 0x25, 0x2C, 0x2B, 0x06, 0x01, 0x08, 0x0F, 0x1A, 0x1D, 0x14, 0x13,
-    0xAE, 0xA9, 0xA0, 0xA7, 0xB2, 0xB5, 0xBC, 0xBB, 0x96, 0x91, 0x98, 0x9F, 0x8A, 0x8D, 0x84, 0x83,
-    0xDE, 0xD9, 0xD0, 0xD7, 0xC2, 0xC5, 0xCC, 0xCB, 0xE6, 0xE1, 0xE8, 0xEF, 0xFA, 0xFD, 0xF4, 0xF3
-};
-
-/* Global variables */
-volatile uint16_t timerCount = 0;
-volatile bool dataReady = false;
-volatile int16_t ADCData[ADC_SAMPLES_PER_PACKET*ADC_NUM_CHANNELS];
-volatile uint16_t adpdDataA[ADPD_SAMPLES_PER_PACKET*ADPD_NUM_CHANNELS];
-volatile uint16_t adpdDataB[ADPD_SAMPLES_PER_PACKET*ADPD_NUM_CHANNELS];
 
 /* Variables to store Crypto internal states */
 cy_stc_crypto_context_t cryptoScratch;
@@ -148,9 +124,39 @@ CY_ALIGN(4) uint8_t packet[MAX_PACKET_SIZE];
 CY_ALIGN(4) uint8_t encrypted_pkt[MAX_PACKET_SIZE];
 // CY_ALIGN(4) uint8_t decrypted_pkt[MAX_PACKET_SIZE]; // debug only
 
+/* UART Tx opcodes */
+#define OPCODE_ADC_0 0x01
+#define OPCODE_ADC_1 0x02
+#define OPCODE_ADC_2 0x03
+#define OPCODE_ADC_3 0x04
+#define OPCODE_ADC_4 0x05
+#define OPCODE_ADC_5 0x06
+#define OPCODE_ADC_6 0x07
+#define OPCODE_ADC_7 0x08
+#define OPCODE_ADPD  0x09
+#define OPCODE_ALL   0x0A
+
+/* CRC-8 calculation table */
+const uint8_t crcTable[256] = {
+    0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D,
+    0x70, 0x77, 0x7E, 0x79, 0x6C, 0x6B, 0x62, 0x65, 0x48, 0x4F, 0x46, 0x41, 0x54, 0x53, 0x5A, 0x5D,
+    0xE0, 0xE7, 0xEE, 0xE9, 0xFC, 0xFB, 0xF2, 0xF5, 0xD8, 0xDF, 0xD6, 0xD1, 0xC4, 0xC3, 0xCA, 0xCD,
+    0x90, 0x97, 0x9E, 0x99, 0x8C, 0x8B, 0x82, 0x85, 0xA8, 0xAF, 0xA6, 0xA1, 0xB4, 0xB3, 0xBA, 0xBD,
+    0xC7, 0xC0, 0xC9, 0xCE, 0xDB, 0xDC, 0xD5, 0xD2, 0xFF, 0xF8, 0xF1, 0xF6, 0xE3, 0xE4, 0xED, 0xEA,
+    0xB7, 0xB0, 0xB9, 0xBE, 0xAB, 0xAC, 0xA5, 0xA2, 0x8F, 0x88, 0x81, 0x86, 0x93, 0x94, 0x9D, 0x9A,
+    0x27, 0x20, 0x29, 0x2E, 0x3B, 0x3C, 0x35, 0x32, 0x1F, 0x18, 0x11, 0x16, 0x03, 0x04, 0x0D, 0x0A,
+    0x57, 0x50, 0x59, 0x5E, 0x4B, 0x4C, 0x45, 0x42, 0x6F, 0x68, 0x61, 0x66, 0x73, 0x74, 0x7D, 0x7A,
+    0x89, 0x8E, 0x87, 0x80, 0x95, 0x92, 0x9B, 0x9C, 0xB1, 0xB6, 0xBF, 0xB8, 0xAD, 0xAA, 0xA3, 0xA4,
+    0xF9, 0xFE, 0xF7, 0xF0, 0xE5, 0xE2, 0xEB, 0xEC, 0xC1, 0xC6, 0xCF, 0xC8, 0xDD, 0xDA, 0xD3, 0xD4,
+    0x69, 0x6E, 0x67, 0x60, 0x75, 0x72, 0x7B, 0x7C, 0x51, 0x56, 0x5F, 0x58, 0x4D, 0x4A, 0x43, 0x44,
+    0x19, 0x1E, 0x17, 0x10, 0x05, 0x02, 0x0B, 0x0C, 0x21, 0x26, 0x2F, 0x28, 0x3D, 0x3A, 0x33, 0x34,
+    0x4E, 0x49, 0x40, 0x47, 0x52, 0x55, 0x5C, 0x5B, 0x76, 0x71, 0x78, 0x7F, 0x6A, 0x6D, 0x64, 0x63,
+    0x3E, 0x39, 0x30, 0x37, 0x22, 0x25, 0x2C, 0x2B, 0x06, 0x01, 0x08, 0x0F, 0x1A, 0x1D, 0x14, 0x13,
+    0xAE, 0xA9, 0xA0, 0xA7, 0xB2, 0xB5, 0xBC, 0xBB, 0x96, 0x91, 0x98, 0x9F, 0x8A, 0x8D, 0x84, 0x83,
+    0xDE, 0xD9, 0xD0, 0xD7, 0xC2, 0xC5, 0xCC, 0xCB, 0xE6, 0xE1, 0xE8, 0xEF, 0xFA, 0xFD, 0xF4, 0xF3
+};
+
 /* Function prototypes */
-void vADPD1080(void *pvParameters);
-void vADC(void *pvParameters);
 void vBQ34Z100(void *pvParameters);
 uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data);
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length);
@@ -159,7 +165,7 @@ float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, uint32_t pos, uin
 void float2Bytes(float32_t val, uint8_t *bytes_array);
 void PrintData(uint8_t* data, uint8_t len);
 
-/* Interrupt service routines */
+/* Foreground ISRs */
 /**
  * @brief Program foreground, handles timer overflow interrupt with frequency 100 Hz
  * reads from ADPD1080 with frequency 100 Hz, and ADC with frequency 10 Hz
@@ -341,20 +347,26 @@ int main(void) {
                 del850 = -2.701*log(64*avg_valB / PULSE_B) + 35.27; // -0.1049
                 
                 // Populate packet buffer
+                float2Bytes(avg_valA, &packet[packetsize]); // demo only
+                packetsize += sizeof(float32_t);
+                
+                float2Bytes(avg_valB, &packet[packetsize]); // demo only
+                packetsize += sizeof(float32_t);
+                
                 float2Bytes(SO2, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
                 
                 float2Bytes(SO2_avg, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
                 
-                float2Bytes(del680, &packet[packetsize]);
-                packetsize += sizeof(float32_t);
+                // float2Bytes(del680, &packet[packetsize]);
+                // packetsize += sizeof(float32_t);
                 
-                float2Bytes(del850, &packet[packetsize]);
-                packetsize += sizeof(float32_t);
+                // float2Bytes(del850, &packet[packetsize]);
+                // packetsize += sizeof(float32_t);
                 
-                // printf("L850: %d, L850_Avg: %f, SO2: %f, SO2_Avg: %f, del680: %f, del850: %f\r\n",
-                       // L850, avg_valB, SO2, SO2_avg, del680, del850); // debug only
+                // printf("L850: %d\r\n", L850); // L850_Avg: %f, SO2: %f, SO2_Avg: %f, del680: %f, del850: %f\r\n",
+                //       L850, avg_valB, SO2, SO2_avg, del680, del850); // debug only
             }
             
             // Process ADC data
@@ -364,7 +376,7 @@ int main(void) {
             }
             
             // Encrypt packet
-            AESBlock_count =  (packetsize % AES128_ENCRYPTION_LENGTH == 0) ? \
+            AESBlock_count = (packetsize % AES128_ENCRYPTION_LENGTH == 0) ? \
 								  (packetsize/AES128_ENCRYPTION_LENGTH) \
 								  : (1 + packetsize/AES128_ENCRYPTION_LENGTH);
                                 
@@ -388,13 +400,13 @@ int main(void) {
             // printf("\r\n\nKey used for Encryption:\r\n");
             // PrintData(AES_Key, AES128_KEY_LENGTH);
             
-            // Transmit packet
-            for (uint8_t i = 0; i < 176; i++) {
-                encrypted_pkt[i] = i;
-            }
+            // for (uint8_t i = 0; i < 176; i++) {
+            //    encrypted_pkt[i] = i;
+            // }
             //printf("\r\nResult of Encryption:\r\n");
             //PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
             
+            // Transmit packet
             wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
             
             Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
@@ -403,6 +415,9 @@ int main(void) {
 }
 
 /* Helper functions */
+/**
+ * @brief Helper function for wrap_data()
+*/
 uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
   uint8_t crc = 0x00; // Initialize CRC value
 
@@ -420,41 +435,46 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
   return crc;
 }
 
+/**
+ * @brief Populate buffer with metadata and data and start transmission
+ * 
+ * @param uint8_t opcode - type of transmission TODO: replace with enum
+ * @param uint8_t *data - pointer to buffer containing data to send
+ * @param uint8_t length - number of bytes in data (0-255) 
+ *
+ * @note Buffer being transmitted must be constant and allocated until transmit operation completes
+*/
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
-    uint8_t packet[2 + length + 1];
+    // Ensure previous transmission is not ongoing before modifying transmit buffer
+    while (UART_1_GetTransmitStatus() == CY_SCB_UART_TRANSMIT_ACTIVE) {
+        printf("Waiting for previous transmission to complete\r\n");
+    }
+    
     cy_en_scb_uart_status_t status;
-    packet[0] = opcode;
-    packet[1] = length;
-    memcpy(&packet[2], data, length);
-    packet[2 + length] = calculateCRC8(opcode, length, data);
-    //uint32_t bytesSent = Cy_SCB_UART_PutArray(UART_1_HW, packet, 2 + length + 1);
-    status = UART_1_GetTransmitStatus();
-    printf("\r\nPre-Tx status: 0x%x\r\n", status);
-    status = UART_1_Transmit(packet, 2 + length + 1);
-    printf("\r\nTx status: 0x%x\r\n", status);
+    txBuffer[0] = opcode;
+    txBuffer[1] = length;
+    memcpy(&txBuffer[2], data, length);
+    txBuffer[2 + length] = calculateCRC8(opcode, length, data);
+    
+    // uint32_t bytesSent = Cy_SCB_UART_PutArray(UART_1_HW, txBuffer, 2 + length + 1);
+    // printf("\r\nPre-Tx status: 0x%x\r\n", status);
+    status = UART_1_Transmit(txBuffer, 2 + length + 1);
+    if (status != CY_SCB_UART_SUCCESS) {
+        printf("\r\nTx status: 0x%x\r\n", status);
+    }
+    
     // debug only
-    printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, packet[2 + length]);
-    status = UART_1_GetTransmitStatus();
-    printf("\r\nPost-Tx status: 0x%x\r\n", status);
+    printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, txBuffer[2 + length]);
+    // status = UART_1_GetTransmitStatus();
+    // printf("\r\nPost-Tx status: 0x%x\r\n", status);
     
     // TODO: make sure UART bus data looks right
     // TODO: make sure first data packet looks right after reset
     // TODO: or use GPIO before and after PutArray
 }
-    
-/*  send data (UNUSED)
- *  adc_channel goes from 0 - 8 
- *  0x0-0x7 are 8 ADC channels, 0x8 is the I2C ADPD readings
- */
-void send_data(uint16_t adc_value, uint16_t adc_channel) {
-    uint8_t data[2];
-    data[0] = (adc_value >> 8) & 0xFF;
-    data[1] = adc_value & 0xFF;
-    wrap_data(OPCODE_ADC_0 + adc_channel, data, 2);
-}
 
 /**
- * @brief Helper function for ADPD1080 task calculating moving average
+ * @brief Helper function for main background loop moving average processing
  * 
  * @author <bmccormack> - https://gist.github.com/bmccormack/d12f4bf0c96423d03f82
  * 

@@ -12,15 +12,16 @@
   <block name="Int_Debug" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Debug" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="UART_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
-    <block name="cts_VM" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="rx_VM" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="rx" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="cts_VM" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="SCB" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="SCB_IRQ" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <block name="tx" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="clock_VM" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="SCBCLK" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <block name="or_sclk" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="ZeroTerminal_7" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="tx" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="or_sclk" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   </block>
   <block name="VDAC" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
     <block name="cy_analog_virtualmux_3" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
