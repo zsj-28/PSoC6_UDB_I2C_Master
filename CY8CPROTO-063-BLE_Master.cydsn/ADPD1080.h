@@ -1,5 +1,10 @@
 /**
- * @file ADPD1080.h 
+ * Biorobotics Lab Project 4.2 Summer 2024
+ * @file ADPD1080.h
+ * @brief Header file for adpd1080 device driver
+ *
+ * @author: Steven Zhang <sijinz> 
+ * @author: Thomas Li <tyli>
 */
 
 #ifndef _ADPD1080_H

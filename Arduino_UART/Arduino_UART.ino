@@ -1,4 +1,5 @@
 /**
+ * Biorobotics Lab Project 4.2 Summer 2024
  * @file: Arduino_UART.ino
  * @brief: ESP32 UART receiver demo code for communicating with PSoC
  * 
@@ -11,7 +12,7 @@
 #include "PSoC_Data.h"
 #include "AES.h"
 
-// UART global variables
+/* UART Rx variables */
 uint8_t opCode;
 uint8_t dataLength = 0;
 uint8_t *data;
@@ -21,11 +22,11 @@ uint8_t receivedCRC = 0;
 uint8_t calculatedCRC = 0;
 uint8_t UART_timeout = 0;
 
-// AES key (must be 16 bytes for AES-128)
+/* AES key (must be 16 bytes for AES-128) */
 const byte aes_key[16] = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0xFF, 0xEE, 0xDD, 0xCC, 0xBB, 0xAA, 0xAA, 0xBB, 0xCC, 0xDD};
 AES cipher = AES();
 
-// CRC-8 calculation table
+/* CRC-8 calculation table */
 const uint8_t crcTable[256] = {
     0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31, 0x24, 0x23, 0x2A, 0x2D,
     0x70, 0x77, 0x7E, 0x79, 0x6C, 0x6B, 0x62, 0x65, 0x48, 0x4F, 0x46, 0x41, 0x54, 0x53, 0x5A, 0x5D,
@@ -45,38 +46,50 @@ const uint8_t crcTable[256] = {
     0xDE, 0xD9, 0xD0, 0xD7, 0xC2, 0xC5, 0xCC, 0xCB, 0xE6, 0xE1, 0xE8, 0xEF, 0xFA, 0xFD, 0xF4, 0xF3
 };
 
-// Function prototypes
+/* Function prototypes */
+void UART_receive(void);
+float bytes2Float(byte* bytes_array);
+uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data);
 void onSysTikTimer(void);
 
+/**
+ * @brief Main setup
+*/
 void setup() {
     // Initialize the built-in Serial port for communication with the Serial Monitor
     Serial.begin(115200);
 
-    // size_t newSize = Serial1.setRxBufferSize(200);
-    // Serial.println(newSize);
-    // while (newSize != 200) {
-    //     newSize = Serial1.setRxBufferSize(200);
-    //     Serial.println(newSize);
-    // }
-    // while (!Serial1.setRxFIFOFull(127)) {}
-
     // Initialize the UART port (Serial1) with the desired baud rate
-    Serial1.begin(115200, SERIAL_8N1, 16, 17); // Adjust RX and TX pin numbers if necessary
+    Serial1.begin(115200, SERIAL_8N1, 16, 17); // GPIO16 and GPIO17
 
     // Initialize AES key
     cipher.set_key(aes_key, 16);
 
-    // Timer 0, 1ms timer
-    hw_timer_t *systiktimer = timerBegin(1000000); // was Timer 1, prescaler 80 (1MHz clock), now 1000 Hz
+    // Initialize 1 MHz hardware timer with overflow every 1ms
+    hw_timer_t *systiktimer = timerBegin(1000000);
     timerAttachInterrupt(systiktimer, &onSysTikTimer);
-    timerAlarm(systiktimer, 1000ULL, true, 0ULL); 
-    timerStart(systiktimer); // Enable the timer interrupt
+    timerAlarm(systiktimer, 1000ULL, true, 0ULL);
+    timerStart(systiktimer);
 }
 
+/** 
+ * @brief Main loop
+*/
+void loop() {
+    UART_receive();
+
+    // Add a small delay to avoid overwhelming the Serial Monitor
+    delay(100);
+}
+
+/**
+ * @brief Receive incoming UART data and print to Serial Monitor
+ *
+ * @note Serial = debugger UART, Serial1 = PSoC communication UART
+*/
 void UART_receive() {
-    //This reset mechanism prevents incorrect datastream format from 
-    //disrupting future datastream
-    //If UART does not receive data within 10ms, reset buffer index 
+    // This reset mechanism prevents incorrect datastream format from disrupting future datastream
+    // If UART does not receive data within 10ms, reset buffer index 
     if (UART_timeout >= 10) {
         buffer_index = 0;
     }
@@ -91,9 +104,6 @@ void UART_receive() {
         if (bytesAvail != bytesRead) {
             Serial.println("not all available bytes were read!");
         }
-        // for (uint8_t i = buffer_index; i < buffer_index + bytesRead; i++) {
-        //    Serial.printf("incoming byte %d: 0x%x\r\n", i, UART_buffer[i]);
-        // }
         buffer_index += bytesRead;
 
         // The following conditions check that all the data bytes are received and
@@ -113,22 +123,12 @@ void UART_receive() {
             // Decrypt the received packet
             uint8_t decrypted_packet[dataLength];
             for (int i = 0; i < dataLength/16; i++) {
-                cipher.decrypt(data + i * 16, decrypted_packet + i * 16); // ECB doesn't use an IV
+                cipher.decrypt(data + i * 16, decrypted_packet + i * 16); // use AES ECB mode
             }
-
-            // debug only
-            // Serial.printf("opCode: %d\r\n", opCode);
-            // Serial.printf("dataLength: %d\r\n", dataLength);
-
-            // Serial.print("Received CRC: 0x");
-            // Serial.println(receivedCRC, HEX);
-            // Serial.print("Calculated CRC: 0x");
-            // Serial.println(calculatedCRC, HEX);
 
             // Check if the received CRC mathces the calculated one
             if (receivedCRC == calculatedCRC) {
                 uint8_t dataElem = 0;
-                // Serial.println("CRC check passed.");
                 for (uint8_t i = 0; i < dataLength; i = i + 4) {
                     switch (dataElem) {
                         case 0:
@@ -176,83 +176,23 @@ void UART_receive() {
                     }
                 }
                 Serial.println();
-                switch (opCode) {
-                    case 0x00:
-                        Command_Matrix[0].Data[0] = UART_buffer[2]; //ADC CH0
-                        Command_Matrix[0].Data[1] = UART_buffer[3];
-                        *(Command_Matrix[0].Time_Stamp) = UART_buffer[12];
-                        Command_Matrix[1].Data[0] = UART_buffer[4]; //ADC CH1
-                        Command_Matrix[1].Data[1] = UART_buffer[5];
-                        *(Command_Matrix[1].Time_Stamp) = UART_buffer[12];
-                        Command_Matrix[2].Data[0] = UART_buffer[6]; //ADC CH2
-                        Command_Matrix[2].Data[1] = UART_buffer[7];
-                        *(Command_Matrix[2].Time_Stamp) = UART_buffer[12];
-                        Command_Matrix[3].Data[0] = UART_buffer[8]; //ADC CH3
-                        Command_Matrix[3].Data[1] = UART_buffer[9];
-                        *(Command_Matrix[3].Time_Stamp) = UART_buffer[12];
-                        Command_Matrix[4].Data[0] = UART_buffer[10]; //ADC CH4
-                        Command_Matrix[4].Data[1] = UART_buffer[11];
-                        *(Command_Matrix[4].Time_Stamp) = UART_buffer[12];
-                    break;
-                    case 0x01:
-                        Command_Matrix[5].Data[0] = UART_buffer[2]; //ADC CH5
-                        Command_Matrix[5].Data[1] = UART_buffer[3];
-                        *(Command_Matrix[5].Time_Stamp) = UART_buffer[12];
-                        Command_Matrix[6].Data[0] = UART_buffer[4]; //ADC CH6
-                        Command_Matrix[6].Data[1] = UART_buffer[5];
-                        *(Command_Matrix[6].Time_Stamp) = UART_buffer[12];
-                        Command_Matrix[7].Data[0] = UART_buffer[6]; //ADC CH7
-                        Command_Matrix[7].Data[1] = UART_buffer[7];
-                        *(Command_Matrix[7].Time_Stamp) = UART_buffer[12];
-                        Command_Matrix[8].Data[0] = UART_buffer[8]; //ADC CH8
-                        Command_Matrix[8].Data[1] = UART_buffer[9];
-                        *(Command_Matrix[8].Time_Stamp) = UART_buffer[12];
-                        Command_Matrix[9].Data[0] = UART_buffer[10]; //ADC CH9
-                        Command_Matrix[9].Data[1] = UART_buffer[11];
-                        *(Command_Matrix[9].Time_Stamp) = UART_buffer[12];
-                    break;
-                    case 0x03:
-                        Command_Matrix[0x10].Data[0] = UART_buffer[2]; //s02
-                        Command_Matrix[0x10].Data[1] = UART_buffer[3];
-                        Command_Matrix[0x10].Data[2] = UART_buffer[4]; 
-                        Command_Matrix[0x10].Data[3] = UART_buffer[5];
-                        *(Command_Matrix[0x10].Time_Stamp) = UART_buffer[18];
-                        Command_Matrix[0x11].Data[0] = UART_buffer[6]; //s02_avg
-                        Command_Matrix[0x11].Data[1] = UART_buffer[7];
-                        Command_Matrix[0x11].Data[2] = UART_buffer[8]; 
-                        Command_Matrix[0x11].Data[3] = UART_buffer[9];
-                        *(Command_Matrix[0x11].Time_Stamp) = UART_buffer[18];
-                        Command_Matrix[0x12].Data[0] = UART_buffer[10]; //Hemoglobin A
-                        Command_Matrix[0x12].Data[1] = UART_buffer[11];
-                        Command_Matrix[0x12].Data[2] = UART_buffer[12]; 
-                        Command_Matrix[0x12].Data[3] = UART_buffer[13];
-                        *(Command_Matrix[0x12].Time_Stamp) = UART_buffer[18];
-                        Command_Matrix[0x13].Data[0] = UART_buffer[14]; //Hemoglobin B
-                        Command_Matrix[0x13].Data[1] = UART_buffer[15];
-                        Command_Matrix[0x13].Data[2] = UART_buffer[16]; 
-                        Command_Matrix[0x13].Data[3] = UART_buffer[17];
-                        *(Command_Matrix[0x13].Time_Stamp) = UART_buffer[18];
-                    break;
-                    default:
-                    break;
-                }
             }
             else {
                 Serial.println("CRC check failed.");
             }
         }
     }
-
 }
 
-void loop() {
-
-    UART_receive();
-    // Add a small delay to avoid overwhelming the Serial Monitor
-    // Serial1.write('?'); debug only
-    delay(100);
-}
-
+/**
+ * @brief calculates the CRC8 for an incoming UART packet
+ * 
+ * @param uint8_t opCode - the operation type of the incoming packet
+ * @param uint8_t dataLength - the length of the incoming payload
+ * @param uint8_t *data - pointer to an array of the incoming payload bytes
+ *
+ * @return uint8_t - calculated CRC byte from input parameters
+*/
 uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
     uint8_t crc = 0x00; // Initialize CRC value
 
@@ -270,7 +210,16 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
     return crc;
 }
 
-float bytes2Float(byte* bytes_array){
+/**
+ * @brief Helper function for main loop converting uint8_t array to float
+ * 
+ * @author <Floris> - https://stackoverflow.com/questions/24420246/c-function-to-convert-float-to-byte-array
+ * 
+ * @param byte *bytes_array - uint8_t array of length 4 to be converted to float value
+ *
+ * @return float - single precision float value
+*/
+float bytes2Float(byte* bytes_array) {
     // Create union of shared memory space
     union {
         float float_variable;
@@ -283,16 +232,13 @@ float bytes2Float(byte* bytes_array){
     return u.float_variable;
 }
 
-// 1ms timer interrupt
+/**
+ * @brief Timer interrupt handler occuring every 1ms
+*/
 void onSysTikTimer() {
     UART_timeout++;
+    
     if (UART_timeout > 100) {
-        UART_timeout = 100; // 10ms UART timeout
-        // Set UART error timeout bit
-        Command_Matrix[0xFE].Data[0] |= 0x01;
-    }
-    else {
-        // Clear UART error timeout bit
-        Command_Matrix[0xFE].Data[0] &= 0xFE;
+        UART_timeout = 100; // 10ms UART timeout in loop()
     }
 }

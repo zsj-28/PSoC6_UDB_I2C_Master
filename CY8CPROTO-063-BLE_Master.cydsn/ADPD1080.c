@@ -1,5 +1,10 @@
 /**
- * @file ADPD1080.c 
+ * Biorobotics Lab Project 4.2 Summer 2024
+ * @file ADPD1080.c
+ * @brief Source code for adpd1080 device driver
+ *
+ * @author: Steven Zhang <sijinz> 
+ * @author: Thomas Li <tyli>
 */
 
 #include "project.h"  // Include PSoC project header for PSoC-specific functions

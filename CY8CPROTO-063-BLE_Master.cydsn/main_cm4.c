@@ -1,13 +1,10 @@
 /**
  * Biorobotics Lab Project 4.2 Summer 2024
- * @file main_cm4.c 
+ * @file main_cm4.c
+ * @brief CM4 core PSoC firmware
  *
+ * @author: Thomas Li <tyli>
 */
-
-/* UNUSED - FreeRTOS/unintegrated */
-#include "FreeRTOS.h"
-#include "task.h" 
-#include "bq34z100.h"
 
 #include "project.h"
 #include "cy_crypto.h"
@@ -19,11 +16,6 @@
 #define UNUSEDdel680 (void)(del680)
 #define UNUSEDdel850 (void)(del850)
 
-/* UNUSED - Task configuration */
-#define BQ34Z100_TASK_STACK_SIZE          1024
-#define BQ34Z100_TASK_PRIORITY            3     // RMS based on read interval
-#define BQ34Z100_READ_INTERVAL_MS         100
-
 /* Sensor properties */
 #define ADC_NUM_CHANNELS         4U
 #define ADC_SAMPLES_PER_PACKET   1U
@@ -31,7 +23,6 @@
 
 #define ADPD_NUM_CHANNELS        1U
 #define ADPD_SAMPLES_PER_PACKET  10U
-#define ADPD_SAMPLE_RATE_DIV     1U // TODO: nonfunctional, need to implement (make nicer with math?)
 
 /* Firmware averaging */
 #define SMOOTHED_SAMPLE_SIZE     (200U)
@@ -122,7 +113,6 @@ CY_ALIGN(4) uint8_t AES_Key[AES128_KEY_LENGTH]={0xAA,0xBB,0xCC,0xDD,0xEE,0xFF,0x
 /* Variables to hold the user message and the corresponding encrypted message */
 CY_ALIGN(4) uint8_t packet[MAX_PACKET_SIZE];
 CY_ALIGN(4) uint8_t encrypted_pkt[MAX_PACKET_SIZE];
-// CY_ALIGN(4) uint8_t decrypted_pkt[MAX_PACKET_SIZE]; // debug only
 
 /* UART Tx opcodes */
 #define OPCODE_ADC_0 0x01
@@ -175,12 +165,9 @@ void PrintData(uint8_t* data, uint8_t len);
  *
  * @return none
  */
-CY_ISR (Timer_Int_Handler) {
-    Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 1);
-    
+CY_ISR (Timer_Int_Handler) {    
     // Clear timer overflow interrupt
     Timer_ClearInterrupt(CY_TCPWM_INT_ON_TC);
-    // printf("%u", timerCount); debug only
     
     // Read ADPD1080 data registers with data hold mechanism (6 ms)
     if (turbidity_ReadDataNoInterrupt(ADPD_NUM_CHANNELS)) {
@@ -205,10 +192,9 @@ CY_ISR (Timer_Int_Handler) {
                 ADCData[i] = ADC_GetResult16(i);
             }
             dataReady = true;
-            VDAC_SetValueBuffered(ADCData[0]); // debug only
         }
         else {
-            printf("error: Conversion not finished yet! Status %lu\r\n", conversionStatus);
+            printf("error: Conversion not finished yet!");
             return;
         }        
         // Start next conversion
@@ -217,8 +203,6 @@ CY_ISR (Timer_Int_Handler) {
     
     // Flush write to hardware by reading from same register
     Timer_GetInterruptStatus();
-    
-    Cy_GPIO_Write(Int_Debug_PORT, Int_Debug_NUM, 0);
 }
 
 /**
@@ -235,8 +219,6 @@ int main(void) {
     float32_t SO2_avg;           // Running average SO2
     float32_t del680;            // L680 Hemoglobin concentration
     float32_t del850;            // L850 Hemoglobin concentration
-    // unsigned long t;
-    // unsigned long t0;
 
     // Maintain running average
     uint16_t slotA_avg[SMOOTHED_SAMPLE_SIZE] = {0};
@@ -266,9 +248,6 @@ int main(void) {
     // Intialize ADC for receiving analog sensor data
     ADC_Start();
     
-    // Initialize DAC (debug only)
-    VDAC_Start();
-    
     // Register Timer interrupt handler
     Cy_SysInt_Init(&Timer_Int_cfg, Timer_Int_Handler);
     NVIC_EnableIRQ(Timer_Int_cfg.intrSrc);
@@ -285,7 +264,6 @@ int main(void) {
     
     // Initialize sensor registers
     turbidity_Init();
-    //turbidity_ChannelOffsetCalibration();
     
     printf("ADPD1080 initialization successful.\r\n");
     
@@ -296,13 +274,13 @@ int main(void) {
 	while (Cy_Crypto_Enable() != CY_CRYPTO_SUCCESS) {}
 
 	/* Wait for Crypto Block to be available */
-	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
+	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING);
     
     /* Initializes the AES operation by setting key and key length */
 	while (Cy_Crypto_Aes_Init((uint32_t*)AES_Key, CY_CRYPTO_KEY_AES_128, &cryptoAES) != CY_CRYPTO_SUCCESS) {}
 
 	/* Wait for Crypto Block to be available */
-	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING); // TODO: consider non-blocking, error-checking
+	Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING);
     
     // Begin first ADC scan
     ADC_StartConvert();
@@ -314,7 +292,6 @@ int main(void) {
     for (;;) {
         // When data is ready, process, encrypt, and transmit packet
         if (dataReady) {
-            Cy_GPIO_Write(Debug_PORT, Debug_NUM, 1);
             dataReady = false;
             
             // Reset packetsize and AESBlock_count
@@ -343,11 +320,11 @@ int main(void) {
                 SO2_avg = 188.1*(R_avg) - 89.95;
                 
                 // Hemoglobin concentration
-                del680 = -3.412*log(64*avg_valA / PULSE_A) + 43.02; // TODO: is PULSE_A/PULSE_B = 127?
+                del680 = -3.412*log(64*avg_valA / PULSE_A) + 43.02;
                 del850 = -2.701*log(64*avg_valB / PULSE_B) + 35.27; // -0.1049
                 
                 // Populate packet buffer
-                float2Bytes(avg_valA, &packet[packetsize]); // demo only
+                float2Bytes(avg_valA, &packet[packetsize]); // demo only, Hemoglobin for actual
                 packetsize += sizeof(float32_t);
                 
                 float2Bytes(avg_valB, &packet[packetsize]); // demo only
@@ -358,15 +335,6 @@ int main(void) {
                 
                 float2Bytes(SO2_avg, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
-                
-                // float2Bytes(del680, &packet[packetsize]);
-                // packetsize += sizeof(float32_t);
-                
-                // float2Bytes(del850, &packet[packetsize]);
-                // packetsize += sizeof(float32_t);
-                
-                // printf("L850: %d\r\n", L850); // L850_Avg: %f, SO2: %f, SO2_Avg: %f, del680: %f, del850: %f\r\n",
-                //       L850, avg_valB, SO2, SO2_avg, del680, del850); // debug only
             }
             
             // Process ADC data
@@ -394,29 +362,22 @@ int main(void) {
 				Cy_Crypto_Sync(CY_CRYPTO_SYNC_BLOCKING);
 			}
             
-            // debug only
-            // printf("\r\n\nPacketsize being Encrypted: %d, %d\r\n", packetsize, AESBlock_count);
-            // PrintData(packet, packetsize);
-            // printf("\r\n\nKey used for Encryption:\r\n");
-            // PrintData(AES_Key, AES128_KEY_LENGTH);
-            
-            // for (uint8_t i = 0; i < 176; i++) {
-            //    encrypted_pkt[i] = i;
-            // }
-            //printf("\r\nResult of Encryption:\r\n");
-            //PrintData((uint8_t*)encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
-            
             // Transmit packet
             wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
-            
-            Cy_GPIO_Write(Debug_PORT, Debug_NUM, 0);
         }
     }
 }
 
 /* Helper functions */
 /**
- * @brief Helper function for wrap_data()
+ * @brief calculates the CRC8 for an outgoing UART packet
+ * 
+ * @param uint8_t opCode - the operation type of the outgoing packet
+ * @param uint8_t dataLength - the length of the payload to send
+ * @param uint8_t *data - pointer to an array of the Tx payload bytes
+ *
+ * @return uint8_t - calculated CRC byte from input parameters
+ * @note Helper function for wrap_data()
 */
 uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
   uint8_t crc = 0x00; // Initialize CRC value
@@ -456,21 +417,13 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     memcpy(&txBuffer[2], data, length);
     txBuffer[2 + length] = calculateCRC8(opcode, length, data);
     
-    // uint32_t bytesSent = Cy_SCB_UART_PutArray(UART_1_HW, txBuffer, 2 + length + 1);
-    // printf("\r\nPre-Tx status: 0x%x\r\n", status);
     status = UART_1_Transmit(txBuffer, 2 + length + 1);
     if (status != CY_SCB_UART_SUCCESS) {
         printf("\r\nTx status: 0x%x\r\n", status);
     }
     
-    // debug only
-    printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, txBuffer[2 + length]);
-    // status = UART_1_GetTransmitStatus();
-    // printf("\r\nPost-Tx status: 0x%x\r\n", status);
-    
-    // TODO: make sure UART bus data looks right
-    // TODO: make sure first data packet looks right after reset
-    // TODO: or use GPIO before and after PutArray
+    // demo only
+    printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, txBuffer[2 + length]);    
 }
 
 /**
@@ -485,7 +438,7 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
  * @param int nextNum - next data point to add
  *
  * @return int - the moving average after nextNum added
- */
+*/
 float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, uint32_t pos, uint32_t len, uint16_t nextNum) {
     // Subtract the oldest number from the prev sum, add the new number
     *ptrSum = *ptrSum - ptrArrNumbers[pos] + nextNum;
@@ -506,7 +459,7 @@ float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, uint32_t pos, uin
  * @param uint8_t *bytesArray - pointer to uint8_t array in memory
  *
  * @return none
- */
+*/
 void float2Bytes(float32_t val, uint8_t *bytes_array) {
     // Create union of shared memory space
     union {
@@ -534,40 +487,6 @@ void PrintData(uint8_t* data, uint8_t len) {
 		printf("%s", print);
 	}
 	printf("\r\n");
-}
-
-/* FreeRTOS Task Functions */
-/* UNUSED */
-void vBQ34Z100(void *pvParameters) {
-    (void) pvParameters;
-
-    // Declare and initialize BQ34Z100 device structure
-    BQ34Z100_t bq34z100Device;
-
-    for (;;) {
-        // Ensure the device is ready and communicate with it
-        BQ34Z100_Unseal(&bq34z100Device);  // Unseal the device to enable full access
-
-        // Read and print the battery voltage
-        uint16_t voltage = BQ34Z100_GetVoltage(&bq34z100Device);
-        printf("Battery Voltage: %u mV\n", voltage);
-
-        // Read and print the State of Charge
-        uint8_t soc = BQ34Z100_GetSOC(&bq34z100Device);
-        printf("State of Charge: %u%%\n", soc);
-
-        // Read and print the battery current
-        int16_t current = BQ34Z100_GetCurrent(&bq34z100Device);
-        printf("Battery Current: %d mA\n", current);
-
-        // Read and print device type and firmware version as an example of control commands
-        uint16_t deviceType = BQ34Z100_ReadDeviceType(&bq34z100Device);
-        uint16_t fwVersion = BQ34Z100_ReadFWVersion(&bq34z100Device);
-        printf("Device Type: 0x%04X, Firmware Version: 0x%04X\n", deviceType, fwVersion);
-
-        // Delay between reads to prevent overwhelming the device and the I2C bus
-        vTaskDelay(pdMS_TO_TICKS(BQ34Z100_READ_INTERVAL_MS));
-    }
 }
 
 /* [] END OF FILE */
