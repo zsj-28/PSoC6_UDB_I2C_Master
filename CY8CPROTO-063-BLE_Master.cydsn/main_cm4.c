@@ -258,7 +258,7 @@ int main(void) {
     printf("Initializing ADPD1080 sensor...\r\n");
 
     if (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
-        printf("ADPD1080 initialization failed!\r\n");
+        printf("error: ADPD1080 initialization failed!\r\n");
         while (1); // Loop forever on failure
     }
     
@@ -419,7 +419,7 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     
     status = UART_1_Transmit(txBuffer, 2 + length + 1);
     if (status != CY_SCB_UART_SUCCESS) {
-        printf("\r\nTx status: 0x%x\r\n", status);
+        printf("\r\nerror: Tx status 0x%x\r\n", status);
     }
     
     // demo only
