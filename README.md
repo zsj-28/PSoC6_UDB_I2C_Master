@@ -1,5 +1,6 @@
 # Final Report
 ## Demo setup
+- Toolbox containing hardware: Under the back table in A403 on top of one of Lu’s boxes
 - [Demo branch](https://github.com/zsj-28/PSoC6_UDB_I2C_Master/tree/demo)
 - [Demo video](https://drive.google.com/file/d/1Bv1FpYkNOPGebD9OkA_9PS9wtUVst6f3/view?usp=drive_link)
 - [Osama’s optical sensor](https://drive.google.com/file/d/17TWZSqO9HJqURGxlbdL6PXHE-bGl5WQ6/view?usp=drive_link)
@@ -63,6 +64,8 @@
     - Holds byte-aligned encrypted version of packet[]
 
 ## Application next steps (highest to lowest priority)
+**Debug UART CRC check failure:** Try printing to Serial debugger terminal only when CRC check fails to see if the problem is caused by printing slowing the receiver down. If the issue persists after this change there may be another issue with UART transmitter or receiver implementation.
+
 **Track PSoC resources:** Create a spreadsheet containing current PSoC resource usage and overall plan for resource allocation. According to Resource Meter 1 UDB I2C component uses 51% of the available UDB, which could be a limitation. Could also be paired with a plan for pin allocation.
 
 **Error handling:** Currently adpd1080 initialization failure results in infinite loop, encryption failure prints an error message, ADC conversion failure prints an error message and returns (potentially resulting in stale data being transmitted), and adpd1080 read failure substitutes data with 0s. Device driver I2C read error could potentially cause the Timer_Int_Handler to block. Errors should be handled consistently and in a way that meets safety requirements. A spreadsheet of possible errors/faults and how they are handled could be created.
