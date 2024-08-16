@@ -86,6 +86,7 @@ bool ADPD1080_SetOperationMode(ADPD1080_OperationMode enMode) {
     regValue |= (enMode << 0);
     return ADPD1080_WriteReg(ADPD1080_MODE, regValue);
 }
+
 /**
  * @brief Configure the Time Slot Switch register.
  *

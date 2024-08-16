@@ -147,10 +147,9 @@ const uint8_t crcTable[256] = {
 };
 
 /* Function prototypes */
-void vBQ34Z100(void *pvParameters);
+void Timer_Int_Handler(void);
 uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data);
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length);
-void send_data(uint16_t adc_value, uint16_t adc_channel);
 float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, uint32_t pos, uint32_t len, uint16_t nextNum);
 void float2Bytes(float32_t val, uint8_t *bytes_array);
 void PrintData(uint8_t* data, uint8_t len);
