@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
   28:Generated_Source\PSoC6/VDAC.c ****     .deglitchMode       = VDAC_CTDAC_DEGLITCHMODE,
   29:Generated_Source\PSoC6/VDAC.c ****     .outputMode         = CY_CTDAC_OUTPUT_VALUE,
   30:Generated_Source\PSoC6/VDAC.c ****     .outputBuffer       = VDAC_CTDAC_OUTPUTBUFFER,
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 2
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 2
 
 
   31:Generated_Source\PSoC6/VDAC.c ****     .deepSleep          = VDAC_CTDAC_DEEPSLEEP,
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
   85:Generated_Source\PSoC6/VDAC.c ****     .callback = &Cy_CTDAC_DeepSleepCallback,
   86:Generated_Source\PSoC6/VDAC.c ****     .type = CY_SYSPM_DEEPSLEEP,
   87:Generated_Source\PSoC6/VDAC.c ****     .callbackParams = &VDAC_DeepSleepCallbackParams,
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 3
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 3
 
 
   88:Generated_Source\PSoC6/VDAC.c **** };
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
   18:Generated_Source\PSoC6/VDAC.h **** 
   19:Generated_Source\PSoC6/VDAC.h **** #if !defined(CY_VDAC_H)
   20:Generated_Source\PSoC6/VDAC.h **** #define CY_VDAC_H
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 4
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 4
 
 
   21:Generated_Source\PSoC6/VDAC.h **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
   75:Generated_Source\PSoC6/VDAC.h **** /*******************************************************************************
   76:Generated_Source\PSoC6/VDAC.h ****                             Enumerated Definitions
   77:Generated_Source\PSoC6/VDAC.h **** *******************************************************************************/
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 5
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 5
 
 
   78:Generated_Source\PSoC6/VDAC.h **** /** This enum type is used when calling VDAC_SetSampleAndHold().*/
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  132:Generated_Source\PSoC6/VDAC.h **** #define VDAC_CTDAC_SIGNMODE             ((VDAC_PARAM_DacCodeMode == VDAC_COMP_FORMAT_SIGNED) ? \
  133:Generated_Source\PSoC6/VDAC.h ****                                                     CY_CTDAC_FORMAT_SIGNED : CY_CTDAC_FORMAT_UNSIGN
  134:Generated_Source\PSoC6/VDAC.h **** #define VDAC_CTDAC_UPDATEMODE           (cy_en_ctdac_update_t) VDAC_PARAM_UpdateMode
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 6
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 6
 
 
  135:Generated_Source\PSoC6/VDAC.h **** #define VDAC_CTDAC_OUTPUTBUFFER         ((VDAC_PARAM_OutputBuffer <= VDAC_COMP_OUTPUT_UNBUFFERED_IN
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  189:Generated_Source\PSoC6/VDAC.h **** __STATIC_INLINE void VDAC_Stop(void);
  190:Generated_Source\PSoC6/VDAC.h **** __STATIC_INLINE void VDAC_SetValue(int32_t value);
  191:Generated_Source\PSoC6/VDAC.h **** __STATIC_INLINE void VDAC_SetValueBuffered(int32_t value);
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 7
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 7
 
 
  192:Generated_Source\PSoC6/VDAC.h **** __STATIC_INLINE void VDAC_SetSignMode(cy_en_ctdac_format_t signMode);
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  246:Generated_Source\PSoC6/VDAC.h **** {
  247:Generated_Source\PSoC6/VDAC.h ****     (void)Cy_CTDAC_Init(VDAC_CTDAC_HW, &VDAC_ctdacConfig);
   44              		.loc 2 247 0
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 8
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 8
 
 
   45 000a 0849     		ldr	r1, .L3+4
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
   36:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *       - Unsigned 12-bit mode
   37:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *       - Virtual signed 12-bit mode
   38:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * - Configurable update rate using clock or strobe signal
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 9
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 9
 
 
   39:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * - Double buffered DAC voltage control register
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
   93:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * selected during initialization with the \ref cy_stc_ctdac_config_t.updateMode.
   94:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * Four of these modes require a dedicated clock resource and the driver
   95:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * can configure the clock during initialization (see \ref cy_stc_ctdac_config_t).
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 10
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 10
 
 
   96:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  150:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *
  151:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * \subsection group_ctdac_updatemode_strobe_level Strobe level
  152:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 11
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 11
 
 
  153:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * In this mode, the user writes to the CTDAC_VAL_NXT register using
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  207:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * used with a DMA block to update the CTDAC value register at high speeds without any CPU intervent
  208:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * Alternatively, the interrupt output can be used when DMA is not available
  209:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * to update the CTDAC value register, but at a slower speed.
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 12
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 12
 
 
  210:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  264:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * The DAC output voltage is retained on an internal capacitor for a duration of time while the
  265:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * DAC output can be turned off. The DAC hardware needs to be turned on in a periodic fashion
  266:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * to recharge the hold capacitor. This feature is firmware controlled using a sequence of function 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 13
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 13
 
 
  267:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * See \ref Cy_CTB_DACSampleAndHold in the \ref group_ctb_sample_hold "CTB" driver.
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  321:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *   <tr>
  322:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *     <td>Added register access layer. Use register access macros instead
  323:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *         of direct register access using dereferenced pointers.</td>
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 14
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 14
 
 
  324:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *     <td>Makes register access device-independent, so that the PDL does 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  378:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** /** Driver minor version */
  379:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** #define CY_CTDAC_DRV_VERSION_MINOR       0
  380:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 15
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 15
 
 
  381:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** /** CTDAC driver identifier */
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  435:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h ****     CY_CTDAC_UPDATE_BUFFERED_WRITE          = 1uL,  /**< DAC value stored with \ref Cy_CTDAC_SetVal
  436:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h ****     CY_CTDAC_UPDATE_STROBE_EDGE_SYNC        = 2uL,  /**< DAC value stored with \ref Cy_CTDAC_SetVal
  437:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h ****     CY_CTDAC_UPDATE_STROBE_EDGE_IMMEDIATE   = 3uL,  /**< DAC value stored with \ref Cy_CTDAC_SetVal
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 16
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 16
 
 
  438:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h ****     CY_CTDAC_UPDATE_STROBE_LEVEL            = 4uL   /**< DAC value stored with \ref Cy_CTDAC_SetVal
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  492:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** /** Configure the output to be buffered or unbuffered
  493:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *
  494:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * The CO6 switch is closed when the output is unbuffered to Pin 6 of the CTDAC port.
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 17
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 17
 
 
  495:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * See the device datasheet for the CTDAC port.
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  549:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h ****     /* Configuring the clock */
  550:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h ****     bool                        configClock;        /**< Configure or ignore clock information */
  551:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h ****     cy_en_divider_types_t       dividerType;        /**< Specifies which type of divider to use. Ca
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 18
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 18
 
 
  552:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h ****     uint32_t                    dividerNum;         /**< Specifies which divider of the selected ty
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  606:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** /** Configure CTDAC to use Vdda reference and output buffered through Opamp0 of CTB. See \ref Cy_CT
  607:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *
  608:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * To quickly configure Opamp0, call with \ref Cy_CTB_FastInit
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 19
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 19
 
 
  609:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * with \ref Cy_CTB_Fast_Opamp0_Vdac_Out or \ref Cy_CTB_Fast_Opamp0_Vdac_Out_SH.
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  663:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** /**
  664:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * \addtogroup group_ctdac_functions_basic
  665:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * This set of functions are for configuring basic usage of the CTDAC.
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 20
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 20
 
 
  666:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * \{
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  720:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * \param base
  721:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * Pointer to structure describing registers
  722:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** *
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 21
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 21
 
 
  723:Generated_Source\PSoC6\pdl\drivers/peripheral/ctdac/cy_ctdac.h **** * \return None
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  129:Generated_Source\PSoC6/VDAC.c **** * Sets whether the DAC hardware continues to stay powered in
  130:Generated_Source\PSoC6/VDAC.c **** * Deep Sleep mode or not. If the DAC is enabled in Deep Sleep,
  131:Generated_Source\PSoC6/VDAC.c **** * then any required buffers will also be enabled in Deep Sleep.
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 22
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 22
 
 
  132:Generated_Source\PSoC6/VDAC.c **** * If the DAC is disabled in Deep Sleep, and both opamps are
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  105              		.align	2
  106              		.global	VDAC_SetSampleAndHold
  107              		.code	16
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 23
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 23
 
 
  108              		.thumb_func
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  217:Generated_Source\PSoC6/VDAC.c ****         Cy_CTB_DACSampleAndHold(VDAC_CTB_HW, CY_CTB_SH_SAMPLE);
  218:Generated_Source\PSoC6/VDAC.c ****         break;
  219:Generated_Source\PSoC6/VDAC.c ****     case VDAC_SH_HOLD:
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 24
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 24
 
 
  220:Generated_Source\PSoC6/VDAC.c ****         Cy_CTB_DACSampleAndHold(VDAC_CTB_HW, CY_CTB_SH_PREPARE_HOLD);
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  260:Generated_Source\PSoC6/VDAC.c **** *   - Hold time = 750 us @ Vref = VDDA , VDDA = 1.7 V
  261:Generated_Source\PSoC6/VDAC.c **** *   - Hold time = 525 us @ Vref = VDDA , VDDA = 3.6 V
  262:Generated_Source\PSoC6/VDAC.c **** *   - Hold time = 200 us @ Vref = 1.2 V, VDDA = 3.6 V
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 25
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 25
 
 
  263:Generated_Source\PSoC6/VDAC.c **** *
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  149              		.type	VDAC_ctdacConfig, %object
  150              		.size	VDAC_ctdacConfig, 52
  151              	VDAC_ctdacConfig:
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 26
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 26
 
 
  152 0000 01       		.byte	1
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  204              		.file 7 "Generated_Source\\PSoC6\\pdl\\devices/psoc6/include/psoc6_01_config.h"
  205              		.file 8 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/device/cy_device.h"
  206              		.file 9 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/syspm/cy_syspm.h"
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 27
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 27
 
 
  207              		.file 10 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/sysclk/cy_sysclk.h"
@@ -1569,56 +1569,56 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  212 0006 00000000 		.4byte	.Ldebug_abbrev0
  213 000a 04       		.byte	0x4
  214 000b 01       		.uleb128 0x1
- 215 000c D90B0000 		.4byte	.LASF225
+ 215 000c CB0B0000 		.4byte	.LASF225
  216 0010 0C       		.byte	0xc
- 217 0011 23050000 		.4byte	.LASF226
- 218 0015 0D030000 		.4byte	.LASF227
+ 217 0011 15050000 		.4byte	.LASF226
+ 218 0015 3F030000 		.4byte	.LASF227
  219 0019 00000000 		.4byte	.Ldebug_ranges0+0
  220 001d 00000000 		.4byte	0
  221 0021 00000000 		.4byte	.Ldebug_line0
  222 0025 02       		.uleb128 0x2
  223 0026 02       		.byte	0x2
  224 0027 05       		.byte	0x5
- 225 0028 CC0A0000 		.4byte	.LASF0
+ 225 0028 BE0A0000 		.4byte	.LASF0
  226 002c 02       		.uleb128 0x2
  227 002d 01       		.byte	0x1
  228 002e 08       		.byte	0x8
- 229 002f 730A0000 		.4byte	.LASF1
+ 229 002f 650A0000 		.4byte	.LASF1
  230 0033 02       		.uleb128 0x2
  231 0034 01       		.byte	0x1
  232 0035 06       		.byte	0x6
  233 0036 82020000 		.4byte	.LASF2
  234 003a 03       		.uleb128 0x3
- 235 003b CF0B0000 		.4byte	.LASF3
+ 235 003b C10B0000 		.4byte	.LASF3
  236 003f 04       		.byte	0x4
  237 0040 1D       		.byte	0x1d
  238 0041 2C000000 		.4byte	0x2c
  239 0045 03       		.uleb128 0x3
- 240 0046 19050000 		.4byte	.LASF4
+ 240 0046 0B050000 		.4byte	.LASF4
  241 004a 04       		.byte	0x4
  242 004b 29       		.byte	0x29
  243 004c 25000000 		.4byte	0x25
  244 0050 03       		.uleb128 0x3
- 245 0051 990C0000 		.4byte	.LASF5
+ 245 0051 8B0C0000 		.4byte	.LASF5
  246 0055 04       		.byte	0x4
  247 0056 2B       		.byte	0x2b
  248 0057 5B000000 		.4byte	0x5b
  249 005b 02       		.uleb128 0x2
  250 005c 02       		.byte	0x2
  251 005d 07       		.byte	0x7
- 252 005e 4E0D0000 		.4byte	.LASF6
+ 252 005e 400D0000 		.4byte	.LASF6
  253 0062 03       		.uleb128 0x3
- 254 0063 DA0C0000 		.4byte	.LASF7
+ 254 0063 CC0C0000 		.4byte	.LASF7
  255 0067 04       		.byte	0x4
  256 0068 3F       		.byte	0x3f
  257 0069 6D000000 		.4byte	0x6d
  258 006d 02       		.uleb128 0x2
  259 006e 04       		.byte	0x4
  260 006f 05       		.byte	0x5
- 261 0070 540B0000 		.4byte	.LASF8
+ 261 0070 460B0000 		.4byte	.LASF8
  262 0074 03       		.uleb128 0x3
- 263 0075 CC040000 		.4byte	.LASF9
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 28
+ 263 0075 BE040000 		.4byte	.LASF9
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 28
 
 
  264 0079 04       		.byte	0x4
@@ -1627,7 +1627,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  267 007f 02       		.uleb128 0x2
  268 0080 04       		.byte	0x4
  269 0081 07       		.byte	0x7
- 270 0082 E7050000 		.4byte	.LASF10
+ 270 0082 D9050000 		.4byte	.LASF10
  271 0086 02       		.uleb128 0x2
  272 0087 08       		.byte	0x8
  273 0088 05       		.byte	0x5
@@ -1643,9 +1643,9 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  283 009b 02       		.uleb128 0x2
  284 009c 04       		.byte	0x4
  285 009d 07       		.byte	0x7
- 286 009e 92050000 		.4byte	.LASF13
+ 286 009e 84050000 		.4byte	.LASF13
  287 00a2 03       		.uleb128 0x3
- 288 00a3 950E0000 		.4byte	.LASF14
+ 288 00a3 870E0000 		.4byte	.LASF14
  289 00a7 05       		.byte	0x5
  290 00a8 18       		.byte	0x18
  291 00a9 3A000000 		.4byte	0x3a
@@ -1655,30 +1655,30 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  295 00b3 20       		.byte	0x20
  296 00b4 45000000 		.4byte	0x45
  297 00b8 03       		.uleb128 0x3
- 298 00b9 C0060000 		.4byte	.LASF16
+ 298 00b9 B2060000 		.4byte	.LASF16
  299 00bd 05       		.byte	0x5
  300 00be 24       		.byte	0x24
  301 00bf 50000000 		.4byte	0x50
  302 00c3 03       		.uleb128 0x3
- 303 00c4 6B0A0000 		.4byte	.LASF17
+ 303 00c4 5D0A0000 		.4byte	.LASF17
  304 00c8 05       		.byte	0x5
  305 00c9 2C       		.byte	0x2c
  306 00ca 62000000 		.4byte	0x62
  307 00ce 03       		.uleb128 0x3
- 308 00cf 900B0000 		.4byte	.LASF18
+ 308 00cf 820B0000 		.4byte	.LASF18
  309 00d3 05       		.byte	0x5
  310 00d4 30       		.byte	0x30
  311 00d5 74000000 		.4byte	0x74
  312 00d9 02       		.uleb128 0x2
  313 00da 04       		.byte	0x4
  314 00db 07       		.byte	0x7
- 315 00dc 9F050000 		.4byte	.LASF19
+ 315 00dc 91050000 		.4byte	.LASF19
  316 00e0 05       		.uleb128 0x5
  317 00e1 CE000000 		.4byte	0xce
  318 00e5 06       		.uleb128 0x6
  319 00e6 E0000000 		.4byte	0xe0
  320 00ea 07       		.uleb128 0x7
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 29
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 29
 
 
  321 00eb E5000000 		.4byte	0xe5
@@ -1700,52 +1700,52 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  337 010e 21       		.byte	0x21
  338 010f A6010000 		.4byte	0x1a6
  339 0113 0A       		.uleb128 0xa
- 340 0114 410E0000 		.4byte	.LASF20
+ 340 0114 330E0000 		.4byte	.LASF20
  341 0118 06       		.byte	0x6
  342 0119 22       		.byte	0x22
  343 011a E0000000 		.4byte	0xe0
  344 011e 00       		.byte	0
  345 011f 0A       		.uleb128 0xa
- 346 0120 ED0A0000 		.4byte	.LASF21
+ 346 0120 DF0A0000 		.4byte	.LASF21
  347 0124 06       		.byte	0x6
  348 0125 23       		.byte	0x23
  349 0126 AB010000 		.4byte	0x1ab
  350 012a 04       		.byte	0x4
  351 012b 0A       		.uleb128 0xa
- 352 012c 110D0000 		.4byte	.LASF22
+ 352 012c 030D0000 		.4byte	.LASF22
  353 0130 06       		.byte	0x6
  354 0131 24       		.byte	0x24
  355 0132 E0000000 		.4byte	0xe0
  356 0136 20       		.byte	0x20
  357 0137 0A       		.uleb128 0xa
- 358 0138 A1070000 		.4byte	.LASF23
+ 358 0138 93070000 		.4byte	.LASF23
  359 013c 06       		.byte	0x6
  360 013d 25       		.byte	0x25
  361 013e E0000000 		.4byte	0xe0
  362 0142 24       		.byte	0x24
  363 0143 0A       		.uleb128 0xa
- 364 0144 0F060000 		.4byte	.LASF24
+ 364 0144 01060000 		.4byte	.LASF24
  365 0148 06       		.byte	0x6
  366 0149 26       		.byte	0x26
  367 014a E0000000 		.4byte	0xe0
  368 014e 28       		.byte	0x28
  369 014f 0A       		.uleb128 0xa
- 370 0150 AC090000 		.4byte	.LASF25
+ 370 0150 9E090000 		.4byte	.LASF25
  371 0154 06       		.byte	0x6
  372 0155 27       		.byte	0x27
  373 0156 E5000000 		.4byte	0xe5
  374 015a 2C       		.byte	0x2c
  375 015b 0A       		.uleb128 0xa
- 376 015c F8090000 		.4byte	.LASF26
+ 376 015c EA090000 		.4byte	.LASF26
  377 0160 06       		.byte	0x6
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 30
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 30
 
 
  378 0161 28       		.byte	0x28
  379 0162 B5010000 		.4byte	0x1b5
  380 0166 30       		.byte	0x30
  381 0167 0A       		.uleb128 0xa
- 382 0168 920A0000 		.4byte	.LASF27
+ 382 0168 840A0000 		.4byte	.LASF27
  383 016c 06       		.byte	0x6
  384 016d 29       		.byte	0x29
  385 016e E0000000 		.4byte	0xe0
@@ -1757,19 +1757,19 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  391 017a E0000000 		.4byte	0xe0
  392 017e B4       		.byte	0xb4
  393 017f 0A       		.uleb128 0xa
- 394 0180 5D0B0000 		.4byte	.LASF29
+ 394 0180 4F0B0000 		.4byte	.LASF29
  395 0184 06       		.byte	0x6
  396 0185 2B       		.byte	0x2b
  397 0186 CF010000 		.4byte	0x1cf
  398 018a B8       		.byte	0xb8
  399 018b 0B       		.uleb128 0xb
- 400 018c D00C0000 		.4byte	.LASF30
+ 400 018c C20C0000 		.4byte	.LASF30
  401 0190 06       		.byte	0x6
  402 0191 2C       		.byte	0x2c
  403 0192 E0000000 		.4byte	0xe0
  404 0196 0001     		.2byte	0x100
  405 0198 0B       		.uleb128 0xb
- 406 0199 A60F0000 		.4byte	.LASF31
+ 406 0199 980F0000 		.4byte	.LASF31
  407 019d 06       		.byte	0x6
  408 019e 2D       		.byte	0x2d
  409 019f E0000000 		.4byte	0xe0
@@ -1795,22 +1795,22 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  429 01cf 06       		.uleb128 0x6
  430 01d0 CA010000 		.4byte	0x1ca
  431 01d4 03       		.uleb128 0x3
- 432 01d5 F10C0000 		.4byte	.LASF32
+ 432 01d5 E30C0000 		.4byte	.LASF32
  433 01d9 06       		.byte	0x6
  434 01da 2E       		.byte	0x2e
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 31
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 31
 
 
  435 01db 0A010000 		.4byte	0x10a
  436 01df 0C       		.uleb128 0xc
- 437 01e0 64050000 		.4byte	.LASF33
+ 437 01e0 56050000 		.4byte	.LASF33
  438 01e4 07       		.byte	0x7
  439 01e5 5106     		.2byte	0x651
  440 01e7 D4010000 		.4byte	0x1d4
  441 01eb 02       		.uleb128 0x2
  442 01ec 08       		.byte	0x8
  443 01ed 04       		.byte	0x4
- 444 01ee 6B0C0000 		.4byte	.LASF34
+ 444 01ee 5D0C0000 		.4byte	.LASF34
  445 01f2 0D       		.uleb128 0xd
  446 01f3 B8       		.byte	0xb8
  447 01f4 08       		.byte	0x8
@@ -1823,64 +1823,64 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  454 0201 CE000000 		.4byte	0xce
  455 0205 00       		.byte	0
  456 0206 0A       		.uleb128 0xa
- 457 0207 C1040000 		.4byte	.LASF36
+ 457 0207 B3040000 		.4byte	.LASF36
  458 020b 08       		.byte	0x8
  459 020c 38       		.byte	0x38
  460 020d CE000000 		.4byte	0xce
  461 0211 04       		.byte	0x4
  462 0212 0A       		.uleb128 0xa
- 463 0213 ED030000 		.4byte	.LASF37
+ 463 0213 DF030000 		.4byte	.LASF37
  464 0217 08       		.byte	0x8
  465 0218 39       		.byte	0x39
  466 0219 CE000000 		.4byte	0xce
  467 021d 08       		.byte	0x8
  468 021e 0A       		.uleb128 0xa
- 469 021f 5D0A0000 		.4byte	.LASF38
+ 469 021f 4F0A0000 		.4byte	.LASF38
  470 0223 08       		.byte	0x8
  471 0224 3A       		.byte	0x3a
  472 0225 CE000000 		.4byte	0xce
  473 0229 0C       		.byte	0xc
  474 022a 0A       		.uleb128 0xa
- 475 022b 25090000 		.4byte	.LASF39
+ 475 022b 17090000 		.4byte	.LASF39
  476 022f 08       		.byte	0x8
  477 0230 3B       		.byte	0x3b
  478 0231 CE000000 		.4byte	0xce
  479 0235 10       		.byte	0x10
  480 0236 0A       		.uleb128 0xa
- 481 0237 270B0000 		.4byte	.LASF40
+ 481 0237 190B0000 		.4byte	.LASF40
  482 023b 08       		.byte	0x8
  483 023c 3C       		.byte	0x3c
  484 023d CE000000 		.4byte	0xce
  485 0241 14       		.byte	0x14
  486 0242 0A       		.uleb128 0xa
- 487 0243 19060000 		.4byte	.LASF41
+ 487 0243 0B060000 		.4byte	.LASF41
  488 0247 08       		.byte	0x8
  489 0248 3D       		.byte	0x3d
  490 0249 CE000000 		.4byte	0xce
  491 024d 18       		.byte	0x18
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 32
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 32
 
 
  492 024e 0A       		.uleb128 0xa
- 493 024f 2A080000 		.4byte	.LASF42
+ 493 024f 1C080000 		.4byte	.LASF42
  494 0253 08       		.byte	0x8
  495 0254 3E       		.byte	0x3e
  496 0255 CE000000 		.4byte	0xce
  497 0259 1C       		.byte	0x1c
  498 025a 0A       		.uleb128 0xa
- 499 025b 580F0000 		.4byte	.LASF43
+ 499 025b 4A0F0000 		.4byte	.LASF43
  500 025f 08       		.byte	0x8
  501 0260 3F       		.byte	0x3f
  502 0261 CE000000 		.4byte	0xce
  503 0265 20       		.byte	0x20
  504 0266 0A       		.uleb128 0xa
- 505 0267 A00D0000 		.4byte	.LASF44
+ 505 0267 920D0000 		.4byte	.LASF44
  506 026b 08       		.byte	0x8
  507 026c 40       		.byte	0x40
  508 026d CE000000 		.4byte	0xce
  509 0271 24       		.byte	0x24
  510 0272 0A       		.uleb128 0xa
- 511 0273 AA070000 		.4byte	.LASF45
+ 511 0273 9C070000 		.4byte	.LASF45
  512 0277 08       		.byte	0x8
  513 0278 43       		.byte	0x43
  514 0279 A2000000 		.4byte	0xa2
@@ -1892,25 +1892,25 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  520 0285 A2000000 		.4byte	0xa2
  521 0289 29       		.byte	0x29
  522 028a 0A       		.uleb128 0xa
- 523 028b 4E0F0000 		.4byte	.LASF47
+ 523 028b 400F0000 		.4byte	.LASF47
  524 028f 08       		.byte	0x8
  525 0290 45       		.byte	0x45
  526 0291 A2000000 		.4byte	0xa2
  527 0295 2A       		.byte	0x2a
  528 0296 0A       		.uleb128 0xa
- 529 0297 3B090000 		.4byte	.LASF48
+ 529 0297 2D090000 		.4byte	.LASF48
  530 029b 08       		.byte	0x8
  531 029c 46       		.byte	0x46
  532 029d A2000000 		.4byte	0xa2
  533 02a1 2B       		.byte	0x2b
  534 02a2 0A       		.uleb128 0xa
- 535 02a3 B4060000 		.4byte	.LASF49
+ 535 02a3 A6060000 		.4byte	.LASF49
  536 02a7 08       		.byte	0x8
  537 02a8 47       		.byte	0x47
  538 02a9 A2000000 		.4byte	0xa2
  539 02ad 2C       		.byte	0x2c
  540 02ae 0A       		.uleb128 0xa
- 541 02af E40C0000 		.4byte	.LASF50
+ 541 02af D60C0000 		.4byte	.LASF50
  542 02b3 08       		.byte	0x8
  543 02b4 48       		.byte	0x48
  544 02b5 A2000000 		.4byte	0xa2
@@ -1918,26 +1918,26 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  546 02ba 0A       		.uleb128 0xa
  547 02bb CC020000 		.4byte	.LASF51
  548 02bf 08       		.byte	0x8
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 33
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 33
 
 
  549 02c0 49       		.byte	0x49
  550 02c1 A2000000 		.4byte	0xa2
  551 02c5 2E       		.byte	0x2e
  552 02c6 0A       		.uleb128 0xa
- 553 02c7 B8090000 		.4byte	.LASF52
+ 553 02c7 AA090000 		.4byte	.LASF52
  554 02cb 08       		.byte	0x8
  555 02cc 4A       		.byte	0x4a
  556 02cd A2000000 		.4byte	0xa2
  557 02d1 2F       		.byte	0x2f
  558 02d2 0A       		.uleb128 0xa
- 559 02d3 CC080000 		.4byte	.LASF53
+ 559 02d3 BE080000 		.4byte	.LASF53
  560 02d7 08       		.byte	0x8
  561 02d8 4B       		.byte	0x4b
  562 02d9 A2000000 		.4byte	0xa2
  563 02dd 30       		.byte	0x30
  564 02de 0A       		.uleb128 0xa
- 565 02df F9050000 		.4byte	.LASF54
+ 565 02df EB050000 		.4byte	.LASF54
  566 02e3 08       		.byte	0x8
  567 02e4 4E       		.byte	0x4e
  568 02e5 A2000000 		.4byte	0xa2
@@ -1949,52 +1949,52 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  574 02f1 A2000000 		.4byte	0xa2
  575 02f5 32       		.byte	0x32
  576 02f6 0A       		.uleb128 0xa
- 577 02f7 6F050000 		.4byte	.LASF56
+ 577 02f7 61050000 		.4byte	.LASF56
  578 02fb 08       		.byte	0x8
  579 02fc 50       		.byte	0x50
  580 02fd A2000000 		.4byte	0xa2
  581 0301 33       		.byte	0x33
  582 0302 0A       		.uleb128 0xa
- 583 0303 33080000 		.4byte	.LASF57
+ 583 0303 25080000 		.4byte	.LASF57
  584 0307 08       		.byte	0x8
  585 0308 51       		.byte	0x51
  586 0309 A2000000 		.4byte	0xa2
  587 030d 34       		.byte	0x34
  588 030e 0A       		.uleb128 0xa
- 589 030f 930D0000 		.4byte	.LASF58
+ 589 030f 850D0000 		.4byte	.LASF58
  590 0313 08       		.byte	0x8
  591 0314 52       		.byte	0x52
  592 0315 AD000000 		.4byte	0xad
  593 0319 36       		.byte	0x36
  594 031a 0A       		.uleb128 0xa
- 595 031b 07040000 		.4byte	.LASF59
+ 595 031b F9030000 		.4byte	.LASF59
  596 031f 08       		.byte	0x8
  597 0320 53       		.byte	0x53
  598 0321 AD000000 		.4byte	0xad
  599 0325 38       		.byte	0x38
  600 0326 0A       		.uleb128 0xa
- 601 0327 4C0E0000 		.4byte	.LASF60
+ 601 0327 3E0E0000 		.4byte	.LASF60
  602 032b 08       		.byte	0x8
  603 032c 54       		.byte	0x54
  604 032d AD000000 		.4byte	0xad
  605 0331 3A       		.byte	0x3a
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 34
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 34
 
 
  606 0332 0A       		.uleb128 0xa
- 607 0333 2A0F0000 		.4byte	.LASF61
+ 607 0333 1C0F0000 		.4byte	.LASF61
  608 0337 08       		.byte	0x8
  609 0338 55       		.byte	0x55
  610 0339 A2000000 		.4byte	0xa2
  611 033d 3C       		.byte	0x3c
  612 033e 0A       		.uleb128 0xa
- 613 033f 2E040000 		.4byte	.LASF62
+ 613 033f 20040000 		.4byte	.LASF62
  614 0343 08       		.byte	0x8
  615 0344 56       		.byte	0x56
  616 0345 A2000000 		.4byte	0xa2
  617 0349 3D       		.byte	0x3d
  618 034a 0A       		.uleb128 0xa
- 619 034b 670B0000 		.4byte	.LASF63
+ 619 034b 590B0000 		.4byte	.LASF63
  620 034f 08       		.byte	0x8
  621 0350 57       		.byte	0x57
  622 0351 A2000000 		.4byte	0xa2
@@ -2006,31 +2006,31 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  628 035d A2000000 		.4byte	0xa2
  629 0361 3F       		.byte	0x3f
  630 0362 0A       		.uleb128 0xa
- 631 0363 62090000 		.4byte	.LASF65
+ 631 0363 54090000 		.4byte	.LASF65
  632 0367 08       		.byte	0x8
  633 0368 59       		.byte	0x59
  634 0369 A2000000 		.4byte	0xa2
  635 036d 40       		.byte	0x40
  636 036e 0A       		.uleb128 0xa
- 637 036f 6A0D0000 		.4byte	.LASF66
+ 637 036f 5C0D0000 		.4byte	.LASF66
  638 0373 08       		.byte	0x8
  639 0374 5A       		.byte	0x5a
  640 0375 A2000000 		.4byte	0xa2
  641 0379 41       		.byte	0x41
  642 037a 0A       		.uleb128 0xa
- 643 037b 23070000 		.4byte	.LASF67
+ 643 037b 15070000 		.4byte	.LASF67
  644 037f 08       		.byte	0x8
  645 0380 5B       		.byte	0x5b
  646 0381 A2000000 		.4byte	0xa2
  647 0385 42       		.byte	0x42
  648 0386 0A       		.uleb128 0xa
- 649 0387 04090000 		.4byte	.LASF68
+ 649 0387 F6080000 		.4byte	.LASF68
  650 038b 08       		.byte	0x8
  651 038c 5C       		.byte	0x5c
  652 038d A2000000 		.4byte	0xa2
  653 0391 43       		.byte	0x43
  654 0392 0A       		.uleb128 0xa
- 655 0393 F6030000 		.4byte	.LASF69
+ 655 0393 E8030000 		.4byte	.LASF69
  656 0397 08       		.byte	0x8
  657 0398 5D       		.byte	0x5d
  658 0399 A2000000 		.4byte	0xa2
@@ -2038,14 +2038,14 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  660 039e 0A       		.uleb128 0xa
  661 039f 00000000 		.4byte	.LASF70
  662 03a3 08       		.byte	0x8
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 35
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 35
 
 
  663 03a4 5E       		.byte	0x5e
  664 03a5 CE000000 		.4byte	0xce
  665 03a9 48       		.byte	0x48
  666 03aa 0A       		.uleb128 0xa
- 667 03ab B1030000 		.4byte	.LASF71
+ 667 03ab A3030000 		.4byte	.LASF71
  668 03af 08       		.byte	0x8
  669 03b0 5F       		.byte	0x5f
  670 03b1 CE000000 		.4byte	0xce
@@ -2057,25 +2057,25 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  676 03bd A2000000 		.4byte	0xa2
  677 03c1 50       		.byte	0x50
  678 03c2 0A       		.uleb128 0xa
- 679 03c3 9D0E0000 		.4byte	.LASF73
+ 679 03c3 8F0E0000 		.4byte	.LASF73
  680 03c7 08       		.byte	0x8
  681 03c8 61       		.byte	0x61
  682 03c9 A2000000 		.4byte	0xa2
  683 03cd 51       		.byte	0x51
  684 03ce 0A       		.uleb128 0xa
- 685 03cf 7B0E0000 		.4byte	.LASF74
+ 685 03cf 6D0E0000 		.4byte	.LASF74
  686 03d3 08       		.byte	0x8
  687 03d4 62       		.byte	0x62
  688 03d5 A2000000 		.4byte	0xa2
  689 03d9 52       		.byte	0x52
  690 03da 0A       		.uleb128 0xa
- 691 03db FF0C0000 		.4byte	.LASF75
+ 691 03db F10C0000 		.4byte	.LASF75
  692 03df 08       		.byte	0x8
  693 03e0 63       		.byte	0x63
  694 03e1 A2000000 		.4byte	0xa2
  695 03e5 53       		.byte	0x53
  696 03e6 0A       		.uleb128 0xa
- 697 03e7 750B0000 		.4byte	.LASF76
+ 697 03e7 670B0000 		.4byte	.LASF76
  698 03eb 08       		.byte	0x8
  699 03ec 64       		.byte	0x64
  700 03ed A2000000 		.4byte	0xa2
@@ -2087,18 +2087,18 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  706 03f9 A2000000 		.4byte	0xa2
  707 03fd 55       		.byte	0x55
  708 03fe 0A       		.uleb128 0xa
- 709 03ff 2A0D0000 		.4byte	.LASF78
+ 709 03ff 1C0D0000 		.4byte	.LASF78
  710 0403 08       		.byte	0x8
  711 0404 66       		.byte	0x66
  712 0405 A2000000 		.4byte	0xa2
  713 0409 56       		.byte	0x56
  714 040a 0A       		.uleb128 0xa
- 715 040b 2E060000 		.4byte	.LASF79
+ 715 040b 20060000 		.4byte	.LASF79
  716 040f 08       		.byte	0x8
  717 0410 67       		.byte	0x67
  718 0411 A2000000 		.4byte	0xa2
  719 0415 57       		.byte	0x57
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 36
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 36
 
 
  720 0416 0A       		.uleb128 0xa
@@ -2108,19 +2108,19 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  724 041d A2000000 		.4byte	0xa2
  725 0421 58       		.byte	0x58
  726 0422 0A       		.uleb128 0xa
- 727 0423 9B0A0000 		.4byte	.LASF81
+ 727 0423 8D0A0000 		.4byte	.LASF81
  728 0427 08       		.byte	0x8
  729 0428 69       		.byte	0x69
  730 0429 A2000000 		.4byte	0xa2
  731 042d 59       		.byte	0x59
  732 042e 0A       		.uleb128 0xa
- 733 042f 17080000 		.4byte	.LASF82
+ 733 042f 09080000 		.4byte	.LASF82
  734 0433 08       		.byte	0x8
  735 0434 6E       		.byte	0x6e
  736 0435 B8000000 		.4byte	0xb8
  737 0439 5A       		.byte	0x5a
  738 043a 0A       		.uleb128 0xa
- 739 043b 610D0000 		.4byte	.LASF83
+ 739 043b 530D0000 		.4byte	.LASF83
  740 043f 08       		.byte	0x8
  741 0440 6F       		.byte	0x6f
  742 0441 B8000000 		.4byte	0xb8
@@ -2132,52 +2132,52 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  748 044d A2000000 		.4byte	0xa2
  749 0451 5E       		.byte	0x5e
  750 0452 0A       		.uleb128 0xa
- 751 0453 320A0000 		.4byte	.LASF85
+ 751 0453 240A0000 		.4byte	.LASF85
  752 0457 08       		.byte	0x8
  753 0458 71       		.byte	0x71
  754 0459 A2000000 		.4byte	0xa2
  755 045d 5F       		.byte	0x5f
  756 045e 0A       		.uleb128 0xa
- 757 045f D8080000 		.4byte	.LASF86
+ 757 045f CA080000 		.4byte	.LASF86
  758 0463 08       		.byte	0x8
  759 0464 72       		.byte	0x72
  760 0465 A2000000 		.4byte	0xa2
  761 0469 60       		.byte	0x60
  762 046a 0A       		.uleb128 0xa
- 763 046b DA090000 		.4byte	.LASF87
+ 763 046b CC090000 		.4byte	.LASF87
  764 046f 08       		.byte	0x8
  765 0470 73       		.byte	0x73
  766 0471 CE000000 		.4byte	0xce
  767 0475 64       		.byte	0x64
  768 0476 0A       		.uleb128 0xa
- 769 0477 F60A0000 		.4byte	.LASF88
+ 769 0477 E80A0000 		.4byte	.LASF88
  770 047b 08       		.byte	0x8
  771 047c 76       		.byte	0x76
  772 047d B8000000 		.4byte	0xb8
  773 0481 68       		.byte	0x68
  774 0482 0A       		.uleb128 0xa
- 775 0483 BF050000 		.4byte	.LASF89
+ 775 0483 B1050000 		.4byte	.LASF89
  776 0487 08       		.byte	0x8
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 37
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 37
 
 
  777 0488 77       		.byte	0x77
  778 0489 B8000000 		.4byte	0xb8
  779 048d 6A       		.byte	0x6a
  780 048e 0A       		.uleb128 0xa
- 781 048f 53060000 		.4byte	.LASF90
+ 781 048f 45060000 		.4byte	.LASF90
  782 0493 08       		.byte	0x8
  783 0494 78       		.byte	0x78
  784 0495 B8000000 		.4byte	0xb8
  785 0499 6C       		.byte	0x6c
  786 049a 0A       		.uleb128 0xa
- 787 049b 90060000 		.4byte	.LASF91
+ 787 049b 82060000 		.4byte	.LASF91
  788 049f 08       		.byte	0x8
  789 04a0 79       		.byte	0x79
  790 04a1 B8000000 		.4byte	0xb8
  791 04a5 6E       		.byte	0x6e
  792 04a6 0A       		.uleb128 0xa
- 793 04a7 310B0000 		.4byte	.LASF92
+ 793 04a7 230B0000 		.4byte	.LASF92
  794 04ab 08       		.byte	0x8
  795 04ac 7B       		.byte	0x7b
  796 04ad A2000000 		.4byte	0xa2
@@ -2189,36 +2189,36 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  802 04b9 A2000000 		.4byte	0xa2
  803 04bd 71       		.byte	0x71
  804 04be 0A       		.uleb128 0xa
- 805 04bf 7B0F0000 		.4byte	.LASF94
+ 805 04bf 6D0F0000 		.4byte	.LASF94
  806 04c3 08       		.byte	0x8
  807 04c4 7D       		.byte	0x7d
  808 04c5 A2000000 		.4byte	0xa2
  809 04c9 72       		.byte	0x72
  810 04ca 0A       		.uleb128 0xa
- 811 04cb 44080000 		.4byte	.LASF95
+ 811 04cb 36080000 		.4byte	.LASF95
  812 04cf 08       		.byte	0x8
  813 04d0 7E       		.byte	0x7e
  814 04d1 A2000000 		.4byte	0xa2
  815 04d5 73       		.byte	0x73
  816 04d6 0A       		.uleb128 0xa
- 817 04d7 66040000 		.4byte	.LASF96
+ 817 04d7 58040000 		.4byte	.LASF96
  818 04db 08       		.byte	0x8
  819 04dc 80       		.byte	0x80
  820 04dd B8000000 		.4byte	0xb8
  821 04e1 74       		.byte	0x74
  822 04e2 0A       		.uleb128 0xa
- 823 04e3 BD0C0000 		.4byte	.LASF97
+ 823 04e3 AF0C0000 		.4byte	.LASF97
  824 04e7 08       		.byte	0x8
  825 04e8 81       		.byte	0x81
  826 04e9 B8000000 		.4byte	0xb8
  827 04ed 76       		.byte	0x76
  828 04ee 0A       		.uleb128 0xa
- 829 04ef 19040000 		.4byte	.LASF98
+ 829 04ef 0B040000 		.4byte	.LASF98
  830 04f3 08       		.byte	0x8
  831 04f4 82       		.byte	0x82
  832 04f5 B8000000 		.4byte	0xb8
  833 04f9 78       		.byte	0x78
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 38
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 38
 
 
  834 04fa 0A       		.uleb128 0xa
@@ -2228,13 +2228,13 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  838 0501 B8000000 		.4byte	0xb8
  839 0505 7A       		.byte	0x7a
  840 0506 0A       		.uleb128 0xa
- 841 0507 C40E0000 		.4byte	.LASF100
+ 841 0507 B60E0000 		.4byte	.LASF100
  842 050b 08       		.byte	0x8
  843 050c 86       		.byte	0x86
  844 050d A2000000 		.4byte	0xa2
  845 0511 7C       		.byte	0x7c
  846 0512 0A       		.uleb128 0xa
- 847 0513 F6040000 		.4byte	.LASF101
+ 847 0513 E8040000 		.4byte	.LASF101
  848 0517 08       		.byte	0x8
  849 0518 87       		.byte	0x87
  850 0519 A2000000 		.4byte	0xa2
@@ -2246,7 +2246,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  856 0525 A2000000 		.4byte	0xa2
  857 0529 7E       		.byte	0x7e
  858 052a 0A       		.uleb128 0xa
- 859 052b AD040000 		.4byte	.LASF103
+ 859 052b 9F040000 		.4byte	.LASF103
  860 052f 08       		.byte	0x8
  861 0530 89       		.byte	0x89
  862 0531 A2000000 		.4byte	0xa2
@@ -2258,7 +2258,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  868 053d A2000000 		.4byte	0xa2
  869 0541 80       		.byte	0x80
  870 0542 0A       		.uleb128 0xa
- 871 0543 C80D0000 		.4byte	.LASF105
+ 871 0543 BA0D0000 		.4byte	.LASF105
  872 0547 08       		.byte	0x8
  873 0548 8D       		.byte	0x8d
  874 0549 CE000000 		.4byte	0xce
@@ -2270,34 +2270,34 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  880 0555 CE000000 		.4byte	0xce
  881 0559 88       		.byte	0x88
  882 055a 0A       		.uleb128 0xa
- 883 055b AF0E0000 		.4byte	.LASF107
+ 883 055b A10E0000 		.4byte	.LASF107
  884 055f 08       		.byte	0x8
  885 0560 8F       		.byte	0x8f
  886 0561 CE000000 		.4byte	0xce
  887 0565 8C       		.byte	0x8c
  888 0566 0A       		.uleb128 0xa
- 889 0567 D7070000 		.4byte	.LASF108
+ 889 0567 C9070000 		.4byte	.LASF108
  890 056b 08       		.byte	0x8
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 39
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 39
 
 
  891 056c 90       		.byte	0x90
  892 056d CE000000 		.4byte	0xce
  893 0571 90       		.byte	0x90
  894 0572 0A       		.uleb128 0xa
- 895 0573 F4060000 		.4byte	.LASF109
+ 895 0573 E6060000 		.4byte	.LASF109
  896 0577 08       		.byte	0x8
  897 0578 91       		.byte	0x91
  898 0579 CE000000 		.4byte	0xce
  899 057d 94       		.byte	0x94
  900 057e 0A       		.uleb128 0xa
- 901 057f 4B070000 		.4byte	.LASF110
+ 901 057f 3D070000 		.4byte	.LASF110
  902 0583 08       		.byte	0x8
  903 0584 92       		.byte	0x92
  904 0585 CE000000 		.4byte	0xce
  905 0589 98       		.byte	0x98
  906 058a 0A       		.uleb128 0xa
- 907 058b FF0E0000 		.4byte	.LASF111
+ 907 058b F10E0000 		.4byte	.LASF111
  908 058f 08       		.byte	0x8
  909 0590 93       		.byte	0x93
  910 0591 CE000000 		.4byte	0xce
@@ -2315,40 +2315,40 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  922 05a9 B8000000 		.4byte	0xb8
  923 05ad A4       		.byte	0xa4
  924 05ae 0A       		.uleb128 0xa
- 925 05af BA0B0000 		.4byte	.LASF114
+ 925 05af AC0B0000 		.4byte	.LASF114
  926 05b3 08       		.byte	0x8
  927 05b4 96       		.byte	0x96
  928 05b5 B8000000 		.4byte	0xb8
  929 05b9 A6       		.byte	0xa6
  930 05ba 0A       		.uleb128 0xa
- 931 05bb 0C0A0000 		.4byte	.LASF115
+ 931 05bb FE090000 		.4byte	.LASF115
  932 05bf 08       		.byte	0x8
  933 05c0 97       		.byte	0x97
  934 05c1 B8000000 		.4byte	0xb8
  935 05c5 A8       		.byte	0xa8
  936 05c6 0A       		.uleb128 0xa
- 937 05c7 8B0C0000 		.4byte	.LASF116
+ 937 05c7 7D0C0000 		.4byte	.LASF116
  938 05cb 08       		.byte	0x8
  939 05cc 98       		.byte	0x98
  940 05cd B8000000 		.4byte	0xb8
  941 05d1 AA       		.byte	0xaa
  942 05d2 0A       		.uleb128 0xa
- 943 05d3 62060000 		.4byte	.LASF117
+ 943 05d3 54060000 		.4byte	.LASF117
  944 05d7 08       		.byte	0x8
  945 05d8 99       		.byte	0x99
  946 05d9 B8000000 		.4byte	0xb8
  947 05dd AC       		.byte	0xac
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 40
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 40
 
 
  948 05de 0A       		.uleb128 0xa
- 949 05df 8E080000 		.4byte	.LASF118
+ 949 05df 80080000 		.4byte	.LASF118
  950 05e3 08       		.byte	0x8
  951 05e4 9A       		.byte	0x9a
  952 05e5 B8000000 		.4byte	0xb8
  953 05e9 AE       		.byte	0xae
  954 05ea 0A       		.uleb128 0xa
- 955 05eb 6F090000 		.4byte	.LASF119
+ 955 05eb 61090000 		.4byte	.LASF119
  956 05ef 08       		.byte	0x8
  957 05f0 9D       		.byte	0x9d
  958 05f1 B8000000 		.4byte	0xb8
@@ -2361,14 +2361,14 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  965 0601 B4       		.byte	0xb4
  966 0602 00       		.byte	0
  967 0603 03       		.uleb128 0x3
- 968 0604 C9060000 		.4byte	.LASF121
+ 968 0604 BB060000 		.4byte	.LASF121
  969 0608 08       		.byte	0x8
  970 0609 9F       		.byte	0x9f
  971 060a F2010000 		.4byte	0x1f2
  972 060e 02       		.uleb128 0x2
  973 060f 01       		.byte	0x1
  974 0610 08       		.byte	0x8
- 975 0611 770C0000 		.4byte	.LASF122
+ 975 0611 690C0000 		.4byte	.LASF122
  976 0615 02       		.uleb128 0x2
  977 0616 04       		.byte	0x4
  978 0617 04       		.byte	0x4
@@ -2376,7 +2376,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  980 061c 02       		.uleb128 0x2
  981 061d 08       		.byte	0x8
  982 061e 04       		.byte	0x4
- 983 061f 12040000 		.4byte	.LASF124
+ 983 061f 04040000 		.4byte	.LASF124
  984 0623 0E       		.uleb128 0xe
  985 0624 04       		.byte	0x4
  986 0625 9B000000 		.4byte	0x9b
@@ -2384,7 +2384,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  988 062a 1405     		.2byte	0x514
  989 062c 64060000 		.4byte	0x664
  990 0630 0F       		.uleb128 0xf
- 991 0631 D90E0000 		.4byte	.LASF125
+ 991 0631 CB0E0000 		.4byte	.LASF125
  992 0635 00       		.byte	0
  993 0636 10       		.uleb128 0x10
  994 0637 7A000000 		.4byte	.LASF126
@@ -2393,20 +2393,20 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  997 0640 2E000000 		.4byte	.LASF127
  998 0644 02004200 		.4byte	0x420002
  999 0648 10       		.uleb128 0x10
- 1000 0649 7B050000 		.4byte	.LASF128
+ 1000 0649 6D050000 		.4byte	.LASF128
  1001 064d 03004200 		.4byte	0x420003
  1002 0651 10       		.uleb128 0x10
- 1003 0652 07050000 		.4byte	.LASF129
+ 1003 0652 F9040000 		.4byte	.LASF129
  1004 0656 04004200 		.4byte	0x420004
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 41
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 41
 
 
  1005 065a 10       		.uleb128 0x10
- 1006 065b DF0D0000 		.4byte	.LASF130
+ 1006 065b D10D0000 		.4byte	.LASF130
  1007 065f FF004200 		.4byte	0x4200ff
  1008 0663 00       		.byte	0
  1009 0664 0C       		.uleb128 0xc
- 1010 0665 390F0000 		.4byte	.LASF131
+ 1010 0665 2B0F0000 		.4byte	.LASF131
  1011 0669 09       		.byte	0x9
  1012 066a 1C05     		.2byte	0x51c
  1013 066c 23060000 		.4byte	0x623
@@ -2417,19 +2417,19 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1018 0677 B205     		.2byte	0x5b2
  1019 0679 9C060000 		.4byte	0x69c
  1020 067d 0F       		.uleb128 0xf
- 1021 067e 450B0000 		.4byte	.LASF132
+ 1021 067e 370B0000 		.4byte	.LASF132
  1022 0682 00       		.byte	0
  1023 0683 0F       		.uleb128 0xf
  1024 0684 A3020000 		.4byte	.LASF133
  1025 0688 01       		.byte	0x1
  1026 0689 0F       		.uleb128 0xf
- 1027 068a 7D090000 		.4byte	.LASF134
+ 1027 068a 6F090000 		.4byte	.LASF134
  1028 068e 02       		.byte	0x2
  1029 068f 0F       		.uleb128 0xf
  1030 0690 BF000000 		.4byte	.LASF135
  1031 0694 03       		.byte	0x3
  1032 0695 0F       		.uleb128 0xf
- 1033 0696 610E0000 		.4byte	.LASF136
+ 1033 0696 530E0000 		.4byte	.LASF136
  1034 069a 04       		.byte	0x4
  1035 069b 00       		.byte	0
  1036 069c 0C       		.uleb128 0xc
@@ -2444,21 +2444,21 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1045 06af BC05     		.2byte	0x5bc
  1046 06b1 CE060000 		.4byte	0x6ce
  1047 06b5 0F       		.uleb128 0xf
- 1048 06b6 EA0E0000 		.4byte	.LASF138
+ 1048 06b6 DC0E0000 		.4byte	.LASF138
  1049 06ba 01       		.byte	0x1
  1050 06bb 0F       		.uleb128 0xf
- 1051 06bc 160D0000 		.4byte	.LASF139
+ 1051 06bc 080D0000 		.4byte	.LASF139
  1052 06c0 02       		.byte	0x2
  1053 06c1 0F       		.uleb128 0xf
- 1054 06c2 E9080000 		.4byte	.LASF140
+ 1054 06c2 DB080000 		.4byte	.LASF140
  1055 06c6 04       		.byte	0x4
  1056 06c7 0F       		.uleb128 0xf
- 1057 06c8 87070000 		.4byte	.LASF141
+ 1057 06c8 79070000 		.4byte	.LASF141
  1058 06cc 08       		.byte	0x8
  1059 06cd 00       		.byte	0
  1060 06ce 0C       		.uleb128 0xc
- 1061 06cf 90090000 		.4byte	.LASF142
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 42
+ 1061 06cf 82090000 		.4byte	.LASF142
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 42
 
 
  1062 06d3 09       		.byte	0x9
@@ -2470,13 +2470,13 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1068 06dd E705     		.2byte	0x5e7
  1069 06df FE060000 		.4byte	0x6fe
  1070 06e3 12       		.uleb128 0x12
- 1071 06e4 B7070000 		.4byte	.LASF143
+ 1071 06e4 A9070000 		.4byte	.LASF143
  1072 06e8 09       		.byte	0x9
  1073 06e9 E905     		.2byte	0x5e9
  1074 06eb FE060000 		.4byte	0x6fe
  1075 06ef 00       		.byte	0
  1076 06f0 12       		.uleb128 0x12
- 1077 06f1 4B060000 		.4byte	.LASF144
+ 1077 06f1 3D060000 		.4byte	.LASF144
  1078 06f5 09       		.byte	0x9
  1079 06f6 EC05     		.2byte	0x5ec
  1080 06f8 FE060000 		.4byte	0x6fe
@@ -2485,12 +2485,12 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1083 06fe 13       		.uleb128 0x13
  1084 06ff 04       		.byte	0x4
  1085 0700 0C       		.uleb128 0xc
- 1086 0701 78040000 		.4byte	.LASF145
+ 1086 0701 6A040000 		.4byte	.LASF145
  1087 0705 09       		.byte	0x9
  1088 0706 EF05     		.2byte	0x5ef
  1089 0708 DA060000 		.4byte	0x6da
  1090 070c 0C       		.uleb128 0xc
- 1091 070d 810A0000 		.4byte	.LASF146
+ 1091 070d 730A0000 		.4byte	.LASF146
  1092 0711 09       		.byte	0x9
  1093 0712 F205     		.2byte	0x5f2
  1094 0714 18070000 		.4byte	0x718
@@ -2509,16 +2509,16 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1107 0733 04       		.byte	0x4
  1108 0734 00070000 		.4byte	0x700
  1109 0738 17       		.uleb128 0x17
- 1110 0739 97040000 		.4byte	.LASF228
+ 1110 0739 89040000 		.4byte	.LASF228
  1111 073d 18       		.byte	0x18
  1112 073e 09       		.byte	0x9
  1113 073f F505     		.2byte	0x5f5
  1114 0741 94070000 		.4byte	0x794
  1115 0745 12       		.uleb128 0x12
- 1116 0746 87060000 		.4byte	.LASF147
+ 1116 0746 79060000 		.4byte	.LASF147
  1117 074a 09       		.byte	0x9
  1118 074b F705     		.2byte	0x5f7
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 43
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 43
 
 
  1119 074d 0C070000 		.4byte	0x70c
@@ -2530,13 +2530,13 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1125 075a 9C060000 		.4byte	0x69c
  1126 075e 04       		.byte	0x4
  1127 075f 12       		.uleb128 0x12
- 1128 0760 42060000 		.4byte	.LASF149
+ 1128 0760 34060000 		.4byte	.LASF149
  1129 0764 09       		.byte	0x9
  1130 0765 F905     		.2byte	0x5f9
  1131 0767 CE000000 		.4byte	0xce
  1132 076b 08       		.byte	0x8
  1133 076c 12       		.uleb128 0x12
- 1134 076d 2F070000 		.4byte	.LASF150
+ 1134 076d 21070000 		.4byte	.LASF150
  1135 0771 09       		.byte	0x9
  1136 0772 0106     		.2byte	0x601
  1137 0774 32070000 		.4byte	0x732
@@ -2548,7 +2548,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1143 0781 94070000 		.4byte	0x794
  1144 0785 10       		.byte	0x10
  1145 0786 12       		.uleb128 0x12
- 1146 0787 22080000 		.4byte	.LASF152
+ 1146 0787 14080000 		.4byte	.LASF152
  1147 078b 09       		.byte	0x9
  1148 078c 0A06     		.2byte	0x60a
  1149 078e 94070000 		.4byte	0x794
@@ -2558,14 +2558,14 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1153 0795 04       		.byte	0x4
  1154 0796 38070000 		.4byte	0x738
  1155 079a 0C       		.uleb128 0xc
- 1156 079b 0C0E0000 		.4byte	.LASF153
+ 1156 079b FE0D0000 		.4byte	.LASF153
  1157 079f 09       		.byte	0x9
  1158 07a0 0F06     		.2byte	0x60f
  1159 07a2 38070000 		.4byte	0x738
  1160 07a6 02       		.uleb128 0x2
  1161 07a7 01       		.byte	0x1
  1162 07a8 02       		.byte	0x2
- 1163 07a9 650A0000 		.4byte	.LASF154
+ 1163 07a9 570A0000 		.4byte	.LASF154
  1164 07ad 0E       		.uleb128 0xe
  1165 07ae 01       		.byte	0x1
  1166 07af 2C000000 		.4byte	0x2c
@@ -2573,23 +2573,23 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1168 07b4 2107     		.2byte	0x721
  1169 07b6 D3070000 		.4byte	0x7d3
  1170 07ba 0F       		.uleb128 0xf
- 1171 07bb B8080000 		.4byte	.LASF155
+ 1171 07bb AA080000 		.4byte	.LASF155
  1172 07bf 00       		.byte	0
  1173 07c0 0F       		.uleb128 0xf
- 1174 07c1 150F0000 		.4byte	.LASF156
+ 1174 07c1 070F0000 		.4byte	.LASF156
  1175 07c5 01       		.byte	0x1
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 44
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 44
 
 
  1176 07c6 0F       		.uleb128 0xf
- 1177 07c7 9D060000 		.4byte	.LASF157
+ 1177 07c7 8F060000 		.4byte	.LASF157
  1178 07cb 02       		.byte	0x2
  1179 07cc 0F       		.uleb128 0xf
  1180 07cd 98010000 		.4byte	.LASF158
  1181 07d1 03       		.byte	0x3
  1182 07d2 00       		.byte	0
  1183 07d3 0C       		.uleb128 0xc
- 1184 07d4 0F090000 		.4byte	.LASF159
+ 1184 07d4 01090000 		.4byte	.LASF159
  1185 07d8 0A       		.byte	0xa
  1186 07d9 2607     		.2byte	0x726
  1187 07db AD070000 		.4byte	0x7ad
@@ -2600,23 +2600,23 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1192 07e6 B101     		.2byte	0x1b1
  1193 07e8 0B080000 		.4byte	0x80b
  1194 07ec 0F       		.uleb128 0xf
- 1195 07ed 73030000 		.4byte	.LASF160
+ 1195 07ed 0D030000 		.4byte	.LASF160
  1196 07f1 00       		.byte	0
  1197 07f2 0F       		.uleb128 0xf
- 1198 07f3 D7040000 		.4byte	.LASF161
+ 1198 07f3 C9040000 		.4byte	.LASF161
  1199 07f7 01       		.byte	0x1
  1200 07f8 0F       		.uleb128 0xf
- 1201 07f9 060B0000 		.4byte	.LASF162
+ 1201 07f9 F80A0000 		.4byte	.LASF162
  1202 07fd 02       		.byte	0x2
  1203 07fe 0F       		.uleb128 0xf
- 1204 07ff 61070000 		.4byte	.LASF163
+ 1204 07ff 53070000 		.4byte	.LASF163
  1205 0803 03       		.byte	0x3
  1206 0804 0F       		.uleb128 0xf
- 1207 0805 240E0000 		.4byte	.LASF164
+ 1207 0805 160E0000 		.4byte	.LASF164
  1208 0809 04       		.byte	0x4
  1209 080a 00       		.byte	0
  1210 080b 0C       		.uleb128 0xc
- 1211 080c 39040000 		.4byte	.LASF165
+ 1211 080c 2B040000 		.4byte	.LASF165
  1212 0810 03       		.byte	0x3
  1213 0811 B701     		.2byte	0x1b7
  1214 0813 DF070000 		.4byte	0x7df
@@ -2627,18 +2627,18 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1219 081e BC01     		.2byte	0x1bc
  1220 0820 34080000 		.4byte	0x834
  1221 0824 0F       		.uleb128 0xf
- 1222 0825 A40C0000 		.4byte	.LASF166
+ 1222 0825 960C0000 		.4byte	.LASF166
  1223 0829 00       		.byte	0
  1224 082a 10       		.uleb128 0x10
  1225 082b 41020000 		.4byte	.LASF167
  1226 082f 00000001 		.4byte	0x1000000
  1227 0833 00       		.byte	0
  1228 0834 0C       		.uleb128 0xc
- 1229 0835 90030000 		.4byte	.LASF168
+ 1229 0835 2A030000 		.4byte	.LASF168
  1230 0839 03       		.byte	0x3
  1231 083a BF01     		.2byte	0x1bf
  1232 083c 17080000 		.4byte	0x817
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 45
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 45
 
 
  1233 0840 0E       		.uleb128 0xe
@@ -2648,14 +2648,14 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1237 0847 C401     		.2byte	0x1c4
  1238 0849 5D080000 		.4byte	0x85d
  1239 084d 0F       		.uleb128 0xf
- 1240 084e D9060000 		.4byte	.LASF169
+ 1240 084e CB060000 		.4byte	.LASF169
  1241 0852 00       		.byte	0
  1242 0853 10       		.uleb128 0x10
- 1243 0854 09070000 		.4byte	.LASF170
+ 1243 0854 FB060000 		.4byte	.LASF170
  1244 0858 00000040 		.4byte	0x40000000
  1245 085c 00       		.byte	0
  1246 085d 0C       		.uleb128 0xc
- 1247 085e 49090000 		.4byte	.LASF171
+ 1247 085e 3B090000 		.4byte	.LASF171
  1248 0862 03       		.byte	0x3
  1249 0863 C701     		.2byte	0x1c7
  1250 0865 40080000 		.4byte	0x840
@@ -2669,20 +2669,20 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1258 0877 48010000 		.4byte	.LASF172
  1259 087b 00       		.byte	0
  1260 087c 10       		.uleb128 0x10
- 1261 087d 5B080000 		.4byte	.LASF173
+ 1261 087d 4D080000 		.4byte	.LASF173
  1262 0881 00004000 		.4byte	0x400000
  1263 0885 10       		.uleb128 0x10
- 1264 0886 EC070000 		.4byte	.LASF174
+ 1264 0886 DE070000 		.4byte	.LASF174
  1265 088a 0000C000 		.4byte	0xc00000
  1266 088e 10       		.uleb128 0x10
- 1267 088f 480A0000 		.4byte	.LASF175
+ 1267 088f 3A0A0000 		.4byte	.LASF175
  1268 0893 00000008 		.4byte	0x8000000
  1269 0897 10       		.uleb128 0x10
- 1270 0898 910F0000 		.4byte	.LASF176
+ 1270 0898 830F0000 		.4byte	.LASF176
  1271 089c 00008008 		.4byte	0x8800000
  1272 08a0 00       		.byte	0
  1273 08a1 0C       		.uleb128 0xc
- 1274 08a2 180A0000 		.4byte	.LASF177
+ 1274 08a2 0A0A0000 		.4byte	.LASF177
  1275 08a6 03       		.byte	0x3
  1276 08a7 D401     		.2byte	0x1d4
  1277 08a9 69080000 		.4byte	0x869
@@ -2696,20 +2696,20 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1285 08bb 1E020000 		.4byte	.LASF178
  1286 08bf 00       		.byte	0
  1287 08c0 18       		.uleb128 0x18
- 1288 08c1 990B0000 		.4byte	.LASF179
+ 1288 08c1 8B0B0000 		.4byte	.LASF179
  1289 08c5 0001     		.2byte	0x100
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 46
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 46
 
 
  1290 08c7 18       		.uleb128 0x18
- 1291 08c8 ED0D0000 		.4byte	.LASF180
+ 1291 08c8 DF0D0000 		.4byte	.LASF180
  1292 08cc 0002     		.2byte	0x200
  1293 08ce 18       		.uleb128 0x18
- 1294 08cf 600F0000 		.4byte	.LASF181
+ 1294 08cf 520F0000 		.4byte	.LASF181
  1295 08d3 0003     		.2byte	0x300
  1296 08d5 00       		.byte	0
  1297 08d6 0C       		.uleb128 0xc
- 1298 08d7 70060000 		.4byte	.LASF182
+ 1298 08d7 62060000 		.4byte	.LASF182
  1299 08db 03       		.byte	0x3
  1300 08dc E001     		.2byte	0x1e0
  1301 08de AD080000 		.4byte	0x8ad
@@ -2720,10 +2720,10 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1306 08e9 E701     		.2byte	0x1e7
  1307 08eb FC080000 		.4byte	0x8fc
  1308 08ef 0F       		.uleb128 0xf
- 1309 08f0 9C080000 		.4byte	.LASF183
+ 1309 08f0 8E080000 		.4byte	.LASF183
  1310 08f4 00       		.byte	0
  1311 08f5 0F       		.uleb128 0xf
- 1312 08f6 D5030000 		.4byte	.LASF184
+ 1312 08f6 C7030000 		.4byte	.LASF184
  1313 08fa 01       		.byte	0x1
  1314 08fb 00       		.byte	0
  1315 08fc 0C       		.uleb128 0xc
@@ -2741,11 +2741,11 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1327 0916 C0010000 		.4byte	.LASF186
  1328 091a 00       		.byte	0
  1329 091b 0F       		.uleb128 0xf
- 1330 091c BC070000 		.4byte	.LASF187
+ 1330 091c AE070000 		.4byte	.LASF187
  1331 0920 01       		.byte	0x1
  1332 0921 00       		.byte	0
  1333 0922 0C       		.uleb128 0xc
- 1334 0923 B40F0000 		.4byte	.LASF188
+ 1334 0923 A60F0000 		.4byte	.LASF188
  1335 0927 03       		.byte	0x3
  1336 0928 F401     		.2byte	0x1f4
  1337 092a 08090000 		.4byte	0x908
@@ -2758,55 +2758,55 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1344 0938 77010000 		.4byte	.LASF189
  1345 093c 03       		.byte	0x3
  1346 093d 1902     		.2byte	0x219
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 47
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 47
 
 
  1347 093f FC080000 		.4byte	0x8fc
  1348 0943 00       		.byte	0
  1349 0944 12       		.uleb128 0x12
- 1350 0945 41050000 		.4byte	.LASF190
+ 1350 0945 33050000 		.4byte	.LASF190
  1351 0949 03       		.byte	0x3
  1352 094a 1A02     		.2byte	0x21a
  1353 094c 34080000 		.4byte	0x834
  1354 0950 04       		.byte	0x4
  1355 0951 12       		.uleb128 0x12
- 1356 0952 04060000 		.4byte	.LASF191
+ 1356 0952 F6050000 		.4byte	.LASF191
  1357 0956 03       		.byte	0x3
  1358 0957 1B02     		.2byte	0x21b
  1359 0959 0B080000 		.4byte	0x80b
  1360 095d 08       		.byte	0x8
  1361 095e 12       		.uleb128 0x12
- 1362 095f 3E070000 		.4byte	.LASF192
+ 1362 095f 30070000 		.4byte	.LASF192
  1363 0963 03       		.byte	0x3
  1364 0964 1C02     		.2byte	0x21c
  1365 0966 D6080000 		.4byte	0x8d6
  1366 096a 0A       		.byte	0xa
  1367 096b 12       		.uleb128 0x12
- 1368 096c 7A0D0000 		.4byte	.LASF193
+ 1368 096c 6C0D0000 		.4byte	.LASF193
  1369 0970 03       		.byte	0x3
  1370 0971 1D02     		.2byte	0x21d
  1371 0973 A1080000 		.4byte	0x8a1
  1372 0977 0C       		.byte	0xc
  1373 0978 12       		.uleb128 0x12
- 1374 0979 6E0E0000 		.4byte	.LASF194
+ 1374 0979 600E0000 		.4byte	.LASF194
  1375 097d 03       		.byte	0x3
  1376 097e 1E02     		.2byte	0x21e
  1377 0980 22090000 		.4byte	0x922
  1378 0984 10       		.byte	0x10
  1379 0985 12       		.uleb128 0x12
- 1380 0986 7C0C0000 		.4byte	.LASF195
+ 1380 0986 6E0C0000 		.4byte	.LASF195
  1381 098a 03       		.byte	0x3
  1382 098b 1F02     		.2byte	0x21f
  1383 098d 5D080000 		.4byte	0x85d
  1384 0991 14       		.byte	0x14
  1385 0992 12       		.uleb128 0x12
- 1386 0993 D00F0000 		.4byte	.LASF196
+ 1386 0993 C20F0000 		.4byte	.LASF196
  1387 0997 03       		.byte	0x3
  1388 0998 2002     		.2byte	0x220
  1389 099a CE000000 		.4byte	0xce
  1390 099e 18       		.byte	0x18
  1391 099f 12       		.uleb128 0x12
- 1392 09a0 4C050000 		.4byte	.LASF197
+ 1392 09a0 3E050000 		.4byte	.LASF197
  1393 09a4 03       		.byte	0x3
  1394 09a5 2102     		.2byte	0x221
  1395 09a7 C3000000 		.4byte	0xc3
@@ -2818,22 +2818,22 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1401 09b4 C3000000 		.4byte	0xc3
  1402 09b8 20       		.byte	0x20
  1403 09b9 12       		.uleb128 0x12
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 48
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 48
 
 
- 1404 09ba 3E0D0000 		.4byte	.LASF199
+ 1404 09ba 300D0000 		.4byte	.LASF199
  1405 09be 03       		.byte	0x3
  1406 09bf 2302     		.2byte	0x223
  1407 09c1 A6070000 		.4byte	0x7a6
  1408 09c5 24       		.byte	0x24
  1409 09c6 12       		.uleb128 0x12
- 1410 09c7 22060000 		.4byte	.LASF200
+ 1410 09c7 14060000 		.4byte	.LASF200
  1411 09cb 03       		.byte	0x3
  1412 09cc 2602     		.2byte	0x226
  1413 09ce A6070000 		.4byte	0x7a6
  1414 09d2 25       		.byte	0x25
  1415 09d3 12       		.uleb128 0x12
- 1416 09d4 AF0A0000 		.4byte	.LASF201
+ 1416 09d4 A10A0000 		.4byte	.LASF201
  1417 09d8 03       		.byte	0x3
  1418 09d9 2702     		.2byte	0x227
  1419 09db D3070000 		.4byte	0x7d3
@@ -2851,7 +2851,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1431 09f5 CE000000 		.4byte	0xce
  1432 09f9 2C       		.byte	0x2c
  1433 09fa 12       		.uleb128 0x12
- 1434 09fb BB0A0000 		.4byte	.LASF204
+ 1434 09fb AD0A0000 		.4byte	.LASF204
  1435 09ff 03       		.byte	0x3
  1436 0a00 2A02     		.2byte	0x22a
  1437 0a02 CE000000 		.4byte	0xce
@@ -2868,17 +2868,17 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1448 0a17 4D02     		.2byte	0x24d
  1449 0a19 2B0A0000 		.4byte	0xa2b
  1450 0a1d 12       		.uleb128 0x12
- 1451 0a1e 4E040000 		.4byte	.LASF206
+ 1451 0a1e 40040000 		.4byte	.LASF206
  1452 0a22 03       		.byte	0x3
  1453 0a23 4F02     		.2byte	0x24f
  1454 0a25 CE000000 		.4byte	0xce
  1455 0a29 00       		.byte	0
  1456 0a2a 00       		.byte	0
  1457 0a2b 0C       		.uleb128 0xc
- 1458 0a2c A8050000 		.4byte	.LASF207
+ 1458 0a2c 9A050000 		.4byte	.LASF207
  1459 0a30 03       		.byte	0x3
  1460 0a31 5002     		.2byte	0x250
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 49
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 49
 
 
  1461 0a33 140A0000 		.4byte	0xa14
@@ -2892,14 +2892,14 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1469 0a44 FD020000 		.4byte	.LASF208
  1470 0a48 00       		.byte	0
  1471 0a49 0F       		.uleb128 0xf
- 1472 0a4a 08080000 		.4byte	.LASF209
+ 1472 0a4a FA070000 		.4byte	.LASF209
  1473 0a4e 01       		.byte	0x1
  1474 0a4f 0F       		.uleb128 0xf
- 1475 0a50 2E090000 		.4byte	.LASF210
+ 1475 0a50 20090000 		.4byte	.LASF210
  1476 0a54 02       		.byte	0x2
  1477 0a55 00       		.byte	0
  1478 0a56 03       		.uleb128 0x3
- 1479 0a57 C4090000 		.4byte	.LASF211
+ 1479 0a57 B6090000 		.4byte	.LASF211
  1480 0a5b 02       		.byte	0x2
  1481 0a5c 53       		.byte	0x53
  1482 0a5d 370A0000 		.4byte	0xa37
@@ -2910,7 +2910,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1487 0a69 03       		.byte	0x3
  1488 0a6a 7B0A0000 		.4byte	0xa7b
  1489 0a6e 1B       		.uleb128 0x1b
- 1490 0a6f B7070000 		.4byte	.LASF143
+ 1490 0a6f A9070000 		.4byte	.LASF143
  1491 0a73 03       		.byte	0x3
  1492 0a74 D602     		.2byte	0x2d6
  1493 0a76 7B0A0000 		.4byte	0xa7b
@@ -2919,17 +2919,17 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1496 0a7c 04       		.byte	0x4
  1497 0a7d DF010000 		.4byte	0x1df
  1498 0a81 1C       		.uleb128 0x1c
- 1499 0a82 8B0E0000 		.4byte	.LASF212
+ 1499 0a82 7D0E0000 		.4byte	.LASF212
  1500 0a86 02       		.byte	0x2
  1501 0a87 F5       		.byte	0xf5
  1502 0a88 03       		.byte	0x3
  1503 0a89 1C       		.uleb128 0x1c
- 1504 0a8a A5030000 		.4byte	.LASF213
+ 1504 0a8a 97030000 		.4byte	.LASF213
  1505 0a8e 02       		.byte	0x2
  1506 0a8f DD       		.byte	0xdd
  1507 0a90 03       		.byte	0x3
  1508 0a91 1D       		.uleb128 0x1d
- 1509 0a92 850B0000 		.4byte	.LASF214
+ 1509 0a92 770B0000 		.4byte	.LASF214
  1510 0a96 01       		.byte	0x1
  1511 0a97 6A       		.byte	0x6a
  1512 0a98 00000000 		.4byte	.LFB186
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1515 0aa1 9C       		.byte	0x9c
  1516 0aa2 000B0000 		.4byte	0xb00
  1517 0aa6 1E       		.uleb128 0x1e
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 50
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 50
 
 
  1518 0aa7 810A0000 		.4byte	0xa81
@@ -2983,7 +2983,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1557 0afe 00       		.byte	0
  1558 0aff 00       		.byte	0
  1559 0b00 1D       		.uleb128 0x1d
- 1560 0b01 BF030000 		.4byte	.LASF215
+ 1560 0b01 B1030000 		.4byte	.LASF215
  1561 0b05 01       		.byte	0x1
  1562 0b06 91       		.byte	0x91
  1563 0b07 00000000 		.4byte	.LFB187
@@ -2998,12 +2998,12 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1572 0b1c 5D080000 		.4byte	0x85d
  1573 0b20 01       		.uleb128 0x1
  1574 0b21 50       		.byte	0x50
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 51
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 51
 
 
  1575 0b22 00       		.byte	0
  1576 0b23 1D       		.uleb128 0x1d
- 1577 0b24 D1050000 		.4byte	.LASF216
+ 1577 0b24 C3050000 		.4byte	.LASF216
  1578 0b28 01       		.byte	0x1
  1579 0b29 CE       		.byte	0xce
  1580 0b2a 00000000 		.4byte	.LFB188
@@ -3012,7 +3012,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1583 0b33 9C       		.byte	0x9c
  1584 0b34 460B0000 		.4byte	0xb46
  1585 0b38 23       		.uleb128 0x23
- 1586 0b39 860C0000 		.4byte	.LASF218
+ 1586 0b39 780C0000 		.4byte	.LASF218
  1587 0b3d 01       		.byte	0x1
  1588 0b3e CE       		.byte	0xce
  1589 0b3f 560A0000 		.4byte	0xa56
@@ -3020,7 +3020,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1591 0b44 50       		.byte	0x50
  1592 0b45 00       		.byte	0
  1593 0b46 24       		.uleb128 0x24
- 1594 0b47 D60A0000 		.4byte	.LASF230
+ 1594 0b47 C80A0000 		.4byte	.LASF230
  1595 0b4b 01       		.byte	0x1
  1596 0b4c 1C01     		.2byte	0x11c
  1597 0b4e 00000000 		.4byte	.LFB189
@@ -3028,7 +3028,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1599 0b56 01       		.uleb128 0x1
  1600 0b57 9C       		.byte	0x9c
  1601 0b58 25       		.uleb128 0x25
- 1602 0b59 52050000 		.4byte	.LASF219
+ 1602 0b59 44050000 		.4byte	.LASF219
  1603 0b5d 01       		.byte	0x1
  1604 0b5e 4D       		.byte	0x4d
  1605 0b5f 2B0A0000 		.4byte	0xa2b
@@ -3036,7 +3036,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1607 0b64 03       		.byte	0x3
  1608 0b65 04000000 		.4byte	VDAC_ctdacContext
  1609 0b69 25       		.uleb128 0x25
- 1610 0b6a AB0D0000 		.4byte	.LASF220
+ 1610 0b6a 9D0D0000 		.4byte	.LASF220
  1611 0b6e 01       		.byte	0x1
  1612 0b6f 4F       		.byte	0x4f
  1613 0b70 00070000 		.4byte	0x700
@@ -3044,7 +3044,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1615 0b75 03       		.byte	0x3
  1616 0b76 18000000 		.4byte	VDAC_DeepSleepCallbackParams
  1617 0b7a 26       		.uleb128 0x26
- 1618 0b7b 020A0000 		.4byte	.LASF221
+ 1618 0b7b F4090000 		.4byte	.LASF221
  1619 0b7f 08       		.byte	0x8
  1620 0b80 A7       		.byte	0xa7
  1621 0b81 850B0000 		.4byte	0xb85
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1629 0b95 01       		.byte	0x1
  1630 0b96 17       		.byte	0x17
  1631 0b97 A10B0000 		.4byte	0xba1
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 52
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 52
 
 
  1632 0b9b 05       		.uleb128 0x5
@@ -3067,7 +3067,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1635 0ba1 06       		.uleb128 0x6
  1636 0ba2 080A0000 		.4byte	0xa08
  1637 0ba6 27       		.uleb128 0x27
- 1638 0ba7 EB090000 		.4byte	.LASF223
+ 1638 0ba7 DD090000 		.4byte	.LASF223
  1639 0bab 01       		.byte	0x1
  1640 0bac 15       		.byte	0x15
  1641 0bad A2000000 		.4byte	0xa2
@@ -3075,7 +3075,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1643 0bb2 03       		.byte	0x3
  1644 0bb3 00000000 		.4byte	VDAC_initVar
  1645 0bb7 27       		.uleb128 0x27
- 1646 0bb8 71080000 		.4byte	.LASF224
+ 1646 0bb8 63080000 		.4byte	.LASF224
  1647 0bbc 01       		.byte	0x1
  1648 0bbd 54       		.byte	0x54
  1649 0bbe 9A070000 		.4byte	0x79a
@@ -3083,8 +3083,8 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1651 0bc3 03       		.byte	0x3
  1652 0bc4 00000000 		.4byte	VDAC_DeepSleepCallbackStruct
  1653 0bc8 28       		.uleb128 0x28
- 1654 0bc9 850D0000 		.4byte	.LASF231
- 1655 0bcd 850D0000 		.4byte	.LASF231
+ 1654 0bc9 770D0000 		.4byte	.LASF231
+ 1655 0bcd 770D0000 		.4byte	.LASF231
  1656 0bd1 03       		.byte	0x3
  1657 0bd2 9002     		.2byte	0x290
  1658 0bd4 00       		.byte	0
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1686 0019 0B       		.uleb128 0xb
  1687 001a 03       		.uleb128 0x3
  1688 001b 0E       		.uleb128 0xe
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 53
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 53
 
 
  1689 001c 00       		.byte	0
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1743 0052 2F       		.uleb128 0x2f
  1744 0053 0B       		.uleb128 0xb
  1745 0054 00       		.byte	0
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 54
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 54
 
 
  1746 0055 00       		.byte	0
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1800 008b 13       		.uleb128 0x13
  1801 008c 00       		.byte	0
  1802 008d 00       		.byte	0
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 55
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 55
 
 
  1803 008e 0D       		.uleb128 0xd
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1857 00c4 05       		.uleb128 0x5
  1858 00c5 01       		.uleb128 0x1
  1859 00c6 13       		.uleb128 0x13
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 56
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 56
 
 
  1860 00c7 00       		.byte	0
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1914 00fd 03       		.uleb128 0x3
  1915 00fe 0E       		.uleb128 0xe
  1916 00ff 0B       		.uleb128 0xb
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 57
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 57
 
 
  1917 0100 0B       		.uleb128 0xb
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  1971 0136 0E       		.uleb128 0xe
  1972 0137 3A       		.uleb128 0x3a
  1973 0138 0B       		.uleb128 0xb
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 58
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 58
 
 
  1974 0139 3B       		.uleb128 0x3b
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  2028 0170 06       		.uleb128 0x6
  2029 0171 58       		.uleb128 0x58
  2030 0172 0B       		.uleb128 0xb
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 59
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 59
 
 
  2031 0173 59       		.uleb128 0x59
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  2085 01ae 0B       		.uleb128 0xb
  2086 01af 3B       		.uleb128 0x3b
  2087 01b0 0B       		.uleb128 0xb
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 60
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 60
 
 
  2088 01b1 49       		.uleb128 0x49
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  2142 01e8 13       		.uleb128 0x13
  2143 01e9 3F       		.uleb128 0x3f
  2144 01ea 19       		.uleb128 0x19
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 61
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 61
 
 
  2145 01eb 3C       		.uleb128 0x3c
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  2199 000a 04       		.byte	0x4
  2200 000b 00       		.byte	0
  2201 000c 0000     		.2byte	0
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 62
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 62
 
 
  2202 000e 0000     		.2byte	0
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  2236              	.LASF102:
  2237 0053 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
  2237      50727443 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 63
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 63
 
 
  2237      6667496E 
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  2259      44697632 
  2259      345F3543 
  2259      746C4F66 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 64
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 64
 
 
  2259      66736574 
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  2281      69726564 
  2281      00
  2282              	.LASF186:
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 65
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 65
 
 
  2283 01c0 43595F43 		.ascii	"CY_CTDAC_OUTPUT_BUFFERED\000"
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  2303      7400
  2304              	.LASF2:
  2305 0282 7369676E 		.ascii	"signed char\000"
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 66
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 66
 
 
  2305      65642063 
@@ -3942,1008 +3942,1006 @@ ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 1
  2319      5F53485F 
  2319      44495341 
  2319      424C4500 
- 2320              	.LASF227:
- 2321 030d 433A5C55 		.ascii	"C:\\Users\\thoma\\Documents\\PSoC Creator\\ecmo\\sz"
- 2321      73657273 
- 2321      5C74686F 
- 2321      6D615C44 
- 2321      6F63756D 
- 2322 033a 68616E67 		.ascii	"hang\\PSoC6_UDB_I2C_Master\\CY8CPROTO-063-BLE_Maste"
- 2322      5C50536F 
- 2322      43365F55 
- 2322      44425F49 
- 2322      32435F4D 
- 2323 036b 722E6379 		.ascii	"r.cydsn\000"
- 2323      64736E00 
- 2324              	.LASF160:
- 2325 0373 43595F43 		.ascii	"CY_CTDAC_UPDATE_DIRECT_WRITE\000"
- 2325      54444143 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 67
+ 2320              	.LASF160:
+ 2321 030d 43595F43 		.ascii	"CY_CTDAC_UPDATE_DIRECT_WRITE\000"
+ 2321      54444143 
+ 2321      5F555044 
+ 2321      4154455F 
+ 2321      44495245 
+ 2322              	.LASF168:
+ 2323 032a 63795F65 		.ascii	"cy_en_ctdac_format_t\000"
+ 2323      6E5F6374 
+ 2323      6461635F 
+ 2323      666F726D 
+ 2323      61745F74 
+ 2324              	.LASF227:
+ 2325 033f 433A5C55 		.ascii	"C:\\Users\\thoma\\Documents\\PSoC Creator\\ecmo\\ec"
+ 2325      73657273 
+ 2325      5C74686F 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 67
 
 
- 2325      5F555044 
- 2325      4154455F 
- 2325      44495245 
- 2326              	.LASF168:
- 2327 0390 63795F65 		.ascii	"cy_en_ctdac_format_t\000"
- 2327      6E5F6374 
- 2327      6461635F 
- 2327      666F726D 
- 2327      61745F74 
- 2328              	.LASF213:
- 2329 03a5 56444143 		.ascii	"VDAC_Enable\000"
- 2329      5F456E61 
- 2329      626C6500 
- 2330              	.LASF71:
- 2331 03b1 63727970 		.ascii	"cryptoMemSize\000"
- 2331      746F4D65 
- 2331      6D53697A 
- 2331      6500
- 2332              	.LASF215:
- 2333 03bf 56444143 		.ascii	"VDAC_SetDeepSleepMode\000"
- 2333      5F536574 
- 2333      44656570 
- 2333      536C6565 
- 2333      704D6F64 
- 2334              	.LASF184:
- 2335 03d5 43595F43 		.ascii	"CY_CTDAC_REFSOURCE_VDDA\000"
- 2335      54444143 
- 2335      5F524546 
- 2335      534F5552 
- 2335      43455F56 
- 2336              	.LASF37:
- 2337 03ed 70657269 		.ascii	"periBase\000"
- 2337      42617365 
- 2337      00
- 2338              	.LASF69:
- 2339 03f6 73797350 		.ascii	"sysPmSimoPresent\000"
- 2339      6D53696D 
- 2339      6F507265 
- 2339      73656E74 
- 2339      00
- 2340              	.LASF59:
- 2341 0407 63707573 		.ascii	"cpussFmIrq\000"
- 2341      73466D49 
- 2341      727100
- 2342              	.LASF124:
- 2343 0412 646F7562 		.ascii	"double\000"
- 2343      6C6500
- 2344              	.LASF98:
- 2345 0419 70657269 		.ascii	"periDiv16_5CtlOffset\000"
- 2345      44697631 
- 2345      365F3543 
- 2345      746C4F66 
- 2345      66736574 
- 2346              	.LASF62:
- 2347 042e 73727373 		.ascii	"srssNumPll\000"
- 2347      4E756D50 
- 2347      6C6C00
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 68
+ 2325      6D615C44 
+ 2325      6F63756D 
+ 2326 036c 6D6F5F70 		.ascii	"mo_psoc6_ws\\CY8CPROTO-063-BLE_Master.cydsn\000"
+ 2326      736F6336 
+ 2326      5F77735C 
+ 2326      43593843 
+ 2326      50524F54 
+ 2327              	.LASF213:
+ 2328 0397 56444143 		.ascii	"VDAC_Enable\000"
+ 2328      5F456E61 
+ 2328      626C6500 
+ 2329              	.LASF71:
+ 2330 03a3 63727970 		.ascii	"cryptoMemSize\000"
+ 2330      746F4D65 
+ 2330      6D53697A 
+ 2330      6500
+ 2331              	.LASF215:
+ 2332 03b1 56444143 		.ascii	"VDAC_SetDeepSleepMode\000"
+ 2332      5F536574 
+ 2332      44656570 
+ 2332      536C6565 
+ 2332      704D6F64 
+ 2333              	.LASF184:
+ 2334 03c7 43595F43 		.ascii	"CY_CTDAC_REFSOURCE_VDDA\000"
+ 2334      54444143 
+ 2334      5F524546 
+ 2334      534F5552 
+ 2334      43455F56 
+ 2335              	.LASF37:
+ 2336 03df 70657269 		.ascii	"periBase\000"
+ 2336      42617365 
+ 2336      00
+ 2337              	.LASF69:
+ 2338 03e8 73797350 		.ascii	"sysPmSimoPresent\000"
+ 2338      6D53696D 
+ 2338      6F507265 
+ 2338      73656E74 
+ 2338      00
+ 2339              	.LASF59:
+ 2340 03f9 63707573 		.ascii	"cpussFmIrq\000"
+ 2340      73466D49 
+ 2340      727100
+ 2341              	.LASF124:
+ 2342 0404 646F7562 		.ascii	"double\000"
+ 2342      6C6500
+ 2343              	.LASF98:
+ 2344 040b 70657269 		.ascii	"periDiv16_5CtlOffset\000"
+ 2344      44697631 
+ 2344      365F3543 
+ 2344      746C4F66 
+ 2344      66736574 
+ 2345              	.LASF62:
+ 2346 0420 73727373 		.ascii	"srssNumPll\000"
+ 2346      4E756D50 
+ 2346      6C6C00
+ 2347              	.LASF165:
+ 2348 042b 63795F65 		.ascii	"cy_en_ctdac_update_t\000"
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 68
 
 
- 2348              	.LASF165:
- 2349 0439 63795F65 		.ascii	"cy_en_ctdac_update_t\000"
- 2349      6E5F6374 
- 2349      6461635F 
- 2349      75706461 
- 2349      74655F74 
- 2350              	.LASF206:
- 2351 044e 6465676C 		.ascii	"deglitchModeBeforeSleep\000"
- 2351      69746368 
- 2351      4D6F6465 
- 2351      4265666F 
- 2351      7265536C 
- 2352              	.LASF96:
- 2353 0466 70657269 		.ascii	"periDiv8CtlOffset\000"
- 2353      44697638 
- 2353      43746C4F 
- 2353      66667365 
- 2353      7400
- 2354              	.LASF145:
- 2355 0478 63795F73 		.ascii	"cy_stc_syspm_callback_params_t\000"
- 2355      74635F73 
- 2355      7973706D 
- 2355      5F63616C 
- 2355      6C626163 
- 2356              	.LASF228:
- 2357 0497 63795F73 		.ascii	"cy_stc_syspm_callback\000"
- 2357      74635F73 
- 2357      7973706D 
- 2357      5F63616C 
- 2357      6C626163 
- 2358              	.LASF103:
- 2359 04ad 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
- 2359      50727443 
- 2359      66674F75 
- 2359      744F6666 
- 2359      73657400 
- 2360              	.LASF36:
- 2361 04c1 666C6173 		.ascii	"flashcBase\000"
- 2361      68634261 
- 2361      736500
- 2362              	.LASF9:
- 2363 04cc 5F5F7569 		.ascii	"__uint32_t\000"
- 2363      6E743332 
- 2363      5F7400
- 2364              	.LASF161:
- 2365 04d7 43595F43 		.ascii	"CY_CTDAC_UPDATE_BUFFERED_WRITE\000"
- 2365      54444143 
- 2365      5F555044 
- 2365      4154455F 
- 2365      42554646 
- 2366              	.LASF101:
- 2367 04f6 6770696F 		.ascii	"gpioPrtCfgOffset\000"
- 2367      50727443 
- 2367      66674F66 
- 2367      66736574 
- 2367      00
- 2368              	.LASF129:
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 69
+ 2348      6E5F6374 
+ 2348      6461635F 
+ 2348      75706461 
+ 2348      74655F74 
+ 2349              	.LASF206:
+ 2350 0440 6465676C 		.ascii	"deglitchModeBeforeSleep\000"
+ 2350      69746368 
+ 2350      4D6F6465 
+ 2350      4265666F 
+ 2350      7265536C 
+ 2351              	.LASF96:
+ 2352 0458 70657269 		.ascii	"periDiv8CtlOffset\000"
+ 2352      44697638 
+ 2352      43746C4F 
+ 2352      66667365 
+ 2352      7400
+ 2353              	.LASF145:
+ 2354 046a 63795F73 		.ascii	"cy_stc_syspm_callback_params_t\000"
+ 2354      74635F73 
+ 2354      7973706D 
+ 2354      5F63616C 
+ 2354      6C626163 
+ 2355              	.LASF228:
+ 2356 0489 63795F73 		.ascii	"cy_stc_syspm_callback\000"
+ 2356      74635F73 
+ 2356      7973706D 
+ 2356      5F63616C 
+ 2356      6C626163 
+ 2357              	.LASF103:
+ 2358 049f 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
+ 2358      50727443 
+ 2358      66674F75 
+ 2358      744F6666 
+ 2358      73657400 
+ 2359              	.LASF36:
+ 2360 04b3 666C6173 		.ascii	"flashcBase\000"
+ 2360      68634261 
+ 2360      736500
+ 2361              	.LASF9:
+ 2362 04be 5F5F7569 		.ascii	"__uint32_t\000"
+ 2362      6E743332 
+ 2362      5F7400
+ 2363              	.LASF161:
+ 2364 04c9 43595F43 		.ascii	"CY_CTDAC_UPDATE_BUFFERED_WRITE\000"
+ 2364      54444143 
+ 2364      5F555044 
+ 2364      4154455F 
+ 2364      42554646 
+ 2365              	.LASF101:
+ 2366 04e8 6770696F 		.ascii	"gpioPrtCfgOffset\000"
+ 2366      50727443 
+ 2366      66674F66 
+ 2366      66736574 
+ 2366      00
+ 2367              	.LASF129:
+ 2368 04f9 43595F53 		.ascii	"CY_SYSPM_CANCELED\000"
+ 2368      5953504D 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 69
 
 
- 2369 0507 43595F53 		.ascii	"CY_SYSPM_CANCELED\000"
- 2369      5953504D 
- 2369      5F43414E 
- 2369      43454C45 
- 2369      4400
- 2370              	.LASF4:
- 2371 0519 5F5F696E 		.ascii	"__int16_t\000"
- 2371      7431365F 
- 2371      7400
- 2372              	.LASF226:
- 2373 0523 47656E65 		.ascii	"Generated_Source\\PSoC6\\VDAC.c\000"
- 2373      72617465 
- 2373      645F536F 
- 2373      75726365 
- 2373      5C50536F 
- 2374              	.LASF190:
- 2375 0541 666F726D 		.ascii	"formatMode\000"
- 2375      61744D6F 
- 2375      646500
- 2376              	.LASF197:
- 2377 054c 76616C75 		.ascii	"value\000"
- 2377      6500
- 2378              	.LASF219:
- 2379 0552 56444143 		.ascii	"VDAC_ctdacContext\000"
- 2379      5F637464 
- 2379      6163436F 
- 2379      6E746578 
- 2379      7400
- 2380              	.LASF33:
- 2381 0564 43544441 		.ascii	"CTDAC_Type\000"
- 2381      435F5479 
- 2381      706500
- 2382              	.LASF56:
- 2383 056f 63707573 		.ascii	"cpussDwChNr\000"
- 2383      73447743 
- 2383      684E7200 
- 2384              	.LASF128:
- 2385 057b 43595F53 		.ascii	"CY_SYSPM_INVALID_STATE\000"
- 2385      5953504D 
- 2385      5F494E56 
- 2385      414C4944 
- 2385      5F535441 
- 2386              	.LASF13:
- 2387 0592 756E7369 		.ascii	"unsigned int\000"
- 2387      676E6564 
- 2387      20696E74 
- 2387      00
- 2388              	.LASF19:
- 2389 059f 73697A65 		.ascii	"sizetype\000"
- 2389      74797065 
- 2389      00
- 2390              	.LASF207:
- 2391 05a8 63795F73 		.ascii	"cy_stc_ctdac_context_t\000"
- 2391      74635F63 
- 2391      74646163 
- 2391      5F636F6E 
- 2391      74657874 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 70
+ 2368      5F43414E 
+ 2368      43454C45 
+ 2368      4400
+ 2369              	.LASF4:
+ 2370 050b 5F5F696E 		.ascii	"__int16_t\000"
+ 2370      7431365F 
+ 2370      7400
+ 2371              	.LASF226:
+ 2372 0515 47656E65 		.ascii	"Generated_Source\\PSoC6\\VDAC.c\000"
+ 2372      72617465 
+ 2372      645F536F 
+ 2372      75726365 
+ 2372      5C50536F 
+ 2373              	.LASF190:
+ 2374 0533 666F726D 		.ascii	"formatMode\000"
+ 2374      61744D6F 
+ 2374      646500
+ 2375              	.LASF197:
+ 2376 053e 76616C75 		.ascii	"value\000"
+ 2376      6500
+ 2377              	.LASF219:
+ 2378 0544 56444143 		.ascii	"VDAC_ctdacContext\000"
+ 2378      5F637464 
+ 2378      6163436F 
+ 2378      6E746578 
+ 2378      7400
+ 2379              	.LASF33:
+ 2380 0556 43544441 		.ascii	"CTDAC_Type\000"
+ 2380      435F5479 
+ 2380      706500
+ 2381              	.LASF56:
+ 2382 0561 63707573 		.ascii	"cpussDwChNr\000"
+ 2382      73447743 
+ 2382      684E7200 
+ 2383              	.LASF128:
+ 2384 056d 43595F53 		.ascii	"CY_SYSPM_INVALID_STATE\000"
+ 2384      5953504D 
+ 2384      5F494E56 
+ 2384      414C4944 
+ 2384      5F535441 
+ 2385              	.LASF13:
+ 2386 0584 756E7369 		.ascii	"unsigned int\000"
+ 2386      676E6564 
+ 2386      20696E74 
+ 2386      00
+ 2387              	.LASF19:
+ 2388 0591 73697A65 		.ascii	"sizetype\000"
+ 2388      74797065 
+ 2388      00
+ 2389              	.LASF207:
+ 2390 059a 63795F73 		.ascii	"cy_stc_ctdac_context_t\000"
+ 2390      74635F63 
+ 2390      74646163 
+ 2390      5F636F6E 
+ 2390      74657874 
+ 2391              	.LASF89:
+ 2392 05b1 70657269 		.ascii	"periTrCmdGrSelMsk\000"
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 70
 
 
- 2392              	.LASF89:
- 2393 05bf 70657269 		.ascii	"periTrCmdGrSelMsk\000"
- 2393      5472436D 
- 2393      64477253 
- 2393      656C4D73 
- 2393      6B00
- 2394              	.LASF216:
- 2395 05d1 56444143 		.ascii	"VDAC_SetSampleAndHold\000"
- 2395      5F536574 
- 2395      53616D70 
- 2395      6C65416E 
- 2395      64486F6C 
- 2396              	.LASF10:
- 2397 05e7 6C6F6E67 		.ascii	"long unsigned int\000"
- 2397      20756E73 
- 2397      69676E65 
- 2397      6420696E 
- 2397      7400
- 2398              	.LASF54:
- 2399 05f9 63707573 		.ascii	"cpussIpcNr\000"
- 2399      73497063 
- 2399      4E7200
- 2400              	.LASF191:
- 2401 0604 75706461 		.ascii	"updateMode\000"
- 2401      74654D6F 
- 2401      646500
- 2402              	.LASF24:
- 2403 060f 494E5452 		.ascii	"INTR_MASK\000"
- 2403      5F4D4153 
- 2403      4B00
- 2404              	.LASF41:
- 2405 0619 6770696F 		.ascii	"gpioBase\000"
- 2405      42617365 
- 2405      00
- 2406              	.LASF200:
- 2407 0622 636F6E66 		.ascii	"configClock\000"
- 2407      6967436C 
- 2407      6F636B00 
- 2408              	.LASF79:
- 2409 062e 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
- 2409      6843746C 
- 2409      4D61696E 
- 2409      57733246 
- 2409      72657100 
- 2410              	.LASF149:
- 2411 0642 736B6970 		.ascii	"skipMode\000"
- 2411      4D6F6465 
- 2411      00
- 2412              	.LASF144:
- 2413 064b 636F6E74 		.ascii	"context\000"
- 2413      65787400 
- 2414              	.LASF90:
- 2415 0653 70657269 		.ascii	"periTrGrOffset\000"
- 2415      54724772 
- 2415      4F666673 
- 2415      657400
- 2416              	.LASF117:
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 71
+ 2392      5472436D 
+ 2392      64477253 
+ 2392      656C4D73 
+ 2392      6B00
+ 2393              	.LASF216:
+ 2394 05c3 56444143 		.ascii	"VDAC_SetSampleAndHold\000"
+ 2394      5F536574 
+ 2394      53616D70 
+ 2394      6C65416E 
+ 2394      64486F6C 
+ 2395              	.LASF10:
+ 2396 05d9 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2396      20756E73 
+ 2396      69676E65 
+ 2396      6420696E 
+ 2396      7400
+ 2397              	.LASF54:
+ 2398 05eb 63707573 		.ascii	"cpussIpcNr\000"
+ 2398      73497063 
+ 2398      4E7200
+ 2399              	.LASF191:
+ 2400 05f6 75706461 		.ascii	"updateMode\000"
+ 2400      74654D6F 
+ 2400      646500
+ 2401              	.LASF24:
+ 2402 0601 494E5452 		.ascii	"INTR_MASK\000"
+ 2402      5F4D4153 
+ 2402      4B00
+ 2403              	.LASF41:
+ 2404 060b 6770696F 		.ascii	"gpioBase\000"
+ 2404      42617365 
+ 2404      00
+ 2405              	.LASF200:
+ 2406 0614 636F6E66 		.ascii	"configClock\000"
+ 2406      6967436C 
+ 2406      6F636B00 
+ 2407              	.LASF79:
+ 2408 0620 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
+ 2408      6843746C 
+ 2408      4D61696E 
+ 2408      57733246 
+ 2408      72657100 
+ 2409              	.LASF149:
+ 2410 0634 736B6970 		.ascii	"skipMode\000"
+ 2410      4D6F6465 
+ 2410      00
+ 2411              	.LASF144:
+ 2412 063d 636F6E74 		.ascii	"context\000"
+ 2412      65787400 
+ 2413              	.LASF90:
+ 2414 0645 70657269 		.ascii	"periTrGrOffset\000"
+ 2414      54724772 
+ 2414      4F666673 
+ 2414      657400
+ 2415              	.LASF117:
+ 2416 0654 63707573 		.ascii	"cpussRam1Ctl0\000"
+ 2416      7352616D 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 71
 
 
- 2417 0662 63707573 		.ascii	"cpussRam1Ctl0\000"
- 2417      7352616D 
- 2417      3143746C 
- 2417      3000
- 2418              	.LASF182:
- 2419 0670 63795F65 		.ascii	"cy_en_ctdac_deglitch_t\000"
- 2419      6E5F6374 
- 2419      6461635F 
- 2419      6465676C 
- 2419      69746368 
- 2420              	.LASF147:
- 2421 0687 63616C6C 		.ascii	"callback\000"
- 2421      6261636B 
- 2421      00
- 2422              	.LASF91:
- 2423 0690 70657269 		.ascii	"periTrGrSize\000"
- 2423      54724772 
- 2423      53697A65 
- 2423      00
- 2424              	.LASF157:
- 2425 069d 43595F53 		.ascii	"CY_SYSCLK_DIV_16_5_BIT\000"
- 2425      5953434C 
- 2425      4B5F4449 
- 2425      565F3136 
- 2425      5F355F42 
- 2426              	.LASF49:
- 2427 06b4 6770696F 		.ascii	"gpioVersion\000"
- 2427      56657273 
- 2427      696F6E00 
- 2428              	.LASF16:
- 2429 06c0 75696E74 		.ascii	"uint16_t\000"
- 2429      31365F74 
- 2429      00
- 2430              	.LASF121:
- 2431 06c9 63795F73 		.ascii	"cy_stc_device_t\000"
- 2431      74635F64 
- 2431      65766963 
- 2431      655F7400 
- 2432              	.LASF169:
- 2433 06d9 43595F43 		.ascii	"CY_CTDAC_DEEPSLEEP_DISABLE\000"
- 2433      54444143 
- 2433      5F444545 
- 2433      50534C45 
- 2433      45505F44 
- 2434              	.LASF109:
- 2435 06f4 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
- 2435      73436D34 
- 2435      50777243 
- 2435      746C4F66 
- 2435      66736574 
- 2436              	.LASF170:
- 2437 0709 43595F43 		.ascii	"CY_CTDAC_DEEPSLEEP_ENABLE\000"
- 2437      54444143 
- 2437      5F444545 
- 2437      50534C45 
- 2437      45505F45 
- 2438              	.LASF67:
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 72
+ 2416      3143746C 
+ 2416      3000
+ 2417              	.LASF182:
+ 2418 0662 63795F65 		.ascii	"cy_en_ctdac_deglitch_t\000"
+ 2418      6E5F6374 
+ 2418      6461635F 
+ 2418      6465676C 
+ 2418      69746368 
+ 2419              	.LASF147:
+ 2420 0679 63616C6C 		.ascii	"callback\000"
+ 2420      6261636B 
+ 2420      00
+ 2421              	.LASF91:
+ 2422 0682 70657269 		.ascii	"periTrGrSize\000"
+ 2422      54724772 
+ 2422      53697A65 
+ 2422      00
+ 2423              	.LASF157:
+ 2424 068f 43595F53 		.ascii	"CY_SYSCLK_DIV_16_5_BIT\000"
+ 2424      5953434C 
+ 2424      4B5F4449 
+ 2424      565F3136 
+ 2424      5F355F42 
+ 2425              	.LASF49:
+ 2426 06a6 6770696F 		.ascii	"gpioVersion\000"
+ 2426      56657273 
+ 2426      696F6E00 
+ 2427              	.LASF16:
+ 2428 06b2 75696E74 		.ascii	"uint16_t\000"
+ 2428      31365F74 
+ 2428      00
+ 2429              	.LASF121:
+ 2430 06bb 63795F73 		.ascii	"cy_stc_device_t\000"
+ 2430      74635F64 
+ 2430      65766963 
+ 2430      655F7400 
+ 2431              	.LASF169:
+ 2432 06cb 43595F43 		.ascii	"CY_CTDAC_DEEPSLEEP_DISABLE\000"
+ 2432      54444143 
+ 2432      5F444545 
+ 2432      50534C45 
+ 2432      45505F44 
+ 2433              	.LASF109:
+ 2434 06e6 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
+ 2434      73436D34 
+ 2434      50777243 
+ 2434      746C4F66 
+ 2434      66736574 
+ 2435              	.LASF170:
+ 2436 06fb 43595F43 		.ascii	"CY_CTDAC_DEEPSLEEP_ENABLE\000"
+ 2436      54444143 
+ 2436      5F444545 
+ 2436      50534C45 
+ 2436      45505F45 
+ 2437              	.LASF67:
+ 2438 0715 65704D6F 		.ascii	"epMonitorNr\000"
+ 2438      6E69746F 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 72
 
 
- 2439 0723 65704D6F 		.ascii	"epMonitorNr\000"
- 2439      6E69746F 
- 2439      724E7200 
- 2440              	.LASF150:
- 2441 072f 63616C6C 		.ascii	"callbackParams\000"
- 2441      6261636B 
- 2441      50617261 
- 2441      6D7300
- 2442              	.LASF192:
- 2443 073e 6465676C 		.ascii	"deglitchMode\000"
- 2443      69746368 
- 2443      4D6F6465 
- 2443      00
- 2444              	.LASF110:
- 2445 074b 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
- 2445      73547269 
- 2445      6D52616D 
- 2445      43746C4F 
- 2445      66667365 
- 2446              	.LASF163:
- 2447 0761 43595F43 		.ascii	"CY_CTDAC_UPDATE_STROBE_EDGE_IMMEDIATE\000"
- 2447      54444143 
- 2447      5F555044 
- 2447      4154455F 
- 2447      5354524F 
- 2448              	.LASF141:
- 2449 0787 43595F53 		.ascii	"CY_SYSPM_AFTER_TRANSITION\000"
- 2449      5953504D 
- 2449      5F414654 
- 2449      45525F54 
- 2449      52414E53 
- 2450              	.LASF23:
- 2451 07a1 494E5452 		.ascii	"INTR_SET\000"
- 2451      5F534554 
- 2451      00
- 2452              	.LASF45:
- 2453 07aa 63707573 		.ascii	"cpussVersion\000"
- 2453      73566572 
- 2453      73696F6E 
- 2453      00
- 2454              	.LASF143:
- 2455 07b7 62617365 		.ascii	"base\000"
- 2455      00
- 2456              	.LASF187:
- 2457 07bc 43595F43 		.ascii	"CY_CTDAC_OUTPUT_UNBUFFERED\000"
- 2457      54444143 
- 2457      5F4F5554 
- 2457      5055545F 
- 2457      554E4255 
- 2458              	.LASF108:
- 2459 07d7 63707573 		.ascii	"cpussCm0StatusOffset\000"
- 2459      73436D30 
- 2459      53746174 
- 2459      75734F66 
- 2459      66736574 
- 2460              	.LASF174:
- 2461 07ec 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VALUE_PLUS1\000"
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 73
+ 2438      724E7200 
+ 2439              	.LASF150:
+ 2440 0721 63616C6C 		.ascii	"callbackParams\000"
+ 2440      6261636B 
+ 2440      50617261 
+ 2440      6D7300
+ 2441              	.LASF192:
+ 2442 0730 6465676C 		.ascii	"deglitchMode\000"
+ 2442      69746368 
+ 2442      4D6F6465 
+ 2442      00
+ 2443              	.LASF110:
+ 2444 073d 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
+ 2444      73547269 
+ 2444      6D52616D 
+ 2444      43746C4F 
+ 2444      66667365 
+ 2445              	.LASF163:
+ 2446 0753 43595F43 		.ascii	"CY_CTDAC_UPDATE_STROBE_EDGE_IMMEDIATE\000"
+ 2446      54444143 
+ 2446      5F555044 
+ 2446      4154455F 
+ 2446      5354524F 
+ 2447              	.LASF141:
+ 2448 0779 43595F53 		.ascii	"CY_SYSPM_AFTER_TRANSITION\000"
+ 2448      5953504D 
+ 2448      5F414654 
+ 2448      45525F54 
+ 2448      52414E53 
+ 2449              	.LASF23:
+ 2450 0793 494E5452 		.ascii	"INTR_SET\000"
+ 2450      5F534554 
+ 2450      00
+ 2451              	.LASF45:
+ 2452 079c 63707573 		.ascii	"cpussVersion\000"
+ 2452      73566572 
+ 2452      73696F6E 
+ 2452      00
+ 2453              	.LASF143:
+ 2454 07a9 62617365 		.ascii	"base\000"
+ 2454      00
+ 2455              	.LASF187:
+ 2456 07ae 43595F43 		.ascii	"CY_CTDAC_OUTPUT_UNBUFFERED\000"
+ 2456      54444143 
+ 2456      5F4F5554 
+ 2456      5055545F 
+ 2456      554E4255 
+ 2457              	.LASF108:
+ 2458 07c9 63707573 		.ascii	"cpussCm0StatusOffset\000"
+ 2458      73436D30 
+ 2458      53746174 
+ 2458      75734F66 
+ 2458      66736574 
+ 2459              	.LASF174:
+ 2460 07de 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VALUE_PLUS1\000"
+ 2460      54444143 
+ 2460      5F4F5554 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 73
 
 
- 2461      54444143 
- 2461      5F4F5554 
- 2461      5055545F 
- 2461      56414C55 
- 2462              	.LASF209:
- 2463 0808 56444143 		.ascii	"VDAC_SH_SAMPLE\000"
- 2463      5F53485F 
- 2463      53414D50 
- 2463      4C4500
- 2464              	.LASF82:
- 2465 0817 64774368 		.ascii	"dwChOffset\000"
- 2465      4F666673 
- 2465      657400
- 2466              	.LASF152:
- 2467 0822 6E657874 		.ascii	"nextItm\000"
- 2467      49746D00 
- 2468              	.LASF42:
- 2469 082a 70617373 		.ascii	"passBase\000"
- 2469      42617365 
- 2469      00
- 2470              	.LASF57:
- 2471 0833 63707573 		.ascii	"cpussFlashPaSize\000"
- 2471      73466C61 
- 2471      73685061 
- 2471      53697A65 
- 2471      00
- 2472              	.LASF95:
- 2473 0844 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
- 2473      44697643 
- 2473      6D645061 
- 2473      54797065 
- 2473      53656C50 
- 2474              	.LASF173:
- 2475 085b 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VALUE\000"
- 2475      54444143 
- 2475      5F4F5554 
- 2475      5055545F 
- 2475      56414C55 
- 2476              	.LASF224:
- 2477 0871 56444143 		.ascii	"VDAC_DeepSleepCallbackStruct\000"
- 2477      5F446565 
- 2477      70536C65 
- 2477      65704361 
- 2477      6C6C6261 
- 2478              	.LASF118:
- 2479 088e 63707573 		.ascii	"cpussRam2Ctl0\000"
- 2479      7352616D 
- 2479      3243746C 
- 2479      3000
- 2480              	.LASF183:
- 2481 089c 43595F43 		.ascii	"CY_CTDAC_REFSOURCE_EXTERNAL\000"
- 2481      54444143 
- 2481      5F524546 
- 2481      534F5552 
- 2481      43455F45 
- 2482              	.LASF155:
- 2483 08b8 43595F53 		.ascii	"CY_SYSCLK_DIV_8_BIT\000"
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 74
+ 2460      5055545F 
+ 2460      56414C55 
+ 2461              	.LASF209:
+ 2462 07fa 56444143 		.ascii	"VDAC_SH_SAMPLE\000"
+ 2462      5F53485F 
+ 2462      53414D50 
+ 2462      4C4500
+ 2463              	.LASF82:
+ 2464 0809 64774368 		.ascii	"dwChOffset\000"
+ 2464      4F666673 
+ 2464      657400
+ 2465              	.LASF152:
+ 2466 0814 6E657874 		.ascii	"nextItm\000"
+ 2466      49746D00 
+ 2467              	.LASF42:
+ 2468 081c 70617373 		.ascii	"passBase\000"
+ 2468      42617365 
+ 2468      00
+ 2469              	.LASF57:
+ 2470 0825 63707573 		.ascii	"cpussFlashPaSize\000"
+ 2470      73466C61 
+ 2470      73685061 
+ 2470      53697A65 
+ 2470      00
+ 2471              	.LASF95:
+ 2472 0836 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
+ 2472      44697643 
+ 2472      6D645061 
+ 2472      54797065 
+ 2472      53656C50 
+ 2473              	.LASF173:
+ 2474 084d 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VALUE\000"
+ 2474      54444143 
+ 2474      5F4F5554 
+ 2474      5055545F 
+ 2474      56414C55 
+ 2475              	.LASF224:
+ 2476 0863 56444143 		.ascii	"VDAC_DeepSleepCallbackStruct\000"
+ 2476      5F446565 
+ 2476      70536C65 
+ 2476      65704361 
+ 2476      6C6C6261 
+ 2477              	.LASF118:
+ 2478 0880 63707573 		.ascii	"cpussRam2Ctl0\000"
+ 2478      7352616D 
+ 2478      3243746C 
+ 2478      3000
+ 2479              	.LASF183:
+ 2480 088e 43595F43 		.ascii	"CY_CTDAC_REFSOURCE_EXTERNAL\000"
+ 2480      54444143 
+ 2480      5F524546 
+ 2480      534F5552 
+ 2480      43455F45 
+ 2481              	.LASF155:
+ 2482 08aa 43595F53 		.ascii	"CY_SYSCLK_DIV_8_BIT\000"
+ 2482      5953434C 
+ 2482      4B5F4449 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 74
 
 
- 2483      5953434C 
- 2483      4B5F4449 
- 2483      565F385F 
- 2483      42495400 
- 2484              	.LASF53:
- 2485 08cc 70726F74 		.ascii	"protVersion\000"
- 2485      56657273 
- 2485      696F6E00 
- 2486              	.LASF86:
- 2487 08d8 64775374 		.ascii	"dwStatusChIdxPos\000"
- 2487      61747573 
- 2487      43684964 
- 2487      78506F73 
- 2487      00
- 2488              	.LASF140:
- 2489 08e9 43595F53 		.ascii	"CY_SYSPM_BEFORE_TRANSITION\000"
- 2489      5953504D 
- 2489      5F424546 
- 2489      4F52455F 
- 2489      5452414E 
- 2490              	.LASF68:
- 2491 0904 75646250 		.ascii	"udbPresent\000"
- 2491      72657365 
- 2491      6E7400
- 2492              	.LASF159:
- 2493 090f 63795F65 		.ascii	"cy_en_divider_types_t\000"
- 2493      6E5F6469 
- 2493      76696465 
- 2493      725F7479 
- 2493      7065735F 
- 2494              	.LASF39:
- 2495 0925 70726F74 		.ascii	"protBase\000"
- 2495      42617365 
- 2495      00
- 2496              	.LASF210:
- 2497 092e 56444143 		.ascii	"VDAC_SH_HOLD\000"
- 2497      5F53485F 
- 2497      484F4C44 
- 2497      00
- 2498              	.LASF48:
- 2499 093b 666C6173 		.ascii	"flashcVersion\000"
- 2499      68635665 
- 2499      7273696F 
- 2499      6E00
- 2500              	.LASF171:
- 2501 0949 63795F65 		.ascii	"cy_en_ctdac_deep_sleep_t\000"
- 2501      6E5F6374 
- 2501      6461635F 
- 2501      64656570 
- 2501      5F736C65 
- 2502              	.LASF65:
- 2503 0962 736D6966 		.ascii	"smifDeviceNr\000"
- 2503      44657669 
- 2503      63654E72 
- 2503      00
- 2504              	.LASF119:
- 2505 096f 69706353 		.ascii	"ipcStructSize\000"
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 75
+ 2482      565F385F 
+ 2482      42495400 
+ 2483              	.LASF53:
+ 2484 08be 70726F74 		.ascii	"protVersion\000"
+ 2484      56657273 
+ 2484      696F6E00 
+ 2485              	.LASF86:
+ 2486 08ca 64775374 		.ascii	"dwStatusChIdxPos\000"
+ 2486      61747573 
+ 2486      43684964 
+ 2486      78506F73 
+ 2486      00
+ 2487              	.LASF140:
+ 2488 08db 43595F53 		.ascii	"CY_SYSPM_BEFORE_TRANSITION\000"
+ 2488      5953504D 
+ 2488      5F424546 
+ 2488      4F52455F 
+ 2488      5452414E 
+ 2489              	.LASF68:
+ 2490 08f6 75646250 		.ascii	"udbPresent\000"
+ 2490      72657365 
+ 2490      6E7400
+ 2491              	.LASF159:
+ 2492 0901 63795F65 		.ascii	"cy_en_divider_types_t\000"
+ 2492      6E5F6469 
+ 2492      76696465 
+ 2492      725F7479 
+ 2492      7065735F 
+ 2493              	.LASF39:
+ 2494 0917 70726F74 		.ascii	"protBase\000"
+ 2494      42617365 
+ 2494      00
+ 2495              	.LASF210:
+ 2496 0920 56444143 		.ascii	"VDAC_SH_HOLD\000"
+ 2496      5F53485F 
+ 2496      484F4C44 
+ 2496      00
+ 2497              	.LASF48:
+ 2498 092d 666C6173 		.ascii	"flashcVersion\000"
+ 2498      68635665 
+ 2498      7273696F 
+ 2498      6E00
+ 2499              	.LASF171:
+ 2500 093b 63795F65 		.ascii	"cy_en_ctdac_deep_sleep_t\000"
+ 2500      6E5F6374 
+ 2500      6461635F 
+ 2500      64656570 
+ 2500      5F736C65 
+ 2501              	.LASF65:
+ 2502 0954 736D6966 		.ascii	"smifDeviceNr\000"
+ 2502      44657669 
+ 2502      63654E72 
+ 2502      00
+ 2503              	.LASF119:
+ 2504 0961 69706353 		.ascii	"ipcStructSize\000"
+ 2504      74727563 
+ 2504      7453697A 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 75
 
 
- 2505      74727563 
- 2505      7453697A 
- 2505      6500
- 2506              	.LASF134:
- 2507 097d 43595F53 		.ascii	"CY_SYSPM_HIBERNATE\000"
- 2507      5953504D 
- 2507      5F484942 
- 2507      45524E41 
- 2507      544500
- 2508              	.LASF142:
- 2509 0990 63795F65 		.ascii	"cy_en_syspm_callback_mode_t\000"
- 2509      6E5F7379 
- 2509      73706D5F 
- 2509      63616C6C 
- 2509      6261636B 
- 2510              	.LASF25:
- 2511 09ac 494E5452 		.ascii	"INTR_MASKED\000"
- 2511      5F4D4153 
- 2511      4B454400 
- 2512              	.LASF52:
- 2513 09b8 70657269 		.ascii	"periVersion\000"
- 2513      56657273 
- 2513      696F6E00 
- 2514              	.LASF211:
- 2515 09c4 56444143 		.ascii	"VDAC_en_sample_hold_t\000"
- 2515      5F656E5F 
- 2515      73616D70 
- 2515      6C655F68 
- 2515      6F6C645F 
- 2516              	.LASF87:
- 2517 09da 64775374 		.ascii	"dwStatusChIdxMsk\000"
- 2517      61747573 
- 2517      43684964 
- 2517      784D736B 
- 2517      00
- 2518              	.LASF223:
- 2519 09eb 56444143 		.ascii	"VDAC_initVar\000"
- 2519      5F696E69 
- 2519      74566172 
- 2519      00
- 2520              	.LASF26:
- 2521 09f8 52455345 		.ascii	"RESERVED1\000"
- 2521      52564544 
- 2521      3100
- 2522              	.LASF221:
- 2523 0a02 63795F64 		.ascii	"cy_device\000"
- 2523      65766963 
- 2523      6500
- 2524              	.LASF115:
- 2525 0a0c 63707573 		.ascii	"cpussRomCtl\000"
- 2525      73526F6D 
- 2525      43746C00 
- 2526              	.LASF177:
- 2527 0a18 63795F65 		.ascii	"cy_en_ctdac_output_mode_t\000"
- 2527      6E5F6374 
- 2527      6461635F 
- 2527      6F757470 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 76
+ 2504      6500
+ 2505              	.LASF134:
+ 2506 096f 43595F53 		.ascii	"CY_SYSPM_HIBERNATE\000"
+ 2506      5953504D 
+ 2506      5F484942 
+ 2506      45524E41 
+ 2506      544500
+ 2507              	.LASF142:
+ 2508 0982 63795F65 		.ascii	"cy_en_syspm_callback_mode_t\000"
+ 2508      6E5F7379 
+ 2508      73706D5F 
+ 2508      63616C6C 
+ 2508      6261636B 
+ 2509              	.LASF25:
+ 2510 099e 494E5452 		.ascii	"INTR_MASKED\000"
+ 2510      5F4D4153 
+ 2510      4B454400 
+ 2511              	.LASF52:
+ 2512 09aa 70657269 		.ascii	"periVersion\000"
+ 2512      56657273 
+ 2512      696F6E00 
+ 2513              	.LASF211:
+ 2514 09b6 56444143 		.ascii	"VDAC_en_sample_hold_t\000"
+ 2514      5F656E5F 
+ 2514      73616D70 
+ 2514      6C655F68 
+ 2514      6F6C645F 
+ 2515              	.LASF87:
+ 2516 09cc 64775374 		.ascii	"dwStatusChIdxMsk\000"
+ 2516      61747573 
+ 2516      43684964 
+ 2516      784D736B 
+ 2516      00
+ 2517              	.LASF223:
+ 2518 09dd 56444143 		.ascii	"VDAC_initVar\000"
+ 2518      5F696E69 
+ 2518      74566172 
+ 2518      00
+ 2519              	.LASF26:
+ 2520 09ea 52455345 		.ascii	"RESERVED1\000"
+ 2520      52564544 
+ 2520      3100
+ 2521              	.LASF221:
+ 2522 09f4 63795F64 		.ascii	"cy_device\000"
+ 2522      65766963 
+ 2522      6500
+ 2523              	.LASF115:
+ 2524 09fe 63707573 		.ascii	"cpussRomCtl\000"
+ 2524      73526F6D 
+ 2524      43746C00 
+ 2525              	.LASF177:
+ 2526 0a0a 63795F65 		.ascii	"cy_en_ctdac_output_mode_t\000"
+ 2526      6E5F6374 
+ 2526      6461635F 
+ 2526      6F757470 
+ 2526      75745F6D 
+ 2527              	.LASF85:
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 76
 
 
- 2527      75745F6D 
- 2528              	.LASF85:
- 2529 0a32 64774368 		.ascii	"dwChCtlPreemptablePos\000"
- 2529      43746C50 
- 2529      7265656D 
- 2529      70746162 
- 2529      6C65506F 
- 2530              	.LASF175:
- 2531 0a48 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VSSA\000"
- 2531      54444143 
- 2531      5F4F5554 
- 2531      5055545F 
- 2531      56535341 
- 2532              	.LASF38:
- 2533 0a5d 75646242 		.ascii	"udbBase\000"
- 2533      61736500 
- 2534              	.LASF154:
- 2535 0a65 5F426F6F 		.ascii	"_Bool\000"
- 2535      6C00
- 2536              	.LASF17:
- 2537 0a6b 696E7433 		.ascii	"int32_t\000"
- 2537      325F7400 
- 2538              	.LASF1:
- 2539 0a73 756E7369 		.ascii	"unsigned char\000"
- 2539      676E6564 
- 2539      20636861 
- 2539      7200
- 2540              	.LASF146:
- 2541 0a81 43795F53 		.ascii	"Cy_SysPmCallback\000"
- 2541      7973506D 
- 2541      43616C6C 
- 2541      6261636B 
- 2541      00
- 2542              	.LASF27:
- 2543 0a92 43544441 		.ascii	"CTDAC_SW\000"
- 2543      435F5357 
- 2543      00
- 2544              	.LASF81:
- 2545 0a9b 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
- 2545      6843746C 
- 2545      4D61696E 
- 2545      57733446 
- 2545      72657100 
- 2546              	.LASF201:
- 2547 0aaf 64697669 		.ascii	"dividerType\000"
- 2547      64657254 
- 2547      79706500 
- 2548              	.LASF204:
- 2549 0abb 64697669 		.ascii	"dividerFracValue\000"
- 2549      64657246 
- 2549      72616356 
- 2549      616C7565 
- 2549      00
- 2550              	.LASF0:
- 2551 0acc 73686F72 		.ascii	"short int\000"
- 2551      7420696E 
- 2551      7400
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 77
+ 2528 0a24 64774368 		.ascii	"dwChCtlPreemptablePos\000"
+ 2528      43746C50 
+ 2528      7265656D 
+ 2528      70746162 
+ 2528      6C65506F 
+ 2529              	.LASF175:
+ 2530 0a3a 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VSSA\000"
+ 2530      54444143 
+ 2530      5F4F5554 
+ 2530      5055545F 
+ 2530      56535341 
+ 2531              	.LASF38:
+ 2532 0a4f 75646242 		.ascii	"udbBase\000"
+ 2532      61736500 
+ 2533              	.LASF154:
+ 2534 0a57 5F426F6F 		.ascii	"_Bool\000"
+ 2534      6C00
+ 2535              	.LASF17:
+ 2536 0a5d 696E7433 		.ascii	"int32_t\000"
+ 2536      325F7400 
+ 2537              	.LASF1:
+ 2538 0a65 756E7369 		.ascii	"unsigned char\000"
+ 2538      676E6564 
+ 2538      20636861 
+ 2538      7200
+ 2539              	.LASF146:
+ 2540 0a73 43795F53 		.ascii	"Cy_SysPmCallback\000"
+ 2540      7973506D 
+ 2540      43616C6C 
+ 2540      6261636B 
+ 2540      00
+ 2541              	.LASF27:
+ 2542 0a84 43544441 		.ascii	"CTDAC_SW\000"
+ 2542      435F5357 
+ 2542      00
+ 2543              	.LASF81:
+ 2544 0a8d 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
+ 2544      6843746C 
+ 2544      4D61696E 
+ 2544      57733446 
+ 2544      72657100 
+ 2545              	.LASF201:
+ 2546 0aa1 64697669 		.ascii	"dividerType\000"
+ 2546      64657254 
+ 2546      79706500 
+ 2547              	.LASF204:
+ 2548 0aad 64697669 		.ascii	"dividerFracValue\000"
+ 2548      64657246 
+ 2548      72616356 
+ 2548      616C7565 
+ 2548      00
+ 2549              	.LASF0:
+ 2550 0abe 73686F72 		.ascii	"short int\000"
+ 2550      7420696E 
+ 2550      7400
+ 2551              	.LASF230:
+ 2552 0ac8 56444143 		.ascii	"VDAC_EasySampleAndHold\000"
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 77
 
 
- 2552              	.LASF230:
- 2553 0ad6 56444143 		.ascii	"VDAC_EasySampleAndHold\000"
- 2553      5F456173 
- 2553      7953616D 
- 2553      706C6541 
- 2553      6E64486F 
- 2554              	.LASF21:
- 2555 0aed 52455345 		.ascii	"RESERVED\000"
- 2555      52564544 
- 2555      00
- 2556              	.LASF88:
- 2557 0af6 70657269 		.ascii	"periTrCmdOffset\000"
- 2557      5472436D 
- 2557      644F6666 
- 2557      73657400 
- 2558              	.LASF162:
- 2559 0b06 43595F43 		.ascii	"CY_CTDAC_UPDATE_STROBE_EDGE_SYNC\000"
- 2559      54444143 
- 2559      5F555044 
- 2559      4154455F 
- 2559      5354524F 
- 2560              	.LASF40:
- 2561 0b27 6873696F 		.ascii	"hsiomBase\000"
- 2561      6D426173 
- 2561      6500
- 2562              	.LASF92:
- 2563 0b31 70657269 		.ascii	"periDivCmdDivSelMsk\000"
- 2563      44697643 
- 2563      6D644469 
- 2563      7653656C 
- 2563      4D736B00 
- 2564              	.LASF132:
- 2565 0b45 43595F53 		.ascii	"CY_SYSPM_SLEEP\000"
- 2565      5953504D 
- 2565      5F534C45 
- 2565      455000
- 2566              	.LASF8:
- 2567 0b54 6C6F6E67 		.ascii	"long int\000"
- 2567      20696E74 
- 2567      00
- 2568              	.LASF29:
- 2569 0b5d 52455345 		.ascii	"RESERVED2\000"
- 2569      52564544 
- 2569      3200
- 2570              	.LASF63:
- 2571 0b67 73727373 		.ascii	"srssNumHfroot\000"
- 2571      4E756D48 
- 2571      66726F6F 
- 2571      7400
- 2572              	.LASF76:
- 2573 0b75 666C6173 		.ascii	"flashEraseDelay\000"
- 2573      68457261 
- 2573      73654465 
- 2573      6C617900 
- 2574              	.LASF214:
- 2575 0b85 56444143 		.ascii	"VDAC_Start\000"
- 2575      5F537461 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 78
+ 2552      5F456173 
+ 2552      7953616D 
+ 2552      706C6541 
+ 2552      6E64486F 
+ 2553              	.LASF21:
+ 2554 0adf 52455345 		.ascii	"RESERVED\000"
+ 2554      52564544 
+ 2554      00
+ 2555              	.LASF88:
+ 2556 0ae8 70657269 		.ascii	"periTrCmdOffset\000"
+ 2556      5472436D 
+ 2556      644F6666 
+ 2556      73657400 
+ 2557              	.LASF162:
+ 2558 0af8 43595F43 		.ascii	"CY_CTDAC_UPDATE_STROBE_EDGE_SYNC\000"
+ 2558      54444143 
+ 2558      5F555044 
+ 2558      4154455F 
+ 2558      5354524F 
+ 2559              	.LASF40:
+ 2560 0b19 6873696F 		.ascii	"hsiomBase\000"
+ 2560      6D426173 
+ 2560      6500
+ 2561              	.LASF92:
+ 2562 0b23 70657269 		.ascii	"periDivCmdDivSelMsk\000"
+ 2562      44697643 
+ 2562      6D644469 
+ 2562      7653656C 
+ 2562      4D736B00 
+ 2563              	.LASF132:
+ 2564 0b37 43595F53 		.ascii	"CY_SYSPM_SLEEP\000"
+ 2564      5953504D 
+ 2564      5F534C45 
+ 2564      455000
+ 2565              	.LASF8:
+ 2566 0b46 6C6F6E67 		.ascii	"long int\000"
+ 2566      20696E74 
+ 2566      00
+ 2567              	.LASF29:
+ 2568 0b4f 52455345 		.ascii	"RESERVED2\000"
+ 2568      52564544 
+ 2568      3200
+ 2569              	.LASF63:
+ 2570 0b59 73727373 		.ascii	"srssNumHfroot\000"
+ 2570      4E756D48 
+ 2570      66726F6F 
+ 2570      7400
+ 2571              	.LASF76:
+ 2572 0b67 666C6173 		.ascii	"flashEraseDelay\000"
+ 2572      68457261 
+ 2572      73654465 
+ 2572      6C617900 
+ 2573              	.LASF214:
+ 2574 0b77 56444143 		.ascii	"VDAC_Start\000"
+ 2574      5F537461 
+ 2574      727400
+ 2575              	.LASF18:
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 78
 
 
- 2575      727400
- 2576              	.LASF18:
- 2577 0b90 75696E74 		.ascii	"uint32_t\000"
- 2577      33325F74 
- 2577      00
- 2578              	.LASF179:
- 2579 0b99 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_UNBUFFERED\000"
- 2579      54444143 
- 2579      5F444547 
- 2579      4C495443 
- 2579      484D4F44 
- 2580              	.LASF114:
- 2581 0bba 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
- 2581      73436D34 
- 2581      4E6D6943 
- 2581      746C4F66 
- 2581      66736574 
- 2582              	.LASF3:
- 2583 0bcf 5F5F7569 		.ascii	"__uint8_t\000"
- 2583      6E74385F 
- 2583      7400
- 2584              	.LASF225:
- 2585 0bd9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 2585      43313120 
- 2585      352E342E 
- 2585      31203230 
- 2585      31363036 
- 2586 0c0c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0plus -mthumb -"
- 2586      20726576 
- 2586      6973696F 
- 2586      6E203233 
- 2586      37373135 
- 2587 0c3f 67202D4F 		.ascii	"g -Og -ffunction-sections -ffat-lto-objects\000"
- 2587      67202D66 
- 2587      66756E63 
- 2587      74696F6E 
- 2587      2D736563 
- 2588              	.LASF34:
- 2589 0c6b 6C6F6E67 		.ascii	"long double\000"
- 2589      20646F75 
- 2589      626C6500 
- 2590              	.LASF122:
- 2591 0c77 63686172 		.ascii	"char\000"
- 2591      00
- 2592              	.LASF195:
- 2593 0c7c 64656570 		.ascii	"deepSleep\000"
- 2593      536C6565 
- 2593      7000
- 2594              	.LASF218:
- 2595 0c86 6D6F6465 		.ascii	"mode\000"
- 2595      00
- 2596              	.LASF116:
- 2597 0c8b 63707573 		.ascii	"cpussRam0Ctl0\000"
- 2597      7352616D 
- 2597      3043746C 
- 2597      3000
- 2598              	.LASF5:
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 79
+ 2576 0b82 75696E74 		.ascii	"uint32_t\000"
+ 2576      33325F74 
+ 2576      00
+ 2577              	.LASF179:
+ 2578 0b8b 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_UNBUFFERED\000"
+ 2578      54444143 
+ 2578      5F444547 
+ 2578      4C495443 
+ 2578      484D4F44 
+ 2579              	.LASF114:
+ 2580 0bac 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
+ 2580      73436D34 
+ 2580      4E6D6943 
+ 2580      746C4F66 
+ 2580      66736574 
+ 2581              	.LASF3:
+ 2582 0bc1 5F5F7569 		.ascii	"__uint8_t\000"
+ 2582      6E74385F 
+ 2582      7400
+ 2583              	.LASF225:
+ 2584 0bcb 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2584      43313120 
+ 2584      352E342E 
+ 2584      31203230 
+ 2584      31363036 
+ 2585 0bfe 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0plus -mthumb -"
+ 2585      20726576 
+ 2585      6973696F 
+ 2585      6E203233 
+ 2585      37373135 
+ 2586 0c31 67202D4F 		.ascii	"g -Og -ffunction-sections -ffat-lto-objects\000"
+ 2586      67202D66 
+ 2586      66756E63 
+ 2586      74696F6E 
+ 2586      2D736563 
+ 2587              	.LASF34:
+ 2588 0c5d 6C6F6E67 		.ascii	"long double\000"
+ 2588      20646F75 
+ 2588      626C6500 
+ 2589              	.LASF122:
+ 2590 0c69 63686172 		.ascii	"char\000"
+ 2590      00
+ 2591              	.LASF195:
+ 2592 0c6e 64656570 		.ascii	"deepSleep\000"
+ 2592      536C6565 
+ 2592      7000
+ 2593              	.LASF218:
+ 2594 0c78 6D6F6465 		.ascii	"mode\000"
+ 2594      00
+ 2595              	.LASF116:
+ 2596 0c7d 63707573 		.ascii	"cpussRam0Ctl0\000"
+ 2596      7352616D 
+ 2596      3043746C 
+ 2596      3000
+ 2597              	.LASF5:
+ 2598 0c8b 5F5F7569 		.ascii	"__uint16_t\000"
+ 2598      6E743136 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 79
 
 
- 2599 0c99 5F5F7569 		.ascii	"__uint16_t\000"
- 2599      6E743136 
- 2599      5F7400
- 2600              	.LASF166:
- 2601 0ca4 43595F43 		.ascii	"CY_CTDAC_FORMAT_UNSIGNED\000"
- 2601      54444143 
- 2601      5F464F52 
- 2601      4D41545F 
- 2601      554E5349 
- 2602              	.LASF97:
- 2603 0cbd 70657269 		.ascii	"periDiv16CtlOffset\000"
- 2603      44697631 
- 2603      3643746C 
- 2603      4F666673 
- 2603      657400
- 2604              	.LASF30:
- 2605 0cd0 43544441 		.ascii	"CTDAC_VAL\000"
- 2605      435F5641 
- 2605      4C00
- 2606              	.LASF7:
- 2607 0cda 5F5F696E 		.ascii	"__int32_t\000"
- 2607      7433325F 
- 2607      7400
- 2608              	.LASF50:
- 2609 0ce4 6873696F 		.ascii	"hsiomVersion\000"
- 2609      6D566572 
- 2609      73696F6E 
- 2609      00
- 2610              	.LASF32:
- 2611 0cf1 43544441 		.ascii	"CTDAC_V1_Type\000"
- 2611      435F5631 
- 2611      5F547970 
- 2611      6500
- 2612              	.LASF75:
- 2613 0cff 666C6173 		.ascii	"flashProgramDelay\000"
- 2613      6850726F 
- 2613      6772616D 
- 2613      44656C61 
- 2613      7900
- 2614              	.LASF22:
- 2615 0d11 494E5452 		.ascii	"INTR\000"
- 2615      00
- 2616              	.LASF139:
- 2617 0d16 43595F53 		.ascii	"CY_SYSPM_CHECK_FAIL\000"
- 2617      5953504D 
- 2617      5F434845 
- 2617      434B5F46 
- 2617      41494C00 
- 2618              	.LASF78:
- 2619 0d2a 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
- 2619      6843746C 
- 2619      4D61696E 
- 2619      57733146 
- 2619      72657100 
- 2620              	.LASF199:
- 2621 0d3e 656E6162 		.ascii	"enableInterrupt\000"
- 2621      6C65496E 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 80
+ 2598      5F7400
+ 2599              	.LASF166:
+ 2600 0c96 43595F43 		.ascii	"CY_CTDAC_FORMAT_UNSIGNED\000"
+ 2600      54444143 
+ 2600      5F464F52 
+ 2600      4D41545F 
+ 2600      554E5349 
+ 2601              	.LASF97:
+ 2602 0caf 70657269 		.ascii	"periDiv16CtlOffset\000"
+ 2602      44697631 
+ 2602      3643746C 
+ 2602      4F666673 
+ 2602      657400
+ 2603              	.LASF30:
+ 2604 0cc2 43544441 		.ascii	"CTDAC_VAL\000"
+ 2604      435F5641 
+ 2604      4C00
+ 2605              	.LASF7:
+ 2606 0ccc 5F5F696E 		.ascii	"__int32_t\000"
+ 2606      7433325F 
+ 2606      7400
+ 2607              	.LASF50:
+ 2608 0cd6 6873696F 		.ascii	"hsiomVersion\000"
+ 2608      6D566572 
+ 2608      73696F6E 
+ 2608      00
+ 2609              	.LASF32:
+ 2610 0ce3 43544441 		.ascii	"CTDAC_V1_Type\000"
+ 2610      435F5631 
+ 2610      5F547970 
+ 2610      6500
+ 2611              	.LASF75:
+ 2612 0cf1 666C6173 		.ascii	"flashProgramDelay\000"
+ 2612      6850726F 
+ 2612      6772616D 
+ 2612      44656C61 
+ 2612      7900
+ 2613              	.LASF22:
+ 2614 0d03 494E5452 		.ascii	"INTR\000"
+ 2614      00
+ 2615              	.LASF139:
+ 2616 0d08 43595F53 		.ascii	"CY_SYSPM_CHECK_FAIL\000"
+ 2616      5953504D 
+ 2616      5F434845 
+ 2616      434B5F46 
+ 2616      41494C00 
+ 2617              	.LASF78:
+ 2618 0d1c 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
+ 2618      6843746C 
+ 2618      4D61696E 
+ 2618      57733146 
+ 2618      72657100 
+ 2619              	.LASF199:
+ 2620 0d30 656E6162 		.ascii	"enableInterrupt\000"
+ 2620      6C65496E 
+ 2620      74657272 
+ 2620      75707400 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 80
 
 
- 2621      74657272 
- 2621      75707400 
- 2622              	.LASF6:
- 2623 0d4e 73686F72 		.ascii	"short unsigned int\000"
- 2623      7420756E 
- 2623      7369676E 
- 2623      65642069 
- 2623      6E7400
- 2624              	.LASF83:
- 2625 0d61 64774368 		.ascii	"dwChSize\000"
- 2625      53697A65 
- 2625      00
- 2626              	.LASF66:
- 2627 0d6a 70617373 		.ascii	"passSarChannels\000"
- 2627      53617243 
- 2627      68616E6E 
- 2627      656C7300 
- 2628              	.LASF193:
- 2629 0d7a 6F757470 		.ascii	"outputMode\000"
- 2629      75744D6F 
- 2629      646500
- 2630              	.LASF231:
- 2631 0d85 43795F43 		.ascii	"Cy_CTDAC_Init\000"
- 2631      54444143 
- 2631      5F496E69 
- 2631      7400
- 2632              	.LASF58:
- 2633 0d93 63707573 		.ascii	"cpussIpc0Irq\000"
- 2633      73497063 
- 2633      30497271 
- 2633      00
- 2634              	.LASF44:
- 2635 0da0 63727970 		.ascii	"cryptoBase\000"
- 2635      746F4261 
- 2635      736500
- 2636              	.LASF220:
- 2637 0dab 56444143 		.ascii	"VDAC_DeepSleepCallbackParams\000"
- 2637      5F446565 
- 2637      70536C65 
- 2637      65704361 
- 2637      6C6C6261 
- 2638              	.LASF105:
- 2639 0dc8 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
- 2639      73436D30 
- 2639      436C6F63 
- 2639      6B43746C 
- 2639      4F666673 
- 2640              	.LASF130:
- 2641 0ddf 43595F53 		.ascii	"CY_SYSPM_FAIL\000"
- 2641      5953504D 
- 2641      5F464149 
- 2641      4C00
- 2642              	.LASF180:
- 2643 0ded 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_BUFFERED\000"
- 2643      54444143 
- 2643      5F444547 
- 2643      4C495443 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 81
+ 2621              	.LASF6:
+ 2622 0d40 73686F72 		.ascii	"short unsigned int\000"
+ 2622      7420756E 
+ 2622      7369676E 
+ 2622      65642069 
+ 2622      6E7400
+ 2623              	.LASF83:
+ 2624 0d53 64774368 		.ascii	"dwChSize\000"
+ 2624      53697A65 
+ 2624      00
+ 2625              	.LASF66:
+ 2626 0d5c 70617373 		.ascii	"passSarChannels\000"
+ 2626      53617243 
+ 2626      68616E6E 
+ 2626      656C7300 
+ 2627              	.LASF193:
+ 2628 0d6c 6F757470 		.ascii	"outputMode\000"
+ 2628      75744D6F 
+ 2628      646500
+ 2629              	.LASF231:
+ 2630 0d77 43795F43 		.ascii	"Cy_CTDAC_Init\000"
+ 2630      54444143 
+ 2630      5F496E69 
+ 2630      7400
+ 2631              	.LASF58:
+ 2632 0d85 63707573 		.ascii	"cpussIpc0Irq\000"
+ 2632      73497063 
+ 2632      30497271 
+ 2632      00
+ 2633              	.LASF44:
+ 2634 0d92 63727970 		.ascii	"cryptoBase\000"
+ 2634      746F4261 
+ 2634      736500
+ 2635              	.LASF220:
+ 2636 0d9d 56444143 		.ascii	"VDAC_DeepSleepCallbackParams\000"
+ 2636      5F446565 
+ 2636      70536C65 
+ 2636      65704361 
+ 2636      6C6C6261 
+ 2637              	.LASF105:
+ 2638 0dba 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
+ 2638      73436D30 
+ 2638      436C6F63 
+ 2638      6B43746C 
+ 2638      4F666673 
+ 2639              	.LASF130:
+ 2640 0dd1 43595F53 		.ascii	"CY_SYSPM_FAIL\000"
+ 2640      5953504D 
+ 2640      5F464149 
+ 2640      4C00
+ 2641              	.LASF180:
+ 2642 0ddf 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_BUFFERED\000"
+ 2642      54444143 
+ 2642      5F444547 
+ 2642      4C495443 
+ 2642      484D4F44 
+ 2643              	.LASF153:
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 81
 
 
- 2643      484D4F44 
- 2644              	.LASF153:
- 2645 0e0c 63795F73 		.ascii	"cy_stc_syspm_callback_t\000"
- 2645      74635F73 
- 2645      7973706D 
- 2645      5F63616C 
- 2645      6C626163 
- 2646              	.LASF164:
- 2647 0e24 43595F43 		.ascii	"CY_CTDAC_UPDATE_STROBE_LEVEL\000"
- 2647      54444143 
- 2647      5F555044 
- 2647      4154455F 
- 2647      5354524F 
- 2648              	.LASF20:
- 2649 0e41 43544441 		.ascii	"CTDAC_CTRL\000"
- 2649      435F4354 
- 2649      524C00
- 2650              	.LASF60:
- 2651 0e4c 63707573 		.ascii	"cpussNotConnectedIrq\000"
- 2651      734E6F74 
- 2651      436F6E6E 
- 2651      65637465 
- 2651      64497271 
- 2652              	.LASF136:
- 2653 0e61 43595F53 		.ascii	"CY_SYSPM_ULP\000"
- 2653      5953504D 
- 2653      5F554C50 
- 2653      00
- 2654              	.LASF194:
- 2655 0e6e 6F757470 		.ascii	"outputBuffer\000"
- 2655      75744275 
- 2655      66666572 
- 2655      00
- 2656              	.LASF74:
- 2657 0e7b 666C6173 		.ascii	"flashWriteDelay\000"
- 2657      68577269 
- 2657      74654465 
- 2657      6C617900 
- 2658              	.LASF212:
- 2659 0e8b 56444143 		.ascii	"VDAC_Init\000"
- 2659      5F496E69 
- 2659      7400
- 2660              	.LASF14:
- 2661 0e95 75696E74 		.ascii	"uint8_t\000"
- 2661      385F7400 
- 2662              	.LASF73:
- 2663 0e9d 666C6173 		.ascii	"flashPipeRequired\000"
- 2663      68506970 
- 2663      65526571 
- 2663      75697265 
- 2663      6400
- 2664              	.LASF107:
- 2665 0eaf 63707573 		.ascii	"cpussCm4StatusOffset\000"
- 2665      73436D34 
- 2665      53746174 
- 2665      75734F66 
- 2665      66736574 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 82
+ 2644 0dfe 63795F73 		.ascii	"cy_stc_syspm_callback_t\000"
+ 2644      74635F73 
+ 2644      7973706D 
+ 2644      5F63616C 
+ 2644      6C626163 
+ 2645              	.LASF164:
+ 2646 0e16 43595F43 		.ascii	"CY_CTDAC_UPDATE_STROBE_LEVEL\000"
+ 2646      54444143 
+ 2646      5F555044 
+ 2646      4154455F 
+ 2646      5354524F 
+ 2647              	.LASF20:
+ 2648 0e33 43544441 		.ascii	"CTDAC_CTRL\000"
+ 2648      435F4354 
+ 2648      524C00
+ 2649              	.LASF60:
+ 2650 0e3e 63707573 		.ascii	"cpussNotConnectedIrq\000"
+ 2650      734E6F74 
+ 2650      436F6E6E 
+ 2650      65637465 
+ 2650      64497271 
+ 2651              	.LASF136:
+ 2652 0e53 43595F53 		.ascii	"CY_SYSPM_ULP\000"
+ 2652      5953504D 
+ 2652      5F554C50 
+ 2652      00
+ 2653              	.LASF194:
+ 2654 0e60 6F757470 		.ascii	"outputBuffer\000"
+ 2654      75744275 
+ 2654      66666572 
+ 2654      00
+ 2655              	.LASF74:
+ 2656 0e6d 666C6173 		.ascii	"flashWriteDelay\000"
+ 2656      68577269 
+ 2656      74654465 
+ 2656      6C617900 
+ 2657              	.LASF212:
+ 2658 0e7d 56444143 		.ascii	"VDAC_Init\000"
+ 2658      5F496E69 
+ 2658      7400
+ 2659              	.LASF14:
+ 2660 0e87 75696E74 		.ascii	"uint8_t\000"
+ 2660      385F7400 
+ 2661              	.LASF73:
+ 2662 0e8f 666C6173 		.ascii	"flashPipeRequired\000"
+ 2662      68506970 
+ 2662      65526571 
+ 2662      75697265 
+ 2662      6400
+ 2663              	.LASF107:
+ 2664 0ea1 63707573 		.ascii	"cpussCm4StatusOffset\000"
+ 2664      73436D34 
+ 2664      53746174 
+ 2664      75734F66 
+ 2664      66736574 
+ 2665              	.LASF100:
+ 2666 0eb6 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 82
 
 
- 2666              	.LASF100:
- 2667 0ec4 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
- 2667      50727449 
- 2667      6E747243 
- 2667      66674F66 
- 2667      66736574 
- 2668              	.LASF125:
- 2669 0ed9 43595F53 		.ascii	"CY_SYSPM_SUCCESS\000"
- 2669      5953504D 
- 2669      5F535543 
- 2669      43455353 
- 2669      00
- 2670              	.LASF138:
- 2671 0eea 43595F53 		.ascii	"CY_SYSPM_CHECK_READY\000"
- 2671      5953504D 
- 2671      5F434845 
- 2671      434B5F52 
- 2671      45414459 
- 2672              	.LASF111:
- 2673 0eff 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
- 2673      73547269 
- 2673      6D526F6D 
- 2673      43746C4F 
- 2673      66667365 
- 2674              	.LASF156:
- 2675 0f15 43595F53 		.ascii	"CY_SYSCLK_DIV_16_BIT\000"
- 2675      5953434C 
- 2675      4B5F4449 
- 2675      565F3136 
- 2675      5F424954 
- 2676              	.LASF61:
- 2677 0f2a 73727373 		.ascii	"srssNumClkpath\000"
- 2677      4E756D43 
- 2677      6C6B7061 
- 2677      746800
- 2678              	.LASF131:
- 2679 0f39 63795F65 		.ascii	"cy_en_syspm_status_t\000"
- 2679      6E5F7379 
- 2679      73706D5F 
- 2679      73746174 
- 2679      75735F74 
- 2680              	.LASF47:
- 2681 0f4e 64775665 		.ascii	"dwVersion\000"
- 2681      7273696F 
- 2681      6E00
- 2682              	.LASF43:
- 2683 0f58 69706342 		.ascii	"ipcBase\000"
- 2683      61736500 
- 2684              	.LASF181:
- 2685 0f60 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_BOTH\000"
- 2685      54444143 
- 2685      5F444547 
- 2685      4C495443 
- 2685      484D4F44 
- 2686              	.LASF94:
- 2687 0f7b 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
- 2687      44697643 
-ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccacsxUw.s 			page 83
+ 2666      50727449 
+ 2666      6E747243 
+ 2666      66674F66 
+ 2666      66736574 
+ 2667              	.LASF125:
+ 2668 0ecb 43595F53 		.ascii	"CY_SYSPM_SUCCESS\000"
+ 2668      5953504D 
+ 2668      5F535543 
+ 2668      43455353 
+ 2668      00
+ 2669              	.LASF138:
+ 2670 0edc 43595F53 		.ascii	"CY_SYSPM_CHECK_READY\000"
+ 2670      5953504D 
+ 2670      5F434845 
+ 2670      434B5F52 
+ 2670      45414459 
+ 2671              	.LASF111:
+ 2672 0ef1 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
+ 2672      73547269 
+ 2672      6D526F6D 
+ 2672      43746C4F 
+ 2672      66667365 
+ 2673              	.LASF156:
+ 2674 0f07 43595F53 		.ascii	"CY_SYSCLK_DIV_16_BIT\000"
+ 2674      5953434C 
+ 2674      4B5F4449 
+ 2674      565F3136 
+ 2674      5F424954 
+ 2675              	.LASF61:
+ 2676 0f1c 73727373 		.ascii	"srssNumClkpath\000"
+ 2676      4E756D43 
+ 2676      6C6B7061 
+ 2676      746800
+ 2677              	.LASF131:
+ 2678 0f2b 63795F65 		.ascii	"cy_en_syspm_status_t\000"
+ 2678      6E5F7379 
+ 2678      73706D5F 
+ 2678      73746174 
+ 2678      75735F74 
+ 2679              	.LASF47:
+ 2680 0f40 64775665 		.ascii	"dwVersion\000"
+ 2680      7273696F 
+ 2680      6E00
+ 2681              	.LASF43:
+ 2682 0f4a 69706342 		.ascii	"ipcBase\000"
+ 2682      61736500 
+ 2683              	.LASF181:
+ 2684 0f52 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_BOTH\000"
+ 2684      54444143 
+ 2684      5F444547 
+ 2684      4C495443 
+ 2684      484D4F44 
+ 2685              	.LASF94:
+ 2686 0f6d 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
+ 2686      44697643 
+ 2686      6D645061 
+ 2686      44697653 
+ARM GAS  C:\Users\thoma\AppData\Local\Temp\ccqimrK4.s 			page 83
 
 
- 2687      6D645061 
- 2687      44697653 
- 2687      656C506F 
- 2688              	.LASF176:
- 2689 0f91 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VREF\000"
- 2689      54444143 
- 2689      5F4F5554 
- 2689      5055545F 
- 2689      56524546 
- 2690              	.LASF31:
- 2691 0fa6 43544441 		.ascii	"CTDAC_VAL_NXT\000"
- 2691      435F5641 
- 2691      4C5F4E58 
- 2691      5400
- 2692              	.LASF188:
- 2693 0fb4 63795F65 		.ascii	"cy_en_ctdac_output_buffer_t\000"
- 2693      6E5F6374 
- 2693      6461635F 
- 2693      6F757470 
- 2693      75745F62 
- 2694              	.LASF196:
- 2695 0fd0 6465676C 		.ascii	"deglitchCycles\000"
- 2695      69746368 
- 2695      4379636C 
- 2695      657300
- 2696              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 2686      656C506F 
+ 2687              	.LASF176:
+ 2688 0f83 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VREF\000"
+ 2688      54444143 
+ 2688      5F4F5554 
+ 2688      5055545F 
+ 2688      56524546 
+ 2689              	.LASF31:
+ 2690 0f98 43544441 		.ascii	"CTDAC_VAL_NXT\000"
+ 2690      435F5641 
+ 2690      4C5F4E58 
+ 2690      5400
+ 2691              	.LASF188:
+ 2692 0fa6 63795F65 		.ascii	"cy_en_ctdac_output_buffer_t\000"
+ 2692      6E5F6374 
+ 2692      6461635F 
+ 2692      6F757470 
+ 2692      75745F62 
+ 2693              	.LASF196:
+ 2694 0fc2 6465676C 		.ascii	"deglitchCycles\000"
+ 2694      69746368 
+ 2694      4379636C 
+ 2694      657300
+ 2695              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
