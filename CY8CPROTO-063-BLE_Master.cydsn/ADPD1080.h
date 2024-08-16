@@ -1,6 +1,11 @@
 /**
- * @file ADPD1080.h 
- */
+ * Biorobotics Lab Project 4.2 Summer 2024
+ * @file ADPD1080.h
+ * @brief Header file for adpd1080 device driver
+ *
+ * @author: Steven Zhang <sijinz> 
+ * @author: Thomas Li <tyli>
+*/
 
 #ifndef _ADPD1080_H
 #define _ADPD1080_H
@@ -93,6 +98,10 @@
 /* Sensitivity */
 #define ADPD1080_SENSITIVITY 1.64f
     
+/* Constants */
+extern const uint8_t PULSE_A;
+extern const uint8_t PULSE_B;
+    
 /* Define volatile data slots */
 extern volatile uint16_t au16DataSlotA[4];
 extern volatile uint16_t au16DataSlotB[4];
@@ -131,13 +140,13 @@ typedef enum {
 
 typedef enum {
   AVERAGE1 = 0,
-  AVERAGE2,
-  AVERAGE4,
-  AVERAGE8,
-  AVERAGE16,
-  AVERAGE32,
-  AVERAGE64,
-  AVERAGE128
+  AVERAGE2 = 1,
+  AVERAGE4 = 2,
+  AVERAGE8 = 3,
+  AVERAGE16 = 4,
+  AVERAGE32 = 5,
+  AVERAGE64 = 6,
+  AVERAGE128 = 7
 } ADPD1080_AverageN;
 
 typedef enum {
@@ -177,10 +186,8 @@ bool ADPD1080_EnableLed(ADPD1080_TimeSlot enSlot);
 bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t u8PulseCount, uint8_t u8PulsePeriod);
 
 /* Controller function prototypes */
-void turbidity_init(void); // Debug only
 void turbidity_Init(void);
-void turbidity_ReadDataInterrupt(void);
-void turbidity_ChannelOffsetCalibration(void);
+bool turbidity_ReadDataNoInterrupt(uint8_t count);
 void register_settings(void);
 
 #endif /* _ADPD1080_H */

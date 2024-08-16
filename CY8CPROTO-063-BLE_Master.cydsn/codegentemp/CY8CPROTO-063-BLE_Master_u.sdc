@@ -1,3 +1,3 @@
-# Component constraints for C:\Users\shizh\Desktop\psoc\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\TopDesign\TopDesign.cysch
-# Project: C:\Users\shizh\Desktop\psoc\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj
-# Date: Tue, 09 Jul 2024 20:44:31 GMT
+# Component constraints for C:\Users\thoma\Documents\PSoC Creator\ecmo\szhang\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\TopDesign\TopDesign.cysch
+# Project: C:\Users\thoma\Documents\PSoC Creator\ecmo\szhang\PSoC6_UDB_I2C_Master\CY8CPROTO-063-BLE_Master.cydsn\CY8CPROTO-063-BLE_Master.cyprj
+# Date: Thu, 01 Aug 2024 19:53:23 GMT

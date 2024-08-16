@@ -5,20 +5,48 @@
   </Group>
   <Data key="DataVersionKey" value="2" />
   <Group key="DWRInstGuidMapping">
+    <Group key="Interrupt">
+      <Data key="485bfda3-4f9d-412b-bc9b-9cdbcde17f27/9260d369-b684-4310-b925-f618d77b89d7" value="UART_1_SCB_IRQ" />
+      <Data key="72463f96-822d-40d2-aad2-bc2cd379f7ff/2629bb23-3eac-4b03-b076-507a73c88e0d" value="I2C_I2C_IRQ" />
+      <Data key="af8629ba-ac4c-423d-9ff5-21939cfe0e60/9260d369-b684-4310-b925-f618d77b89d7" value="UART_SCB_IRQ" />
+      <Data key="c3699cc9-ef27-46ef-aac5-e29eb9b4eed6" value="Timer_Int" />
+      <Data key="d9703dfa-a5a5-4390-8694-d444aa9df2d7/76cc9645-f3bd-4d51-b91b-2975c83cdda3" value="ADC_IRQ" />
+    </Group>
     <Group key="Pin">
+      <Data key="0e1266fa-c062-4cac-9112-4de7fd51b1e9" value="Debug" />
       <Data key="3bebfee8-790b-4297-b73a-27818bdce71c" value="SDA" />
       <Data key="4cca878b-77b5-471d-8aeb-ad6925202455" value="RST" />
-      <Data key="9e8cc873-349c-454d-b76b-45ae1e5ab2ca" value="ADC_CH3" />
-      <Data key="21b4e067-c0e9-4c7b-8c83-ad858e6566e8" value="ADC_CH4" />
-      <Data key="63a9ae5c-e009-4798-8986-8b31d40bd178" value="ADC_CH7" />
-      <Data key="73d5de89-5942-48fc-a034-79fc43f28aae" value="ADC_CH2" />
-      <Data key="0113321b-4a37-46f6-8407-2f8646c68756" value="ADC_CH1" />
-      <Data key="1421286a-9264-443b-8c40-855a116a89f1" value="ADC_CH8" />
+      <Data key="9e8cc873-349c-454d-b76b-45ae1e5ab2ca" value="ADC_CH2" />
+      <Data key="21b4e067-c0e9-4c7b-8c83-ad858e6566e8" value="ADC_CH3" />
+      <Data key="63a9ae5c-e009-4798-8986-8b31d40bd178" value="ADC_CH6" />
+      <Data key="73d5de89-5942-48fc-a034-79fc43f28aae" value="ADC_CH1" />
+      <Data key="485bfda3-4f9d-412b-bc9b-9cdbcde17f27/65f3af6c-759b-4ccb-8c66-5c95ba1f5f4f" value="UART_1_tx" />
+      <Data key="485bfda3-4f9d-412b-bc9b-9cdbcde17f27/b7e8018e-1ef7-49c0-b5a5-61641a03e31c" value="UART_1_rx" />
+      <Data key="0113321b-4a37-46f6-8407-2f8646c68756" value="ADC_CH0" />
+      <Data key="1421286a-9264-443b-8c40-855a116a89f1" value="ADC_CH7" />
+      <Data key="a707f313-56c7-4e7c-8c97-ca4d22b2bb7f" value="DAC_out" />
+      <Data key="a61270bc-07ec-447d-ac9e-34cfe85c30e9" value="Int_Debug" />
       <Data key="af8629ba-ac4c-423d-9ff5-21939cfe0e60/65f3af6c-759b-4ccb-8c66-5c95ba1f5f4f" value="UART_tx" />
       <Data key="af8629ba-ac4c-423d-9ff5-21939cfe0e60/b7e8018e-1ef7-49c0-b5a5-61641a03e31c" value="UART_rx" />
-      <Data key="ba4d4955-0115-4df6-9fb0-e81346f58fe2" value="ADC_CH5" />
+      <Data key="ba4d4955-0115-4df6-9fb0-e81346f58fe2" value="ADC_CH4" />
       <Data key="c268b1f3-4963-4b98-8f34-55813e07c8ed" value="SCL" />
-      <Data key="f33aa665-cd07-4e22-a86e-569bbb5b0261" value="ADC_CH6" />
+      <Data key="f33aa665-cd07-4e22-a86e-569bbb5b0261" value="ADC_CH5" />
+    </Group>
+  </Group>
+  <Group key="Interrupt">
+    <Group key="485bfda3-4f9d-412b-bc9b-9cdbcde17f27/9260d369-b684-4310-b925-f618d77b89d7">
+      <Group key="CortexM4">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="7" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="c3699cc9-ef27-46ef-aac5-e29eb9b4eed6">
+      <Group key="CortexM4">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="7" />
+        <Data key="Vector" value="-1" />
+      </Group>
     </Group>
   </Group>
   <Group key="M0S8Clock">
@@ -606,6 +634,11 @@
     </Group>
   </Group>
   <Group key="Pin2">
+    <Group key="0e1266fa-c062-4cac-9112-4de7fd51b1e9">
+      <Group key="0">
+        <Data key="Port Format" value="9,5" />
+      </Group>
+    </Group>
     <Group key="3bebfee8-790b-4297-b73a-27818bdce71c">
       <Group key="0">
         <Data key="Port Format" value="10,2" />
@@ -631,14 +664,54 @@
         <Data key="Port Format" value="9,2" />
       </Group>
     </Group>
+    <Group key="73d5de89-5942-48fc-a034-79fc43f28aae">
+      <Group key="0">
+        <Data key="Port Format" value="10,4" />
+      </Group>
+    </Group>
+    <Group key="485bfda3-4f9d-412b-bc9b-9cdbcde17f27/65f3af6c-759b-4ccb-8c66-5c95ba1f5f4f">
+      <Group key="0">
+        <Data key="Port Format" value="9,1" />
+      </Group>
+    </Group>
+    <Group key="485bfda3-4f9d-412b-bc9b-9cdbcde17f27/b7e8018e-1ef7-49c0-b5a5-61641a03e31c">
+      <Group key="0">
+        <Data key="Port Format" value="9,0" />
+      </Group>
+    </Group>
+    <Group key="0113321b-4a37-46f6-8407-2f8646c68756">
+      <Group key="0">
+        <Data key="Port Format" value="10,3" />
+      </Group>
+    </Group>
     <Group key="1421286a-9264-443b-8c40-855a116a89f1">
       <Group key="0">
         <Data key="Port Format" value="9,3" />
       </Group>
     </Group>
+    <Group key="a707f313-56c7-4e7c-8c97-ca4d22b2bb7f">
+      <Group key="0">
+        <Data key="Port Format" value="9,6" />
+      </Group>
+    </Group>
+    <Group key="a61270bc-07ec-447d-ac9e-34cfe85c30e9">
+      <Group key="0">
+        <Data key="Port Format" value="0,5" />
+      </Group>
+    </Group>
+    <Group key="af8629ba-ac4c-423d-9ff5-21939cfe0e60/65f3af6c-759b-4ccb-8c66-5c95ba1f5f4f">
+      <Group key="0">
+        <Data key="Port Format" value="5,1" />
+      </Group>
+    </Group>
+    <Group key="af8629ba-ac4c-423d-9ff5-21939cfe0e60/b7e8018e-1ef7-49c0-b5a5-61641a03e31c">
+      <Group key="0">
+        <Data key="Port Format" value="5,0" />
+      </Group>
+    </Group>
     <Group key="ba4d4955-0115-4df6-9fb0-e81346f58fe2">
       <Group key="0">
-        <Data key="Port Format" value="9,0" />
+        <Data key="Port Format" value="5,2" />
       </Group>
     </Group>
     <Group key="c268b1f3-4963-4b98-8f34-55813e07c8ed">
@@ -648,9 +721,11 @@
     </Group>
     <Group key="f33aa665-cd07-4e22-a86e-569bbb5b0261">
       <Group key="0">
-        <Data key="Port Format" value="9,1" />
+        <Data key="Port Format" value="9,4" />
       </Group>
     </Group>
+    <Group key="UnAssigned Pins" />
+    <Group key="Unlocked Pins" />
   </Group>
   <Group key="PlaceDir">
     <Data key="count" value="0" />
