@@ -32,7 +32,7 @@ Timing measurements:
   - Establish common ground with PSoC
   - Connect Rx port (pin 16, GPIO16, RX2) with Tx port of PSoC
 - [Osama's optical sensor](https://drive.google.com/drive/folders/141UBDyeI10y1gl2nfjNEcas7z4vmrYz4?usp=drive_link) (open with Altium online viewer)
-  - Connector clip
+  - Connector clip color key
     - Red - power (3.3V, ideally 5V)
     - Black - ground
     - Green -  SDA (1.8V, 3.6V maximum)
