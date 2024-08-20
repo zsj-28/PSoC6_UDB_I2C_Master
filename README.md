@@ -57,7 +57,7 @@ Embedded team: Steven Zhang <sijinz@andrew.cmu.edu>, Ching-Han Chou <chingha2@an
 
 Device driver for optical sensor (adpd1080) ported over from Arduino script written by Osama Elgabori <oelgabor@andrew.cmu.edu>.
 
-This repo forked from [Steven's personal repo](https://github.com/zsj-28/PSoC6_UDB_I2C_Master). 
+This repo forked from [Steven Zhang's personal repo](https://github.com/zsj-28/PSoC6_UDB_I2C_Master). 
 
 ### References
 Miro Samek, [Programming embedded systems: Foreground-background architecture (“superloop”)](https://www.embedded.com/programming-embedded-systems-foreground-background-architecture-superloop/)
