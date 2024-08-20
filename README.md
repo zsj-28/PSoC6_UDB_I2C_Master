@@ -25,7 +25,7 @@ Timing measurements:
 
 **Additional features:** Watchdog timer, additional sensors, state machine for new operation modes, foreground-background process synchronization, DFU module/bootloader, SMIF data storage, UI via BLE, adpd1080 data available interrupts, I2C multiword read, support for multiple adpd1080 devices on a single I2C bus.
 
-## Instructions
+## Getting Started
 ### Hardware required
 - [PSoC 6 evaluation board](https://www.infineon.com/cms/en/product/evaluation-boards/cy8cproto-063-ble/)
 - [ESP32 receiver](https://www.amazon.com/HiLetgo-ESP-WROOM-32-Development-Microcontroller-Integrated/dp/B0718T232Z)
@@ -42,7 +42,7 @@ Timing measurements:
 
 ### PSoC Creator
 - In PSoC Creator, open the [workspace containing the PSoC base firmware project](ecmo_psoc6_ws.cywrk)
-- Make sure the [I2C component libary PSoC_UDB_I2C](PSoC6_UDB_I2C.cylib/PSoC6_UDB_I2C.cyprj) user dependency is properly installed in Project/Dependencies
+- Make sure the [I2C component libary PSoC_UDB_I2C](PSoC6_UDB_I2C.cylib/PSoC6_UDB_I2C.cyprj) user dependency is properly installed in Project > Dependencies
 - Connect and program the PSoC 6 evaluation board with the [PSoC base firmware project](CY8CPROTO-063-BLE_Master.cydsn/)
 - View debug output using a terminal app
 
