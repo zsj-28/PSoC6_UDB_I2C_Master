@@ -23,7 +23,7 @@ Timing measurements:
 
 **Cleaning up messy functions:** Need to check whether register_settings() : void is necessary, and whether calculateCRC8() : uint8_t is correct.
 
-**Credit code copied from PDL API:** Need to cite PDL API examples for Crypto block initialization.
+**Credit code copied from PDL API:** Need to cite PDL API examples for Crypto block initialization and usage.
 
 **Application/device drivers error checking and handling:** Error checking and handling when PDL API calls or device driver API calls fail are currently inconsistent or unimplemented.
 
