@@ -23,6 +23,8 @@ Timing measurements:
 
 **Cleaning up messy functions:** Need to check whether register_settings() : void is necessary, and whether calculateCRC8() : uint8_t is correct.
 
+**Credit code copied from PDL API:** Need to cite PDL API examples for Crypto block initialization.
+
 **Application/device drivers error checking and handling:** Error checking and handling when PDL API calls or device driver API calls fail are currently inconsistent or unimplemented.
 
 **Additional features:** Watchdog timer, additional sensors, state machine for new operation modes, foreground-background process synchronization, DFU module/bootloader, SMIF data storage, UI via BLE, adpd1080 data available interrupts, I2C multiword read, support for multiple adpd1080 devices on a single I2C bus.
