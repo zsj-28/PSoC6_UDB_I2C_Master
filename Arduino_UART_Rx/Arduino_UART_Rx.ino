@@ -128,6 +128,7 @@ void UART_receive() {
 
             // Check if the received CRC mathces the calculated one
             if (receivedCRC == calculatedCRC) {
+                
                 uint8_t dataElem = 0;
                 for (uint8_t i = 0; i < dataLength; i = i + 4) {
                     switch (dataElem) {
@@ -176,6 +177,7 @@ void UART_receive() {
                     }
                 }
                 Serial.println();
+                
             }
             else {
                 Serial.println("CRC check failed.");

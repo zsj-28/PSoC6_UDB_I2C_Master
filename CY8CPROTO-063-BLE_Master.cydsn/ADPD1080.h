@@ -188,6 +188,5 @@ bool ADPD1080_SetPulseNumberPeriod(ADPD1080_TimeSlot enSlot, uint8_t u8PulseCoun
 /* Controller function prototypes */
 void turbidity_Init(void);
 bool turbidity_ReadDataNoInterrupt(uint8_t count);
-void register_settings(void);
 
 #endif /* _ADPD1080_H */

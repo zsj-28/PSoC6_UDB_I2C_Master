@@ -183,21 +183,23 @@ CY_ISR (Timer_Int_Handler) {
     
     // Read ADC conversion results with frequency 10 Hz (10 us latency)
     if (timerCount == ADC_SAMPLE_RATE_DIV) {
-        timerCount = 0;
+        timerCount = 0;        
         // Check conversion status without blocking
         uint32_t conversionStatus = ADC_IsEndConversion(CY_SAR_RETURN_STATUS);
         if (conversionStatus) {
             for (uint16_t i = 0; i < ADC_NUM_CHANNELS; i++) {
                 ADCData[i] = ADC_GetResult16(i);
             }
-            dataReady = true;
+            dataReady = true;            
+            // Start next conversion
+            ADC_StartConvert();
         }
         else {
+            for (uint16_t i = 0; i < ADC_NUM_CHANNELS; i++) {
+                ADCData[i] = 0;
+            }
             printf("error: Conversion not finished yet!");
-            return;
         }        
-        // Start next conversion
-        ADC_StartConvert();
     }
     
     // Flush write to hardware by reading from same register
