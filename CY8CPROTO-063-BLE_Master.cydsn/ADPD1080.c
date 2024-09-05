@@ -16,7 +16,7 @@ volatile uint16_t au16DataSlotA[4] = {0,0,0,0};
 volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
 
 const uint8_t PULSE_A = 32u;
-const uint8_t PULSE_B = 127u;
+const uint8_t PULSE_B = 255u;
 
 /* Driver Function Definitions */
 /**
