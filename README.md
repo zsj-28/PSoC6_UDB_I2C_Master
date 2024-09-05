@@ -19,9 +19,9 @@ Timing measurements:
 - UART packet transmission: periodic with 100ms period, 16ms duration
 
 ### TODOs
-**Debugging CRC check failures:** The receiver occasionally fails its CRC check on incoming data packets, for around 3-5 packets for every 15-25 packets sent. This reliability issue could be on either the transmitter or receiver side, but currently my hypothesis is that the receiver sometimes misses incoming bytes due to all of the time it has to spend printing data to Serial for debugging, thus failing its CRC check. My reasoning is that the reliability seems to get worse the more the receiver has to print to Serial.
+**Debugging CRC check failures:** The receiver occasionally fails its CRC check on incoming data packets, for around 3-5 packets for every 15-25 packets sent. Another way of viewing it is that every 1-10 seconds (varying), there will be 1-5 CRC check failures. This reliability issue could be on the transmitter side, receiver side, or due to bus issues, yet to be determined.
 
-**Cleaning up messy functions:** Need to check whether register_settings() : void is necessary, and whether calculateCRC8() : uint8_t is correct.
+**Cleaning up messy functions:** Need to check whether calculateCRC8() : uint8_t is correct and make style updates to ADPD1080.c functions.
 
 **Credit code copied from PDL API:** Need to cite PDL API examples for Crypto block initialization and usage.
 
