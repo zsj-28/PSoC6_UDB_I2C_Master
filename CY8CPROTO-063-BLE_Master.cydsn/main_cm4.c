@@ -191,13 +191,15 @@ CY_ISR (Timer_Int_Handler) {
                 ADCData[i] = ADC_GetResult16(i);
             }
             dataReady = true;
+            // Start next conversion
+            ADC_StartConvert();
         }
         else {
+            for (uint16_t i = 0; i < ADC_NUM_CHANNELS; i++) {
+                ADCData[i] = 0;
+            }
             printf("error: Conversion not finished yet!");
-            return;
         }        
-        // Start next conversion
-        ADC_StartConvert();
     }
     
     // Flush write to hardware by reading from same register
