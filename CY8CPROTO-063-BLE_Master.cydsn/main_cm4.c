@@ -25,7 +25,7 @@
 #define ADPD_SAMPLES_PER_PACKET  10U
 
 /* Firmware averaging */
-#define SMOOTHED_SAMPLE_SIZE     (200U)
+#define SMOOTHED_SAMPLE_SIZE     (50U)
 
 // Maximum number of bytes in a packet
 #define MAX_PACKET_SIZE          (255u)
@@ -42,7 +42,7 @@ volatile uint16_t timerCount = 0;
 /* Background variables */
 uint8_t txBuffer[MAX_PACKET_SIZE + 3];
 
-/* Macros to configure the Crypto block */
+/* Crypto block configuration - based on Infineon PDL API example code */
 /* IPC data channel for the Crypto */
 #define MY_CHAN_CRYPTO         				(uint32_t)(3u)
 /* IPC interrupt structure for the Crypto server */
