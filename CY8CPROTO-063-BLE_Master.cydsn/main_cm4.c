@@ -260,7 +260,7 @@ int main(void) {
 
     if (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
         printf("error: ADPD1080 initialization failed!\r\n");
-        while (1); // Loop forever on failure
+        // while (1); // Loop forever on failure
     }
     
     // Initialize sensor registers
