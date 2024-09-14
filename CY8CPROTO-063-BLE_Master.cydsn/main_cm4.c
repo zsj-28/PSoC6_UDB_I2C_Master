@@ -428,6 +428,8 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
         printf("\r\nerror: Tx status 0x%x\r\n", status);
     }
     
+    // TODO: New param + duplicate body w/ UART instead of UART_1 for RPi logging
+    
     // demo only
     printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, txBuffer[2 + length]);    
 }

@@ -15,8 +15,8 @@
 volatile uint16_t au16DataSlotA[4] = {0,0,0,0};
 volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
 
-const uint8_t PULSE_A = 32u;
-const uint8_t PULSE_B = 255u;
+const uint8_t PULSE_A = 64u;
+const uint8_t PULSE_B = 64u;
 
 const float cal1[6] = {-3.7435, -3.1523, 0.3859, 15.4058, 0.1953, -0.1263};
 const float cal2[6] = {76.4088, -92.4425, -8.3894, 289.3447, 6.8068, 1.8836};
