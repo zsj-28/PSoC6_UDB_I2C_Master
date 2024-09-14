@@ -319,9 +319,9 @@ int main(void) {
                 R_avg = log(avg_valA)/log(avg_valB);
                 
                 SO2 = cal1[0] + cal1[1]*log(L680_norm) + cal1[2]*log(L850_norm) + cal1[3]*R
-                        + cal1[4]*log(L680_norm)*log(L850_norm) + cal1[5]*log(L680_norm)*R; //188.1*(R)-89.95;
+                        + cal1[4]*log(L680_norm)*log(L850_norm) + cal1[5]*log(L680_norm)*R;
                 SO2_avg = cal1[0] + cal1[1]*log(avg_valA) + cal1[2]*log(avg_valB) + cal1[3]*R_avg
-                        + cal1[4]*log(avg_valA)*log(avg_valB) + cal1[5]*log(avg_valA)*R_avg; //188.1*(R_avg)-89.95;
+                        + cal1[4]*log(avg_valA)*log(avg_valB) + cal1[5]*log(avg_valA)*R_avg;
                 
                 // Hemoglobin concentration calculation
                 HBT = cal2[0] + cal2[1]*log(L680_norm) + cal2[2]*log(L850_norm) + cal2[3]*R
