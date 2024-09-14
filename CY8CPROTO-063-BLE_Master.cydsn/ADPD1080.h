@@ -102,6 +102,9 @@
 extern const uint8_t PULSE_A;
 extern const uint8_t PULSE_B;
     
+extern const float cal1[6];
+extern const float cal2[6];
+    
 /* Define volatile data slots */
 extern volatile uint16_t au16DataSlotA[4];
 extern volatile uint16_t au16DataSlotB[4];

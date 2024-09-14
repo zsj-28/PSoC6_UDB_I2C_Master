@@ -259,14 +259,13 @@ int main(void) {
     printf("Initializing ADPD1080 sensor...\r\n");
 
     if (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
-        printf("error: ADPD1080 initialization failed!\r\n");
+        printf("error: ADPD1080 sensor initialization failed!\r\n");
         // while (1); // Loop forever on failure
     }
     
     // Initialize sensor registers
     turbidity_Init();
-    
-    printf("ADPD1080 initialization successful.\r\n");
+    printf("ADPD1080 sensor initialization successful.\r\n");
     
     /* Initialization of Crypto Driver */
 	while (Cy_Crypto_Init(&cryptoConfig, &cryptoScratch) != CY_CRYPTO_SUCCESS) {}
