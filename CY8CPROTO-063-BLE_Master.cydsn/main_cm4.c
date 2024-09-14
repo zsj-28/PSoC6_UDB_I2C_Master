@@ -13,9 +13,6 @@
 #include <math.h>
 #include <string.h>
 
-#define UNUSEDdel680 (void)(del680)
-#define UNUSEDdel850 (void)(del850)
-
 /* Sensor properties */
 #define ADC_NUM_CHANNELS         4U
 #define ADC_SAMPLES_PER_PACKET   1U
@@ -216,10 +213,10 @@ int main(void) {
 
     float32_t R;                 // Ratio of L680 to L850
     float32_t SO2;               // Oxygen saturation
+    float32_t HBT;               // Hemoglobin concentration
     float32_t R_avg;             // Running average R
     float32_t SO2_avg;           // Running average SO2
-    float32_t del680;            // L680 Hemoglobin concentration
-    float32_t del850;            // L850 Hemoglobin concentration
+    float32_t HBT_avg;           // Running average HBT
 
     // Maintain running average
     uint16_t slotA_avg[SMOOTHED_SAMPLE_SIZE] = {0};
@@ -299,12 +296,17 @@ int main(void) {
             
             // Process adpd1080 data
             for (uint8_t i = 0; i < ADPD_SAMPLES_PER_PACKET; i++) {
-                // Raw and time avg light intensity
+                // Raw light intensity
                 L680 = adpdDataA[i];
                 L850 = adpdDataB[i];
+                
+                // Normalize by pulse number
+                float32_t L680_norm = L680/(float32_t)PULSE_A;
+                float32_t L850_norm = L850/(float32_t)PULSE_B;
             
-                avg_valA = movingAvg(slotA_avg, &sumA, posA, lenA, L680);
-                avg_valB = movingAvg(slotB_avg, &sumB, posB, lenB, L850);
+                // Time average light intensity
+                avg_valA = movingAvg(slotA_avg, &sumA, posA, lenA, L680)/(float32_t)PULSE_A;
+                avg_valB = movingAvg(slotB_avg, &sumB, posB, lenB, L850)/(float32_t)PULSE_B;
                 
                 // Update ring buffer current position
                 posA++;
@@ -312,16 +314,20 @@ int main(void) {
                 posB++;
                 if (posB >= lenB) posB = 0;
                 
-                // SO2%
-                R = log(L680)/log(L850);
+                // SO2% calculation
+                R = log(L680_norm)/log(L850_norm);
                 R_avg = log(avg_valA)/log(avg_valB);
                 
-                SO2 = 188.1*(R) - 89.95;
-                SO2_avg = 188.1*(R_avg) - 89.95;
+                SO2 = cal1[0] + cal1[1]*log(L680_norm) + cal1[2]*log(L850_norm) + cal1[3]*R
+                        + cal1[4]*log(L680_norm)*log(L850_norm) + cal1[5]*log(L680_norm)*R; //188.1*(R)-89.95;
+                SO2_avg = cal1[0] + cal1[1]*log(avg_valA) + cal1[2]*log(avg_valB) + cal1[3]*R_avg
+                        + cal1[4]*log(avg_valA)*log(avg_valB) + cal1[5]*log(avg_valA)*R_avg; //188.1*(R_avg)-89.95;
                 
-                // Hemoglobin concentration
-                del680 = -3.412*log(64*avg_valA / PULSE_A) + 43.02;
-                del850 = -2.701*log(64*avg_valB / PULSE_B) + 35.27; // -0.1049
+                // Hemoglobin concentration calculation
+                HBT = cal2[0] + cal2[1]*log(L680_norm) + cal2[2]*log(L850_norm) + cal2[3]*R
+                        + cal2[4]*log(L680_norm)*log(L850_norm) + cal2[5]*log(L680_norm)*R;
+                HBT_avg = cal2[0] + cal2[1]*log(avg_valA) + cal2[2]*log(avg_valB) + cal2[3]*R_avg
+                        + cal2[4]*log(avg_valA)*log(avg_valB) + cal2[5]*log(avg_valA)*R_avg;
                 
                 // Populate packet buffer
                 float2Bytes(avg_valA, &packet[packetsize]); // demo only, Hemoglobin for actual
