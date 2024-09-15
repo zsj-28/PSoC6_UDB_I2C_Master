@@ -18,11 +18,10 @@
 ##################################################################### 
                     1::Clock Frequency Summary
 ===================================================================== 
-Number of clocks: 15
+Number of clocks: 13
 Clock: ADC_intSarClock  | N/A                    | Target: 1.00 MHz    | 
-Clock: CLK_App          | Frequency: 170.53 MHz  | Target: 16.67 MHz   | 
+Clock: CLK_App          | Frequency: 169.95 MHz  | Target: 16.67 MHz   | 
 Clock: Clock_1          | N/A                    | Target: 1.00 MHz    | 
-Clock: Clock_2          | N/A                    | Target: 0.00 MHz    | 
 Clock: CyClk_Fast       | N/A                    | Target: 100.00 MHz  | 
 Clock: CyClk_HF0        | N/A                    | Target: 100.00 MHz  | 
 Clock: CyClk_LF         | N/A                    | Target: 0.03 MHz    | 
@@ -32,7 +31,6 @@ Clock: CyFLL            | N/A                    | Target: 100.00 MHz  |
 Clock: CyILO            | N/A                    | Target: 0.03 MHz    | 
 Clock: CyIMO            | N/A                    | Target: 8.00 MHz    | 
 Clock: CyPeriClk_App    | N/A                    | Target: 50.00 MHz   | 
-Clock: UART_1_SCBCLK    | N/A                    | Target: 1.39 MHz    | 
 Clock: UART_SCBCLK      | N/A                    | Target: 1.39 MHz    | 
 
  =====================================================================
@@ -46,7 +44,7 @@ Clock: UART_SCBCLK      | N/A                    | Target: 1.39 MHz    |
 
 Launch Clock  Capture Clock  Constraint(R-R)  Slack(R-R)  Constraint(R-F)  Slack(R-F)  Constraint(F-F)  Slack(F-F)  Constraint(F-R)  Slack(F-R)  
 ------------  -------------  ---------------  ----------  ---------------  ----------  ---------------  ----------  ---------------  ----------  
-CLK_App       CLK_App        60000            54136       N/A              N/A         N/A              N/A         N/A              N/A         
+CLK_App       CLK_App        60000            54116       N/A              N/A         N/A              N/A         N/A              N/A         
 
  =====================================================================
                     End of Clock Relationship Summary
@@ -64,9 +62,9 @@ All values are in Picoseconds
 
 Port Name      Setup to Clk  Clock Name:Phase  
 -------------  ------------  ----------------  
-RST(0)_PAD     3287          CLK_App:R         
-SCL(0)_PAD:in  2787          CLK_App:R         
-SDA(0)_PAD:in  2427          CLK_App:R         
+RST(0)_PAD     2647          CLK_App:R         
+SCL(0)_PAD:in  2657          CLK_App:R         
+SDA(0)_PAD:in  2787          CLK_App:R         
 
 
                        3.2::Clock to Out
@@ -93,233 +91,21 @@ Port Name (Source)  Port Name (Destination)  Delay
 4.1::Critical Path Report for CLK_App
 *************************************
 Clock: CLK_App
-Frequency: 170.53 MHz | Target: 16.67 MHz
+Frequency: 169.95 MHz | Target: 16.67 MHz
 
 ++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:Net_643_3\/q
-Path End       : \I2C:bI2C_UDB:scl_in_reg\/main_0
-Capture Clock  : \I2C:bI2C_UDB:scl_in_reg\/clock_0
-Path slack     : 54136p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1200
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58800
-
-Launch Clock Arrival Time                      0
-+ Clock path delay                         0
-+ Data path delay                       4664
--------------------------------------   ---- 
-End-of-path arrival time (ps)           4664
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:Net_643_3\/clock_0                                   macrocell31      0      0  RISE       1
-
-Data path
-pin name                          model name   delay     AT  slack  edge  Fanout
---------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:Net_643_3\/q                 macrocell31    320    320  54136  FALL       1
-SCL(0)/pin_input                  iocell5          0    320  54136  FALL       1
-SCL(0)/pad_out                    iocell5       2757   3077  54136  FALL       1
-SCL(0)/pad_in                     iocell5          0   3077  54136  FALL       1
-SCL(0)/fb                         iocell5       1587   4664  54136  FALL       1
-\I2C:bI2C_UDB:scl_in_reg\/main_0  macrocell20      0   4664  54136  FALL       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:scl_in_reg\/clock_0                         macrocell20      0      0  RISE       1
-
-
-
-===================================================================== 
-                    End of Path Details for Clock Frequency Summary
-##################################################################### 
-
-
-##################################################################### 
-                    5::Path Details for Clock Relationship Summary
-===================================================================== 
-
-5.1::Critical Path Report for (CLK_App:R vs. CLK_App:R)
-*******************************************************
-
-++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:Net_643_3\/q
-Path End       : \I2C:bI2C_UDB:scl_in_reg\/main_0
-Capture Clock  : \I2C:bI2C_UDB:scl_in_reg\/clock_0
-Path slack     : 54136p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1200
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58800
-
-Launch Clock Arrival Time                      0
-+ Clock path delay                         0
-+ Data path delay                       4664
--------------------------------------   ---- 
-End-of-path arrival time (ps)           4664
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:Net_643_3\/clock_0                                   macrocell31      0      0  RISE       1
-
-Data path
-pin name                          model name   delay     AT  slack  edge  Fanout
---------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:Net_643_3\/q                 macrocell31    320    320  54136  FALL       1
-SCL(0)/pin_input                  iocell5          0    320  54136  FALL       1
-SCL(0)/pad_out                    iocell5       2757   3077  54136  FALL       1
-SCL(0)/pad_in                     iocell5          0   3077  54136  FALL       1
-SCL(0)/fb                         iocell5       1587   4664  54136  FALL       1
-\I2C:bI2C_UDB:scl_in_reg\/main_0  macrocell20      0   4664  54136  FALL       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:scl_in_reg\/clock_0                         macrocell20      0      0  RISE       1
-
-
-
-===================================================================== 
-                    End of Path Details for Clock Relationship Summary
-##################################################################### 
-
-##################################################################### 
-                    Detailed Report for all timing paths 
-===================================================================== 
-
-++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:Net_643_3\/q
-Path End       : \I2C:bI2C_UDB:scl_in_reg\/main_0
-Capture Clock  : \I2C:bI2C_UDB:scl_in_reg\/clock_0
-Path slack     : 54136p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1200
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58800
-
-Launch Clock Arrival Time                      0
-+ Clock path delay                         0
-+ Data path delay                       4664
--------------------------------------   ---- 
-End-of-path arrival time (ps)           4664
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:Net_643_3\/clock_0                                   macrocell31      0      0  RISE       1
-
-Data path
-pin name                          model name   delay     AT  slack  edge  Fanout
---------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:Net_643_3\/q                 macrocell31    320    320  54136  FALL       1
-SCL(0)/pin_input                  iocell5          0    320  54136  FALL       1
-SCL(0)/pad_out                    iocell5       2757   3077  54136  FALL       1
-SCL(0)/pad_in                     iocell5          0   3077  54136  FALL       1
-SCL(0)/fb                         iocell5       1587   4664  54136  FALL       1
-\I2C:bI2C_UDB:scl_in_reg\/main_0  macrocell20      0   4664  54136  FALL       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:scl_in_reg\/clock_0                         macrocell20      0      0  RISE       1
-
-
-
-++++ Path 2 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:Net_643_3\/q
-Path End       : \I2C:bI2C_UDB:clk_eq_reg\/main_0
-Capture Clock  : \I2C:bI2C_UDB:clk_eq_reg\/clock_0
-Path slack     : 54356p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                    -980
---------------------------------------------   ----- 
-End-of-path required time (ps)                 59020
-
-Launch Clock Arrival Time                      0
-+ Clock path delay                         0
-+ Data path delay                       4664
--------------------------------------   ---- 
-End-of-path arrival time (ps)           4664
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:Net_643_3\/clock_0                                   macrocell31      0      0  RISE       1
-
-Data path
-pin name                          model name   delay     AT  slack  edge  Fanout
---------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:Net_643_3\/q                 macrocell31    320    320  54136  FALL       1
-SCL(0)/pin_input                  iocell5          0    320  54136  FALL       1
-SCL(0)/pad_out                    iocell5       2757   3077  54136  FALL       1
-SCL(0)/pad_in                     iocell5          0   3077  54136  FALL       1
-SCL(0)/fb                         iocell5       1587   4664  54136  FALL       1
-\I2C:bI2C_UDB:clk_eq_reg\/main_0  macrocell30      0   4664  54356  FALL       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:clk_eq_reg\/clock_0                         macrocell30      0      0  RISE       1
-
-
-
-++++ Path 3 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 Path Begin     : \I2C:sda_x_wire\/q
 Path End       : \I2C:bI2C_UDB:sda_in_reg\/main_0
 Capture Clock  : \I2C:bI2C_UDB:sda_in_reg\/clock_0
-Path slack     : 54476p
+Path slack     : 54116p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                    -840
+- Setup time                                   -1200
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 59160
+End-of-path required time (ps)                 58800
 
 Launch Clock Arrival Time                      0
 + Clock path delay                         0
@@ -338,12 +124,12 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Data path
 pin name                          model name   delay     AT  slack  edge  Fanout
 --------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:sda_x_wire\/q                macrocell32    340    340  54476  FALL       1
-SDA(0)/pin_input                  iocell4          0    340  54476  FALL       1
-SDA(0)/pad_out                    iocell4       2757   3097  54476  FALL       1
-SDA(0)/pad_in                     iocell4          0   3097  54476  FALL       1
-SDA(0)/fb                         iocell4       1587   4684  54476  FALL       1
-\I2C:bI2C_UDB:sda_in_reg\/main_0  macrocell10      0   4684  54476  FALL       1
+\I2C:sda_x_wire\/q                macrocell32    340    340  54116  FALL       1
+SDA(0)/pin_input                  iocell4          0    340  54116  FALL       1
+SDA(0)/pad_out                    iocell4       2757   3097  54116  FALL       1
+SDA(0)/pad_in                     iocell4          0   3097  54116  FALL       1
+SDA(0)/fb                         iocell4       1587   4684  54116  FALL       1
+\I2C:bI2C_UDB:sda_in_reg\/main_0  macrocell10      0   4684  54116  FALL       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -355,25 +141,37 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 
 
 
-++++ Path 4 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+===================================================================== 
+                    End of Path Details for Clock Frequency Summary
+##################################################################### 
 
-Path Begin     : \I2C:bI2C_UDB:m_state_3\/q
-Path End       : \I2C:bI2C_UDB:status_0\/main_1
-Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
-Path slack     : 56940p
+
+##################################################################### 
+                    5::Path Details for Clock Relationship Summary
+===================================================================== 
+
+5.1::Critical Path Report for (CLK_App:R vs. CLK_App:R)
+*******************************************************
+
+++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:sda_x_wire\/q
+Path End       : \I2C:bI2C_UDB:sda_in_reg\/main_0
+Capture Clock  : \I2C:bI2C_UDB:sda_in_reg\/clock_0
+Path slack     : 54116p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1520
+- Setup time                                   -1200
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58480
+End-of-path required time (ps)                 58800
 
 Launch Clock Arrival Time                      0
 + Clock path delay                         0
-+ Data path delay                       1540
++ Data path delay                       4684
 -------------------------------------   ---- 
-End-of-path arrival time (ps)           1540
+End-of-path arrival time (ps)           4684
  
 Launch Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -381,15 +179,17 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
+\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
 
 Data path
-pin name                                 model name   delay     AT  slack  edge  Fanout
----------------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_3\/q               macrocell12    420    420  56940  RISE       1
-\I2C:bI2C_UDB:cs_addr_shifter_1\/main_2  macrocell7       0    420  56940  RISE       1
-\I2C:bI2C_UDB:cs_addr_shifter_1\/q       macrocell7    1120   1540  56940  RISE       1
-\I2C:bI2C_UDB:status_0\/main_1           macrocell19      0   1540  56940  RISE       1
+pin name                          model name   delay     AT  slack  edge  Fanout
+--------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:sda_x_wire\/q                macrocell32    340    340  54116  FALL       1
+SDA(0)/pin_input                  iocell4          0    340  54116  FALL       1
+SDA(0)/pad_out                    iocell4       2757   3097  54116  FALL       1
+SDA(0)/pad_in                     iocell4          0   3097  54116  FALL       1
+SDA(0)/fb                         iocell4       1587   4684  54116  FALL       1
+\I2C:bI2C_UDB:sda_in_reg\/main_0  macrocell10      0   4684  54116  FALL       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -397,29 +197,37 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
+\I2C:bI2C_UDB:sda_in_reg\/clock_0                         macrocell10      0      0  RISE       1
 
 
 
-++++ Path 5 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+===================================================================== 
+                    End of Path Details for Clock Relationship Summary
+##################################################################### 
 
-Path Begin     : \I2C:bI2C_UDB:m_state_3\/q
-Path End       : \I2C:bI2C_UDB:status_3\/main_1
-Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
-Path slack     : 56990p
+##################################################################### 
+                    Detailed Report for all timing paths 
+===================================================================== 
+
+++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:sda_x_wire\/q
+Path End       : \I2C:bI2C_UDB:sda_in_reg\/main_0
+Capture Clock  : \I2C:bI2C_UDB:sda_in_reg\/clock_0
+Path slack     : 54116p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1470
+- Setup time                                   -1200
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58530
+End-of-path required time (ps)                 58800
 
 Launch Clock Arrival Time                      0
 + Clock path delay                         0
-+ Data path delay                       1540
++ Data path delay                       4684
 -------------------------------------   ---- 
-End-of-path arrival time (ps)           1540
+End-of-path arrival time (ps)           4684
  
 Launch Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -427,15 +235,201 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
+\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
 
 Data path
-pin name                                 model name   delay     AT  slack  edge  Fanout
----------------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_3\/q               macrocell12    420    420  56940  RISE       1
-\I2C:bI2C_UDB:cs_addr_shifter_1\/main_2  macrocell7       0    420  56940  RISE       1
-\I2C:bI2C_UDB:cs_addr_shifter_1\/q       macrocell7    1120   1540  56940  RISE       1
-\I2C:bI2C_UDB:status_3\/main_1           macrocell16      0   1540  56990  RISE       1
+pin name                          model name   delay     AT  slack  edge  Fanout
+--------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:sda_x_wire\/q                macrocell32    340    340  54116  FALL       1
+SDA(0)/pin_input                  iocell4          0    340  54116  FALL       1
+SDA(0)/pad_out                    iocell4       2757   3097  54116  FALL       1
+SDA(0)/pad_in                     iocell4          0   3097  54116  FALL       1
+SDA(0)/fb                         iocell4       1587   4684  54116  FALL       1
+\I2C:bI2C_UDB:sda_in_reg\/main_0  macrocell10      0   4684  54116  FALL       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:sda_in_reg\/clock_0                         macrocell10      0      0  RISE       1
+
+
+
+++++ Path 2 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:Net_643_3\/q
+Path End       : \I2C:bI2C_UDB:scl_in_reg\/main_0
+Capture Clock  : \I2C:bI2C_UDB:scl_in_reg\/clock_0
+Path slack     : 54266p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1070
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58930
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4664
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4664
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:Net_643_3\/clock_0                                   macrocell31      0      0  RISE       1
+
+Data path
+pin name                          model name   delay     AT  slack  edge  Fanout
+--------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:Net_643_3\/q                 macrocell31    320    320  54266  FALL       1
+SCL(0)/pin_input                  iocell5          0    320  54266  FALL       1
+SCL(0)/pad_out                    iocell5       2757   3077  54266  FALL       1
+SCL(0)/pad_in                     iocell5          0   3077  54266  FALL       1
+SCL(0)/fb                         iocell5       1587   4664  54266  FALL       1
+\I2C:bI2C_UDB:scl_in_reg\/main_0  macrocell20      0   4664  54266  FALL       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:scl_in_reg\/clock_0                         macrocell20      0      0  RISE       1
+
+
+
+++++ Path 3 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:Net_643_3\/q
+Path End       : \I2C:bI2C_UDB:clk_eq_reg\/main_0
+Capture Clock  : \I2C:bI2C_UDB:clk_eq_reg\/clock_0
+Path slack     : 54466p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                    -870
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 59130
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4664
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4664
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:Net_643_3\/clock_0                                   macrocell31      0      0  RISE       1
+
+Data path
+pin name                          model name   delay     AT  slack  edge  Fanout
+--------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:Net_643_3\/q                 macrocell31    320    320  54266  FALL       1
+SCL(0)/pin_input                  iocell5          0    320  54266  FALL       1
+SCL(0)/pad_out                    iocell5       2757   3077  54266  FALL       1
+SCL(0)/pad_in                     iocell5          0   3077  54266  FALL       1
+SCL(0)/fb                         iocell5       1587   4664  54266  FALL       1
+\I2C:bI2C_UDB:clk_eq_reg\/main_0  macrocell30      0   4664  54466  FALL       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:clk_eq_reg\/clock_0                         macrocell30      0      0  RISE       1
+
+
+
+++++ Path 4 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_reset\/q
+Path End       : \I2C:bI2C_UDB:status_2\/main_6
+Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
+Path slack     : 57370p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1990
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58010
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       640
+-------------------------------------   --- 
+End-of-path arrival time (ps)           640
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_reset\/q        macrocell33    640    640  57370  RISE       1
+\I2C:bI2C_UDB:status_2\/main_6  macrocell17      0    640  57370  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
+
+
+
+++++ Path 5 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_reset\/q
+Path End       : \I2C:bI2C_UDB:status_3\/main_7
+Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
+Path slack     : 57540p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1820
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58180
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       640
+-------------------------------------   --- 
+End-of-path arrival time (ps)           640
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_reset\/q        macrocell33    640    640  57370  RISE       1
+\I2C:bI2C_UDB:status_3\/main_7  macrocell16      0    640  57540  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -449,37 +443,37 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 
 ++++ Path 6 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:SyncCtl:CtrlReg\/control_1
-Path End       : \I2C:bI2C_UDB:m_reset\/main_0
-Capture Clock  : \I2C:bI2C_UDB:m_reset\/clock_0
-Path slack     : 57730p
+Path Begin     : \I2C:bI2C_UDB:status_2\/q
+Path End       : \I2C:bI2C_UDB:status_2\/main_0
+Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
+Path slack     : 57620p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1700
+- Setup time                                   -1990
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58300
+End-of-path required time (ps)                 58010
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
-+ Data path delay                       570
++ Data path delay                       390
 -------------------------------------   --- 
-End-of-path arrival time (ps)           570
+End-of-path arrival time (ps)           390
  
 Launch Clock Path
-pin name                                                  model name    delay     AT  edge  Fanout
---------------------------------------------------------  ------------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock             0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN           0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN           0      0  RISE       1
-\I2C:bI2C_UDB:SyncCtl:CtrlReg\/clock                      controlcell1      0      0  RISE       1
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
 
 Data path
-pin name                                  model name    delay     AT  slack  edge  Fanout
-----------------------------------------  ------------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:SyncCtl:CtrlReg\/control_1  controlcell1    570    570  57730  RISE       1
-\I2C:bI2C_UDB:m_reset\/main_0             macrocell33       0    570  57730  RISE       1
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:status_2\/q       macrocell17    390    390  57620  RISE       1
+\I2C:bI2C_UDB:status_2\/main_0  macrocell17      0    390  57620  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -487,243 +481,23 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
+\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
 
 
 
 ++++ Path 7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:sda_in_reg\/q
-Path End       : \I2C:bI2C_UDB:sda_in_last_reg\/main_0
-Capture Clock  : \I2C:bI2C_UDB:sda_in_last_reg\/clock_0
-Path slack     : 57880p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1650
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58350
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       470
--------------------------------------   --- 
-End-of-path arrival time (ps)           470
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:sda_in_reg\/clock_0                         macrocell10      0      0  RISE       1
-
-Data path
-pin name                               model name   delay     AT  slack  edge  Fanout
--------------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:sda_in_reg\/q            macrocell10    470    470  57880  RISE       1
-\I2C:bI2C_UDB:sda_in_last_reg\/main_0  macrocell23      0    470  57880  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:sda_in_last_reg\/clock_0                    macrocell23      0      0  RISE       1
-
-
-
-++++ Path 8 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:SyncCtl:CtrlReg\/control_4
-Path End       : \I2C:sda_x_wire\/main_1
-Capture Clock  : \I2C:sda_x_wire\/clock_0
-Path slack     : 57890p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1350
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58650
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       760
--------------------------------------   --- 
-End-of-path arrival time (ps)           760
- 
-Launch Clock Path
-pin name                                                  model name    delay     AT  edge  Fanout
---------------------------------------------------------  ------------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock             0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN           0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN           0      0  RISE       1
-\I2C:bI2C_UDB:SyncCtl:CtrlReg\/clock                      controlcell1      0      0  RISE       1
-
-Data path
-pin name                                  model name    delay     AT  slack  edge  Fanout
-----------------------------------------  ------------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:SyncCtl:CtrlReg\/control_4  controlcell1    760    760  57890  RISE       1
-\I2C:sda_x_wire\/main_1                   macrocell32       0    760  57890  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
-
-
-
-++++ Path 9 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:scl_in_reg\/q
-Path End       : \I2C:bI2C_UDB:scl_in_last_reg\/main_0
-Capture Clock  : \I2C:bI2C_UDB:scl_in_last_reg\/clock_0
-Path slack     : 58030p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1420
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58580
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       550
--------------------------------------   --- 
-End-of-path arrival time (ps)           550
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:scl_in_reg\/clock_0                         macrocell20      0      0  RISE       1
-
-Data path
-pin name                               model name   delay     AT  slack  edge  Fanout
--------------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:scl_in_reg\/q            macrocell20    550    550  58030  RISE       1
-\I2C:bI2C_UDB:scl_in_last_reg\/main_0  macrocell21      0    550  58030  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:scl_in_last_reg\/clock_0                    macrocell21      0      0  RISE       1
-
-
-
-++++ Path 10 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
 Path Begin     : \I2C:bI2C_UDB:m_state_3\/q
-Path End       : \I2C:bI2C_UDB:status_0\/main_3
-Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
-Path slack     : 58060p
+Path End       : \I2C:bI2C_UDB:status_2\/main_2
+Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
+Path slack     : 57630p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1520
+- Setup time                                   -1990
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58480
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       420
--------------------------------------   --- 
-End-of-path arrival time (ps)           420
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_3\/q      macrocell12    420    420  56940  RISE       1
-\I2C:bI2C_UDB:status_0\/main_3  macrocell19      0    420  58060  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
-
-
-
-++++ Path 11 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_2\/q
-Path End       : \I2C:bI2C_UDB:status_0\/main_4
-Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
-Path slack     : 58060p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1520
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58480
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       420
--------------------------------------   --- 
-End-of-path arrival time (ps)           420
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_2\/clock_0                          macrocell13      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_2\/q      macrocell13    420    420  56940  RISE       1
-\I2C:bI2C_UDB:status_0\/main_4  macrocell19      0    420  58060  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
-
-
-
-++++ Path 12 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_1\/q
-Path End       : \I2C:bI2C_UDB:status_0\/main_5
-Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
-Path slack     : 58100p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1520
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58480
+End-of-path required time (ps)                 58010
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
@@ -737,13 +511,13 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_1\/clock_0                          macrocell14      0      0  RISE       1
+\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
 
 Data path
 pin name                        model name   delay     AT  slack  edge  Fanout
 ------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_1\/q      macrocell14    380    380  56980  RISE       1
-\I2C:bI2C_UDB:status_0\/main_5  macrocell19      0    380  58100  RISE       1
+\I2C:bI2C_UDB:m_state_3\/q      macrocell12    380    380  57630  RISE       1
+\I2C:bI2C_UDB:status_2\/main_2  macrocell17      0    380  57630  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -751,23 +525,67 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
+\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
 
 
 
-++++ Path 13 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 8 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:scl_in_last_reg\/q
-Path End       : \I2C:bI2C_UDB:scl_in_last2_reg\/main_0
-Capture Clock  : \I2C:bI2C_UDB:scl_in_last2_reg\/clock_0
-Path slack     : 58100p
+Path Begin     : \I2C:bI2C_UDB:m_reset\/q
+Path End       : \I2C:bI2C_UDB:clkgen_tc2_reg\/main_0
+Capture Clock  : \I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0
+Path slack     : 57640p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1560
+- Setup time                                   -1720
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58440
+End-of-path required time (ps)                 58280
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       640
+-------------------------------------   --- 
+End-of-path arrival time (ps)           640
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_reset\/q              macrocell33    640    640  57370  RISE       1
+\I2C:bI2C_UDB:clkgen_tc2_reg\/main_0  macrocell28      0    640  57640  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0                     macrocell28      0      0  RISE       1
+
+
+
+++++ Path 9 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_1\/q
+Path End       : \I2C:bI2C_UDB:status_2\/main_4
+Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
+Path slack     : 57670p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1990
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58010
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
@@ -781,13 +599,13 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:scl_in_last_reg\/clock_0                    macrocell21      0      0  RISE       1
+\I2C:bI2C_UDB:m_state_1\/clock_0                          macrocell14      0      0  RISE       1
 
 Data path
-pin name                                model name   delay     AT  slack  edge  Fanout
---------------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:scl_in_last_reg\/q        macrocell21    340    340  58100  RISE       1
-\I2C:bI2C_UDB:scl_in_last2_reg\/main_0  macrocell22      0    340  58100  RISE       1
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_1\/q      macrocell14    340    340  57670  RISE       1
+\I2C:bI2C_UDB:status_2\/main_4  macrocell17      0    340  57670  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -795,7 +613,183 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:scl_in_last2_reg\/clock_0                   macrocell22      0      0  RISE       1
+\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
+
+
+
+++++ Path 10 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_4\/q
+Path End       : \I2C:bI2C_UDB:status_2\/main_1
+Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
+Path slack     : 57680p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1990
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58010
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       330
+-------------------------------------   --- 
+End-of-path arrival time (ps)           330
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_state_4\/clock_0                          macrocell11      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_4\/q      macrocell11    330    330  57680  RISE       1
+\I2C:bI2C_UDB:status_2\/main_1  macrocell17      0    330  57680  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
+
+
+
+++++ Path 11 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_2\/q
+Path End       : \I2C:bI2C_UDB:status_2\/main_3
+Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
+Path slack     : 57680p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1990
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58010
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       330
+-------------------------------------   --- 
+End-of-path arrival time (ps)           330
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_state_2\/clock_0                          macrocell13      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_2\/q      macrocell13    330    330  57680  RISE       1
+\I2C:bI2C_UDB:status_2\/main_3  macrocell17      0    330  57680  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
+
+
+
+++++ Path 12 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_0\/q
+Path End       : \I2C:bI2C_UDB:status_2\/main_5
+Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
+Path slack     : 57690p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1990
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58010
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       320
+-------------------------------------   --- 
+End-of-path arrival time (ps)           320
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_state_0\/clock_0                          macrocell15      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_0\/q      macrocell15    320    320  57690  RISE       1
+\I2C:bI2C_UDB:status_2\/main_5  macrocell17      0    320  57690  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
+
+
+
+++++ Path 13 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:scl_in_reg\/q
+Path End       : \I2C:bI2C_UDB:scl_in_last_reg\/main_0
+Capture Clock  : \I2C:bI2C_UDB:scl_in_last_reg\/clock_0
+Path slack     : 57710p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1650
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58350
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       640
+-------------------------------------   --- 
+End-of-path arrival time (ps)           640
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:scl_in_reg\/clock_0                         macrocell20      0      0  RISE       1
+
+Data path
+pin name                               model name   delay     AT  slack  edge  Fanout
+-------------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:scl_in_reg\/q            macrocell20    640    640  57710  RISE       1
+\I2C:bI2C_UDB:scl_in_last_reg\/main_0  macrocell21      0    640  57710  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:scl_in_last_reg\/clock_0                    macrocell21      0      0  RISE       1
 
 
 
@@ -804,20 +798,20 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Path Begin     : \I2C:bI2C_UDB:m_reset\/q
 Path End       : \I2C:bI2C_UDB:status_0\/main_6
 Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
-Path slack     : 58100p
+Path slack     : 57740p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1520
+- Setup time                                   -1620
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58480
+End-of-path required time (ps)                 58380
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
-+ Data path delay                       380
++ Data path delay                       640
 -------------------------------------   --- 
-End-of-path arrival time (ps)           380
+End-of-path arrival time (ps)           640
  
 Launch Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -830,8 +824,8 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Data path
 pin name                        model name   delay     AT  slack  edge  Fanout
 ------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_reset\/q        macrocell33    380    380  58100  RISE       1
-\I2C:bI2C_UDB:status_0\/main_6  macrocell19      0    380  58100  RISE       1
+\I2C:bI2C_UDB:m_reset\/q        macrocell33    640    640  57370  RISE       1
+\I2C:bI2C_UDB:status_0\/main_6  macrocell19      0    640  57740  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -848,190 +842,14 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Path Begin     : \I2C:bI2C_UDB:m_state_3\/q
 Path End       : \I2C:bI2C_UDB:status_3\/main_3
 Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
-Path slack     : 58110p
+Path slack     : 57800p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1470
+- Setup time                                   -1820
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58530
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       420
--------------------------------------   --- 
-End-of-path arrival time (ps)           420
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_3\/q      macrocell12    420    420  56940  RISE       1
-\I2C:bI2C_UDB:status_3\/main_3  macrocell16      0    420  58110  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
-
-
-
-++++ Path 16 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_2\/q
-Path End       : \I2C:bI2C_UDB:status_3\/main_4
-Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
-Path slack     : 58110p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1470
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58530
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       420
--------------------------------------   --- 
-End-of-path arrival time (ps)           420
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_2\/clock_0                          macrocell13      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_2\/q      macrocell13    420    420  56940  RISE       1
-\I2C:bI2C_UDB:status_3\/main_4  macrocell16      0    420  58110  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
-
-
-
-++++ Path 17 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:Master:ClkGen:u0\/z0_comb
-Path End       : \I2C:bI2C_UDB:clkgen_tc1_reg\/main_0
-Capture Clock  : \I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0
-Path slack     : 58120p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1490
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58510
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       390
--------------------------------------   --- 
-End-of-path arrival time (ps)           390
- 
-Launch Clock Path
-pin name                                                  model name     delay     AT  edge  Fanout
---------------------------------------------------------  -------------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock              0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN            0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN            0      0  RISE       1
-\I2C:bI2C_UDB:Master:ClkGen:u0\/clock                     datapathcell2      0      0  RISE       1
-
-Data path
-pin name                                 model name     delay     AT  slack  edge  Fanout
----------------------------------------  -------------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:Master:ClkGen:u0\/z0_comb  datapathcell2    390    390  58120  RISE       1
-\I2C:bI2C_UDB:clkgen_tc1_reg\/main_0     macrocell25        0    390  58120  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0                     macrocell25      0      0  RISE       1
-
-
-
-++++ Path 18 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:clkgen_tc2_reg\/q
-Path End       : \I2C:sda_x_wire\/main_10
-Capture Clock  : \I2C:sda_x_wire\/clock_0
-Path slack     : 58120p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1350
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58650
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       530
--------------------------------------   --- 
-End-of-path arrival time (ps)           530
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0                     macrocell28      0      0  RISE       1
-
-Data path
-pin name                         model name   delay     AT  slack  edge  Fanout
--------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:clkgen_tc2_reg\/q  macrocell28    530    530  58120  RISE       1
-\I2C:sda_x_wire\/main_10         macrocell32      0    530  58120  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
-
-
-
-++++ Path 19 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_reset\/q
-Path End       : \I2C:bI2C_UDB:clkgen_tc1_reg\/main_1
-Capture Clock  : \I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0
-Path slack     : 58130p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1490
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58510
+End-of-path required time (ps)                 58180
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
@@ -1045,13 +863,13 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
+\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
 
 Data path
-pin name                              model name   delay     AT  slack  edge  Fanout
-------------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_reset\/q              macrocell33    380    380  58100  RISE       1
-\I2C:bI2C_UDB:clkgen_tc1_reg\/main_1  macrocell25      0    380  58130  RISE       1
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_3\/q      macrocell12    380    380  57630  RISE       1
+\I2C:bI2C_UDB:status_3\/main_3  macrocell16      0    380  57800  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1059,23 +877,155 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0                     macrocell25      0      0  RISE       1
+\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
 
 
 
-++++ Path 20 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 16 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:m_state_4\/q
-Path End       : \I2C:bI2C_UDB:status_0\/main_2
-Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
-Path slack     : 58150p
+Path Begin     : \I2C:bI2C_UDB:status_3\/q
+Path End       : \I2C:bI2C_UDB:status_3\/main_0
+Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
+Path slack     : 57800p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1520
+- Setup time                                   -1820
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58480
+End-of-path required time (ps)                 58180
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       380
+-------------------------------------   --- 
+End-of-path arrival time (ps)           380
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:status_3\/q       macrocell16    380    380  57800  RISE       1
+\I2C:bI2C_UDB:status_3\/main_0  macrocell16      0    380  57800  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
+
+
+
+++++ Path 17 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:sda_in_reg\/q
+Path End       : \I2C:bI2C_UDB:sda_in_last_reg\/main_0
+Capture Clock  : \I2C:bI2C_UDB:sda_in_last_reg\/clock_0
+Path slack     : 57820p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1630
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58370
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       550
+-------------------------------------   --- 
+End-of-path arrival time (ps)           550
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:sda_in_reg\/clock_0                         macrocell10      0      0  RISE       1
+
+Data path
+pin name                               model name   delay     AT  slack  edge  Fanout
+-------------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:sda_in_reg\/q            macrocell10    550    550  57820  RISE       1
+\I2C:bI2C_UDB:sda_in_last_reg\/main_0  macrocell23      0    550  57820  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:sda_in_last_reg\/clock_0                    macrocell23      0      0  RISE       1
+
+
+
+++++ Path 18 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_1\/q
+Path End       : \I2C:bI2C_UDB:status_3\/main_5
+Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
+Path slack     : 57840p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1820
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58180
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       340
+-------------------------------------   --- 
+End-of-path arrival time (ps)           340
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_state_1\/clock_0                          macrocell14      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_1\/q      macrocell14    340    340  57670  RISE       1
+\I2C:bI2C_UDB:status_3\/main_5  macrocell16      0    340  57840  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
+
+
+
+++++ Path 19 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_4\/q
+Path End       : \I2C:bI2C_UDB:status_3\/main_2
+Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
+Path slack     : 57850p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1820
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58180
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
@@ -1094,8 +1044,8 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Data path
 pin name                        model name   delay     AT  slack  edge  Fanout
 ------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_4\/q      macrocell11    330    330  57030  RISE       1
-\I2C:bI2C_UDB:status_0\/main_2  macrocell19      0    330  58150  RISE       1
+\I2C:bI2C_UDB:m_state_4\/q      macrocell11    330    330  57680  RISE       1
+\I2C:bI2C_UDB:status_3\/main_2  macrocell16      0    330  57850  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1103,29 +1053,29 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
+\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
 
 
 
-++++ Path 21 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 20 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:m_state_1\/q
-Path End       : \I2C:bI2C_UDB:status_3\/main_5
+Path Begin     : \I2C:bI2C_UDB:m_state_2\/q
+Path End       : \I2C:bI2C_UDB:status_3\/main_4
 Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
-Path slack     : 58150p
+Path slack     : 57850p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1470
+- Setup time                                   -1820
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58530
+End-of-path required time (ps)                 58180
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
-+ Data path delay                       380
++ Data path delay                       330
 -------------------------------------   --- 
-End-of-path arrival time (ps)           380
+End-of-path arrival time (ps)           330
  
 Launch Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1133,13 +1083,57 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_1\/clock_0                          macrocell14      0      0  RISE       1
+\I2C:bI2C_UDB:m_state_2\/clock_0                          macrocell13      0      0  RISE       1
 
 Data path
 pin name                        model name   delay     AT  slack  edge  Fanout
 ------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_1\/q      macrocell14    380    380  56980  RISE       1
-\I2C:bI2C_UDB:status_3\/main_5  macrocell16      0    380  58150  RISE       1
+\I2C:bI2C_UDB:m_state_2\/q      macrocell13    330    330  57680  RISE       1
+\I2C:bI2C_UDB:status_3\/main_4  macrocell16      0    330  57850  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
+
+
+
+++++ Path 21 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_0\/q
+Path End       : \I2C:bI2C_UDB:status_3\/main_6
+Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
+Path slack     : 57860p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1820
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58180
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       320
+-------------------------------------   --- 
+End-of-path arrival time (ps)           320
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_state_0\/clock_0                          macrocell15      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_0\/q      macrocell15    320    320  57690  RISE       1
+\I2C:bI2C_UDB:status_3\/main_6  macrocell16      0    320  57860  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1154,22 +1148,22 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 ++++ Path 22 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 Path Begin     : \I2C:bI2C_UDB:m_reset\/q
-Path End       : \I2C:bI2C_UDB:status_3\/main_7
-Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
-Path slack     : 58150p
+Path End       : \I2C:bI2C_UDB:clkgen_tc1_reg\/main_1
+Capture Clock  : \I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0
+Path slack     : 57920p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1470
+- Setup time                                   -1440
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58530
+End-of-path required time (ps)                 58560
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
-+ Data path delay                       380
++ Data path delay                       640
 -------------------------------------   --- 
-End-of-path arrival time (ps)           380
+End-of-path arrival time (ps)           640
  
 Launch Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1180,10 +1174,10 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 \I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
 
 Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_reset\/q        macrocell33    380    380  58100  RISE       1
-\I2C:bI2C_UDB:status_3\/main_7  macrocell16      0    380  58150  RISE       1
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_reset\/q              macrocell33    640    640  57370  RISE       1
+\I2C:bI2C_UDB:clkgen_tc1_reg\/main_1  macrocell25      0    640  57920  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1191,23 +1185,67 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
+\I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0                     macrocell25      0      0  RISE       1
 
 
 
 ++++ Path 23 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:status_0\/q
-Path End       : \I2C:bI2C_UDB:status_0\/main_0
-Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
-Path slack     : 58160p
+Path Begin     : \I2C:bI2C_UDB:scl_in_last_reg\/q
+Path End       : \I2C:bI2C_UDB:scl_in_last2_reg\/main_0
+Capture Clock  : \I2C:bI2C_UDB:scl_in_last2_reg\/clock_0
+Path slack     : 57950p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1520
+- Setup time                                   -1650
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58480
+End-of-path required time (ps)                 58350
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       400
+-------------------------------------   --- 
+End-of-path arrival time (ps)           400
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:scl_in_last_reg\/clock_0                    macrocell21      0      0  RISE       1
+
+Data path
+pin name                                model name   delay     AT  slack  edge  Fanout
+--------------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:scl_in_last_reg\/q        macrocell21    400    400  57950  RISE       1
+\I2C:bI2C_UDB:scl_in_last2_reg\/main_0  macrocell22      0    400  57950  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:scl_in_last2_reg\/clock_0                   macrocell22      0      0  RISE       1
+
+
+
+++++ Path 24 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:clkgen_tc1_reg\/q
+Path End       : \I2C:bI2C_UDB:clkgen_tc2_reg\/main_1
+Capture Clock  : \I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0
+Path slack     : 57960p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1720
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58280
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
@@ -1221,13 +1259,101 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
+\I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0                     macrocell25      0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:clkgen_tc1_reg\/q       macrocell25    320    320  57960  RISE       1
+\I2C:bI2C_UDB:clkgen_tc2_reg\/main_1  macrocell28      0    320  57960  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0                     macrocell28      0      0  RISE       1
+
+
+
+++++ Path 25 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:SyncCtl:CtrlReg\/control_1
+Path End       : \I2C:bI2C_UDB:m_reset\/main_0
+Capture Clock  : \I2C:bI2C_UDB:m_reset\/clock_0
+Path slack     : 58000p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1060
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58940
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       940
+-------------------------------------   --- 
+End-of-path arrival time (ps)           940
+ 
+Launch Clock Path
+pin name                                                  model name    delay     AT  edge  Fanout
+--------------------------------------------------------  ------------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock             0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN           0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN           0      0  RISE       1
+\I2C:bI2C_UDB:SyncCtl:CtrlReg\/clock                      controlcell1      0      0  RISE       1
+
+Data path
+pin name                                  model name    delay     AT  slack  edge  Fanout
+----------------------------------------  ------------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:SyncCtl:CtrlReg\/control_1  controlcell1    940    940  58000  RISE       1
+\I2C:bI2C_UDB:m_reset\/main_0             macrocell33       0    940  58000  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
+
+
+
+++++ Path 26 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_3\/q
+Path End       : \I2C:bI2C_UDB:status_0\/main_3
+Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
+Path slack     : 58000p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1620
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58380
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       380
+-------------------------------------   --- 
+End-of-path arrival time (ps)           380
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
 
 Data path
 pin name                        model name   delay     AT  slack  edge  Fanout
 ------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:status_0\/q       macrocell19    320    320  58160  RISE       1
-\I2C:bI2C_UDB:status_0\/main_0  macrocell19      0    320  58160  RISE       1
+\I2C:bI2C_UDB:m_state_3\/q      macrocell12    380    380  57630  RISE       1
+\I2C:bI2C_UDB:status_0\/main_3  macrocell19      0    380  58000  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1239,19 +1365,151 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 
 
 
-++++ Path 24 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 27 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:m_state_4\/q
-Path End       : \I2C:bI2C_UDB:status_3\/main_2
-Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
-Path slack     : 58200p
+Path Begin     : \I2C:bI2C_UDB:m_reset\/q
+Path End       : \I2C:sda_x_wire\/main_8
+Capture Clock  : \I2C:sda_x_wire\/clock_0
+Path slack     : 58010p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1470
+- Setup time                                   -1350
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58530
+End-of-path required time (ps)                 58650
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       640
+-------------------------------------   --- 
+End-of-path arrival time (ps)           640
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
+
+Data path
+pin name                  model name   delay     AT  slack  edge  Fanout
+------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_reset\/q  macrocell33    640    640  57370  RISE       1
+\I2C:sda_x_wire\/main_8   macrocell32      0    640  58010  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
+
+
+
+++++ Path 28 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:SyncCtl:CtrlReg\/control_4
+Path End       : \I2C:sda_x_wire\/main_1
+Capture Clock  : \I2C:sda_x_wire\/clock_0
+Path slack     : 58030p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1350
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58650
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       620
+-------------------------------------   --- 
+End-of-path arrival time (ps)           620
+ 
+Launch Clock Path
+pin name                                                  model name    delay     AT  edge  Fanout
+--------------------------------------------------------  ------------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock             0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN           0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN           0      0  RISE       1
+\I2C:bI2C_UDB:SyncCtl:CtrlReg\/clock                      controlcell1      0      0  RISE       1
+
+Data path
+pin name                                  model name    delay     AT  slack  edge  Fanout
+----------------------------------------  ------------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:SyncCtl:CtrlReg\/control_4  controlcell1    620    620  58030  RISE       1
+\I2C:sda_x_wire\/main_1                   macrocell32       0    620  58030  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
+
+
+
+++++ Path 29 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_1\/q
+Path End       : \I2C:bI2C_UDB:status_0\/main_5
+Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
+Path slack     : 58040p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1620
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58380
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       340
+-------------------------------------   --- 
+End-of-path arrival time (ps)           340
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_state_1\/clock_0                          macrocell14      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_1\/q      macrocell14    340    340  57670  RISE       1
+\I2C:bI2C_UDB:status_0\/main_5  macrocell19      0    340  58040  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
+
+
+
+++++ Path 30 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_4\/q
+Path End       : \I2C:bI2C_UDB:status_0\/main_2
+Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
+Path slack     : 58050p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1620
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58380
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
@@ -1270,8 +1528,8 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Data path
 pin name                        model name   delay     AT  slack  edge  Fanout
 ------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_4\/q      macrocell11    330    330  57030  RISE       1
-\I2C:bI2C_UDB:status_3\/main_2  macrocell16      0    330  58200  RISE       1
+\I2C:bI2C_UDB:m_state_4\/q      macrocell11    330    330  57680  RISE       1
+\I2C:bI2C_UDB:status_0\/main_2  macrocell19      0    330  58050  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1279,161 +1537,29 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
+\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
 
 
 
-++++ Path 25 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_0\/q
-Path End       : \I2C:bI2C_UDB:status_3\/main_6
-Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
-Path slack     : 58200p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1470
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58530
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       330
--------------------------------------   --- 
-End-of-path arrival time (ps)           330
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_0\/clock_0                          macrocell15      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_0\/q      macrocell15    330    330  57030  RISE       1
-\I2C:bI2C_UDB:status_3\/main_6  macrocell16      0    330  58200  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
-
-
-
-++++ Path 26 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:status_3\/q
-Path End       : \I2C:bI2C_UDB:status_3\/main_0
-Capture Clock  : \I2C:bI2C_UDB:status_3\/clock_0
-Path slack     : 58200p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1470
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58530
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       330
--------------------------------------   --- 
-End-of-path arrival time (ps)           330
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:status_3\/q       macrocell16    330    330  58200  RISE       1
-\I2C:bI2C_UDB:status_3\/main_0  macrocell16      0    330  58200  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_3\/clock_0                           macrocell16      0      0  RISE       1
-
-
-
-++++ Path 27 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_3\/q
-Path End       : \I2C:sda_x_wire\/main_4
-Capture Clock  : \I2C:sda_x_wire\/clock_0
-Path slack     : 58230p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1350
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58650
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       420
--------------------------------------   --- 
-End-of-path arrival time (ps)           420
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
-
-Data path
-pin name                    model name   delay     AT  slack  edge  Fanout
---------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_3\/q  macrocell12    420    420  56940  RISE       1
-\I2C:sda_x_wire\/main_4     macrocell32      0    420  58230  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
-
-
-
-++++ Path 28 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 31 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 Path Begin     : \I2C:bI2C_UDB:m_state_2\/q
-Path End       : \I2C:sda_x_wire\/main_5
-Capture Clock  : \I2C:sda_x_wire\/clock_0
-Path slack     : 58230p
+Path End       : \I2C:bI2C_UDB:status_0\/main_4
+Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
+Path slack     : 58050p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1350
+- Setup time                                   -1620
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58650
+End-of-path required time (ps)                 58380
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
-+ Data path delay                       420
++ Data path delay                       330
 -------------------------------------   --- 
-End-of-path arrival time (ps)           420
+End-of-path arrival time (ps)           330
  
 Launch Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1444,10 +1570,10 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 \I2C:bI2C_UDB:m_state_2\/clock_0                          macrocell13      0      0  RISE       1
 
 Data path
-pin name                    model name   delay     AT  slack  edge  Fanout
---------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_2\/q  macrocell13    420    420  56940  RISE       1
-\I2C:sda_x_wire\/main_5     macrocell32      0    420  58230  RISE       1
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_2\/q      macrocell13    330    330  57680  RISE       1
+\I2C:bI2C_UDB:status_0\/main_4  macrocell19      0    330  58050  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1455,16 +1581,60 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
+\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
 
 
 
-++++ Path 29 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 32 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:status_0\/q
+Path End       : \I2C:bI2C_UDB:status_0\/main_0
+Capture Clock  : \I2C:bI2C_UDB:status_0\/clock_0
+Path slack     : 58050p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1620
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58380
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       330
+-------------------------------------   --- 
+End-of-path arrival time (ps)           330
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
+
+Data path
+pin name                        model name   delay     AT  slack  edge  Fanout
+------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:status_0\/q       macrocell19    330    330  58050  RISE       1
+\I2C:bI2C_UDB:status_0\/main_0  macrocell19      0    330  58050  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:status_0\/clock_0                           macrocell19      0      0  RISE       1
+
+
+
+++++ Path 33 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 Path Begin     : \I2C:bI2C_UDB:lost_arb_reg\/q
 Path End       : \I2C:sda_x_wire\/main_9
 Capture Clock  : \I2C:sda_x_wire\/clock_0
-Path slack     : 58240p
+Path slack     : 58180p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
@@ -1475,9 +1645,9 @@ End-of-path required time (ps)                 58650
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
-+ Data path delay                       410
++ Data path delay                       470
 -------------------------------------   --- 
-End-of-path arrival time (ps)           410
+End-of-path arrival time (ps)           470
  
 Launch Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1490,8 +1660,8 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Data path
 pin name                       model name   delay     AT  slack  edge  Fanout
 -----------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:lost_arb_reg\/q  macrocell26    410    410  58240  RISE       1
-\I2C:sda_x_wire\/main_9        macrocell32      0    410  58240  RISE       1
+\I2C:bI2C_UDB:lost_arb_reg\/q  macrocell26    470    470  58180  RISE       1
+\I2C:sda_x_wire\/main_9        macrocell32      0    470  58180  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1503,107 +1673,19 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 
 
 
-++++ Path 30 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 34 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:m_state_1\/q
-Path End       : \I2C:sda_x_wire\/main_6
-Capture Clock  : \I2C:sda_x_wire\/clock_0
-Path slack     : 58270p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1350
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58650
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       380
--------------------------------------   --- 
-End-of-path arrival time (ps)           380
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_1\/clock_0                          macrocell14      0      0  RISE       1
-
-Data path
-pin name                    model name   delay     AT  slack  edge  Fanout
---------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_1\/q  macrocell14    380    380  56980  RISE       1
-\I2C:sda_x_wire\/main_6     macrocell32      0    380  58270  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
-
-
-
-++++ Path 31 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_reset\/q
-Path End       : \I2C:sda_x_wire\/main_8
-Capture Clock  : \I2C:sda_x_wire\/clock_0
-Path slack     : 58270p
+Path Begin     : \I2C:bI2C_UDB:Master:ClkGen:u0\/z0_comb
+Path End       : \I2C:bI2C_UDB:clkgen_tc1_reg\/main_0
+Capture Clock  : \I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0
+Path slack     : 58210p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1350
+- Setup time                                   -1440
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58650
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       380
--------------------------------------   --- 
-End-of-path arrival time (ps)           380
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
-
-Data path
-pin name                  model name   delay     AT  slack  edge  Fanout
-------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_reset\/q  macrocell33    380    380  58100  RISE       1
-\I2C:sda_x_wire\/main_8   macrocell32      0    380  58270  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
-
-
-
-++++ Path 32 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:Shifter:u0\/so_comb
-Path End       : \I2C:sda_x_wire\/main_2
-Capture Clock  : \I2C:sda_x_wire\/clock_0
-Path slack     : 58300p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1350
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58650
+End-of-path required time (ps)                 58560
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
@@ -1617,13 +1699,57 @@ pin name                                                  model name     delay  
 ClockBlock/udb_div_0                                      Clock              0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN            0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN            0      0  RISE       1
+\I2C:bI2C_UDB:Master:ClkGen:u0\/clock                     datapathcell2      0      0  RISE       1
+
+Data path
+pin name                                 model name     delay     AT  slack  edge  Fanout
+---------------------------------------  -------------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:Master:ClkGen:u0\/z0_comb  datapathcell2    350    350  58210  RISE       1
+\I2C:bI2C_UDB:clkgen_tc1_reg\/main_0     macrocell25        0    350  58210  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0                     macrocell25      0      0  RISE       1
+
+
+
+++++ Path 35 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:Shifter:u0\/so_comb
+Path End       : \I2C:sda_x_wire\/main_2
+Capture Clock  : \I2C:sda_x_wire\/clock_0
+Path slack     : 58260p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1350
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58650
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       390
+-------------------------------------   --- 
+End-of-path arrival time (ps)           390
+ 
+Launch Clock Path
+pin name                                                  model name     delay     AT  edge  Fanout
+--------------------------------------------------------  -------------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock              0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN            0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN            0      0  RISE       1
 \I2C:bI2C_UDB:Shifter:u0\/clock                           datapathcell1      0      0  RISE       1
 
 Data path
 pin name                           model name     delay     AT  slack  edge  Fanout
 ---------------------------------  -------------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:Shifter:u0\/so_comb  datapathcell1    350    350  58300  RISE       1
-\I2C:sda_x_wire\/main_2            macrocell32        0    350  58300  RISE       1
+\I2C:bI2C_UDB:Shifter:u0\/so_comb  datapathcell1    390    390  58260  RISE       1
+\I2C:sda_x_wire\/main_2            macrocell32        0    390  58260  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1635,7 +1761,139 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 
 
 
-++++ Path 33 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 36 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_3\/q
+Path End       : \I2C:sda_x_wire\/main_4
+Capture Clock  : \I2C:sda_x_wire\/clock_0
+Path slack     : 58270p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1350
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58650
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       380
+-------------------------------------   --- 
+End-of-path arrival time (ps)           380
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
+
+Data path
+pin name                    model name   delay     AT  slack  edge  Fanout
+--------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_3\/q  macrocell12    380    380  57630  RISE       1
+\I2C:sda_x_wire\/main_4     macrocell32      0    380  58270  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
+
+
+
+++++ Path 37 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:clkgen_tc2_reg\/q
+Path End       : \I2C:sda_x_wire\/main_10
+Capture Clock  : \I2C:sda_x_wire\/clock_0
+Path slack     : 58270p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1350
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58650
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       380
+-------------------------------------   --- 
+End-of-path arrival time (ps)           380
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0                     macrocell28      0      0  RISE       1
+
+Data path
+pin name                         model name   delay     AT  slack  edge  Fanout
+-------------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:clkgen_tc2_reg\/q  macrocell28    380    380  58270  RISE       1
+\I2C:sda_x_wire\/main_10         macrocell32      0    380  58270  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
+
+
+
+++++ Path 38 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \I2C:bI2C_UDB:m_state_1\/q
+Path End       : \I2C:sda_x_wire\/main_6
+Capture Clock  : \I2C:sda_x_wire\/clock_0
+Path slack     : 58310p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
+- Setup time                                   -1350
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 58650
+
+Launch Clock Arrival Time                     0
++ Clock path delay                        0
++ Data path delay                       340
+-------------------------------------   --- 
+End-of-path arrival time (ps)           340
+ 
+Launch Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:bI2C_UDB:m_state_1\/clock_0                          macrocell14      0      0  RISE       1
+
+Data path
+pin name                    model name   delay     AT  slack  edge  Fanout
+--------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_1\/q  macrocell14    340    340  57670  RISE       1
+\I2C:sda_x_wire\/main_6     macrocell32      0    340  58310  RISE       1
+
+Capture Clock Path
+pin name                                                  model name   delay     AT  edge  Fanout
+--------------------------------------------------------  -----------  -----  -----  ----  ------
+ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
+ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
+ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
+\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
+
+
+
+++++ Path 39 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 Path Begin     : \I2C:sda_x_wire\/q
 Path End       : \I2C:sda_x_wire\/main_0
@@ -1666,7 +1924,7 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Data path
 pin name                 model name   delay     AT  slack  edge  Fanout
 -----------------------  -----------  -----  -----  -----  ----  ------
-\I2C:sda_x_wire\/q       macrocell32    340    340  54476  FALL       1
+\I2C:sda_x_wire\/q       macrocell32    340    340  54116  FALL       1
 \I2C:sda_x_wire\/main_0  macrocell32      0    340  58310  FALL       1
 
 Capture Clock Path
@@ -1679,7 +1937,7 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 
 
 
-++++ Path 34 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 40 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 Path Begin     : \I2C:bI2C_UDB:m_state_4\/q
 Path End       : \I2C:sda_x_wire\/main_3
@@ -1710,7 +1968,7 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Data path
 pin name                    model name   delay     AT  slack  edge  Fanout
 --------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_4\/q  macrocell11    330    330  57030  RISE       1
+\I2C:bI2C_UDB:m_state_4\/q  macrocell11    330    330  57680  RISE       1
 \I2C:sda_x_wire\/main_3     macrocell32      0    330  58320  RISE       1
 
 Capture Clock Path
@@ -1723,10 +1981,10 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 
 
 
-++++ Path 35 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 41 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:m_state_0\/q
-Path End       : \I2C:sda_x_wire\/main_7
+Path Begin     : \I2C:bI2C_UDB:m_state_2\/q
+Path End       : \I2C:sda_x_wire\/main_5
 Capture Clock  : \I2C:sda_x_wire\/clock_0
 Path slack     : 58320p
 
@@ -1749,13 +2007,13 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_0\/clock_0                          macrocell15      0      0  RISE       1
+\I2C:bI2C_UDB:m_state_2\/clock_0                          macrocell13      0      0  RISE       1
 
 Data path
 pin name                    model name   delay     AT  slack  edge  Fanout
 --------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_0\/q  macrocell15    330    330  57030  RISE       1
-\I2C:sda_x_wire\/main_7     macrocell32      0    330  58320  RISE       1
+\I2C:bI2C_UDB:m_state_2\/q  macrocell13    330    330  57680  RISE       1
+\I2C:sda_x_wire\/main_5     macrocell32      0    330  58320  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1767,25 +2025,25 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 
 
 
-++++ Path 36 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 42 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
-Path Begin     : \I2C:bI2C_UDB:status_2\/q
-Path End       : \I2C:bI2C_UDB:status_2\/main_0
-Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
-Path slack     : 58520p
+Path Begin     : \I2C:bI2C_UDB:m_state_0\/q
+Path End       : \I2C:sda_x_wire\/main_7
+Capture Clock  : \I2C:sda_x_wire\/clock_0
+Path slack     : 58330p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1010
+- Setup time                                   -1350
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58990
+End-of-path required time (ps)                 58650
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
-+ Data path delay                       470
++ Data path delay                       320
 -------------------------------------   --- 
-End-of-path arrival time (ps)           470
+End-of-path arrival time (ps)           320
  
 Launch Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1793,13 +2051,13 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
+\I2C:bI2C_UDB:m_state_0\/clock_0                          macrocell15      0      0  RISE       1
 
 Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:status_2\/q       macrocell17    470    470  58520  RISE       1
-\I2C:bI2C_UDB:status_2\/main_0  macrocell17      0    470  58520  RISE       1
+pin name                    model name   delay     AT  slack  edge  Fanout
+--------------------------  -----------  -----  -----  -----  ----  ------
+\I2C:bI2C_UDB:m_state_0\/q  macrocell15    320    320  57690  RISE       1
+\I2C:sda_x_wire\/main_7     macrocell32      0    320  58330  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1807,29 +2065,29 @@ pin name                                                  model name   delay    
 ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
 ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
 ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
+\I2C:sda_x_wire\/clock_0                                  macrocell32      0      0  RISE       1
 
 
 
-++++ Path 37 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+++++ Path 43 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 Path Begin     : \I2C:bI2C_UDB:sda_in_last_reg\/q
 Path End       : \I2C:bI2C_UDB:sda_in_last2_reg\/main_0
 Capture Clock  : \I2C:bI2C_UDB:sda_in_last2_reg\/clock_0
-Path slack     : 58530p
+Path slack     : 58620p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1070
+- Setup time                                    -960
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 58930
+End-of-path required time (ps)                 59040
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
-+ Data path delay                       400
++ Data path delay                       420
 -------------------------------------   --- 
-End-of-path arrival time (ps)           400
+End-of-path arrival time (ps)           420
  
 Launch Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1842,8 +2100,8 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Data path
 pin name                                model name   delay     AT  slack  edge  Fanout
 --------------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:sda_in_last_reg\/q        macrocell23    400    400  58530  RISE       1
-\I2C:bI2C_UDB:sda_in_last2_reg\/main_0  macrocell24      0    400  58530  RISE       1
+\I2C:bI2C_UDB:sda_in_last_reg\/q        macrocell23    420    420  58620  RISE       1
+\I2C:bI2C_UDB:sda_in_last2_reg\/main_0  macrocell24      0    420  58620  RISE       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout
@@ -1855,371 +2113,19 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 
 
 
-++++ Path 38 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_3\/q
-Path End       : \I2C:bI2C_UDB:status_2\/main_2
-Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
-Path slack     : 58570p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1010
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58990
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       420
--------------------------------------   --- 
-End-of-path arrival time (ps)           420
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_3\/clock_0                          macrocell12      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_3\/q      macrocell12    420    420  56940  RISE       1
-\I2C:bI2C_UDB:status_2\/main_2  macrocell17      0    420  58570  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
-
-
-
-++++ Path 39 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_2\/q
-Path End       : \I2C:bI2C_UDB:status_2\/main_3
-Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
-Path slack     : 58570p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1010
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58990
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       420
--------------------------------------   --- 
-End-of-path arrival time (ps)           420
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_2\/clock_0                          macrocell13      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_2\/q      macrocell13    420    420  56940  RISE       1
-\I2C:bI2C_UDB:status_2\/main_3  macrocell17      0    420  58570  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
-
-
-
-++++ Path 40 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_1\/q
-Path End       : \I2C:bI2C_UDB:status_2\/main_4
-Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
-Path slack     : 58610p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1010
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58990
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       380
--------------------------------------   --- 
-End-of-path arrival time (ps)           380
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_1\/clock_0                          macrocell14      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_1\/q      macrocell14    380    380  56980  RISE       1
-\I2C:bI2C_UDB:status_2\/main_4  macrocell17      0    380  58610  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
-
-
-
-++++ Path 41 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_reset\/q
-Path End       : \I2C:bI2C_UDB:status_2\/main_6
-Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
-Path slack     : 58610p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1010
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58990
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       380
--------------------------------------   --- 
-End-of-path arrival time (ps)           380
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_reset\/q        macrocell33    380    380  58100  RISE       1
-\I2C:bI2C_UDB:status_2\/main_6  macrocell17      0    380  58610  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
-
-
-
-++++ Path 42 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_reset\/q
-Path End       : \I2C:bI2C_UDB:clkgen_tc2_reg\/main_0
-Capture Clock  : \I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0
-Path slack     : 58620p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1000
---------------------------------------------   ----- 
-End-of-path required time (ps)                 59000
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       380
--------------------------------------   --- 
-End-of-path arrival time (ps)           380
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_reset\/clock_0                            macrocell33      0      0  RISE       1
-
-Data path
-pin name                              model name   delay     AT  slack  edge  Fanout
-------------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_reset\/q              macrocell33    380    380  58100  RISE       1
-\I2C:bI2C_UDB:clkgen_tc2_reg\/main_0  macrocell28      0    380  58620  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0                     macrocell28      0      0  RISE       1
-
-
-
-++++ Path 43 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_4\/q
-Path End       : \I2C:bI2C_UDB:status_2\/main_1
-Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
-Path slack     : 58660p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1010
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58990
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       330
--------------------------------------   --- 
-End-of-path arrival time (ps)           330
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_4\/clock_0                          macrocell11      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_4\/q      macrocell11    330    330  57030  RISE       1
-\I2C:bI2C_UDB:status_2\/main_1  macrocell17      0    330  58660  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
-
-
-
 ++++ Path 44 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:m_state_0\/q
-Path End       : \I2C:bI2C_UDB:status_2\/main_5
-Capture Clock  : \I2C:bI2C_UDB:status_2\/clock_0
-Path slack     : 58660p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1010
---------------------------------------------   ----- 
-End-of-path required time (ps)                 58990
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       330
--------------------------------------   --- 
-End-of-path arrival time (ps)           330
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:m_state_0\/clock_0                          macrocell15      0      0  RISE       1
-
-Data path
-pin name                        model name   delay     AT  slack  edge  Fanout
-------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:m_state_0\/q      macrocell15    330    330  57030  RISE       1
-\I2C:bI2C_UDB:status_2\/main_5  macrocell17      0    330  58660  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:status_2\/clock_0                           macrocell17      0      0  RISE       1
-
-
-
-++++ Path 45 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-
-Path Begin     : \I2C:bI2C_UDB:clkgen_tc1_reg\/q
-Path End       : \I2C:bI2C_UDB:clkgen_tc2_reg\/main_1
-Capture Clock  : \I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0
-Path slack     : 58670p
-
-Capture Clock Arrival Time                         0
-+ Clock path delay                                 0
-+ Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                   -1000
---------------------------------------------   ----- 
-End-of-path required time (ps)                 59000
-
-Launch Clock Arrival Time                     0
-+ Clock path delay                        0
-+ Data path delay                       330
--------------------------------------   --- 
-End-of-path arrival time (ps)           330
- 
-Launch Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:clkgen_tc1_reg\/clock_0                     macrocell25      0      0  RISE       1
-
-Data path
-pin name                              model name   delay     AT  slack  edge  Fanout
-------------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:bI2C_UDB:clkgen_tc1_reg\/q       macrocell25    330    330  57030  RISE       1
-\I2C:bI2C_UDB:clkgen_tc2_reg\/main_1  macrocell28      0    330  58670  RISE       1
-
-Capture Clock Path
-pin name                                                  model name   delay     AT  edge  Fanout
---------------------------------------------------------  -----------  -----  -----  ----  ------
-ClockBlock/udb_div_0                                      Clock            0      0  RISE       1
-ClockGenBlock/gen_clk_in_0                                CLK_GEN          0      0  RISE       1
-ClockGenBlock/gen_clk_out_0                               CLK_GEN          0      0  RISE       1
-\I2C:bI2C_UDB:clkgen_tc2_reg\/clock_0                     macrocell28      0      0  RISE       1
-
-
-
-++++ Path 46 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 Path Begin     : \I2C:Net_643_3\/q
 Path End       : \I2C:bI2C_UDB:clk_eq_reg\/main_1
 Capture Clock  : \I2C:bI2C_UDB:clk_eq_reg\/clock_0
-Path slack     : 58700p
+Path slack     : 58810p
 
 Capture Clock Arrival Time                         0
 + Clock path delay                                 0
 + Cycle adjust (CLK_App:R#1 vs. CLK_App:R#2)   60000
-- Setup time                                    -980
+- Setup time                                    -870
 --------------------------------------------   ----- 
-End-of-path required time (ps)                 59020
+End-of-path required time (ps)                 59130
 
 Launch Clock Arrival Time                     0
 + Clock path delay                        0
@@ -2238,8 +2144,8 @@ ClockGenBlock/gen_clk_out_0                               CLK_GEN          0    
 Data path
 pin name                          model name   delay     AT  slack  edge  Fanout
 --------------------------------  -----------  -----  -----  -----  ----  ------
-\I2C:Net_643_3\/q                 macrocell31    320    320  54136  FALL       1
-\I2C:bI2C_UDB:clk_eq_reg\/main_1  macrocell30      0    320  58700  FALL       1
+\I2C:Net_643_3\/q                 macrocell31    320    320  54266  FALL       1
+\I2C:bI2C_UDB:clk_eq_reg\/main_1  macrocell30      0    320  58810  FALL       1
 
 Capture Clock Path
 pin name                                                  model name   delay     AT  edge  Fanout

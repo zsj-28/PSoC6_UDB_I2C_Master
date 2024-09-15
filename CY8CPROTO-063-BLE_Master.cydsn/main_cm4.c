@@ -240,7 +240,7 @@ int main(void) {
     UART_Start();
     
     // Intialize UART_1 for data transmission to ESP32
-    UART_1_Start();
+    // UART_1_Start();
     
     // Initialize I2C for digital sensor communication
     I2C_Start();
@@ -338,6 +338,9 @@ int main(void) {
                 
                 u16Int2Bytes(L850, &packet[packetsize]); // raw intensity B
                 packetsize += sizeof(uint16_t);
+                
+                float2Bytes(SO2, &packet[packetsize]);
+                packetsize += sizeof(float32_t);
                 
                 float2Bytes(SO2_avg, &packet[packetsize]);
                 packetsize += sizeof(float32_t);

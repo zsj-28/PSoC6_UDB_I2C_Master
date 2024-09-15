@@ -18,8 +18,6 @@
 #include "cy_crypto.h"
 #include "cy_crypto_common.h"
 #include "cy_crypto_server.h"
-#include "cy_ctb.h"
-#include "cy_ctdac.h"
 #include "cy_efuse.h"
 #include "cy_flash.h"
 #include "cy_gpio.h"
@@ -119,12 +117,8 @@
 #include "ADC.h"
 #include "Timer.h"
 #include "Clock_1.h"
-#include "VDAC.h"
-#include "Clock_2.h"
-#include "UART_1.h"
 #include "UART_SCBCLK.h"
 #include "ADC_intSarClock.h"
-#include "UART_1_SCBCLK.h"
 
 /*[]*/
 

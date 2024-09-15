@@ -57,6 +57,7 @@ static const cy_stc_sar_config_t ADC_hwConfigs[ADC_TOTAL_CONFIGS] = {
             | SAR_CHAN_CONFIG_NEG_ADDR_EN_Msk
         #else
         #endif
+        | SAR_CHAN_CONFIG_AVG_EN_Msk
         | (uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos),
         (uint32_t) (ADC_SARMUX__CH_1_PORT << SAR_CHAN_CONFIG_POS_PORT_ADDR_Pos) |
         (uint32_t) ADC_SARMUX__CH_1_PIN
@@ -66,6 +67,7 @@ static const cy_stc_sar_config_t ADC_hwConfigs[ADC_TOTAL_CONFIGS] = {
             | SAR_CHAN_CONFIG_NEG_ADDR_EN_Msk
         #else
         #endif
+        | SAR_CHAN_CONFIG_AVG_EN_Msk
         | (uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos),
         (uint32_t) (ADC_SARMUX__CH_2_PORT << SAR_CHAN_CONFIG_POS_PORT_ADDR_Pos) |
         (uint32_t) ADC_SARMUX__CH_2_PIN
@@ -75,6 +77,7 @@ static const cy_stc_sar_config_t ADC_hwConfigs[ADC_TOTAL_CONFIGS] = {
             | SAR_CHAN_CONFIG_NEG_ADDR_EN_Msk
         #else
         #endif
+        | SAR_CHAN_CONFIG_AVG_EN_Msk
         | (uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos),
         (uint32_t) (ADC_SARMUX__CH_3_PORT << SAR_CHAN_CONFIG_POS_PORT_ADDR_Pos) |
         (uint32_t) ADC_SARMUX__CH_3_PIN
@@ -84,43 +87,12 @@ static const cy_stc_sar_config_t ADC_hwConfigs[ADC_TOTAL_CONFIGS] = {
             | SAR_CHAN_CONFIG_NEG_ADDR_EN_Msk
         #else
         #endif
+        | SAR_CHAN_CONFIG_AVG_EN_Msk
         | (uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos),
-        (uint32_t) (ADC_SARMUX__CH_4_PORT << SAR_CHAN_CONFIG_POS_PORT_ADDR_Pos) |
-        (uint32_t) ADC_SARMUX__CH_4_PIN
-        #ifdef ADC_SARMUX__CH_4_MINUS_PIN
-            | (uint32_t) (ADC_SARMUX__CH_4_MINUS_PIN << SAR_CHAN_CONFIG_NEG_PIN_ADDR_Pos) 
-            | (uint32_t) (ADC_SARMUX__CH_4_MINUS_PORT  << SAR_CHAN_CONFIG_NEG_PORT_ADDR_Pos)
-            | SAR_CHAN_CONFIG_NEG_ADDR_EN_Msk
-        #else
-        #endif
-        | (uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos),
-        (uint32_t) (ADC_SARMUX__CH_5_PORT << SAR_CHAN_CONFIG_POS_PORT_ADDR_Pos) |
-        (uint32_t) ADC_SARMUX__CH_5_PIN
-        #ifdef ADC_SARMUX__CH_5_MINUS_PIN
-            | (uint32_t) (ADC_SARMUX__CH_5_MINUS_PIN << SAR_CHAN_CONFIG_NEG_PIN_ADDR_Pos) 
-            | (uint32_t) (ADC_SARMUX__CH_5_MINUS_PORT  << SAR_CHAN_CONFIG_NEG_PORT_ADDR_Pos)
-            | SAR_CHAN_CONFIG_NEG_ADDR_EN_Msk
-        #else
-        #endif
-        | (uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos),
-        (uint32_t) (ADC_SARMUX__CH_6_PORT << SAR_CHAN_CONFIG_POS_PORT_ADDR_Pos) |
-        (uint32_t) ADC_SARMUX__CH_6_PIN
-        #ifdef ADC_SARMUX__CH_6_MINUS_PIN
-            | (uint32_t) (ADC_SARMUX__CH_6_MINUS_PIN << SAR_CHAN_CONFIG_NEG_PIN_ADDR_Pos) 
-            | (uint32_t) (ADC_SARMUX__CH_6_MINUS_PORT  << SAR_CHAN_CONFIG_NEG_PORT_ADDR_Pos)
-            | SAR_CHAN_CONFIG_NEG_ADDR_EN_Msk
-        #else
-        #endif
-        | (uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos),
-        (uint32_t) (ADC_SARMUX__CH_7_PORT << SAR_CHAN_CONFIG_POS_PORT_ADDR_Pos) |
-        (uint32_t) ADC_SARMUX__CH_7_PIN
-        #ifdef ADC_SARMUX__CH_7_MINUS_PIN
-            | (uint32_t) (ADC_SARMUX__CH_7_MINUS_PIN << SAR_CHAN_CONFIG_NEG_PIN_ADDR_Pos) 
-            | (uint32_t) (ADC_SARMUX__CH_7_MINUS_PORT  << SAR_CHAN_CONFIG_NEG_PORT_ADDR_Pos)
-            | SAR_CHAN_CONFIG_NEG_ADDR_EN_Msk
-        #else
-        #endif
-        | (uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos),
+        CY_SAR_DEINIT,
+        CY_SAR_DEINIT,
+        CY_SAR_DEINIT,
+        CY_SAR_DEINIT,
         CY_SAR_DEINIT,
         CY_SAR_DEINIT,
         CY_SAR_DEINIT,
