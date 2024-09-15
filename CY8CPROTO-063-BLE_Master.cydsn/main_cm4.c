@@ -149,6 +149,7 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data);
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length);
 float32_t movingAvg(uint16_t *ptrArrNumbers, uint32_t *ptrSum, uint32_t pos, uint32_t len, uint16_t nextNum);
 void float2Bytes(float32_t val, uint8_t *bytes_array);
+void u16Int2Bytes(uint16_t val, uint8_t *bytes_array);
 void PrintData(uint8_t* data, uint8_t len);
 
 /* Foreground ISRs */
@@ -195,7 +196,8 @@ CY_ISR (Timer_Int_Handler) {
             for (uint16_t i = 0; i < ADC_NUM_CHANNELS; i++) {
                 ADCData[i] = 0;
             }
-            printf("error: Conversion not finished yet!");
+            // printf("error: Conversion not finished yet!");
+            Cy_SysLib_Delay(5u); // wait 5 ms to signal error
         }        
     }
     
@@ -257,6 +259,7 @@ int main(void) {
 
     if (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
         printf("error: ADPD1080 sensor initialization failed!\r\n");
+        Cy_SysLib_Delay(5u); // wait 5 ms before retrying
         // while (1); // Loop forever on failure
     }
     
@@ -330,16 +333,16 @@ int main(void) {
                         + cal2[4]*log(avg_valA)*log(avg_valB) + cal2[5]*log(avg_valA)*R_avg;
                 
                 // Populate packet buffer
-                float2Bytes(avg_valA, &packet[packetsize]); // demo only, Hemoglobin for actual
-                packetsize += sizeof(float32_t);
+                u16Int2Bytes(L680, &packet[packetsize]); // raw intensity A
+                packetsize += sizeof(uint16_t);
                 
-                float2Bytes(avg_valB, &packet[packetsize]); // demo only
-                packetsize += sizeof(float32_t);
-                
-                float2Bytes(SO2, &packet[packetsize]);
-                packetsize += sizeof(float32_t);
+                u16Int2Bytes(L850, &packet[packetsize]); // raw intensity B
+                packetsize += sizeof(uint16_t);
                 
                 float2Bytes(SO2_avg, &packet[packetsize]);
+                packetsize += sizeof(float32_t);
+                
+                float2Bytes(HBT_avg, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
             }
             
@@ -361,7 +364,8 @@ int main(void) {
 				(uint32_t*) (encrypted_pkt + AES128_ENCRYPTION_LENGTH * i),\
 				(uint32_t*) (packet + AES128_ENCRYPTION_LENGTH * i), &cryptoAES);
                 if (status != CY_CRYPTO_SUCCESS) {
-                    printf("error: AES Encryption failed!\r\n");
+                    // printf("error: AES Encryption failed!\r\n");
+                    Cy_SysLib_Delay(5u); // wait 5 ms to signal error
                 }
 
 				/* Wait for Crypto Block to be available */
@@ -369,7 +373,7 @@ int main(void) {
 			}
             
             // Transmit packet
-            wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);        
+            wrap_data(OPCODE_ALL, packet, AESBlock_count*AES128_ENCRYPTION_LENGTH); // Use unencrypted packet, sheep study only
         }
     }
 }
@@ -413,8 +417,9 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
 */
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     // Ensure previous transmission is not ongoing before modifying transmit buffer
-    while (UART_1_GetTransmitStatus() == CY_SCB_UART_TRANSMIT_ACTIVE) {
-        printf("Waiting for previous transmission to complete\r\n");
+    while (UART_GetTransmitStatus() == CY_SCB_UART_TRANSMIT_ACTIVE) {
+        // printf("Waiting for previous transmission to complete\r\n");
+        Cy_SysLib_Delay(5u); // wait 5 ms for completion        
     }
     
     cy_en_scb_uart_status_t status;
@@ -423,15 +428,14 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     memcpy(&txBuffer[2], data, length);
     txBuffer[2 + length] = calculateCRC8(opcode, length, data);
     
-    status = UART_1_Transmit(txBuffer, 2 + length + 1);
+    status = UART_Transmit(txBuffer, 2 + length + 1);
     if (status != CY_SCB_UART_SUCCESS) {
-        printf("\r\nerror: Tx status 0x%x\r\n", status);
+        // printf("\r\nerror: Tx status 0x%x\r\n", status);
+        Cy_SysLib_Delay(5u); // wait 5 ms to signal error
     }
     
-    // TODO: New param + duplicate body w/ UART instead of UART_1 for RPi logging
-    
     // demo only
-    printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, txBuffer[2 + length]);    
+    // printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, txBuffer[2 + length]);    
 }
 
 /**
@@ -478,6 +482,24 @@ void float2Bytes(float32_t val, uint8_t *bytes_array) {
     u.float_variable = val;
     // Assign bytes to input array
     memcpy(bytes_array, u.temp_array, 4);
+}
+
+/**
+ * @brief Helper function for main background loop converting uint16_t to uint8_t array
+ *
+ * @note based on float2Bytes
+ * @return none
+*/
+void u16Int2Bytes(uint16_t val, uint8_t *bytes_array) {
+    // Create union of shared memory space
+    union {
+        uint16_t int_variable;
+        uint8_t temp_array[2];
+    } u;
+    // Overite bytes of union with float variable
+    u.int_variable = val;
+    // Assign bytes to input array
+    memcpy(bytes_array, u.temp_array, 2);
 }
 
 /**
