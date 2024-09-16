@@ -347,13 +347,18 @@ int main(void) {
                 
                 float2Bytes(HBT_avg, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
+                
+                printf("L680: %u, L850: %u, SO2: %f, SO2_avg: %f, HBT_avg: %f\r\n", L680, L850, SO2, SO2_avg, HBT_avg);
             }
             
             // Process ADC data
             for (uint8_t i = 0; i < ADC_NUM_CHANNELS; i++) {
-                float2Bytes(Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]), &packet[packetsize]);
+                float32_t ADCVolts = Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]);
+                float2Bytes(ADCVolts, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
+                printf("ADC %d: %f, ", i, ADCVolts);
             }
+            printf("\r\n");
             
             // Encrypt packet
             AESBlock_count = (packetsize % AES128_ENCRYPTION_LENGTH == 0) ? \
@@ -376,7 +381,7 @@ int main(void) {
 			}
             
             // Transmit packet
-            wrap_data(OPCODE_ALL, packet, AESBlock_count*AES128_ENCRYPTION_LENGTH); // Use unencrypted packet, sheep study only
+            // wrap_data(OPCODE_ALL, packet, AESBlock_count*AES128_ENCRYPTION_LENGTH); // Use unencrypted packet, sheep study only
         }
     }
 }
@@ -426,12 +431,14 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     }
     
     cy_en_scb_uart_status_t status;
-    txBuffer[0] = opcode;
-    txBuffer[1] = length;
-    memcpy(&txBuffer[2], data, length);
-    txBuffer[2 + length] = calculateCRC8(opcode, length, data);
+    txBuffer[0] = 0xAB; // Start byte 1
+    txBuffer[1] = 0xCD; // Start byte 2
+    txBuffer[2] = opcode;
+    txBuffer[3] = length;
+    memcpy(&txBuffer[4], data, length);
+    txBuffer[4 + length] = calculateCRC8(opcode, length, data);
     
-    status = UART_Transmit(txBuffer, 2 + length + 1);
+    status = UART_Transmit(txBuffer, 4 + length + 1);
     if (status != CY_SCB_UART_SUCCESS) {
         // printf("\r\nerror: Tx status 0x%x\r\n", status);
         Cy_SysLib_Delay(5u); // wait 5 ms to signal error
