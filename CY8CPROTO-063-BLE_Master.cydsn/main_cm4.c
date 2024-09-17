@@ -257,7 +257,7 @@ int main(void) {
     // Initialize and configure the ADPD1080 sensor
     printf("Initializing ADPD1080 sensor...\r\n");
 
-    if (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
+    while (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
         printf("error: ADPD1080 sensor initialization failed!\r\n");
         Cy_SysLib_Delay(5u); // wait 5 ms before retrying
         // while (1); // Loop forever on failure
@@ -353,7 +353,7 @@ int main(void) {
             
             // Process ADC data
             for (uint8_t i = 0; i < ADC_NUM_CHANNELS; i++) {
-                float32_t ADCVolts = Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]);
+                float32_t ADCVolts = (3.3/3.23) * Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]);
                 float2Bytes(ADCVolts, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
                 printf("ADC %d: %f, ", i, ADCVolts);
