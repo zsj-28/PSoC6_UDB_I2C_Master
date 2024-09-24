@@ -419,8 +419,8 @@ void turbidity_Init(void) {
     ADPD1080_WriteReg(ADPD1080_SLOTB_TIA_CFG, 0x1C36);
     
     // Set ADC offset
-    struct ADPD1080_ChannelOffset stOffsetA  = {0x2045,0,0,0};
-    struct ADPD1080_ChannelOffset stOffsetB  = {0x2045,0,0,0};    
+    struct ADPD1080_ChannelOffset stOffsetA  = {0x2014,0,0,0};
+    struct ADPD1080_ChannelOffset stOffsetB  = {0x2014,0,0,0};    
     ADPD1080_SetOffset(SLOTA, stOffsetA);
     ADPD1080_SetOffset(SLOTB, stOffsetB);
     // TODO: disable AFE channels 2-4 to save power - see datasheet pg. 41
