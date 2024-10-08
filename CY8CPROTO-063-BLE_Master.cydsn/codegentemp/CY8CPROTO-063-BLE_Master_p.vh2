@@ -1,5 +1,5 @@
 -- Project:   CY8CPROTO-063-BLE_Master
--- Generated: 09/24/2024 16:09:54
+-- Generated: 10/08/2024 19:05:19
 -- PSoC Creator  4.4
 
 ENTITY \CY8CPROTO-063-BLE_Master\ IS
@@ -9,7 +9,9 @@ ENTITY \CY8CPROTO-063-BLE_Master\ IS
         SCL(0)_PAD : INOUT std_ulogic;
         \UART:tx(0)_PAD\ : OUT std_ulogic;
         Int_Debug(0)_PAD : OUT std_ulogic;
-        Debug(0)_PAD : OUT std_ulogic);
+        Debug(0)_PAD : OUT std_ulogic;
+        \UART_1:tx(0)_PAD\ : OUT std_ulogic;
+        \UART_1:rx(0)_PAD\ : IN std_ulogic);
     ATTRIBUTE voltage_VBACKUP OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CSD OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -81,6 +83,8 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     SIGNAL Net_381_8 : bit;
     SIGNAL Net_381_9 : bit;
     SIGNAL Net_382 : bit;
+    SIGNAL Net_391 : bit;
+    SIGNAL Net_394 : bit;
     SIGNAL Net_55 : bit;
     SIGNAL Net_56 : bit;
     SIGNAL RST(0)__PA : bit;
@@ -142,12 +146,21 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     SIGNAL \Timer:Net_1\ : bit;
     SIGNAL \Timer:Net_2\ : bit;
     SIGNAL \UART:Net_161\ : bit;
-    SIGNAL \UART:Net_847_ff0\ : bit;
-    ATTRIBUTE global_signal OF \UART:Net_847_ff0\ : SIGNAL IS true;
+    SIGNAL \UART:Net_847_ff1\ : bit;
+    ATTRIBUTE global_signal OF \UART:Net_847_ff1\ : SIGNAL IS true;
     SIGNAL \UART:intr_wire\ : bit;
     SIGNAL \UART:rts_wire\ : bit;
     SIGNAL \\\UART:tx(0)\\__PA\ : bit;
     SIGNAL \UART:tx_wire\ : bit;
+    SIGNAL \UART_1:Net_1172\ : bit;
+    SIGNAL \UART_1:Net_161\ : bit;
+    SIGNAL \UART_1:Net_847_ff0\ : bit;
+    ATTRIBUTE global_signal OF \UART_1:Net_847_ff0\ : SIGNAL IS true;
+    SIGNAL \UART_1:intr_wire\ : bit;
+    SIGNAL \UART_1:rts_wire\ : bit;
+    SIGNAL \\\UART_1:rx(0)\\__PA\ : bit;
+    SIGNAL \\\UART_1:tx(0)\\__PA\ : bit;
+    SIGNAL \UART_1:tx_wire\ : bit;
     SIGNAL __ONE__ : bit;
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
@@ -184,6 +197,10 @@ ARCHITECTURE __DEFAULT__ OF \CY8CPROTO-063-BLE_Master\ IS
     ATTRIBUTE Location OF Int_Debug(0) : LABEL IS "P0[5]";
     ATTRIBUTE lib_model OF Debug(0) : LABEL IS "iocell12";
     ATTRIBUTE Location OF Debug(0) : LABEL IS "P9[5]";
+    ATTRIBUTE lib_model OF \UART_1:tx(0)\ : LABEL IS "iocell13";
+    ATTRIBUTE Location OF \UART_1:tx(0)\ : LABEL IS "P9[1]";
+    ATTRIBUTE lib_model OF \UART_1:rx(0)\ : LABEL IS "iocell14";
+    ATTRIBUTE Location OF \UART_1:rx(0)\ : LABEL IS "P9[0]";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_5\ : LABEL IS "macrocell2";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:status_4\ : LABEL IS "macrocell3";
     ATTRIBUTE lib_model OF \I2C:bI2C_UDB:cnt_reset\ : LABEL IS "macrocell4";
@@ -856,7 +873,8 @@ BEGIN
             wco => ClockBlock_WCO,
             lfclk => ClockBlock_LFClk,
             udb_div_0 => dclk_to_genclk,
-            ff_div_0 => \UART:Net_847_ff0\,
+            ff_div_0 => \UART_1:Net_847_ff0\,
+            ff_div_1 => \UART:Net_847_ff1\,
             ff_div_11 => Net_192_ff11,
             ff_div_49 => \ADC:Net_428_ff49\,
             periclk_App => periclk_App);
@@ -1517,6 +1535,117 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
+    \UART_1:tx\:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "110",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "264da076-ec27-4ff8-91e4-3f82200d982a/65f3af6c-759b-4ccb-8c66-5c95ba1f5f4f",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "1",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    \UART_1:tx(0)\:iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "\UART_1:tx\",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => \\\UART_1:tx(0)\\__PA\,
+            oe => open,
+            pin_input => \UART_1:tx_wire\,
+            pad_out => \UART_1:tx(0)_PAD\,
+            pad_in => \UART_1:tx(0)_PAD\,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    \UART_1:rx\:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "1",
+            id => "264da076-ec27-4ff8-91e4-3f82200d982a/b7e8018e-1ef7-49c0-b5a5-61641a03e31c",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    \UART_1:rx(0)\:iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "\UART_1:rx\",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => \\\UART_1:rx(0)\\__PA\,
+            oe => open,
+            fb => \UART_1:Net_1172\,
+            pad_in => \UART_1:rx(0)_PAD\,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
     \I2C:bI2C_UDB:status_5\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * main_1 * main_2 * main_3 * !main_4)",
@@ -1769,7 +1898,7 @@ BEGIN
             mode => 2,
             requires_io_preconfigure => 0)
         PORT MAP(
-            clock => \UART:Net_847_ff0\,
+            clock => \UART:Net_847_ff1\,
             uart_rx => open,
             uart_tx => \UART:tx_wire\,
             uart_rts => \UART:rts_wire\,
@@ -1864,6 +1993,39 @@ BEGIN
         PORT MAP(
             interrupt => Net_300,
             clock => ClockBlock_PeriClk);
+
+    \UART_1:SCB_IRQ\:interrupt
+        GENERIC MAP(
+            cy_registers => "",
+            deepsleep_required => 0,
+            int_type => "10")
+        PORT MAP(
+            interrupt => \UART_1:intr_wire\,
+            clock => ClockBlock_PeriClk);
+
+    \UART_1:SCB\:SCB
+        GENERIC MAP(
+            cy_registers => "",
+            master => 0,
+            mode => 2,
+            requires_io_preconfigure => 0)
+        PORT MAP(
+            clock => \UART_1:Net_847_ff0\,
+            uart_rx => \UART_1:Net_1172\,
+            uart_tx => \UART_1:tx_wire\,
+            uart_rts => \UART_1:rts_wire\,
+            uart_cts => open,
+            spi_clk => open,
+            spi_select_3 => open,
+            spi_select_2 => open,
+            spi_select_1 => open,
+            spi_select_0 => open,
+            spi_mosi => open,
+            spi_miso => open,
+            interrupt => \UART_1:intr_wire\,
+            tr_tx_req => Net_394,
+            tr_rx_req => Net_391,
+            tr_i2c_scl_filtered => \UART_1:Net_161\);
 
     \I2C:bI2C_UDB:sda_in_reg\:macrocell
         GENERIC MAP(

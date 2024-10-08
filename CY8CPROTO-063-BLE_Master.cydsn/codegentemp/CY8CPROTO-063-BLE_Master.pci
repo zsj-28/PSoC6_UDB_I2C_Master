@@ -1,5 +1,5 @@
 # CY8CPROTO-063-BLE_Master
-# 2024-09-24 20:09:54Z
+# 2024-10-08 23:05:19Z
 
 dont_use_location SMIF -1 -1 0
 dont_use_location p4usbcell -1 -1 0
@@ -18,4 +18,6 @@ set_io "ADC_CH2(0)" iocell 10 5
 set_io "ADC_CH3(0)" iocell 10 6
 set_io "Int_Debug(0)" iocell 0 5
 set_io "Debug(0)" iocell 9 5
+set_io "\UART_1:tx(0)\" iocell 9 1
+set_io "\UART_1:rx(0)\" iocell 9 0
 set_location "\ADC:SAR\" SARADC -1 -1 0

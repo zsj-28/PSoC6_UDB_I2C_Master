@@ -6,7 +6,7 @@
 
 #Build Date:         Sep  9 2019 11:47:43
 
-#File Generated:     Sep 24 2024 16:09:54
+#File Generated:     Oct 8 2024 19:05:20
 
 #Purpose:            
 
@@ -54,8 +54,8 @@ Design Statistics after Packing
 
 Device Utilization Summary after Packing
     Macrocells                  :	33/96
-    UDBS                        :	8/12
-    IOs                         :	12/96
+    UDBS                        :	7/12
+    IOs                         :	14/96
 
 
 D2088: Phase 3, elapsed time : 0.0 (sec)
@@ -76,9 +76,9 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 13
+Number of clocks: 14
 Clock: ADC_intSarClock      | Frequency: N/A       | Target:   1.0 MHz
-Clock: CLK_App              | Frequency:  33.9 MHz | Target:  16.7 MHz
+Clock: CLK_App              | Frequency:  33.6 MHz | Target:  16.7 MHz
 Clock: Clock_1              | Frequency: N/A       | Target:   1.0 MHz
 Clock: CyClk_Fast           | Frequency: N/A       | Target: 100.0 MHz
 Clock: CyClk_HF0            | Frequency: N/A       | Target: 100.0 MHz
@@ -89,21 +89,22 @@ Clock: CyFLL                | Frequency: N/A       | Target: 100.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:   8.0 MHz
 Clock: CyPeriClk_App        | Frequency: N/A       | Target:  50.0 MHz
+Clock: UART_1_SCBCLK        | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 
 ======================================================================
                      End of Clock Summary
 ######################################################################
 
-D2088: Phase 6, elapsed time : 0.5 (sec)
+D2088: Phase 6, elapsed time : 0.4 (sec)
 
 Phase 7
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 13
+Number of clocks: 14
 Clock: ADC_intSarClock      | Frequency: N/A       | Target:   1.0 MHz
-Clock: CLK_App              | Frequency:  39.4 MHz | Target:  16.7 MHz
+Clock: CLK_App              | Frequency:  37.5 MHz | Target:  16.7 MHz
 Clock: Clock_1              | Frequency: N/A       | Target:   1.0 MHz
 Clock: CyClk_Fast           | Frequency: N/A       | Target: 100.0 MHz
 Clock: CyClk_HF0            | Frequency: N/A       | Target: 100.0 MHz
@@ -114,12 +115,13 @@ Clock: CyFLL                | Frequency: N/A       | Target: 100.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:   8.0 MHz
 Clock: CyPeriClk_App        | Frequency: N/A       | Target:  50.0 MHz
+Clock: UART_1_SCBCLK        | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 
 ======================================================================
                      End of Clock Summary
 ######################################################################
-D2088: Phase 7, elapsed time : 0.4 (sec)
+D2088: Phase 7, elapsed time : 0.2 (sec)
 
 Final Design Statistics
     Number of Combinational MCs 	:	10
@@ -129,11 +131,11 @@ Final Design Statistics
     Number of Status            	:	1
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
-    Number of IOs       	:	12
+    Number of IOs       	:	14
 
 Device Utilization Summary
     Macrocells                  :	33/96
-    IOs                         :	12/96
+    IOs                         :	14/96
 
 
 
@@ -149,9 +151,9 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 13
+Number of clocks: 14
 Clock: ADC_intSarClock      | Frequency: N/A       | Target:   1.0 MHz
-Clock: CLK_App              | Frequency:  42.2 MHz | Target:  18.2 MHz
+Clock: CLK_App              | Frequency:  39.8 MHz | Target:  18.2 MHz
 Clock: Clock_1              | Frequency: N/A       | Target:   1.0 MHz
 Clock: CyClk_Fast           | Frequency: N/A       | Target: 100.0 MHz
 Clock: CyClk_HF0            | Frequency: N/A       | Target: 100.0 MHz
@@ -162,6 +164,7 @@ Clock: CyFLL                | Frequency: N/A       | Target: 100.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:   8.0 MHz
 Clock: CyPeriClk_App        | Frequency: N/A       | Target:  50.0 MHz
+Clock: UART_1_SCBCLK        | Frequency: N/A       | Target:   1.4 MHz
 Clock: UART_SCBCLK          | Frequency: N/A       | Target:   1.4 MHz
 
 ======================================================================
@@ -173,5 +176,5 @@ D2088: Phase 8, elapsed time : 0.0 (sec)
 
 D2054: Placement of the design completed successfully
 
-I2076: Total run-time: 1.4 sec.
+I2076: Total run-time: 0.9 sec.
 

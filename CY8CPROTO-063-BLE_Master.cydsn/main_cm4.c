@@ -234,7 +234,7 @@ int main(void) {
     UART_Start();
     
     // Intialize UART_1 for data transmission to ESP32
-    // UART_1_Start();
+    UART_1_Start();
     
     // Initialize I2C for digital sensor communication
     I2C_Start();
@@ -375,7 +375,7 @@ int main(void) {
 			}
             
             // Transmit packet
-            // wrap_data(OPCODE_ALL, packet, AESBlock_count*AES128_ENCRYPTION_LENGTH); // Use unencrypted packet, sheep study only
+            wrap_data(OPCODE_ALL, packet, AESBlock_count*AES128_ENCRYPTION_LENGTH); // Use unencrypted packet, sheep study only
         }
     }
 }
@@ -419,7 +419,7 @@ uint8_t calculateCRC8(uint8_t opCode, uint8_t dataLength, uint8_t* data) {
 */
 void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     // Ensure previous transmission is not ongoing before modifying transmit buffer
-    while (UART_GetTransmitStatus() == CY_SCB_UART_TRANSMIT_ACTIVE) {
+    while (UART_1_GetTransmitStatus() == CY_SCB_UART_TRANSMIT_ACTIVE) {
         // printf("Waiting for previous transmission to complete\r\n");
         Cy_SysLib_Delay(5u); // wait 5 ms for completion        
     }
@@ -432,7 +432,7 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     memcpy(&txBuffer[4], data, length);
     txBuffer[4 + length] = calculateCRC8(opcode, length, data);
     
-    status = UART_Transmit(txBuffer, 4 + length + 1);
+    status = UART_1_Transmit(txBuffer, 4 + length + 1);
     if (status != CY_SCB_UART_SUCCESS) {
         // printf("\r\nerror: Tx status 0x%x\r\n", status);
         Cy_SysLib_Delay(5u); // wait 5 ms to signal error
