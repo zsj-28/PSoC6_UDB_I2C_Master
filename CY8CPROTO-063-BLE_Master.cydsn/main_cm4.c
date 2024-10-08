@@ -167,14 +167,8 @@ CY_ISR (Timer_Int_Handler) {
     Timer_ClearInterrupt(CY_TCPWM_INT_ON_TC);
     
     // Read ADPD1080 data registers with data hold mechanism (6 ms)
-    if (turbidity_ReadDataNoInterrupt(ADPD_NUM_CHANNELS)) {
-        adpdDataA[timerCount] = au16DataSlotA[0];
-        adpdDataB[timerCount] = au16DataSlotB[0];
-    }
-    else {
-        adpdDataA[timerCount] = 0;
-        adpdDataB[timerCount] = 0;
-    }
+    adpdDataA[timerCount] = 65535; // max value u16
+    adpdDataB[timerCount] = 65535;
     
     // Increment timer count
     timerCount++;
@@ -257,14 +251,14 @@ int main(void) {
     // Initialize and configure the ADPD1080 sensor
     printf("Initializing ADPD1080 sensor...\r\n");
 
-    while (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
-        printf("error: ADPD1080 sensor initialization failed!\r\n");
-        Cy_SysLib_Delay(5u); // wait 5 ms before retrying
+    // while (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
+        // printf("error: ADPD1080 sensor initialization failed!\r\n");
+        // Cy_SysLib_Delay(5u); // wait 5 ms before retrying
         // while (1); // Loop forever on failure
-    }
+    // }
     
     // Initialize sensor registers
-    turbidity_Init();
+    // turbidity_Init();
     printf("ADPD1080 sensor initialization successful.\r\n");
     
     /* Initialization of Crypto Driver */
