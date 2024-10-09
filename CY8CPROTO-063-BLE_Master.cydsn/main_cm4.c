@@ -425,12 +425,10 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     }
     
     cy_en_scb_uart_status_t status;
-    txBuffer[0] = 0xAB; // Start byte 1
-    txBuffer[1] = 0xCD; // Start byte 2
-    txBuffer[2] = opcode;
-    txBuffer[3] = length;
-    memcpy(&txBuffer[4], data, length);
-    txBuffer[4 + length] = calculateCRC8(opcode, length, data);
+    txBuffer[0] = opcode;
+    txBuffer[1] = length;
+    memcpy(&txBuffer[2], data, length);
+    txBuffer[2 + length] = calculateCRC8(opcode, length, data);
     
     status = UART_1_Transmit(txBuffer, 4 + length + 1);
     if (status != CY_SCB_UART_SUCCESS) {
@@ -439,7 +437,7 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     }
     
     // demo only
-    // printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, txBuffer[2 + length]);    
+    //printf("\r\n\nopcode: %d, length: %d, crc: 0x%x\r\n", opcode, length, txBuffer[2 + length]);    
 }
 
 /**
