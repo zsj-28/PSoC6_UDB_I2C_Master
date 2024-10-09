@@ -327,13 +327,10 @@ int main(void) {
                         + cal2[4]*log(avg_valA)*log(avg_valB) + cal2[5]*log(avg_valA)*R_avg;
                 
                 // Populate packet buffer
-                u16Int2Bytes(L680, &packet[packetsize]); // raw intensity A
+                u16Int2Bytes(avg_valA, &packet[packetsize]);
                 packetsize += sizeof(uint16_t);
                 
-                u16Int2Bytes(L850, &packet[packetsize]); // raw intensity B
-                packetsize += sizeof(uint16_t);
-                
-                float2Bytes(SO2, &packet[packetsize]);
+                float2Bytes(avg_valB, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
                 
                 float2Bytes(SO2_avg, &packet[packetsize]);

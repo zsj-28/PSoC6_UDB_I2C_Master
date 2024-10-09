@@ -153,7 +153,7 @@ void UART_receive() {
                                 Serial.print("ADC CH3: ");
                             }
                             else {
-                                Serial.print("Raw SO2: ");
+                                Serial.print("SO2 avg: ");
                             }
                         break;
                         case 3:
@@ -161,7 +161,7 @@ void UART_receive() {
                                 Serial.print("ADC CH4: ");
                             }
                             else {
-                                Serial.print("SO2 avg: ");
+                                Serial.print("HBT avg: ");
                             }
                         break;
                         default:
