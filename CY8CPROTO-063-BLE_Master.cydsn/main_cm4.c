@@ -327,8 +327,8 @@ int main(void) {
                         + cal2[4]*log(avg_valA)*log(avg_valB) + cal2[5]*log(avg_valA)*R_avg;
                 
                 // Populate packet buffer
-                u16Int2Bytes(avg_valA, &packet[packetsize]);
-                packetsize += sizeof(uint16_t);
+                float2Bytes(avg_valA, &packet[packetsize]);
+                packetsize += sizeof(float32_t);
                 
                 float2Bytes(avg_valB, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
@@ -372,7 +372,7 @@ int main(void) {
 			}
             
             // Transmit packet
-            wrap_data(OPCODE_ALL, packet, AESBlock_count*AES128_ENCRYPTION_LENGTH); // Use unencrypted packet, sheep study only
+            wrap_data(OPCODE_ALL, encrypted_pkt, AESBlock_count*AES128_ENCRYPTION_LENGTH);
         }
     }
 }
@@ -427,7 +427,7 @@ void wrap_data(uint8_t opcode, uint8_t* data, uint8_t length) {
     memcpy(&txBuffer[2], data, length);
     txBuffer[2 + length] = calculateCRC8(opcode, length, data);
     
-    status = UART_1_Transmit(txBuffer, 4 + length + 1);
+    status = UART_1_Transmit(txBuffer, 2 + length + 1);
     if (status != CY_SCB_UART_SUCCESS) {
         // printf("\r\nerror: Tx status 0x%x\r\n", status);
         Cy_SysLib_Delay(5u); // wait 5 ms to signal error
