@@ -339,7 +339,7 @@ int main(void) {
                 float2Bytes(HBT_avg, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
                 
-                printf("L680: %u, L850: %u, SO2: %f, SO2_avg: %f, HBT_avg: %f\r\n", L680, L850, SO2, SO2_avg, HBT_avg);
+                printf("avg_valA: %f, avg_valB: %f, SO2: %f, SO2_avg: %f, HBT_avg: %f\r\n", avg_valA, avg_valB, SO2, SO2_avg, HBT_avg);
             }
             
             // Process ADC data
