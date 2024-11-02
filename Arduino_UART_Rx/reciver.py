@@ -15,6 +15,8 @@ import serial
 import time
 import struct
 from Cryptodome.Cipher import AES
+from datetime import datetime, timedelta
+import os  # Import os module to handle directory paths
 
 # UART Rx variables
 opCode = None
@@ -57,6 +59,8 @@ crcTable = [
     0xFA, 0xFD, 0xF4, 0xF3
 ]
 
+last_log_time = datetime.now()
+
 # Function definitions
 def bytes2Float(bytes_array):
     """Convert 4 bytes to a float."""
@@ -77,6 +81,51 @@ def calculateCRC8(opCode, dataLength, data):
         crc = crcTable[crc ^ data[i]]
 
     return crc
+
+# Function to generate a filename based on the current date and hour
+def generate_filename():
+    # Define the directory where you want to save the logs
+    log_directory = "/home/just4fun/Desktop/ecmo/ecmo_psoc6_ws/log"
+    # Ensure the directory exists; create it if it doesn't
+    if not os.path.exists(log_directory):
+        os.makedirs(log_directory)
+        print(f"Created directory: {log_directory}")
+
+    current_time = time.strftime("%Y-%m-%d_%H")  # e.g., 2024-10-31_16
+    filename = f"psoc_data_log_{current_time}.txt"
+    # Combine the directory and filename
+    full_path = os.path.join(log_directory, filename)
+    return full_path
+
+# Initialize logging
+current_filename = generate_filename()
+try:
+    log_file = open(current_filename, 'a')
+    print(f"Logging to file: {current_filename}")
+except Exception as e:
+    print(f"Error opening log file: {e}")
+    exit(1)  # Exit if the log file cannot be opened
+
+def log_message(message):
+    """Write the message to the log file."""
+    global current_filename, log_file
+    # Generate the new filename based on the current hour
+    new_filename = generate_filename()
+    if new_filename != current_filename:
+        log_file.close()  # Close the previous file
+        current_filename = new_filename
+        try:
+            log_file = open(current_filename, 'a')  # Open a new file
+            print(f"Switched logging to new file: {current_filename}")
+        except Exception as e:
+            print(f"Error opening log file: {e}")
+            exit(1)  # Exit if the log file cannot be opened
+
+    try:
+        log_file.write(message + "\n")  # Write message to file
+        log_file.flush()  # Ensure it's written immediately
+    except Exception as e:
+        print(f"Error writing to log file: {e}")
 
 def UART_receive(ser):
     """Receive incoming UART data and print to console."""
@@ -124,61 +173,96 @@ def process_data():
     # Check if the received CRC matches the calculated one
     if receivedCRC == calculatedCRC:
         dataElem = 0
+        log_entry = ""
         for i in range(0, dataLength, 4):
             float_bytes = decrypted_packet[i:i+4]
             value = bytes2Float(float_bytes)
             if dataElem == 0:
                 if i + 16 >= dataLength:
-                    print("\n   ADC CH1: ", end='')
+                    # print("\n   ADC CH0: ", end='')
+                    timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+                    log_entry += f"{timestamp}: "
+                    log_entry += "ADC 0: "
                 else:
-                    print("Slot A avg: ", end='')
+                    # print("Slot A avg: ", end='')
+                    timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+                    log_entry += f"{timestamp}: "
+                    log_entry += "L680: "
             elif dataElem == 1:
                 if i + 16 >= dataLength:
-                    print("   ADC CH2: ", end='')
+                    # print("   ADC CH1: ", end='')
+                    log_entry += "ADC 1: "
                 else:
-                    print("Slot B avg: ", end='')
+                    # print("Slot B avg: ", end='')
+                    log_entry += "L850: "
             elif dataElem == 2:
                 if i + 16 >= dataLength:
-                    print("ADC CH3: ", end='')
+                    # print("ADC CH2: ", end='')
+                    log_entry += "ADC 2: "
                 else:
-                    print("SO2_avg: ", end='')
+                    # print("SO2_avg: ", end='')
+                    log_entry += "SO2_avg: "
             elif dataElem == 3:
                 if i + 16 >= dataLength:
-                    print("ADC CH4: ", end='')
+                    # print("ADC CH3: ", end='')
+                    log_entry += "ADC 3: "
                 else:
-                    print("HBT_avg: ", end='')
-            print(f"{value:15f}", end='')
+                    # print("HBT_avg: ", end='')
+                    log_entry += "HBT_avg: "
+            # print(f"{value:15f}", end='')
+            log_entry += f"{value:6f}"
             dataElem = (dataElem + 1) % 4
             if dataElem == 0:
-                print()
+                # print()
+                log_message(log_entry)
+                log_entry = ""
             else:
-                print(",\t", end='')
-        print()
+                # print(",\t", end='')
+                log_entry += ", "
+        # print()
     else:
         print("CRC check failed.")
 
 # Initialize UART serial port
 def setup_serial():
     # Adjust the serial port and baud rate as per your setup
-    ser = serial.Serial('/dev/serial0', 115200, timeout=0)
-    return ser
+    try:
+        ser = serial.Serial('/dev/serial0', 115200, timeout=0)
+        print("Serial port opened successfully.")
+        return ser
+    except Exception as e:
+        print(f"Error opening serial port: {e}")
+        exit(1)  # Exit if the serial port cannot be opened
 
 def main():
-    global UART_timeout
+    global UART_timeout, log_file
     ser = setup_serial()
     last_time = time.time()
-    while True:
-        UART_receive(ser)
 
-        # Simulate the 1ms timer interrupt
-        current_time = time.time()
-        if current_time - last_time >= 0.001:  # 1ms
-            last_time = current_time
-            UART_timeout += 1
-            if UART_timeout > 100:
-                UART_timeout = 100  # Limit the timeout
+    try:
+        while True:
+            UART_receive(ser)
 
-        time.sleep(0.0001)  # Small delay to prevent CPU overload
+            # Simulate the 1ms timer interrupt
+            current_time = time.time()
+            if current_time - last_time >= 0.001:  # 1ms
+                last_time = current_time
+                UART_timeout += 1
+                if UART_timeout > 100:
+                    UART_timeout = 100  # Limit the timeout
+
+            time.sleep(0.0001)  # Small delay to prevent CPU overload
+
+    except KeyboardInterrupt:
+        # Stop the script gracefully with Ctrl+C
+        print("Logging stopped.")
+
+    finally:
+        # Close the serial port and the log file when done
+        ser.close()
+        print("Serial port closed.")
+        log_file.close()
+        print("Log file closed.")
 
 if __name__ == '__main__':
     main()
