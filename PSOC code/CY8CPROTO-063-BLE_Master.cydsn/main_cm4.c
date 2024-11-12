@@ -14,18 +14,18 @@
 #include <string.h>
 
 /* Sensor properties */
-#define ADC_NUM_CHANNELS         4U
-#define ADC_SAMPLES_PER_PACKET   1U
-#define ADC_SAMPLE_RATE_DIV      10U
+#define ADC_NUM_CHANNELS         4u
+#define ADC_SAMPLES_PER_PACKET   1u
+#define ADC_SAMPLE_RATE_DIV      10u
 
-#define ADPD_NUM_CHANNELS        1U
-#define ADPD_SAMPLES_PER_PACKET  10U
+#define ADPD_NUM_CHANNELS        1u
+#define ADPD_SAMPLES_PER_PACKET  10u
 
 /* Firmware averaging */
-#define SMOOTHED_SAMPLE_SIZE     (50U)
+#define SMOOTHED_SAMPLE_SIZE     50u
 
 // Maximum number of bytes in a packet
-#define MAX_PACKET_SIZE          (255u)
+#define MAX_PACKET_SIZE          255u
 
 /* Foreground-background shared variables */
 volatile bool dataReady = false;
@@ -167,8 +167,14 @@ CY_ISR (Timer_Int_Handler) {
     Timer_ClearInterrupt(CY_TCPWM_INT_ON_TC);
     
     // Read ADPD1080 data registers with data hold mechanism (6 ms)
-    adpdDataA[timerCount] = 65535; // max value u16
-    adpdDataB[timerCount] = 65535;
+    if (turbidity_ReadDataNoInterrupt(ADPD_NUM_CHANNELS)) {
+        adpdDataA[timerCount] = au16DataSlotA[0];
+        adpdDataB[timerCount] = au16DataSlotB[0];
+    }
+    else {
+        adpdDataA[timerCount] = 0;
+        adpdDataB[timerCount] = 0;
+    }
     
     // Increment timer count
     timerCount++;
@@ -251,14 +257,14 @@ int main(void) {
     // Initialize and configure the ADPD1080 sensor
     printf("Initializing ADPD1080 sensor...\r\n");
 
-    // while (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
-        // printf("error: ADPD1080 sensor initialization failed!\r\n");
-        // Cy_SysLib_Delay(5u); // wait 5 ms before retrying
+    while (!ADPD1080_Begin(ADPD1080_ADDRESS, 0)) {
+        printf("error: ADPD1080 sensor initialization failed!\r\n");
+        Cy_SysLib_Delay(5u); // wait 5 ms before retrying
         // while (1); // Loop forever on failure
-    // }
+    }
     
     // Initialize sensor registers
-    // turbidity_Init();
+    turbidity_Init();
     printf("ADPD1080 sensor initialization successful.\r\n");
     
     /* Initialization of Crypto Driver */
@@ -311,20 +317,27 @@ int main(void) {
                 posB++;
                 if (posB >= lenB) posB = 0;
                 
-                // SO2% calculation
                 R = log(L680_norm)/log(L850_norm);
                 R_avg = log(avg_valA)/log(avg_valB);
                 
-                SO2 = cal1[0] + cal1[1]*log(L680_norm) + cal1[2]*log(L850_norm) + cal1[3]*R
-                        + cal1[4]*log(L680_norm)*log(L850_norm) + cal1[5]*log(L680_norm)*R;
-                SO2_avg = cal1[0] + cal1[1]*log(avg_valA) + cal1[2]*log(avg_valB) + cal1[3]*R_avg
-                        + cal1[4]*log(avg_valA)*log(avg_valB) + cal1[5]*log(avg_valA)*R_avg;
-                
                 // Hemoglobin concentration calculation
-                HBT = cal2[0] + cal2[1]*log(L680_norm) + cal2[2]*log(L850_norm) + cal2[3]*R
-                        + cal2[4]*log(L680_norm)*log(L850_norm) + cal2[5]*log(L680_norm)*R;
-                HBT_avg = cal2[0] + cal2[1]*log(avg_valA) + cal2[2]*log(avg_valB) + cal2[3]*R_avg
-                        + cal2[4]*log(avg_valA)*log(avg_valB) + cal2[5]*log(avg_valA)*R_avg;
+                HBT = HBTcal[0]*log(L680_norm) + HBTcal[1]*log(L850_norm) + HBTcal[2]*R
+                        + HBTcal[3]*log(L680_norm)*log(L680_norm) + HBTcal[4]*log(L850_norm)*log(L850_norm)
+                        + HBTcal[5]*R*R + HBTcal[6]*log(L680_norm)*log(L850_norm) 
+                        + HBTcal[7]*log(L680_norm)*R + HBTcal[8];
+                HBT_avg = HBTcal[0]*log(avg_valA) + HBTcal[1]*log(avg_valB) + HBTcal[2]*R_avg 
+                        + HBTcal[3]*log(avg_valA)*log(avg_valA) + HBTcal[4]*log(avg_valB)*log(avg_valB)
+                        + HBTcal[5]*R_avg*R_avg + HBTcal[6]*log(avg_valA)*log(avg_valB) 
+                        + HBTcal[7]*log(avg_valA)*R_avg + HBTcal[8];
+                
+                // SO2% calculation
+                float alpha = SO2cal_m[0]*HBT + SO2cal_m[1];
+                float beta = SO2cal_b[0]*HBT + SO2cal_b[1];
+                float alpha_avg = SO2cal_m[0]*HBT_avg + SO2cal_m[1];
+                float beta_avg = SO2cal_b[0]*HBT_avg + SO2cal_b[1];
+                
+                SO2 = alpha*R + beta;
+                SO2_avg = alpha_avg*R + beta_avg;
                 
                 // Populate packet buffer
                 float2Bytes(avg_valA, &packet[packetsize]);
@@ -339,7 +352,7 @@ int main(void) {
                 float2Bytes(HBT_avg, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
                 
-                printf("avg_valA: %f, avg_valB: %f, SO2: %f, SO2_avg: %f, HBT_avg: %f\r\n", avg_valA, avg_valB, SO2, SO2_avg, HBT_avg);
+                printf("L680: %u, L850: %u, SO2: %f, SO2_avg: %f, HBT: %f\r\n", L680, L850, SO2, SO2_avg, HBT);
             }
             
             // Process ADC data
@@ -347,7 +360,7 @@ int main(void) {
                 float32_t ADCVolts = (3.3/3.23) * Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]);
                 float2Bytes(ADCVolts, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
-                printf("ADC %d: %f, ", i, ADCVolts);
+                // printf("ADC %d: %f, ", i, ADCVolts);
             }
             printf("\r\n");
             
