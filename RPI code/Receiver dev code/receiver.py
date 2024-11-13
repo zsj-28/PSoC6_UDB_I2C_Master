@@ -134,7 +134,7 @@ def generate_filename():
         os.makedirs(LOG_DIRECTORY)
         print(f"Created directory: {LOG_DIRECTORY}")
 
-    current_time = time.strftime("%Y-%m-%d_%H")  # e.g., 2024-10-31_16
+    current_time = time.strftime("%Y-%m-%d_%H-%M")  # e.g., 2024-10-31_16
     filename = f"psoc_data_log_{current_time}.txt"
     return os.path.join(LOG_DIRECTORY, filename)
 
@@ -228,7 +228,7 @@ def log_message(message):
     if new_filename != current_filename:
         if log_file:
             log_file.close()  # Close the previous file
-            upload_to_s3(current_filename, S3_BUCKET)  # Upload to S3
+            # upload_to_s3(current_filename, S3_BUCKET)  # Upload to S3
             EMAprocess(current_filename)
         current_filename = new_filename
         try:
@@ -389,7 +389,7 @@ def main():
             log_file.close()
             print("Log file closed.")
             # Upload the last log file to S3
-            upload_to_s3(current_filename, S3_BUCKET)
+            # upload_to_s3(current_filename, S3_BUCKET)
 
 
 if __name__ == '__main__':
