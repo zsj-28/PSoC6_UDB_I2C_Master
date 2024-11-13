@@ -1,5 +1,5 @@
 """
-Biorobotics Lab Project 4.2 Fall 2024
+Biorobotics Lab Project 4.2 Summer 2024
 @file: raspberry_pi_uart.py
 @brief: Raspberry Pi UART receiver demo code for communicating with PSoC and uploading data to AWS S3.
 
@@ -9,8 +9,6 @@ Biorobotics Lab Project 4.2 Fall 2024
 @author: Ching-Han Chou <chingha2>
 @author: Steven Zhang <sijinz>
 @author: Thomas Li <tyli>
-@author: Marina Li <muyaol>
-
 """
 
 import os
@@ -18,15 +16,13 @@ import struct
 import time
 from datetime import datetime
 
-import pandas as pd
-
 import boto3  # For AWS S3 upload
 import serial  # For serial communication
 from botocore.exceptions import NoCredentialsError
 from Crypto.Cipher import AES  # For AES decryption
 
 # Constants and Configurations
-LOG_DIRECTORY = "/home/pas/Desktop/ecmo/log"
+LOG_DIRECTORY = "/home/pas/Desktop/ecmo/ecmo_psoc6_ws/log"
 UART_PORT = '/dev/ttyAMA0'
 UART_BAUDRATE = 115200
 AES_KEY = bytes([
@@ -176,40 +172,6 @@ def upload_to_s3(file_name, bucket):
     except Exception as e:
         print(f"Error uploading file to S3: {e}")
 
-# Function to parse lines with both timestamp and ADC values
-def parse_adc_line(line):
-    timestamp_part, adc_part = line.split(': ', 1)
-    values = ('ADC' + adc_part.split('ADC', 1)[1]).strip().split(', ')
-    adc_values = []
-    for v in values:
-        if 'ADC' in v:
-            adc_values.append(float(v.split(': ')[1].strip(',')))
-    return [timestamp_part + ':'] + adc_values 
-
-def EMAprocess(filename):
-    with open(filename, 'r') as f:
-        adc_data = [parse_adc_line(line) for line in f if all(adc in line for adc in ['ADC 0', 'ADC 1', 'ADC 2', 'ADC 3'])]
-
-    first_timestamp_part = adc_data[0][0].split(':')[0].replace(' ', '_').replace(':', '')
-
-    df = pd.DataFrame(adc_data, columns=['Timestamp', 'ADC 0', 'ADC 1', 'ADC 2', 'ADC 3'])
-    span = 10
-
-    df['EMA_ADC 0'] = df['ADC 0'].ewm(span=span, adjust=False).mean()
-    df['EMA_ADC 1'] = df['ADC 1'].ewm(span=span, adjust=False).mean()
-    df['EMA_ADC 2'] = df['ADC 2'].ewm(span=span, adjust=False).mean()
-    df['EMA_ADC 3'] = df['ADC 3'].ewm(span=span, adjust=False).mean()
-    
-    EMA_DIRECTORY = "/home/pas/Desktop/ecmo/EMA"
-    output_filename = f'{EMA_DIRECTORY}/EMA_data_{first_timestamp_part}.txt'
-    with open(output_filename, 'w') as f:
-        for index, row in df.iterrows():
-            f.write(f"{row['Timestamp']} ")
-            # f.write(f"ADC 0: {row['ADC 0']:.6f}, ADC 1: {row['ADC 1']:.6f}, ")
-            # f.write(f"ADC 2: {row['ADC 2']:.6f}, ADC 3: {row['ADC 3']:.6f}, ")
-            f.write(f"EMA_ADC 0: {row['EMA_ADC 0']:.6f}, EMA_ADC 1: {row['EMA_ADC 1']:.6f}, ")
-            f.write(f"EMA_ADC 2: {row['EMA_ADC 2']:.6f}, EMA_ADC 3: {row['EMA_ADC 3']:.6f},\n")
-
 
 def log_message(message):
     """
@@ -229,7 +191,6 @@ def log_message(message):
         if log_file:
             log_file.close()  # Close the previous file
             upload_to_s3(current_filename, S3_BUCKET)  # Upload to S3
-            EMAprocess(current_filename)
         current_filename = new_filename
         try:
             log_file = open(current_filename, 'a')  # Open a new file

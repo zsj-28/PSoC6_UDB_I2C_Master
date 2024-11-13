@@ -188,7 +188,7 @@ def parse_adc_line(line):
 
 def EMAprocess(filename):
     with open(filename, 'r') as f:
-        adc_data = [parse_adc_line(line) for line in f if 'ADC' in line]
+        adc_data = [parse_adc_line(line) for line in f if all(adc in line for adc in ['ADC 0', 'ADC 1', 'ADC 2', 'ADC 3'])]
 
     first_timestamp_part = adc_data[0][0].split(':')[0].replace(' ', '_').replace(':', '')
 
