@@ -190,7 +190,7 @@ def generate_s3_key(file_name):
         str: The S3 key (path in the S3 bucket).
     """
     current_time = time.strftime("%Y-%m-%d_%H-%M-%S")
-    s3_key = f"uploads/{current_time}_{os.path.basename(file_name)}"
+    s3_key = f"nov-biodata/{current_time}_{os.path.basename(file_name)}"
     return s3_key
 
 
@@ -433,7 +433,7 @@ def main():
             log_file.close()
             print("Log file closed.")
             # Upload the last log file to S3
-            # upload_to_s3(current_filename, S3_BUCKET)
+            upload_to_s3(current_filename, S3_BUCKET)
 
 
 if __name__ == '__main__':
