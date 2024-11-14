@@ -357,10 +357,10 @@ int main(void) {
             
             // Process ADC data
             for (uint8_t i = 0; i < ADC_NUM_CHANNELS; i++) {
-                float32_t ADCVolts = (3.3/3.23) * Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]);
+                float32_t ADCVolts = (3.3/2.739) * Cy_SAR_CountsTo_Volts(SAR, i, ADCData[i]);
                 float2Bytes(ADCVolts, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
-                // printf("ADC %d: %f, ", i, ADCVolts);
+                printf("ADC %d: %f, ", i, ADCVolts);
             }
             printf("\r\n");
             

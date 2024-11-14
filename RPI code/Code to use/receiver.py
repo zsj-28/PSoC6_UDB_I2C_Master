@@ -17,6 +17,8 @@ import os
 import struct
 import time
 from datetime import datetime
+from threading import Thread
+from queue import Queue
 
 import pandas as pd
 
@@ -27,6 +29,7 @@ from Crypto.Cipher import AES  # For AES decryption
 
 # Constants and Configurations
 LOG_DIRECTORY = "/home/pas/Desktop/ecmo/log"
+EMA_DIRECTORY = "/home/pas/Desktop/ecmo/EMA"
 UART_PORT = '/dev/ttyAMA0'
 UART_BAUDRATE = 115200
 AES_KEY = bytes([
@@ -42,6 +45,9 @@ s3 = boto3.client('s3')
 
 # Initialize AES cipher
 cipher = AES.new(AES_KEY, AES.MODE_ECB)
+
+# Start-of-Frame byte
+# SOF_BYTE = 0x7E  # Example SOF byte
 
 # CRC-8 calculation table
 crcTable = [
@@ -81,6 +87,40 @@ UART_timeout = 0
 current_filename = None
 log_file = None
 
+# Create queues for files to upload and process EMA
+upload_queue = Queue()
+ema_queue = Queue()
+
+def s3_upload_worker():
+    """
+    Worker thread function to upload files to S3.
+    """
+    while True:
+        file_to_upload = upload_queue.get()
+        if file_to_upload is None:
+            break  # Exit the thread
+        upload_to_s3(file_to_upload, S3_BUCKET)
+        upload_queue.task_done()
+
+def ema_worker():
+    """
+    Worker thread function to process EMA calculations.
+    """
+    while True:
+        file_to_process = ema_queue.get()
+        if file_to_process is None:
+            break  # Exit the thread
+        EMAprocess(file_to_process)
+        ema_queue.task_done()
+
+# Start the upload and EMA worker threads
+upload_thread = Thread(target=s3_upload_worker)
+upload_thread.daemon = True
+upload_thread.start()
+
+ema_thread = Thread(target=ema_worker)
+ema_thread.daemon = True
+ema_thread.start()
 
 def bytes2Float(bytes_array):
     """
@@ -190,7 +230,12 @@ def EMAprocess(filename):
     with open(filename, 'r') as f:
         adc_data = [parse_adc_line(line) for line in f if all(adc in line for adc in ['ADC 0', 'ADC 1', 'ADC 2', 'ADC 3'])]
 
-    first_timestamp_part = adc_data[0][0].split(':')[0].replace(' ', '_').replace(':', '')
+    # Ensure that there are at least 50 lines to avoid an out-of-range error
+    if len(adc_data) >= 50:
+        first_timestamp_part = adc_data[49][0].split(':')[0].replace(' ', '_').replace(':', '')
+    else:
+        # Fallback if there are less than 50 lines
+        first_timestamp_part = "Insufficient_Data"
 
     df = pd.DataFrame(adc_data, columns=['Timestamp', 'ADC 0', 'ADC 1', 'ADC 2', 'ADC 3'])
     span = 10
@@ -200,7 +245,6 @@ def EMAprocess(filename):
     df['EMA_ADC 2'] = df['ADC 2'].ewm(span=span, adjust=False).mean()
     df['EMA_ADC 3'] = df['ADC 3'].ewm(span=span, adjust=False).mean()
     
-    EMA_DIRECTORY = "/home/pas/Desktop/ecmo/EMA"
     output_filename = f'{EMA_DIRECTORY}/EMA_data_{first_timestamp_part}.txt'
     with open(output_filename, 'w') as f:
         for index, row in df.iterrows():
@@ -228,8 +272,8 @@ def log_message(message):
     if new_filename != current_filename:
         if log_file:
             log_file.close()  # Close the previous file
-            upload_to_s3(current_filename, S3_BUCKET)  # Upload to S3
-            EMAprocess(current_filename)
+            upload_queue.put(current_filename)
+            ema_queue.put(current_filename)        
         current_filename = new_filename
         try:
             log_file = open(current_filename, 'a')  # Open a new file
@@ -287,7 +331,7 @@ def process_data():
             elif data_element_index == 2:
                 log_entry += "ADC 2: " if i + 16 >= dataLength else "SO2_avg: "
             elif data_element_index == 3:
-                log_entry += "ADC 3: " if i + 16 >= dataLength else "HBT_avg: "
+                log_entry += "ADC 3: " if i + 16 >= dataLength else "HBT: "
             log_entry += f"{value:.6f}"
             data_element_index = (data_element_index + 1) % 4
             if data_element_index == 0:
@@ -389,7 +433,7 @@ def main():
             log_file.close()
             print("Log file closed.")
             # Upload the last log file to S3
-            upload_to_s3(current_filename, S3_BUCKET)
+            # upload_to_s3(current_filename, S3_BUCKET)
 
 
 if __name__ == '__main__':
