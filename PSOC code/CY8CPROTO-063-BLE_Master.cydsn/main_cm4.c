@@ -340,16 +340,19 @@ int main(void) {
                 SO2_avg = alpha_avg*R + beta_avg;
                 
                 // Populate packet buffer
-                float2Bytes(avg_valA, &packet[packetsize]);
-                packetsize += sizeof(float32_t);
+                u16Int2Bytes(L680, &packet[packetsize]);
+                packetsize += sizeof(uint16_t);
                 
-                float2Bytes(avg_valB, &packet[packetsize]);
+                u16Int2Bytes(L850, &packet[packetsize]);
+                packetsize += sizeof(uint16_t);
+                
+                float2Bytes(SO2, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
                 
                 float2Bytes(SO2_avg, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
                 
-                float2Bytes(HBT_avg, &packet[packetsize]);
+                float2Bytes(HBT, &packet[packetsize]);
                 packetsize += sizeof(float32_t);
                 
                 printf("L680: %u, L850: %u, SO2: %f, SO2_avg: %f, HBT: %f\r\n", L680, L850, SO2, SO2_avg, HBT);
