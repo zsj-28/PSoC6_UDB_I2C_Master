@@ -134,6 +134,17 @@ def bytes2Float(bytes_array):
     """
     return struct.unpack('<f', bytes_array)[0]
 
+def bytes2u16Int(bytes_array):
+    """
+    Convert a sequence of 2 bytes to an unsigned 16-bit integer using little-endian format.
+
+    Parameters:
+        bytes_array (bytes): A sequence of 2 bytes representing an unsigned 16-bit integer.
+
+    Returns:
+        int: The converted integer.
+    """
+    return struct.unpack('<H', bytes_array)[0]
 
 def calculateCRC8(opCode, dataLength, data):
     """
@@ -323,16 +334,33 @@ def process_data():
         for i in range(0, dataLength, 4):
             float_bytes = decrypted_packet[i:i + 4]
             value = bytes2Float(float_bytes)
-            if data_element_index == 0:
-                log_entry += f"{timestamp}: "
-                log_entry += "ADC 0: " if i + 16 >= dataLength else "L680: "
-            elif data_element_index == 1:
-                log_entry += "ADC 1: " if i + 16 >= dataLength else "L850: "
-            elif data_element_index == 2:
-                log_entry += "ADC 2: " if i + 16 >= dataLength else "SO2_avg: "
-            elif data_element_index == 3:
-                log_entry += "ADC 3: " if i + 16 >= dataLength else "HBT: "
-            log_entry += f"{value:.6f}"
+
+            if i + 16 < dataLength:
+                if data_element_index == 0:
+                    int_bytes_1 = float_bytes[:2]
+                    int_bytes_2 = float_bytes[2:]
+                    value_1 = bytes2u16Int(int_bytes_1)
+                    value_2 = bytes2u16Int(int_bytes_2)
+
+                    log_entry += f"{timestamp}: "
+                    log_entry += f"L680: {value_1:5d}, L850: {value_2:5d}"
+                elif data_element_index == 1:
+                    log_entry += f"SO2: {value:.6f}"
+                elif data_element_index == 2:
+                    log_entry += f"SO2_avg: {value:.6f}"
+                elif data_element_index == 3:
+                    log_entry += f"HBT: {value:.6f}"
+            else:
+                if data_element_index == 0:
+                    log_entry += f"{timestamp}: "
+                    log_entry += f"ADC 0: {value:.6f}"
+                elif data_element_index == 1:
+                    log_entry += f"ADC 1: {value:.6f}"
+                elif data_element_index == 2:
+                    log_entry += f"ADC 2: {value:.6f}"
+                elif data_element_index == 3:
+                    log_entry += f"ADC 3: {value:.6f}"
+
             data_element_index = (data_element_index + 1) % 4
             if data_element_index == 0:
                 log_message(log_entry)

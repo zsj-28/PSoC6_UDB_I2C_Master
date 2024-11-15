@@ -15,8 +15,8 @@
 volatile uint16_t au16DataSlotA[4] = {0,0,0,0};
 volatile uint16_t au16DataSlotB[4] = {0,0,0,0};
 
-const uint8_t PULSE_A = 8u;
-const uint8_t PULSE_B = 8u;
+const uint8_t PULSE_A = 64u;
+const uint8_t PULSE_B = 64u;
 
 const float HBTcal[9] = {-2.5965, -25.6705, 45.2080, 1.5646, 0.7858, -20.8018, 0.3874, -12.0251, 130.2860};
 const float SO2cal_m[2] = {0.2187, -0.2635};
@@ -420,8 +420,8 @@ void turbidity_Init(void) {
     ADPD1080_WriteReg(ADPD1080_SLOTB_TIA_CFG, 0x1C36);
     
     // Set ADC offset
-    struct ADPD1080_ChannelOffset stOffsetA  = {0x2011,0,0,0}; // Sensor 2
-    struct ADPD1080_ChannelOffset stOffsetB  = {0x2011,0,0,0}; // Sensor 2
+    struct ADPD1080_ChannelOffset stOffsetA  = {0x2045,0,0,0}; // Sensor 2
+    struct ADPD1080_ChannelOffset stOffsetB  = {0x2045,0,0,0}; // Sensor 2
     ADPD1080_SetOffset(SLOTA, stOffsetA);
     ADPD1080_SetOffset(SLOTB, stOffsetB);
     // TODO: disable AFE channels 2-4 to save power - see datasheet pg. 41
