@@ -35,7 +35,7 @@
 #### 4. Install Required Python Libraries
 While inside the virtual environment:
 ```bash
-pip install boto3 pyserial pycryptodome
+pip install boto3 pyserial pycryptodome pandas
 ```
 #### 5. Configure AWS Credentials
 1. Edit the ~/.bashrc file to add AWS credentials:
