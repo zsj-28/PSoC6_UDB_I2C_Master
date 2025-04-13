@@ -6712,16 +6712,6 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 123.19) (xy 36.83 123.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "89495998-e040-409d-abf9-e4d7be482b47")
-	)
-	(wire
-		(pts
 			(xy 44.45 160.02) (xy 50.8 160.02)
 		)
 		(stroke
@@ -7292,6 +7282,16 @@
 	)
 	(wire
 		(pts
+			(xy 24.13 123.19) (xy 36.83 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e656a88a-dd96-4fa1-8def-bef09acc48d2")
+	)
+	(wire
+		(pts
 			(xy 212.09 114.3) (xy 212.09 118.11)
 		)
 		(stroke
@@ -7560,6 +7560,16 @@
 		)
 		(uuid "018aebd5-6e36-4781-a369-8f8604a04b90")
 	)
+	(label "ADC3_raw"
+		(at 24.13 123.19 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "08458279-1851-4038-a17a-1bd598d10c98")
+	)
 	(label "MCURX"
 		(at 114.3 49.53 180)
 		(effects
@@ -7700,7 +7710,7 @@
 		)
 		(uuid "596f8b5a-f347-4003-95f5-a395c4d653b3")
 	)
-	(label "ADC0_raw"
+	(label "ADC2_raw"
 		(at 24.13 125.73 0)
 		(effects
 			(font
@@ -7800,6 +7810,16 @@
 		)
 		(uuid "7c3c6106-40f9-4bfc-be0d-22147c1f5a2b")
 	)
+	(label "ADC0_raw"
+		(at 24.13 115.57 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "845952ea-4db9-4d7d-979a-e993843da38e")
+	)
 	(label "5V"
 		(at 22.86 96.52 0)
 		(effects
@@ -7861,14 +7881,14 @@
 		(uuid "8d8a8c9a-547c-430c-8389-839c7007f1a1")
 	)
 	(label "ADC1_raw"
-		(at 24.13 123.19 0)
+		(at 24.13 118.11 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "90009261-b88c-465e-89f7-9cbad1812721")
+		(uuid "90dc1163-dbe1-4b3d-94f8-87dac9d4c1bf")
 	)
 	(label "SCL"
 		(at 132.08 95.25 0)
@@ -7919,16 +7939,6 @@
 			(justify left bottom)
 		)
 		(uuid "9940d08a-2267-445b-adf1-d0ff14022eac")
-	)
-	(label "ADC3_raw"
-		(at 24.13 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9e98a2e3-b6af-4248-a3fa-1946d1d1cad6")
 	)
 	(label "5V"
 		(at 251.46 17.78 180)
@@ -8100,16 +8110,6 @@
 		)
 		(uuid "d89f51a1-c731-49bb-8175-494e8a004af5")
 	)
-	(label "ADC2_raw"
-		(at 24.13 118.11 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dc3817f9-846b-4d1a-b525-42fcde5fddb7")
-	)
 	(label "SWDCLK"
 		(at 24.13 57.15 0)
 		(effects
@@ -8169,72 +8169,6 @@
 			(justify right bottom)
 		)
 		(uuid "ff998184-9050-469c-8c04-cb67f0fd5df0")
-	)
-	(symbol
-		(lib_id "power:GNDA")
-		(at 44.45 144.78 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "0149e945-5505-4189-8863-d585f6b4f486")
-		(property "Reference" "#PWR023"
-			(at 44.45 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GNDA"
-			(at 44.45 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 44.45 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 44.45 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GNDA\" , analog ground"
-			(at 44.45 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "1b5bad98-294d-4d18-a4f6-a15c90c364bd")
-		)
-		(instances
-			(project "psocpcb"
-				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
-					(reference "#PWR023")
-					(unit 1)
-				)
-			)
-		)
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -9197,17 +9131,17 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GNDA")
-		(at 44.45 170.18 180)
+		(lib_id "power:GND")
+		(at 44.45 144.78 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "2b12af7c-5969-4d61-bd4f-b78cafa43ef7")
+		(uuid "2c70ff76-cf86-4416-84f1-1a867183c873")
 		(property "Reference" "#PWR039"
-			(at 44.45 163.83 0)
+			(at 44.45 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9215,8 +9149,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GNDA"
-			(at 44.45 165.1 0)
+		(property "Value" "GND"
+			(at 44.45 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9224,7 +9158,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 44.45 170.18 0)
+			(at 44.45 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9233,7 +9167,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 44.45 170.18 0)
+			(at 44.45 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9241,8 +9175,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"GNDA\" , analog ground"
-			(at 44.45 170.18 0)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 44.45 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9251,7 +9185,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "6d7d1c01-240d-4c19-96a3-a8e939932a84")
+			(uuid "8026eaa7-e5e0-4ba5-8950-21c041fff867")
 		)
 		(instances
 			(project "psocpcb"
@@ -9356,7 +9290,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical"
 			(at 36.83 59.69 0)
 			(effects
 				(font
@@ -9987,72 +9921,6 @@
 			(project "psocpcb"
 				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
 					(reference "C13")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GNDA")
-		(at 105.41 143.51 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3a4136b1-015b-465f-b374-ba6fecef96c1")
-		(property "Reference" "#PWR020"
-			(at 105.41 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GNDA"
-			(at 105.41 138.43 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 105.41 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 105.41 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GNDA\" , analog ground"
-			(at 105.41 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4659700b-0ffe-40f4-80f2-46fa2aa8446e")
-		)
-		(instances
-			(project "psocpcb"
-				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
-					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -11729,6 +11597,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 44.45 170.18 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "717a4b72-1b01-4a0a-806a-2fb38dee1089")
+		(property "Reference" "#PWR047"
+			(at 44.45 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 44.45 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 44.45 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 44.45 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 44.45 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0c61bc36-94e1-4910-b855-6034d35623e2")
+		)
+		(instances
+			(project "psocpcb"
+				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
+					(reference "#PWR047")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 132.08 60.96 180)
 		(unit 1)
@@ -11945,6 +11879,72 @@
 			(project ""
 				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
 					(reference "J7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 105.41 143.51 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "77ea6996-5bb7-410b-8d47-35dff963f0e8")
+		(property "Reference" "#PWR045"
+			(at 105.41 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 105.41 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 105.41 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 105.41 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "aeee733d-5fdb-4972-8d1b-89a436d14098")
+		)
+		(instances
+			(project "psocpcb"
+				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
+					(reference "#PWR045")
 					(unit 1)
 				)
 			)
@@ -12415,7 +12415,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RASPBERRYPI-ZERO:RASPBERRYPI-ZERO_RPI-ZERO"
+		(property "Footprint" "RASPBERRYPI-ZERO:RASPBERRYPI-ZERO_RPI-ZERO_1"
 			(at 234.95 77.47 0)
 			(effects
 				(font
@@ -13588,72 +13588,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GNDA")
-		(at 105.41 168.91 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "acecbfe2-e3b3-47c3-bff7-d37d80a2fb1f")
-		(property "Reference" "#PWR021"
-			(at 105.41 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GNDA"
-			(at 105.41 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 105.41 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 105.41 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GNDA\" , analog ground"
-			(at 105.41 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a5dca57f-8fdc-4a0c-92c7-4f6967f6b3ea")
-		)
-		(instances
-			(project "psocpcb"
-				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
-					(reference "#PWR021")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 140.97 34.29 0)
 		(unit 1)
@@ -14128,6 +14062,72 @@
 			(project "psocpcb"
 				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
 					(reference "C17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 105.41 168.91 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c66821cf-c982-48a8-9507-0aa4214eb0ac")
+		(property "Reference" "#PWR046"
+			(at 105.41 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 105.41 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 105.41 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 105.41 168.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "31ee43b3-434c-49b3-973a-d6c5d32e421f")
+		)
+		(instances
+			(project "psocpcb"
+				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
+					(reference "#PWR046")
 					(unit 1)
 				)
 			)
