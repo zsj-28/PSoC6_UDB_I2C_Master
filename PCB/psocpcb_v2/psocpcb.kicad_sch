@@ -5455,12 +5455,6 @@
 		(uuid "0eaf7c65-d45c-4733-ac6e-64546814babe")
 	)
 	(junction
-		(at 140.97 21.59)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0f85d6fd-706c-4422-a7f0-de37046f1f64")
-	)
-	(junction
 		(at 78.74 115.57)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -6152,16 +6146,6 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 21.59) (xy 152.4 26.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ada5207-c162-42d6-a1e1-e7791bcc6706")
-	)
-	(wire
-		(pts
 			(xy 58.42 184.15) (xy 68.58 184.15)
 		)
 		(stroke
@@ -6729,16 +6713,6 @@
 			(type default)
 		)
 		(uuid "9285164f-d7d3-477f-b36e-16e827b19d76")
-	)
-	(wire
-		(pts
-			(xy 140.97 21.59) (xy 152.4 21.59)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "957ead71-fb32-46f1-9a0b-743bfbdb5e59")
 	)
 	(wire
 		(pts
@@ -9079,7 +9053,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1.0u"
+		(property "Value" "10u"
 			(at 144.78 31.7499 0)
 			(effects
 				(font
@@ -10390,72 +10364,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 152.4 34.29 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "492d70bb-81a6-4b41-bd7a-f055a08ab0fe")
-		(property "Reference" "#PWR017"
-			(at 152.4 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 152.4 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 152.4 34.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 152.4 34.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 152.4 34.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a440132c-3665-4db3-9d1b-ade53351239d")
-		)
-		(instances
-			(project "psocpcb"
-				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
-					(reference "#PWR017")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GNDA")
 		(at 20.32 162.56 0)
 		(unit 1)
@@ -11727,76 +11635,6 @@
 			(project "psocpcb"
 				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
 					(reference "R2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 152.4 30.48 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7398a2b5-89e3-40bf-8abb-267093d67bab")
-		(property "Reference" "C6"
-			(at 156.21 29.2099 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "0.1u"
-			(at 156.21 31.7499 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 153.3652 34.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 152.4 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 152.4 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d176c413-15c4-4e17-a07c-137de16ee5cd")
-		)
-		(pin "2"
-			(uuid "4ac0d49c-67ff-4de2-ac6f-a4bd009cee86")
-		)
-		(instances
-			(project "psocpcb"
-				(path "/b99eb613-5e3f-4ea6-a2aa-d7f60f888a4d"
-					(reference "C6")
 					(unit 1)
 				)
 			)
